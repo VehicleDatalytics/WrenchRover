@@ -19,5 +19,20 @@
   "homepage": "https://github.com/CWShelly/WrenchRover#readme",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "angular": "^1.5.7",
+    "angular-mocks": "^1.5.7",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "webpack-stream": "^3.2.0"
   }
 }
