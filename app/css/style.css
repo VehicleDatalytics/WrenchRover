@@ -1,0 +1,28 @@
+/*body{
+  color: red;
+  background-color: green;
+}*/
+
+main{
+  height: 100%;
+}
+.angular-google-map-container {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   border: 1px solid blue;
+   position: relative;
+   height: 500px;
+   background-color: red;
+}
+#map_canvas {
+     height: 100%;
+     width: 100%;
+     margin: 0px;
+     border: 1px solid blue;
+     position: relative;
+     height: 500px;
+        background-color: red;
+ }

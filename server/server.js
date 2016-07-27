@@ -3,12 +3,12 @@ const app = express();
 const mysql = require('mysql');
 const port = process.env.PORT || 3000;
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'testRoverDB'
-});
+// var connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'testRoverDB'
+// });
 
 // connection.connect(function(error) {
 //     if (error) {
