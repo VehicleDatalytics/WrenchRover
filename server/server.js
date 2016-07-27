@@ -3,6 +3,8 @@ const app = express();
 const mysql = require('mysql');
 const port = process.env.PORT || 3000;
 
+// the following commented-out code is simply for mysql purposes. However, if we'll be using ruby, we can probably get rid of this soon.
+
 // var connection = mysql.createConnection({
 //     host: 'localhost',
 //     user: 'root',

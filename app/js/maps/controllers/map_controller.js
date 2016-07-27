@@ -10,7 +10,7 @@ module.exports = function(app) {
 
     $scope.map = {
       center: {
-        latitude: 47.618217, longitude: -122.351832
+        latitude: 47.610326, longitude: -122.199138
       },
       zoom: 12,
       bounds: {} };
@@ -22,8 +22,7 @@ module.exports = function(app) {
 
     var latitude = [];
     var longitude = [];
-    var summary = [];
-    var date = [];
+    var place = [];
 
     var createMarker = function(i, bounds, idKey) {
 /* eslint-disable no-eq-null*/
@@ -34,8 +33,7 @@ module.exports = function(app) {
       var ret = {
         latitude: latitude[i],
         longitude: longitude[i],
-        summary: summary[i],
-        date: date[i],
+        place: place[i],
         title: 'm' + i,
         show: false
       };
@@ -59,10 +57,9 @@ module.exports = function(app) {
         $http.get(baseUrl + '/api/serviceCenters')
                  .then((res) => {
                    for (var i = 0; i <= res.data.length; i++) {
-                     latitude.push(res.data[i].latitude);
-                     longitude.push(res.data[i].longitude);
-                     summary.push(res.data[i].summary);
-                     date.push(res.data[i].date);
+                     latitude.push(47.610326);
+                     longitude.push(-122.199138);
+                     place.push('Jiffy Lube');
                      markers.push(createMarker(i, $scope.map.bounds));
                    }
                  });
