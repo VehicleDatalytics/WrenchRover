@@ -12,7 +12,6 @@ require('./maps')(wrApp);
 wrApp.config(['$routeProvider', function($rp) {
   $rp
     .when('/map', {
-
       templateUrl: 'templates/maps/views/map_view.html',
       controller: 'MapController',
       controllerAs: 'xxctrl'

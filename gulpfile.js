@@ -4,7 +4,7 @@ const mocha = require('gulp-mocha');
 const protractor = require('gulp-protractor').protractor;
 const webpack = require('webpack-stream');
 const KarmaServer = require('karma').Server;
-const maps = require('gulp-sourcemaps');
+
 
 var files = {
   server: ['server/**/*.js', 'index.js', 'gulpfile.js'],
@@ -31,7 +31,7 @@ gulp.task('lint', ['lint:server', 'lint:app']);
 gulp.task('webpack:dev', ['lint'], () => {
   return gulp.src('app/js/entry.js')
   .pipe(webpack({
-    devtool: 'sourcemap',
+    devtool: 'source-map',
     output: {
       filename: 'bundle.js'
     }
@@ -45,7 +45,7 @@ gulp.task('static:dev', () => {
 });
 
 gulp.task('css:dev', () => {
-  return gulp.src('app/css/**/*.css')
+  gulp.src('app/css/**/*.css')
   .pipe(gulp.dest('./build'));
 });
 
@@ -76,3 +76,6 @@ gulp.task('karma', ['webpack:test'], (done) => {
 });
 
 gulp.task('test', ['mocha', 'karma']);
+
+
+gulp.task('default', ['build']);
