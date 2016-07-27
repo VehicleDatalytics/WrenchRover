@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="style.css">
   <title>Wrench Rover</title>
 </head>
 
-<body ng-data-app="wrapp">
+<body ng-data-app="wrApp">
   <main>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -29,6 +30,10 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+<div class="col-xs-8">
+  <p>x</p>
+    <section data-ng-view></section>
+    </div>
   </main>
   <script type="text/javascript" src="/bundle.js"></script>
 </body>

@@ -18,13 +18,20 @@
   },
   "homepage": "https://github.com/CWShelly/WrenchRover#readme",
   "dependencies": {
+    "angular-resource": "^1.5.8",
+    "angular-simple-logger": "^0.1.7",
     "express": "^4.14.0",
+    "lodash": "^4.14.0",
     "mysql": "^2.11.1"
   },
   "devDependencies": {
     "angular": "^1.5.7",
+    "angular-google-maps": "^2.3.3",
     "angular-mocks": "^1.5.7",
+    "angular-resource": "^1.5.8",
     "angular-route": "^1.5.7",
+    "angular-simple-logger": "^0.1.7",
+    "angular-ui-bootstrap": "^2.0.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "gulp": "^3.9.1",
@@ -36,6 +43,7 @@
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
+    "lodash": "^4.14.0",
     "webpack-stream": "^3.2.0"
   }
 }
