@@ -3,7 +3,7 @@ const app = express();
 const mysql = require('mysql');
 const port = process.env.PORT || 3000;
 
-// the following commented-out code is simply for mysql purposes. However, if we'll be using ruby, we can probably get rid of this soon.
+const vehicleInfoRouter = require(__dirname + '/router/edmunds_vehicle_info_router');
 
 // var connection = mysql.createConnection({
 //     host: 'localhost',
@@ -31,13 +31,17 @@ const port = process.env.PORT || 3000;
 //         }
 //     });
 // });
+app.use('/api', vehicleInfoRouter.make);
+app.use('/api', vehicleInfoRouter.model);
+app.use('/api', vehicleInfoRouter.engine);
+app.use('/api', vehicleInfoRouter.trim);
 
 app.use(express.static(__dirname + '/../build')).get('*', (req, res) => {
-    res.redirect('/#' + req.url);
+  res.redirect('/#' + req.url);
 });
 
 app.use('/*', (req, res) => {
-    res.status(404).send('not found');
+  res.status(404).send('not found');
 });
 
 
@@ -45,10 +49,9 @@ app.use((req, res, next) => {
 res.header('Access-Control-Allow-Origin', '*');
 res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, token');
 res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-next();
+  next();
 });
 
 module.exports = exports = app.listen(port, () => {
   console.log('server up on ' + port);
-
 });
