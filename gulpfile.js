@@ -49,7 +49,12 @@ gulp.task('css:dev', () => {
   .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build', ['webpack:dev', 'static:dev', 'css:dev']);
+gulp.task('images:dev', () => {
+  return gulp.src('app/images/**/**')
+  .pipe(gulp.dest('./build/images/'));
+});
+
+gulp.task('build', ['webpack:dev', 'static:dev', 'css:dev', 'images:dev']);
 
 // build test task
 gulp.task('webpack:test', ['lint'], () => {
