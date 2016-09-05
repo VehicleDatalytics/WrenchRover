@@ -1,7 +1,12 @@
 require('angular');
 require('angular-google-maps');
 require('lodash');
+var lamePrompt = prompt('zip?');
+var lamePromptAddress = prompt('address?');
 
+var startingAddressLat = [];
+var startingAddressLng = [];
+console.log(lamePrompt);
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
@@ -19,23 +24,34 @@ module.exports = function(app) {
       $scope.searchbox.options.visible = !$scope.searchbox.options.visible;
     };
 
+
     GoogleMapApi.then(function(maps) {
       maps.visualRefresh = true;
+
       $scope.defaultBounds = new google.maps.LatLngBounds(
 new google.maps.LatLng(47.82148, -122.66450),
 new google.maps.LatLng(47.66541, -122.31715));
 
+// new google.maps.LatLng(startingAddressLat[0], startingAddressLng[0]),
+// new google.maps.LatLng(startingAddressLat[0] - .30, startingAddressLng[0] + .30));
 
     });
 
-    count = 0;
     $scope.map = {
       center: {
         latitude: 47.610326, longitude: -122.199138
       },
+
+    //   center: {
+    //     latitude: startingAddressLat[0], longitude: startingAddressLng[0]
+    //   },
+
+    //   center: {
+    //     latitude: startingAddressLat[0], longitude: startingAddressLng[0]
+    //   },
       zoom: 12,
       bounds: {} };
-
+    console.log($scope.map.center);
     $scope.options = {
       scrollwheel: false
     };
@@ -43,11 +59,9 @@ new google.maps.LatLng(47.66541, -122.31715));
 
     var latitude = [];
     var longitude = [];
-
     var place = [];
-    var addresses = [];
+
     console.log('lat: ' + latitude);
-    console.log(addresses);
 
 
     var createMarker = function(i, bounds, idKey) {
@@ -61,6 +75,7 @@ new google.maps.LatLng(47.66541, -122.31715));
         longitude: longitude[i],
         place: place[i],
         title: 'm' + i,
+        index: i + 1,
         show: false
       };
 
@@ -72,6 +87,7 @@ new google.maps.LatLng(47.66541, -122.31715));
     $scope.onClick = function(marker, eventName, model) {
       model.show = !model.show;
     };
+
 
     $scope.randomMarkers = [];
 
@@ -85,33 +101,44 @@ new google.maps.LatLng(47.66541, -122.31715));
 
         console.log(latitude);
 
+        // /
+
+        // /
+
 
         $http.get(baseUrl + '/service_centers')
                  .then((res) => {
+                   geocodeAddress(lamePromptAddress, function(latLng) {
+                     startingAddressLat.push(latLng.lat());
+                     startingAddressLng.push(latLng.lng());
+                     console.log(latLng.lng());
+                   });
 
+                   for (var i = 0; i < res.data.length - 1; i++) {
+                    //  console.log('i: ' + i);
 
-                   for (var i = 10; i < res.data.length - 1; i++) {
-                     console.log('i: ' + i);
+                     if (res.data[i].service_zip == lamePrompt) {
+                       console.log('i: ' + i);
+                       place.push(res.data[i].service_name + '\n' + res.data[i].service_address + '\n' + res.data[i].service_city + '\n' + res.data[i].service_zip);
+                       console.log(res.data[i].service_address, res.data[i].service_zip);
 
-                     geocodeAddress(res.data[i].service_address + ', ' + res.data[i].service_city + ', ' + res.data[i].service_state, function(latLng) {
+                       geocodeAddress(res.data[i].service_address + ', ' + res.data[i].service_city + ', ' + res.data[i].service_state, function(latLng) {
 
-                       count++;
-                       console.log(count);
-                       for (var j = 0; j < 1; j++) {
+                         for (var j = 0; j < 5; j++) {
 
-                         latitude.push(latLng.lat());
-                         longitude.push(latLng.lng());
-                         console.log(latLng.lat(), latLng.lng());
+                           latitude.push(latLng.lat());
+                           longitude.push(latLng.lng());
+                           markers.push(createMarker(i, $scope.map.bounds));
+                         }
 
-                         markers.push(createMarker(i, $scope.map.bounds));
                        }
-
-                     }
                  );
+                     }
 
                    }
 
-                 });
+                 }
+             );
 
 
         $scope.randomMarkers = markers;
@@ -122,7 +149,6 @@ new google.maps.LatLng(47.66541, -122.31715));
           var geocoder = new google.maps.Geocoder();
 
           geocoder.geocode( { 'address': address }, function(results, status) {
-            console.log(address);
             if (status == google.maps.GeocoderStatus.OK) {
               callback(results[0].geometry.location);
             } else {
@@ -131,13 +157,15 @@ new google.maps.LatLng(47.66541, -122.31715));
             for (var i = 0; i < longitude.length - 1; i++) {
               markers.push(createMarker(i, $scope.map.bounds));
             }
+
           });
+
+
         };
 
 
       }
     }, true);
-
 
   }]);
 };
