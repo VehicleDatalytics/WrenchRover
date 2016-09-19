@@ -25,6 +25,7 @@ require('./searchBox')(wrApp);
 require('./service_centers')(wrApp);
 require('./mechanic_sign_up')(wrApp);
 require('./user_sign_up')(wrApp);
+require('./common_repairs')(wrApp);
 
 
 wrApp.config(['$routeProvider', function($rp) {
@@ -58,7 +59,12 @@ wrApp.config(['$routeProvider', function($rp) {
       controller: 'userSignUpController',
       controllerAs: 'userctrl'
     })
+    .when('/carproblems', {
+      templateUrl: 'templates/common_repairs/views/common_repairs_view.html',
+      controller: 'ExampleController',
+      controllerAs: 'oil'
+    })
     .otherwise({
-      redirectTo: '/map'
+      redirectTo: '/user_page_one'
     });
 }]);

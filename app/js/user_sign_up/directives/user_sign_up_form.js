@@ -7,7 +7,7 @@ module.exports = function(app) {
       templateUrl: '/templates/user/directives/user_sign_up_form_page_one.html',
 
       scope: {
-        user: '=',
+        xuser: '=',
         buttonText: '@',
         action: '@'
       },
