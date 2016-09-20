@@ -26,6 +26,7 @@ require('./service_centers')(wrApp);
 require('./mechanic_sign_up')(wrApp);
 require('./user_sign_up')(wrApp);
 require('./common_repairs')(wrApp);
+require('./vehicle')(wrApp);
 
 
 wrApp.config(['$routeProvider', function($rp) {
