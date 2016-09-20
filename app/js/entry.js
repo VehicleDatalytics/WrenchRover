@@ -30,6 +30,11 @@ require('./common_repairs')(wrApp);
 
 wrApp.config(['$routeProvider', function($rp) {
   $rp
+    .when('/', {
+      templateUrl: 'templates/vehicle/vehicle_dropdown_selection.html',
+      controller: 'VehicleInfoController',
+      controllerAs: 'VehicleInfoController'
+    })
     .when('/map', {
       templateUrl: 'templates/maps/views/map_view.html',
       controller: 'MapController',
@@ -65,6 +70,6 @@ wrApp.config(['$routeProvider', function($rp) {
       controllerAs: 'oil'
     })
     .otherwise({
-      redirectTo: '/user_page_one'
+      redirectTo: '/'
     });
 }]);

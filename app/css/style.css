@@ -16,7 +16,34 @@ main{
      position: relative;
      height: 500px;
  }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
 
-#serviceCenterList{
-  color: orange;
+.vehicleselectbox {
+  padding: 10px;
+}
+
+#logo {
+  width: 30%;
+}
+
+#signupnavbutton {
+  float: right;
+  padding-right: 30px;
+  font-size: 12pt;
+}
+
+#homepageimagerow {
+  background-color: #969695;
+}
+
+#vehicleselectimage {
+  float: right;
+  padding-right: 4em;
+  padding-top: 1em;
 }

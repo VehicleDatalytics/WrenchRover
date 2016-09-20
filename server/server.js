@@ -9,6 +9,7 @@ app.use('/api', vehicleInfoRouter.make);
 app.use('/api', vehicleInfoRouter.model);
 app.use('/api', vehicleInfoRouter.engine);
 app.use('/api', vehicleInfoRouter.trim);
+app.use('/api', vehicleInfoRouter.vin);
 
 
 app.use(express.static(__dirname + '/../build')).get('*', (req, res) => {

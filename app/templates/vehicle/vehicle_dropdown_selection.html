@@ -1,0 +1,104 @@
+<section id="vehicleSelectMenu" data-ng-controller="VehicleInfoController as VehicleInfoController">
+
+  <div class="col-md-8">
+    <div class="row vehicleselectbox">
+      <div class="col-md-4">
+        <select id="yearSelect"
+                class="form-control"
+                title="Year"
+                data-ng-model="VehicleInfoController.vehicleObject.year"
+                ng-change="VehicleInfoController.newYearSelected(); VehicleInfoController.getVehicleMakes()"
+                ng-options="year for year in VehicleInfoController.vehicleListOptions.yearsList">
+                <option value=''> Year </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <select id="makeSelect"
+                class="form-control"
+                title="Make"
+                data-ng-model="VehicleInfoController.vehicleObject.make"
+                ng-change="VehicleInfoController.newMakeSelected(); VehicleInfoController.getVehicleModels()"
+                ng-options="make.name for make in VehicleInfoController.vehicleListOptions.makeList">
+                <option value=''> Make </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row vehicleselectbox">
+      <div class="col-md-4">
+        <select id="modelSelect"
+                class="form-control"
+                title="Model"
+                data-ng-model="VehicleInfoController.vehicleObject.model"
+                ng-change="VehicleInfoController.newModelSelected(); VehicleInfoController.getVehicleTrims()"
+                ng-options="model.name for model in VehicleInfoController.vehicleListOptions.modelList">
+                <option value=''> Model </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <select id="trimSelect"
+                class="form-control"
+                title="Trim"
+                data-ng-model="VehicleInfoController.vehicleObject.trim"
+                ng-change="VehicleInfoController.newTrimSelected(); VehicleInfoController.getVehicleEngines()"
+                ng-options="trim.name for trim in VehicleInfoController.vehicleListOptions.trimList">
+                <option value=''> Trim </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row vehicleselectbox">
+      <div class="col-md-4">
+        <select id="engineSelect"
+                class="form-control"
+                title="Engine"
+                data-ng-model="VehicleInfoController.vehicleObject.engine"
+                ng-options="engine for engine in VehicleInfoController.vehicleListOptions.engineList"
+                ng-disabled="VehicleInfoController.vehicleListOptions.engineList[0] == 'N/A'">
+                <option value=''> Engine </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <div class="form-inline">
+          <input type="number"
+                 class="form-control"
+                 id="mileage"
+                 input-type="submit"
+                 placeholder="Mileage"
+                 data-ng-model="VehicleInfoController.vehicleObject.mileage">
+        </div>
+      </div>
+    </div>
+
+    <div class="row vehicleselectbox">
+      <div class="col-md-4">
+        <div class="form-inline">
+          <input type="text"
+                 class="form-control"
+                 id="vin"
+                 input-type="submit"
+                 placeholder="Vehicle VIN"
+                 data-ng-model="VehicleInfoController.vehicleObject.vin">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-default"
+                type="submit"
+                ng-click="VehicleInfoController.getVin()">
+                Lookup Vehicle
+        </button>
+      </div>
+      <div class="col-md-4">
+        <div class="form-inline">
+          <input type="number"
+                 class="form-control"
+                 id="mileage"
+                 input-type="submit"
+                 placeholder="Mileage"
+                 data-ng-model="VehicleInfoController.vehicleObject.mileage">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
