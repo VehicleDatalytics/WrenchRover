@@ -7,16 +7,22 @@ const wrApp = angular.module('wrApp', [require('angular-route'), require('angula
 
 require('./services')(wrApp);
 require('./maps')(wrApp);
+require('./vehicle')(wrApp);
 
 
 wrApp.config(['$routeProvider', function($rp) {
   $rp
+    .when('/', {
+      templateUrl: 'templates/vehicle/vehicle_dropdown_selection.html',
+      controller: 'VehicleInfoController',
+      controllerAs: 'VehicleInfoController'
+    })
     .when('/map', {
       templateUrl: 'templates/maps/views/map_view.html',
       controller: 'MapController',
       controllerAs: 'xxctrl'
     })
     .otherwise({
-      redirectTo: '/map'
+      redirectTo: '/'
     });
 }]);
