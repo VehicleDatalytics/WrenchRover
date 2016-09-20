@@ -19,7 +19,7 @@ module.exports = function(app) {
       GoogleMapApi.then(function(maps) {
         maps.visualRefresh = true;
         $scope.defaultBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(40.82148, -73.66450),
+      new google.maps.LatLng(47.617829, -122.192324),
       new google.maps.LatLng(40.66541, -74.31715));
 
       // /
@@ -33,13 +33,17 @@ module.exports = function(app) {
             }
           });
         };
-        geocodeAddress('30 rockefeller plaza', function(latLng) {
+        // geocodeAddress('11011 NE 9th St', function(latLng) {
+        //   console.log('1  ' + latLng.lat());
+        //   console.log('2  ' + latLng.lng());
+        //   console.log('x');
+        // });
+      // /
+        geocodeAddress('93550', function(latLng) {
           console.log('1  ' + latLng.lat());
           console.log('2  ' + latLng.lng());
           console.log('x');
         });
-      // /
-
 
         $scope.map.bounds = {
           northeast: {
@@ -71,8 +75,8 @@ module.exports = function(app) {
         map: {
           control: {},
           center: {
-            latitude: 40.74349,
-            longitude: -73.990822
+            latitude: 47.617829,
+            longitude: -122.192324
           },
           zoom: 12,
           dragging: false,

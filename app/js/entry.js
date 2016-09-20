@@ -22,6 +22,10 @@ const wrApp = angular.module('wrApp', [require('angular-route'), require('angula
 require('./services')(wrApp);
 require('./maps')(wrApp);
 require('./searchBox')(wrApp);
+require('./service_centers')(wrApp);
+require('./mechanic_sign_up')(wrApp);
+require('./user_sign_up')(wrApp);
+require('./common_repairs')(wrApp);
 
 
 wrApp.config(['$routeProvider', function($rp) {
@@ -35,7 +39,32 @@ wrApp.config(['$routeProvider', function($rp) {
       templateUrl: 'templates/searchBox/views/searchbox_view.html',
       controller: 'SearchBoxController'
     })
+    .when('/servicecenters', {
+      templateUrl: 'templates/service_centers/views/service_list_view.html',
+      controller: 'serviceCenterController',
+      controllerAs: 'scctrl'
+    })
+    .when('/mechanic_sign_up', {
+      templateUrl: 'templates/mechanic_sign_up/views/mechanic_sign_up_form_view.html',
+      controller: 'mechanicSignUpController',
+      controllerAs: 'scctrl'
+    })
+    .when('/user_page_one', {
+      templateUrl: 'templates/user/views/user_sign_up_form_view_page_one.html',
+      controller: 'userSignUpController',
+      controllerAs: 'userctrl'
+    })
+    .when('/user_page_two', {
+      templateUrl: 'templates/user/views/user_sign_up_form_view_page_two.html',
+      controller: 'userSignUpController',
+      controllerAs: 'userctrl'
+    })
+    .when('/carproblems', {
+      templateUrl: 'templates/common_repairs/views/common_repairs_view.html',
+      controller: 'ExampleController',
+      controllerAs: 'oil'
+    })
     .otherwise({
-      redirectTo: '/map'
+      redirectTo: '/user_page_one'
     });
 }]);

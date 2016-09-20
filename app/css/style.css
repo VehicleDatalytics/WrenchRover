@@ -16,3 +16,7 @@ main{
      position: relative;
      height: 500px;
  }
+
+#serviceCenterList{
+  color: orange;
+}
