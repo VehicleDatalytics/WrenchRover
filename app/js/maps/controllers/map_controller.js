@@ -1,12 +1,12 @@
 require('angular');
 require('angular-google-maps');
 require('lodash');
-var lamePrompt = prompt('zip?');
-var lamePromptAddress = prompt('address?');
+// var lamePrompt = prompt('zip?');
+// var lamePromptAddress = prompt('address?');
 
 var startingAddressLat = [];
 var startingAddressLng = [];
-console.log(lamePrompt);
+// console.log(lamePrompt);
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
@@ -108,32 +108,32 @@ new google.maps.LatLng(47.66541, -122.31715));
 
         $http.get(baseUrl + '/service_centers')
                  .then((res) => {
-                   geocodeAddress(lamePromptAddress, function(latLng) {
-                     startingAddressLat.push(latLng.lat());
-                     startingAddressLng.push(latLng.lng());
-                     console.log(latLng.lng());
-                   });
+                //    geocodeAddress(lamePromptAddress, function(latLng) {
+                //      startingAddressLat.push(latLng.lat());
+                //      startingAddressLng.push(latLng.lng());
+                //      console.log(latLng.lng());
+                //    });
 
                    for (var i = 0; i < res.data.length - 1; i++) {
                     //  console.log('i: ' + i);
 
-                     if (res.data[i].service_zip == lamePrompt) {
-                       console.log('i: ' + i);
-                       place.push(res.data[i].service_name + '\n' + res.data[i].service_address + '\n' + res.data[i].service_city + '\n' + res.data[i].service_zip);
-                       console.log(res.data[i].service_address, res.data[i].service_zip);
+                    //  if (res.data[i].service_zip == lamePrompt) {
+                     console.log('i: ' + i);
+                     place.push(res.data[i].service_name + '\n' + res.data[i].service_address + '\n' + res.data[i].service_city + '\n' + res.data[i].service_zip);
+                     console.log(res.data[i].service_address, res.data[i].service_zip);
 
-                       geocodeAddress(res.data[i].service_address + ', ' + res.data[i].service_city + ', ' + res.data[i].service_state, function(latLng) {
+                     geocodeAddress(res.data[i].service_address + ', ' + res.data[i].service_city + ', ' + res.data[i].service_state, function(latLng) {
 
-                         for (var j = 0; j < 5; j++) {
+                       for (var j = 0; j < 5; j++) {
 
-                           latitude.push(latLng.lat());
-                           longitude.push(latLng.lng());
-                           markers.push(createMarker(i, $scope.map.bounds));
-                         }
-
+                         latitude.push(latLng.lat());
+                         longitude.push(latLng.lng());
+                         markers.push(createMarker(i, $scope.map.bounds));
                        }
-                 );
+
                      }
+                 );
+                    //  }
 
                    }
 
