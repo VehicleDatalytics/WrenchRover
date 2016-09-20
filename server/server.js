@@ -1,40 +1,15 @@
 const express = require('express');
 const app = express();
-const mysql = require('mysql');
 const port = process.env.PORT || 3000;
 
 const vehicleInfoRouter = require(__dirname + '/router/edmunds_vehicle_info_router');
 
-// var connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'testRoverDB'
-// });
 
-// connection.connect(function(error) {
-//     if (error) {
-//         console.log('error');
-//     }
-//     else {
-//         console.log('connected');
-//     }
-// });
-
-// app.get('/', (req, res) => {
-//     connection.query('SELECT * FROM testRoverTable', function(error, rows, fields) {
-//         if (error) {
-//             console.log('error in query');
-//         }
-//         else {
-//             console.log(rows);
-//         }
-//     });
-// });
 app.use('/api', vehicleInfoRouter.make);
 app.use('/api', vehicleInfoRouter.model);
 app.use('/api', vehicleInfoRouter.engine);
 app.use('/api', vehicleInfoRouter.trim);
+
 
 app.use(express.static(__dirname + '/../build')).get('*', (req, res) => {
   res.redirect('/#' + req.url);
