@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Wrench Rover</title>
+</head>
+
+<body data-ng-app="wrApp">
+  <main>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#" title="Wrench Rover" rel="home">
+            <img class="img-responsive"
+                 id="logo"
+                 src="/images/WrenchRover_tagline_large_latest.png">
+          </a>
+          <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="user_sign_up_form_view_page_one" id"signupNavButton">Sign Up</a></li>
+          </ul>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+      <div class="row" id="homepageimagerow">
+        <img class="img-responsive"
+             id="vehicleselectimage"
+             src="/images/car1.jpeg">
+    </div> <!-- row -->
+  </div> <!-- container -->
+
+<!-- ng-change - enable "next" button -->
+    <!-- <section data-ng-view></section> -->
+    <section ui-view>
+
+    </section>
+
+  </main>
+  <script type="text/javascript" src="/bundle.js"></script>
+</body>

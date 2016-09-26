@@ -1,0 +1,16 @@
+<form data-ng-submit = "save(xuser)">
+
+<p><label for="user name"> name</label>
+  <input type="text" placeholder = "Name" name = "userName" data-ng-model="xuser.user_name"></p>
+
+
+  <p><label for="user email"> Email</label>
+    <input type="text" placeholder = "Email" name = "userEmail" data-ng-model="xuser.user_email"></p>
+
+    <p><label for="user zip"> Zip Code</label>
+      <input type="text" placeholder = "Zip" name = "userZip" data-ng-model="xuser.user_zip"></p>
+
+     <button type = "submit" id = "newUser">{{buttonText}}</button>
+
+     <ng-transclude></ng-transclude>
+   </form>

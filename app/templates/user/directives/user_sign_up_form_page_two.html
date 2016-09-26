@@ -1,0 +1,10 @@
+<form data-ng-submit = "update(user)">
+
+<p><label for="carType"> Car</label>
+  <input type="text" placeholder = "Car" name = "car" data-ng-model="user.car"></p>
+
+
+     <button type = "submit" id = "newUser">{{buttonText}}</button>
+
+     <ng-transclude></ng-transclude>
+   </form>

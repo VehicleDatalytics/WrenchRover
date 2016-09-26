@@ -1,0 +1,12 @@
+
+<form data-ng-submit="describeIt(description)">
+
+  <p><label for="describe issue"> Describe Your Issue</label>
+<input type="text" placeholder = "describe your issue here" name = "describe" data-ng-model="description.xx">
+<button type="submit">{{buttonText}}</button>
+  </p>
+  x:{{description.xx}}
+  p: {{description}}
+  <br>
+  <ng-transclude></ng-transclude>
+</form>
