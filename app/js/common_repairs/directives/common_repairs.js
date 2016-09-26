@@ -12,7 +12,7 @@ module.exports = function(app) {
         action: '@'
       },
       link: function(scope, element, attrs, controller) {
-        scope.searchClicked = function() {
+        scope.oilDisplay = function() {
           console.log('yes you clicked it and things got bound!');
 
 

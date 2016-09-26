@@ -1,7 +1,7 @@
 
 
-  <section  data-ng-controller = "userSignUpController as scctrl">
-
+  <!-- <section  data-ng-controller = "userSignUpController as scctrl"> -->
+<section>
   <ul id="error">
     <li data-ng-repeat="error in scctrl.errors">{{error.message}}<button data-ng-click="scctrl.errors.splice(sccctrl.errors.indexOf(error), 1)">Close This</button></li>
   </ul>
@@ -10,7 +10,7 @@
   <user-sign-up-form-page-one
     data-button-text="Create!"
     data-action="create"
-    data-user="scctrl.newUser">
+    data-xuser="scctrl.newUser">
 </user-sign-up-form-page-one>
 <!--
   <ol id = "serviceCenterList">

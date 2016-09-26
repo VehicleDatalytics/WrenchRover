@@ -2,8 +2,9 @@ const angular = require('angular');
 require('angular-google-maps');
 require('angular-simple-logger');
 require('lodash');
+require('angular-ui-router');
 
-const wrApp = angular.module('wrApp', [require('angular-route'), require('angular-ui-bootstrap'), require('angular-resource'), 'uiGmapgoogle-maps'])
+const wrApp = angular.module('wrApp', [require('angular-route'), require('angular-ui-bootstrap'), 'ui.router', 'uiGmapgoogle-maps'])
 
 
 .config(['uiGmapGoogleMapApiProvider', function(GoogleMapApi) {
@@ -27,50 +28,70 @@ require('./mechanic_sign_up')(wrApp);
 require('./user_sign_up')(wrApp);
 require('./common_repairs')(wrApp);
 require('./vehicle')(wrApp);
+require('./describe')(wrApp);
 
 
-wrApp.config(['$routeProvider', function($rp) {
-  $rp
-    .when('/', {
-      templateUrl: 'templates/vehicle/vehicle_dropdown_selection.html',
-      controller: 'VehicleInfoController',
-      controllerAs: 'VehicleInfoController'
-    })
-    .when('/map', {
-      templateUrl: 'templates/maps/views/map_view.html',
-      controller: 'MapController',
-      controllerAs: 'xxctrl'
-    })
-    .when('/searchbox', {
-      templateUrl: 'templates/searchBox/views/searchbox_view.html',
-      controller: 'SearchBoxController'
-    })
-    .when('/servicecenters', {
-      templateUrl: 'templates/service_centers/views/service_list_view.html',
-      controller: 'serviceCenterController',
-      controllerAs: 'scctrl'
-    })
-    .when('/mechanic_sign_up', {
-      templateUrl: 'templates/mechanic_sign_up/views/mechanic_sign_up_form_view.html',
-      controller: 'mechanicSignUpController',
-      controllerAs: 'scctrl'
-    })
-    .when('/user_page_one', {
-      templateUrl: 'templates/user/views/user_sign_up_form_view_page_one.html',
-      controller: 'userSignUpController',
-      controllerAs: 'userctrl'
-    })
-    .when('/user_page_two', {
-      templateUrl: 'templates/user/views/user_sign_up_form_view_page_two.html',
-      controller: 'userSignUpController',
-      controllerAs: 'userctrl'
-    })
-    .when('/carproblems', {
-      templateUrl: 'templates/common_repairs/views/common_repairs_view.html',
-      controller: 'ExampleController',
-      controllerAs: 'oil'
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
-}]);
+wrApp.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+.state('user_sign_up_form_view_page_one', {
+  url: '/sign_up',
+  templateUrl: 'templates/user/views/user_sign_up_form_view_page_one.html',
+  controller: 'userSignUpController',
+  controllerAs: 'scctrl'
+
+})
+.state('mechanic_sign_up', {
+  url: '/mechanic_sign_up',
+  templateUrl: 'templates/mechanic_sign_up/views/mechanic_sign_up_form_view.html',
+  controller: 'mechanicSignUpController',
+  controllerAs: 'scctrl'
+})
+
+.state('/map_view', {
+  url: '/map',
+  templateUrl: 'templates/maps/views/map_view.html',
+  controller: 'MapController',
+  controllerAs: 'xxctrl'
+})
+.state('vehicle_dropdown_selection', {
+  url: '/',
+  templateUrl: 'templates/vehicle/vehicle_dropdown_selection.html',
+  controller: 'VehicleInfoController',
+  controllerAs: 'VehicleInfoController'
+})
+// fix
+.state('common_repairs_view', {
+  url: '/common_repairs_oil',
+  templateUrl: 'templates/common_repairs/views/common_repairs_view.html',
+  controller: 'ExampleController',
+  controllerAs: 'oil'
+})
+.state('common_repairs', {
+  url: '/common_repairs',
+  templateUrl:
+    'templates/describe/views/common_repairs.html',
+  controller: 'describeController',
+  controllerAs: 'describe'
+})
+
+.state('service_list_view', {
+  url: '/service_centers',
+  templateUrl:
+    'templates/service_centers/views/service_list_view.html',
+  controller: 'serviceCenterController',
+  controllerAs: 'scctrl'
+})
+.state('common_repairs.common', {
+  url: '/common_maintenance',
+  templateUrl: 'templates/describe/views/common.html'
+  // controller: 'stuffController',
+  // controllerAs: 'describe'
+})
+.state('common_repairs.dash', {
+  url: '/dashlights',
+  templateUrl: 'templates/describe/views/dash.html'
+  // controller: 'stuffController',
+  // controllerAs: 'describe'
+});
+  $urlRouterProvider.otherwise('/');
+});

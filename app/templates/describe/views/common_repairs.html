@@ -1,0 +1,18 @@
+<section>
+  <describe-field
+    data-button-text = "enter"
+    data-action = "create"
+    data-description = "describe.newDescription"
+    >
+  </describe-field>
+
+
+    <ol id = "descriptionList">
+        <describe-item data-ng-repeat = "descriptions in describe.descriptions" data-description="descriptions">
+
+      </describe-item>
+    </ol>
+
+ <a ui-sref="common_repairs.common">Example </a>
+    <div ui-view></div>
+</section>
