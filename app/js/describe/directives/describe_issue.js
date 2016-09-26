@@ -1,10 +1,10 @@
 module.exports = function(app) {
-  app.directive('commonRepairs', function() {
+  app.directive('describeIssue', function() {
     return {
       restrict: 'EAC',
       require: '^ngController',
       transclude: true,
-      templateUrl: '/templates/describe/directives/common_repairs.html',
+      templateUrl: '/templates/describe/directives/describe_issue.html',
 
       scope: {
         description: '=',

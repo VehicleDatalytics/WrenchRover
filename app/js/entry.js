@@ -60,16 +60,16 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   controllerAs: 'VehicleInfoController'
 })
 // fix
+// .state('common_repairs_oil', {
+//   url: '/common_repairs_oil',
+//   templateUrl: 'templates/common_repairs/views/common_repairs_oil.html',
+//   controller: 'ExampleController',
+//   controllerAs: 'oil'
+// })
 .state('common_repairs_view', {
-  url: '/common_repairs_oil',
-  templateUrl: 'templates/common_repairs/views/common_repairs_view.html',
-  controller: 'ExampleController',
-  controllerAs: 'oil'
-})
-.state('common_repairs', {
   url: '/common_repairs',
   templateUrl:
-    'templates/describe/views/common_repairs.html',
+    'templates/describe/views/common_repairs_view.html',
   controller: 'describeController',
   controllerAs: 'describe'
 })
@@ -81,17 +81,27 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   controller: 'serviceCenterController',
   controllerAs: 'scctrl'
 })
-.state('common_repairs.common', {
+.state('common_repairs_view.common_maintenance', {
   url: '/common_maintenance',
   templateUrl: 'templates/describe/views/common.html'
   // controller: 'stuffController',
   // controllerAs: 'describe'
 })
-.state('common_repairs.dash', {
+.state('common_repairs_view.dash_lights', {
   url: '/dashlights',
   templateUrl: 'templates/describe/views/dash.html'
   // controller: 'stuffController',
   // controllerAs: 'describe'
-});
+})
+
+.state('common_repairs_view.describe_issue', {
+  url: '/describe_issue',
+  templateUrl: 'templates/describe/views/describe.html'
+  // controller: 'stuffController',
+  // controllerAs: 'describe'
+})
+
+
+;
   $urlRouterProvider.otherwise('/');
 });
