@@ -1,13 +1,13 @@
 
 
-  <section  data-ng-controller = "serviceCenterController as scctrl">
-
+  <!-- <section  data-ng-controller = "serviceCenterController as scctrl"> -->
+<section>
   <ul id="error">
     <li data-ng-repeat="error in scctrl.errors">{{error.message}}<button data-ng-click="scctrl.errors.splice(sccctrl.errors.indexOf(error), 1)">Close This</button></li>
   </ul>
 
-
-  <!-- <service-center-sign-up-form
+<!-- 
+ <service-center-sign-up-form
     data-button-text="Sign up!"
     data-action="create"
     data-servicecenter="scctrl.newServiceCenter">

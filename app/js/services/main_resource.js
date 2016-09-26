@@ -6,6 +6,7 @@ module.exports = function(app) {
       this.errors = errorsArr;
       this.options = options || {};
       this.options.errMessages = this.options.errMessages || {};
+      console.log(this.data);
     };
 
     Resource.prototype.getAll = function() {
@@ -15,8 +16,12 @@ module.exports = function(app) {
           this.data.splice(0);
           for (var i = 0; i < res.data.length; i++) {
             this.data.push(res.data[i]);
+
+
           }
         }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
+
+
     };
 
     Resource.prototype.create = function(resource) {
