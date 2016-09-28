@@ -29,6 +29,7 @@ require('./user_sign_up')(wrApp);
 require('./common_repairs')(wrApp);
 require('./vehicle')(wrApp);
 require('./describe')(wrApp);
+require('./user_dashboard')(wrApp);
 
 
 wrApp.config(function($stateProvider, $urlRouterProvider) {
