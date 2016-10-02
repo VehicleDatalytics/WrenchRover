@@ -17,6 +17,8 @@ module.exports = function(app) {
           create: controller.createUser
         };
         scope.save = actions[scope.action];
+
+        // console.log(element);
       }
     };
   });
