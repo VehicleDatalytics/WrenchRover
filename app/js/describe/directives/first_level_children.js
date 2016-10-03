@@ -11,10 +11,8 @@ module.exports = function(app) {
       },
 
       link: function(scope, element, attrs, controller) {
-        // element.append('<p>FIRST LEVEL APPEND</p>');
-        // $compile(element.contents())(scope);
-        // console.log(element);
-        // console.log(scope);
+        scope.storeSelection = controller.storeSelection;
+
       }
     };
   });
