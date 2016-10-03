@@ -10,6 +10,7 @@ vehicleInfoRouter.trim = Router();
 vehicleInfoRouter.vin = Router();
 
 vehicleInfoRouter.make.get('/vehicleInfo/:year', (req, res) => {
+console.log('make router');
   var makeTrigger = new EventEmitter();
   request.get('https://api.edmunds.com/api/vehicle/v2/makes?' +
               '&year=' + req.params.year + '&view=basic&fmt=json&api_key=' +
@@ -32,6 +33,7 @@ vehicleInfoRouter.make.get('/vehicleInfo/:year', (req, res) => {
 });
 
 vehicleInfoRouter.model.get('/vehicleInfo/:makeNiceName/:year', (req, res) => {
+  console.log('model router');
   var modelTrigger = new EventEmitter();
   request.get('https://api.edmunds.com/api/vehicle/v2/' + req.params.makeNiceName +
               '/models?' + 'year=' + req.params.year + '&view=basic&fmt=json&api_key=' +
@@ -54,6 +56,7 @@ vehicleInfoRouter.model.get('/vehicleInfo/:makeNiceName/:year', (req, res) => {
 });
 
 vehicleInfoRouter.trim.get('/vehicleInfo/:makeNiceName/:modelNiceName/:year', (req, res) => {
+  console.log('trim router');
   var trimTrigger = new EventEmitter();
   request.get('https://api.edmunds.com/api/vehicle/v2/' + req.params.makeNiceName +
               '/' + req.params.modelNiceName + '/' + req.params.year +
@@ -87,8 +90,9 @@ vehicleInfoRouter.trim.get('/vehicleInfo/:makeNiceName/:modelNiceName/:year', (r
   });
 });
 
-vehicleInfoRouter.vin.get('/vehicleInfo/:vin', (req, res) => {
+vehicleInfoRouter.vin.get('/vehicleInfo/vin/:vin', (req, res) => {
   var vinTrigger = new EventEmitter();
+console.log('vin router');
   request.get('https://api.edmunds.com/api/v1/vehicle/vin/' + req.params.vin +
               '/configuration?api_key=' + process.env.EDMUNDS_API)
   .end((err, data) => {

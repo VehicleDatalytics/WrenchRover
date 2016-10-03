@@ -102,6 +102,13 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   // controllerAs: 'describe'
 })
 
+.state('user_dashboard', {
+  url: '/dashboard',
+  templateUrl: 'templates/user/views/user_dashboard.html'
+  // controller:
+  // controllerAs:
+})
+
 
 ;
   $urlRouterProvider.otherwise('/');

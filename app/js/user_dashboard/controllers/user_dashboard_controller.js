@@ -15,6 +15,7 @@ module.exports = exports = function(app) {
     var resource = new Resource(this.userObject, this.errors);
 
     this.getUserInfo = resource.getUserInfo.bind(resource);
+
     this.logUser = function() {
       console.log('user object from controller');
       console.log(this.userObject);

@@ -33,5 +33,9 @@ module.exports = exports = function(app) {
     this.newMakeSelected = clearSelections.newMakeSelected.bind(clearSelections);
     this.newModelSelected = clearSelections.newModelSelected.bind(clearSelections);
     this.newTrimSelected = clearSelections.newTrimSelected.bind(clearSelections);
+
+    this.logVehicle = function() {
+      console.log(this.vehicleObject);
+    };
   }]);
 };

@@ -1,0 +1,21 @@
+<section data-ng-controller="UserDashboardController as UserDashCtrl">
+    <button class="btn btn-default"
+            type="submit"
+            ng-click="UserDashCtrl.getUserInfo(); UserDashCtrl.logUser()">
+            test get user
+    </button>
+
+    <div id='profile'>
+      <p>Your Profile</p>
+      <img id ='profilePicture' src='http://khns.org/wp-content/uploads/2014/07/profile-icon-400x380.png'>
+      <p> {{UserDashCtrl.userObject.userName}} </p>
+      <p>Member Since</p>
+      <p>{{UserDashCtrl.userObject.memberSince}}</p>
+      <p>Your Vehicles</p>
+      <p data-ng-repeat="auto in UserDashCtrl.userObject.autos">
+        {{auto.year}} {{auto.make}} {{auto.model}} <br>
+        Trim: {{auto.trim}} <br>
+        Engine: {{auto.engine}}
+      </p>
+    </div>
+</section>

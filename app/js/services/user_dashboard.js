@@ -20,9 +20,9 @@ module.exports = exports = function(app) {
         var month = parseInt(res.data.created_at.slice(5, 7), 10);
         var year = res.data.created_at.slice(0, 4);
         var monthsArray = ['January', 'February', 'March', 'April', 'May',
-                          'June', 'July', 'August', 'September', 'November', 'December'];
-        month = monthsArray[month + 1];
-        this.memberSince = month + ' ' + year;
+                          'June', 'July', 'August', 'September', 'October',
+                          'November', 'December'];
+        this.user.memberSince = monthsArray[month - 1] + ' ' + year;
       });
     };
 
