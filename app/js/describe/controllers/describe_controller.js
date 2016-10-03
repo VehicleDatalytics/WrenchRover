@@ -2,13 +2,29 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('describeController', ['wrResource', function(Resource) {
+  app.controller('describeController', ['$http', function($http) {
     this.descriptions = [];
+    this.childrens = [];
+    this.siblings = [];
     this.errors = [];
-    var remote = new Resource(this.descriptions, this.errors, baseUrl + 'categories', { errMessages: { getAll: 'custome error message' } });
-    this.getAll = remote.getAll.bind(remote);
+    this.selection = [];
+    this.experiment = 'SHOWING UP';
 
-    console.log(this.descriptions);
-    this.getAll();
+    $http.get(baseUrl + 'categories')
+    .then((res) => {
+      this.descriptions = res.data;
+      this.childrens = res.data[0].children;
+    //   for (var i = 0; i < res.data[0].children.length; i++) {
+    //     this.siblings.push(res.data[0].children[i]);
+      //
+    //   }
+
+
+      console.log(this.descriptions);
+      console.log(this.childrens);
+      console.log(this.siblings);
+    });
+
+
   }]);
 };

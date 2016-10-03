@@ -12,17 +12,64 @@ module.exports = function(app) {
     Resource.prototype.getAll = function() {
       return $http.get(this.url)
         .then((res) => {
-          console.log(this.url);
+        //   console.log(this.url);
           this.data.splice(0);
           for (var i = 0; i < res.data.length; i++) {
             this.data.push(res.data[i]);
-
-
           }
         }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
-
-
     };
+
+
+    Resource.prototype.getChildren = function() {
+      console.log('getting children from main resource service');
+      return $http.get(this.url)
+        .then((res) => {
+        //   console.log(this.url);
+          this.data.splice(0);
+          for (var i = 0; i < res.data.length; i++) {
+            this.data.push(res.data[i].children);
+          }
+        }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
+    };
+
+
+    Resource.prototype.getChildren0 = function() {
+    //   console.log('getting children from main resource service');
+      return $http.get(this.url)
+        .then((res) => {
+        //   console.log(this.url);
+          this.data.splice(0);
+          for (var i = 0; i < res.data[0].children.length; i++) {
+            this.data.push(res.data[0].children[i]);
+          }
+        }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
+    };
+
+
+    Resource.prototype.getChildren1 = function() {
+    //   console.log('getting children from main resource service');
+      return $http.get(this.url)
+        .then((res) => {
+        //   console.log(this.url);
+          this.data.splice(0);
+          for (var i = 0; i < res.data[0].children.length; i++) {
+            this.data.push(res.data[0].children[i].children);
+          }
+        }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
+    };
+    // Resource.prototype.getChildren0 = function() {
+    // //   console.log('getting children from main resource service');
+    //   return $http.get(this.url)
+    //     .then((res) => {
+    //     //   console.log(this.url);
+    //       this.data.splice(0);
+    //       for (var i = 0; i < res.data[0].children.length; i++) {
+    //         this.data.push(res.data[0].children[i]);
+    //       }
+    //     }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
+    // };
+
 
     Resource.prototype.create = function(resource) {
       return $http.post(this.url, resource)

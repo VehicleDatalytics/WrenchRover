@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.directive('firstLevelChildren', function() {
+  app.directive('firstLevelChildren', function($compile) {
     return {
       restrict: 'EAC',
       replace: true,
@@ -7,10 +7,14 @@ module.exports = function(app) {
       transclude: true,
       templateUrl: '/templates/describe/directives/first_level_children.html',
       scope: {
-        description: '='
+        firstchild: '='
       },
+
       link: function(scope, element, attrs, controller) {
-        // scope.remove = controller.removeMug;
+        // element.append('<p>FIRST LEVEL APPEND</p>');
+        // $compile(element.contents())(scope);
+        // console.log(element);
+        // console.log(scope);
       }
     };
   });

@@ -83,22 +83,22 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
 })
 .state('common_repairs_view.common_maintenance', {
   url: '/common_maintenance',
-  templateUrl: 'templates/describe/views/common.html'
-  // controller: 'stuffController',
-  // controllerAs: 'describe'
+  templateUrl: 'templates/describe/views/common.html',
+  controller: 'describeController',
+  controllerAs: 'describe'
 })
 .state('common_repairs_view.dash_lights', {
   url: '/dashlights',
-  templateUrl: 'templates/describe/views/dash.html'
-  // controller: 'stuffController',
-  // controllerAs: 'describe'
+  templateUrl: 'templates/describe/views/dash.html',
+  controller: 'describeController',
+  controllerAs: 'describe'
 })
 
 .state('common_repairs_view.describe_issue', {
   url: '/describe_issue',
-  templateUrl: 'templates/describe/views/describe.html'
-  // controller: 'stuffController',
-  // controllerAs: 'describe'
+  templateUrl: 'templates/describe/views/describe.html',
+  controller: 'describeController',
+  controllerAs: 'describe'
 })
 
 
