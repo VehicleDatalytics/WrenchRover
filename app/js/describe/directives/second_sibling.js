@@ -10,9 +10,10 @@ module.exports = function(app) {
       scope: {
         secondsibling: '='
       },
-      link: function(scope, element, attrs) {
-        // element.append('<p>kaeaega</p>');
-        // console.log(scope);
+      link: function(scope, element, attrs, controller) {
+
+        scope.checkedSelected = controller.checkedSelected;
+
       }
     };
   });
