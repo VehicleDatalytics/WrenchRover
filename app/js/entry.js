@@ -29,6 +29,7 @@ require('./user_sign_up')(wrApp);
 require('./common_repairs')(wrApp);
 require('./vehicle')(wrApp);
 require('./describe')(wrApp);
+require('./user_dashboard')(wrApp);
 
 
 wrApp.config(function($stateProvider, $urlRouterProvider) {
@@ -99,6 +100,13 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   templateUrl: 'templates/describe/views/describe.html',
   controller: 'describeController',
   controllerAs: 'describe'
+})
+
+.state('user_dashboard', {
+  url: '/dashboard',
+  templateUrl: 'templates/user/views/user_dashboard.html'
+  // controller:
+  // controllerAs:
 })
 
 
