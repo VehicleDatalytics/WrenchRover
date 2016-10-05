@@ -3,7 +3,8 @@ module.exports = function(app) {
     return {
       restrict: 'EAC',
       replace: true,
-      require: '^ngController',
+      require: '^describeController',
+    //   require: '^ngController',
       transclude: true,
       templateUrl: '/templates/describe/directives/second_level_children.html',
 

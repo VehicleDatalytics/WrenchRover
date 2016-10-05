@@ -2,6 +2,7 @@ module.exports = function(app) {
   app.directive('describeIssue', function() {
     return {
       restrict: 'EAC',
+    //   require: 'describeController',
       require: '^ngController',
       transclude: true,
       templateUrl: '/templates/describe/directives/describe_issue.html',

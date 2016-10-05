@@ -3,6 +3,7 @@ module.exports = function(app) {
     return {
       restrict: 'E',
       replace: true,
+    //   require: 'describeController',
       require: '^ngController',
       transclude: true,
       templateUrl: '/templates/describe/directives/second_sibling.html',

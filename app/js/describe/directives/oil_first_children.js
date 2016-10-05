@@ -1,19 +1,17 @@
 module.exports = function(app) {
-  app.directive('firstLevelChildren', function($compile) {
+  app.directive('oilFirstChildren', function() {
     return {
       restrict: 'EAC',
       replace: true,
     //   require: 'describeController',
       require: '^ngController',
       transclude: true,
-      templateUrl: '/templates/describe/directives/first_level_children.html',
+      templateUrl: '/templates/describe/directives/oil_first_children.html',
       scope: {
-        firstchild: '='
+        oilfirstchildren: '='
       },
 
       link: function(scope, element, attrs, controller) {
-        scope.storeSelection = controller.storeSelection;
-
       }
     };
   });

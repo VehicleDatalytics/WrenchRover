@@ -9,18 +9,29 @@ module.exports = function(app) {
     this.errors = [];
     this.selection = [];
     this.checked = null;
-    // this.stored = [];
+    this.oils = [];
 
 
     $http.get(baseUrl + 'categories')
     .then((res) => {
       this.descriptions = res.data;
-      this.childrens = res.data[0].children;
+    //   this.childrens = res.data[0].children;
+
+      for (var i = 0; i < res.data[0].children.length; i++) {
+        if (res.data[0].children[i].name != 'Oil Change') {
+          this.childrens.push(res.data[0].children[i]);
+        }
+        else {
+          console.log('oil out');
+          this.oils.push(res.data[0].children[i]);
+          console.log(this.oils);
+        }
+      }
 
       console.log(this.descriptions);
       console.log(this.childrens);
-
     });
+
 
     this.storeSelection = function() {
       console.log('storing the selection');

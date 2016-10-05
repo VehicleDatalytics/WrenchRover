@@ -3,6 +3,7 @@ module.exports = function(app) {
     return {
       restrict: 'EAC',
       replace: true,
+    //   require: 'describeController',
       require: '^ngController',
       transclude: true,
       templateUrl: '/templates/describe/directives/common_maintenance.html',
