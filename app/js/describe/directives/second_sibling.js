@@ -13,7 +13,7 @@ module.exports = function(app) {
       },
       link: function(scope, element, attrs, controller) {
         scope.checkedSelected = controller.checkedSelected;
-        scope.testfunc = controller.testfunc;
+
       }
     };
   });

@@ -13,19 +13,6 @@ module.exports = function(app) {
         secondchild: '='
       },
       link: function(scope, element, attrs) {
-        // if (angular.isArray(scope.secondchild.children)) {
-        //   element.append("<first-level-children data-firstchild='secondchild.children' id = 'hands'  ></first-level-children>");
-        //
-        //
-        //   $compile(element.contents())(scope);
-        // }
-        // else {
-        //   console.log('not appended');
-        // }
-
-        // angular.element('#nails').append('<p>afaefageager</p>');
-
-        // console.log(element);
 
 
       }
