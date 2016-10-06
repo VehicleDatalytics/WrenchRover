@@ -4,7 +4,8 @@ module.exports = function(app) {
       restrict: 'EAC',
       replace: true,
     //   require: 'describeController',
-      require: '^ngController',
+      controller: 'describeController',
+      controllerAs: 'describe',
       transclude: true,
       templateUrl: '/templates/describe/directives/oil_first_children.html',
       scope: {
