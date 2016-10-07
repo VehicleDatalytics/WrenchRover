@@ -5,12 +5,21 @@
 
       </describe-item>
     </ol>
-<div>
+<div id = "temporaryDiv">
+  Your Services
+  <ul>
+    <chosen-oil data-ng-repeat="chosenoil in describe.service.oilChosen" data-chosenoil="chosenoil">
+
+    </chosen-oil>
+
+  </ul>
   <ul>
   <chosen-service data-ng-repeat="chosenservice in describe.service.chosen" data-chosenservice="chosenservice">
 
   </chosen-service>
 </ul>
+
+
 
   </div>
 

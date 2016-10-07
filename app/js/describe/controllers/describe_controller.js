@@ -27,12 +27,10 @@ module.exports = function(app) {
 
     });
 
-    //
-    // this.checkedSelected = function(x) {
-    //   console.log(x);
-    //   var value = this.value;
-    //   cmService.checkedSelected(value);
-    // };
+    this.oilSelected = function(x, y) {
+      var value = this.value;
+      cmService.oilSelected(value, y);
+    };
 
     this.checkedSelected = function(x, y) {
       var value = this.value;
