@@ -5,9 +5,16 @@
 
       </describe-item>
     </ol>
+<div>
+  <ul>
+  <chosen-service data-ng-repeat="chosenservice in describe.service.chosen" data-chosenservice="chosenservice">
 
+  </chosen-service>
+</ul>
 
-chosen:{{describe.service.chosenService}}
+  </div>
+
+<!-- chosen:{{describe.service.chosenService}} -->
 <br>
 
     <div ui-view></div>

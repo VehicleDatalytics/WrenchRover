@@ -8,4 +8,5 @@ module.exports = function(app) {
   require('./oil_list.js')(app);
   require('./oil_first_children.js')(app);
   require('./oil_second.js')(app);
+  require('./chosen_service.js')(app);
 };

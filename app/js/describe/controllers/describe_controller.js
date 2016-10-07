@@ -8,11 +8,8 @@ module.exports = function(app) {
     this.errors = [];
     this.checked = null;
     this.oils = [];
-    // var chosen = [];
     this.service = cmService;
     this.selection = null;
-    // this.chosen = chosen;
-    // var that = this;
 
 
     $http.get(baseUrl + 'categories')
@@ -30,22 +27,17 @@ module.exports = function(app) {
 
     });
 
+    //
+    // this.checkedSelected = function(x) {
+    //   console.log(x);
+    //   var value = this.value;
+    //   cmService.checkedSelected(value);
+    // };
 
-    this.checkedSelected = function(x) {
-    //   console.log(chosen);
-    //   console.log(that.chosen);
-    //   chosen.push(x);
-    //   console.log(chosen.length);
-      console.log(x);
-
-    //   chosen.push(x);
-
-
+    this.checkedSelected = function(x, y) {
       var value = this.value;
-      cmService.checkedSelected(value);
-
+      cmService.checkedSelected(value, y);
     };
-
 
   }]);
 };
