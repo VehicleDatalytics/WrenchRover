@@ -60,13 +60,7 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   controller: 'VehicleInfoController',
   controllerAs: 'VehicleInfoController'
 })
-// fix
-// .state('common_repairs_oil', {
-//   url: '/common_repairs_oil',
-//   templateUrl: 'templates/common_repairs/views/common_repairs_oil.html',
-//   controller: 'ExampleController',
-//   controllerAs: 'oil'
-// })
+
 .state('common_repairs_view', {
   url: '/common_repairs',
   templateUrl:

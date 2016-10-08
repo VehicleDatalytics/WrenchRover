@@ -18,6 +18,8 @@ module.exports = function(app) {
         };
         scope.save = actions[scope.action];
         scope.describeIt = controller.describeIt;
+        scope.textAreaFunc = controller.textAreaFunc;
+        scope.beginIt = controller.beginIt;
       }
     };
   });

@@ -8,10 +8,13 @@ module.exports = function(app) {
     this.oilChosen = oilChosen;
     var that = this;
     this.count = 0;
+    this.textInput = null;
+    // this.button = 'enter';
+
 
     console.log(this.count);
 
-
+    // this.example = 'word up';
     return {
       oilSelected: function(value, second) {
         this.chosenService = second;
@@ -49,7 +52,26 @@ module.exports = function(app) {
           chosen.splice(index, 1);
         }
         this.chosen = that.chosen;
+        window.localStorage.chosen = this.chosen;
+      },
+
+      textAreaFunc: function(value) {
+        this.textInput = value;
+        if (value === undefined) {
+          window.localStorage.removeItem('describeIssue');
+
+        }
+        else {
+          window.localStorage.describeIssue = this.textInput;
+          window.localStorage.example = 'foo bar';
+
+        }
+      },
+
+      changeText: function() {
+        // this.button = 'update';
       }
+
 
     };
   }]);

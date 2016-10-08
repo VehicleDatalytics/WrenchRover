@@ -19,11 +19,20 @@
   </chosen-service>
 </ul>
 
+<p ng-class="{'text-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">You wrote:</p>
+<div id = "tempInsideDiv">
+ {{describe.service.textInput}}
 
+ <a ui-sref="common_repairs_view.describe_issue" ng-click = "describe.changeText()" ng-class="{'text-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">Edit</a>
+
+  <button ng-click="describe.editThis()"  ng-disabled="describe.service.textInput === '' || !describe.service.textInput" ng-class="{'btn btn-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">Remove</button>
+
+
+ </div>
 
   </div>
 
-<!-- chosen:{{describe.service.chosenService}} -->
+
 <br>
 
     <div ui-view></div>
