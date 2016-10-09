@@ -48,13 +48,13 @@ input[type=number]::-webkit-outer-spin-button {
   padding-top: 1em;
 }
 
-#temporaryDiv{
+.temporaryDiv{
   float: right;
   height: 500px;
   width: 150px;
   border: 1px solid red;
 }
 
-#tempInsideDiv{
+.tempInsideDiv{
   border: 2px solid blue;
 }

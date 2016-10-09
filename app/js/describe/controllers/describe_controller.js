@@ -18,8 +18,10 @@ module.exports = function(app) {
     this.button = 'Enter';
     this.button = that.button;
     this.dashArr2 = [];
-    // this.dash = '../../../images/dashlights/001.png';
+    this.dashChild = [];
+
     this.dash = {
+
       one: '../../../images/dashlights/001.png',
       two: '../../../images/dashlights/002.png',
       three: '../../../images/dashlights/003.png',
@@ -34,6 +36,41 @@ module.exports = function(app) {
     this.dashArr = ['../../../images/dashlights/001.png', '../../../images/dashlights/002.png', '../../../images/dashlights/003.png', '../../../images/dashlights/004.png', '../../../images/dashlights/005.png', '../../../images/dashlights/010.png', '../../../images/dashlights/011.png', '../../../images/dashlights/015.png', '../../../images/dashlights/016.png', '../../../images/dashlights/017.png'];
 
     this.dashArr2.push(this.dash);
+    this.sbArr = [];
+
+
+    this.sb = {
+      children: [
+        { imageSrc: '../../../images/dashlights/001.png',
+         name: 'Oil Light' },
+         { imageSrc: '../../../images/dashlights/002.png',
+          name: 'Battery Light' },
+          { imageSrc: '../../../images/dashlights/003.png',
+           name: 'encircled exclamation point' },
+           { imageSrc: '../../../images/dashlights/004.png',
+            name: 'Airbag Light' },
+            { imageSrc: '../../../images/dashlights/005.png',
+             name: 'Temperature Light' },
+             { imageSrc: '../../../images/dashlights/010.png',
+              name: 'ABS warning' },
+              { imageSrc: '../../../images/dashlights/011.png',
+               name: 'Check Engine Light' },
+               { imageSrc: '../../../images/dashlights/015.png',
+                name: 'coils' },
+                { imageSrc: '../../../images/dashlights/016.png',
+                 name: 'triangle exclamation mark' },
+                 { imageSrc: '../../../images/dashlights/017.png',
+                  name: 'Tire Pressures' }
+
+
+      ]
+    };
+
+    this.sbArr.push(this.sb);
+    for (var i = 0; i < this.sbArr[0].children.length; i++) {
+      this.dashChild.push(this.sbArr[0].children[i]);
+    }
+
 
     $http.get(baseUrl + 'categories')
     .then((res) => {
@@ -47,40 +84,79 @@ module.exports = function(app) {
           this.oils.push(res.data[0].children[i]);
         }
       }
+
     });
 
     this.oilSelected = function(x, y) {
+
       var value = this.value;
+
       cmService.oilSelected(value, y);
     };
 
     this.checkedSelected = function(x, y) {
-      var value = this.value;
-      cmService.checkedSelected(value, y);
+      console.log(this.value);
+      if (x === false) {
+        console.log(x);
+        console.log(this.value);
+        this.value = false;
+        console.log(this.value);
+      }
+      else {
+        console.log(x);
+        var value = this.value;
+        cmService.checkedSelected(value, y);
+      }
     };
+
 
     this.textAreaFunc = function(x) {
       console.log(this.value);
       var value = this.value;
       this.value = 'Thank you';
-
       cmService.textAreaFunc(value);
     };
 
     this.editThis = function() {
       var value = '';
-      this.placeholder = 'hello friend';
+      this.placeholder = 'Update?';
       this.textAreaFunc();
     };
 
     this.changeText = function() {
-
       that.button = 'x';
     };
 
-    this.dashSelect = function() {
-      console.log('yes');
+    this.dashSelect = function(x) {
+      console.log(x);
+      var value = x;
+      cmService.dashSelect(value);
+
     };
+
+    this.nextPage = function() {
+      cmService.nextPage();
+    };
+
+    this.removeChosenService = function(z) {
+      console.log(z);
+      var x = z;
+      cmService.removeChosenService(x);
+    //   this.checkedSelected(false, 'aaa');
+    };
+
+    this.removeChosenDash = function(value) {
+      console.log(value);
+      var x = value;
+      cmService.removeChosenDash(x);
+    };
+
+    this.removeChosenOil = function(value) {
+      console.log(value);
+      var x = value;
+      cmService.removeChosenOil(x);
+    };
+
 
   }]);
 };

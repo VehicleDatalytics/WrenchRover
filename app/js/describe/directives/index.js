@@ -11,4 +11,5 @@ module.exports = function(app) {
   require('./chosen_service.js')(app);
   require('./chosen_oil.js')(app);
   require('./dashlights_list.js')(app);
+  require('./chosen_dash.js')(app);
 };
