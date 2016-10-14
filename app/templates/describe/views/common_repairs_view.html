@@ -1,5 +1,11 @@
 <section>
 
+
+
+
+  <!-- ////////// -->
+
+<!-- <div ng-controller="describeController as describe"> -->
     <ol id = "descriptionList">
         <describe-item data-ng-repeat = "descriptions in describe.descriptions" data-description="descriptions">
 
@@ -38,18 +44,21 @@
 
  <a ui-sref="common_repairs_view.describe_issue" ng-click = "describe.changeText()" ng-class="{'text-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">Edit</a>
 
-  <button ng-click="describe.editThis()"  ng-disabled="describe.service.textInput === '' || !describe.service.textInput" ng-class="{'btn btn-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">Remove</button>
+  <button ng-click="describe.editThis()"  ng-disabled="describe.service.textInput === '' || !describe.service.textInput" ng-class="{'btn btn-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">X</button>
 
 
 
 
  </div>
-   <button ng-click="describe.nextPage()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}" >Save and Continue</button>
+
+   <button ng-click="describe.nextPage()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}" >Next Step</button>
 
   </div>
 
 
 <br>
+
+<!-- </div> -->
 
     <div ui-view></div>
 </section>

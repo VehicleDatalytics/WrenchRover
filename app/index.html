@@ -21,7 +21,15 @@
                  src="/images/WrenchRover_tagline_large_latest.png">
           </a>
           <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="user_sign_up_form_view_page_one" id"signupNavButton">Sign Up</a></li>
+
+
+                <!-- <div class="modal-demo" ng-controller="buttonController as $ctrl">
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open()" >Open me!</button> -->
+
+    <div class="modal-demo" ng-controller="buttonController as $ctrl">
+<a ng-click="$ctrl.open()" >Sign up!</a>
+
+</div>
           </ul>
         </div>
       </div><!-- /.container-fluid -->
@@ -37,9 +45,17 @@
 
 <!-- ng-change - enable "next" button -->
     <!-- <section data-ng-view></section> -->
+
+
+    <!-- ///// -->
+
+
+
+    <!-- ////// -->
     <section ui-view>
 
     </section>
+
 
   </main>
   <script type="text/javascript" src="/bundle.js"></script>

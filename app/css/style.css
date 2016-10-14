@@ -58,3 +58,23 @@ input[type=number]::-webkit-outer-spin-button {
 .tempInsideDiv{
   border: 2px solid blue;
 }
+
+
+/*.subcategory{
+  border: 1px solid grey;
+}*/
+
+
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}

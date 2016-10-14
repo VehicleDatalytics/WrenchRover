@@ -19,6 +19,9 @@ module.exports = function(app) {
     console.log(this.count);
 
     return {
+      g: 44444,
+      chosen: chosen,
+
       oilSelected: function(value, second) {
         this.chosenService = second;
         if (value && that.count === 0) {
