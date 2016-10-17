@@ -2,7 +2,8 @@ module.exports = function(app) {
   app.directive('describeIssue', function() {
     return {
       restrict: 'EAC',
-      require: '^ngController',
+      controller: 'describeController',
+      controllerAs: 'describe',
       transclude: true,
       templateUrl: '/templates/describe/directives/describe_issue.html',
 
@@ -17,6 +18,8 @@ module.exports = function(app) {
         };
         scope.save = actions[scope.action];
         scope.describeIt = controller.describeIt;
+        scope.textAreaFunc = controller.textAreaFunc;
+        scope.beginIt = controller.beginIt;
       }
     };
   });

@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="bootstrap_wrenchrover.css">
   <link rel="stylesheet" href="style.css">
+
   <title>Wrench Rover</title>
 </head>
 
@@ -19,7 +21,15 @@
                  src="/images/WrenchRover_tagline_large_latest.png">
           </a>
           <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="user_sign_up_form_view_page_one" id"signupNavButton">Sign Up</a></li>
+
+
+                <!-- <div class="modal-demo" ng-controller="buttonController as $ctrl">
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open()" >Open me!</button> -->
+
+    <div class="modal-demo" ng-controller="buttonController as $ctrl">
+<a ng-click="$ctrl.open()" >Sign up!</a>
+
+</div>
           </ul>
         </div>
       </div><!-- /.container-fluid -->
@@ -31,13 +41,21 @@
              id="vehicleselectimage"
              src="/images/car1.jpeg">
     </div> <!-- row -->
-  <!-- </div> <!-- container --> 
+  <!-- </div> <!-- container -->
 
 <!-- ng-change - enable "next" button -->
     <!-- <section data-ng-view></section> -->
+
+
+    <!-- ///// -->
+
+
+
+    <!-- ////// -->
     <section ui-view>
 
     </section>
+
 
   </main>
   <script type="text/javascript" src="/bundle.js"></script>

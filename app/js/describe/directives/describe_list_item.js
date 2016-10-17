@@ -3,7 +3,8 @@ module.exports = function(app) {
     return {
       restrict: 'EAC',
       replace: true,
-      require: '^ngController',
+      controller: 'describeController',
+      controllerAs: 'describe',
       transclude: true,
       templateUrl: '/templates/describe/directives/describe_list_item.html',
     //   template: '<p> yes</p>',

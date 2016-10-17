@@ -3,8 +3,12 @@ require('angular-google-maps');
 require('angular-simple-logger');
 require('lodash');
 require('angular-ui-router');
+require('angular-ui-bootstrap');
+require('angular-animate');
+require('angular-sanitize');
 
-const wrApp = angular.module('wrApp', [require('angular-route'), require('angular-ui-bootstrap'), 'ui.router', 'uiGmapgoogle-maps'])
+
+const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'uiGmapgoogle-maps'])
 
 
 .config(['uiGmapGoogleMapApiProvider', function(GoogleMapApi) {
@@ -30,6 +34,8 @@ require('./common_repairs')(wrApp);
 require('./vehicle')(wrApp);
 require('./describe')(wrApp);
 require('./user_dashboard')(wrApp);
+require('./modal_window')(wrApp);
+require('./modal_button')(wrApp);
 
 
 wrApp.config(function($stateProvider, $urlRouterProvider) {
@@ -38,7 +44,8 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   url: '/sign_up',
   templateUrl: 'templates/user/views/user_sign_up_form_view_page_one.html',
   controller: 'userSignUpController',
-  controllerAs: 'scctrl'
+  controllerAs: 'userctrl'
+
 
 })
 .state('mechanic_sign_up', {
@@ -60,13 +67,7 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   controller: 'VehicleInfoController',
   controllerAs: 'VehicleInfoController'
 })
-// fix
-// .state('common_repairs_oil', {
-//   url: '/common_repairs_oil',
-//   templateUrl: 'templates/common_repairs/views/common_repairs_oil.html',
-//   controller: 'ExampleController',
-//   controllerAs: 'oil'
-// })
+
 .state('common_repairs_view', {
   url: '/common_repairs',
   templateUrl:

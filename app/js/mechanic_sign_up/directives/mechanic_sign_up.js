@@ -3,6 +3,8 @@ module.exports = function(app) {
     return {
       restrict: 'EAC',
       require: '^ngController',
+      controller: 'mechanicSignUpController',
+      controllerAs: 'scctrl',
       transclude: true,
       templateUrl: '/templates/mechanic_sign_up/directives/mechanic_sign_up_form.html',
 
@@ -12,6 +14,8 @@ module.exports = function(app) {
         action: '@'
       },
       link: function(scope, element, attrs, controller) {
+        console.log('controller: ', controller);
+        console.log('scope:', scope);
         var actions = {
         //   update: controller.updateMug,
           create: controller.createServiceCenter

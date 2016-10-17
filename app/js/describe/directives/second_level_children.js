@@ -3,7 +3,8 @@ module.exports = function(app) {
     return {
       restrict: 'EAC',
       replace: true,
-      require: '^ngController',
+      controller: 'describeController',
+      controllerAs: 'describe',
       transclude: true,
       templateUrl: '/templates/describe/directives/second_level_children.html',
 
@@ -12,19 +13,6 @@ module.exports = function(app) {
         secondchild: '='
       },
       link: function(scope, element, attrs) {
-        // if (angular.isArray(scope.secondchild.children)) {
-        //   element.append("<first-level-children data-firstchild='secondchild.children' id = 'hands'  ></first-level-children>");
-        //
-        //
-        //   $compile(element.contents())(scope);
-        // }
-        // else {
-        //   console.log('not appended');
-        // }
-
-        // angular.element('#nails').append('<p>afaefageager</p>');
-
-        // console.log(element);
 
 
       }

@@ -1,22 +1,19 @@
 
 
-  <!-- <section  data-ng-controller = "userSignUpController as scctrl"> -->
-<section>
-  <ul id="error">
-    <li data-ng-repeat="error in scctrl.errors">{{error.message}}<button data-ng-click="scctrl.errors.splice(sccctrl.errors.indexOf(error), 1)">Close This</button></li>
-  </ul>
+   <section data-ng-controller = "userSignUpController as userctrl">
+      <ul id="error">
+        <li data-ng-repeat="error in userctrl.errors">{{error.message}}<button class="btn btn-default" data-ng-click="userctrl.errors.splice(userctrl.errors.indexOf(error), 1)">Close This</button></li>
+      </ul>
 
 
-  <user-sign-up-form-page-one
-    data-button-text="Create!"
-    data-action="create"
-    data-xuser="scctrl.newUser">
-</user-sign-up-form-page-one>
-<!--
-  <ol id = "serviceCenterList">
-      <service-list-item data-ng-repeat = "servicecenters in scctrl.servicecenters" data-servicecenter="servicecenters">
+      <user-sign-up-form-page-one
+        data-button-text="Sign up!"
+        data-xuser="userctrl.newUser"
+            data-action="create"
 
-    </service-list-item>
-  </ol> -->
+      >
+    </user-sign-up-form-page-one>
 
-</section>
+
+
+    </section>

@@ -6,6 +6,7 @@ module.exports = exports = function(app) {
         console.log(err);
         if (Array.isArray(errorsArr)) {
           errorsArr.push(new Error(message || 'server error'));
+
         }
       };
     };

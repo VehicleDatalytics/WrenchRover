@@ -3,7 +3,8 @@ module.exports = function(app) {
     return {
       restrict: 'E',
       replace: true,
-      require: '^ngController',
+      controller: 'describeController',
+      controllerAs: 'describe',
       transclude: true,
       templateUrl: '/templates/describe/directives/second_sibling.html',
 
@@ -11,7 +12,6 @@ module.exports = function(app) {
         secondsibling: '='
       },
       link: function(scope, element, attrs, controller) {
-
         scope.checkedSelected = controller.checkedSelected;
 
       }

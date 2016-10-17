@@ -47,3 +47,34 @@ input[type=number]::-webkit-outer-spin-button {
   padding-right: 4em;
   padding-top: 1em;
 }
+
+.temporaryDiv{
+  float: right;
+  height: 500px;
+  width: 150px;
+  border: 1px solid red;
+}
+
+.tempInsideDiv{
+  border: 2px solid blue;
+}
+
+
+/*.subcategory{
+  border: 1px solid grey;
+}*/
+
+
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
