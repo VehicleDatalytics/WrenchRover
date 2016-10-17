@@ -19,7 +19,6 @@ module.exports = function(app) {
     console.log(this.count);
 
     return {
-      g: 44444,
       chosen: chosen,
 
       oilSelected: function(value, second) {
@@ -100,9 +99,6 @@ module.exports = function(app) {
         console.log(this.chosenDashlight);
       },
 
-      nextPage: function() {
-        console.log('next page');
-      },
 
       removeChosenService: function(x) {
         console.log(x);
@@ -151,6 +147,9 @@ module.exports = function(app) {
         window.localStorage.oilChosen = this.oilChosen;
         this.oilCount = that.oilCount;
 
+      },
+      nextPage: function() {
+        console.log('next page');
       }
 
     };

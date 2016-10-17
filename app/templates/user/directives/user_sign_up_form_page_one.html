@@ -1,20 +1,26 @@
 
-<form data-ng-submit = "save(xuser)">
+<form class = "form-horizontal" data-ng-submit = "save(xuser)">
+<fieldset>
+  <div class="form-group">
+<p><label for="user name" class="col-lg-2 control-label"> name</label>
 
-<p><label for="user name"> name</label>
   <input type="text" placeholder = "Name" name = "user_name"
    data-ng-model="xuser.user_name">
 </p>
 
+  <p><label for="user email" class="col-lg-2 control-label"> Email</label>
+    <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="xuser.user_email"></p>
 
-  <p><label for="user email"> Email</label>
-    <input type="text" placeholder = "Email" name = "userEmail" data-ng-model="xuser.user_email"></p>
-
-
-    <p><label for="user zip"> Zip Code</label>
-      <input type="text" placeholder = "Zip" name = "userZip" data-ng-model="xuser.user_zip"></p> 
-
+    <p><label for="user zip" class="col-lg-2 control-label"> Zip Code</label>
+      <input type="text" placeholder = "Zip" name = "userZip" data-ng-model="xuser.user_zip"></p>
      <button type = "submit" id = "newUser" class="btn btn-primary">{{buttonText}}</button>
+</div>
+</fieldset>
 
+<div class="modal-demo" ng-controller="buttonController as $ctrl">
+<a ng-click="$ctrl.ok()" >close</a>
      <ng-transclude></ng-transclude>
    </form>
+
+
+</div>

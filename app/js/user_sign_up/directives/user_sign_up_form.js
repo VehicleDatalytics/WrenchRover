@@ -14,8 +14,6 @@ module.exports = function(app) {
         action: '@'
       },
       link: function(scope, element, attrs, controller) {
-        // console.log('scope: ', scope);
-        // console.log('controller: ', controller);
         var actions = {
           create: controller.createUser
         };

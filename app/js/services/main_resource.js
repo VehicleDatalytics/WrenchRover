@@ -9,10 +9,8 @@ module.exports = function(app) {
     };
 
     Resource.prototype.getAll = function() {
-      console.log('getting');
       return $http.get(this.url)
         .then((res) => {
-        //   console.log(this.url);
           this.data.splice(0);
           for (var i = 0; i < res.data.length; i++) {
             this.data.push(res.data[i]);
@@ -28,7 +26,9 @@ module.exports = function(app) {
       return $http.post(this.url, resource)
      .then((res) => {
        console.log(res);
+       console.log(res.data.id);
        console.log(this.url);
+       console.log(res.data.header);
        this.data.push(res.data);
 
      }, handleError(this.errors, this.options.errMessages.create || 'could not save resource'));

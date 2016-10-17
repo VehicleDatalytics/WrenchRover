@@ -51,11 +51,22 @@
 
  </div>
 
-   <button ng-click="describe.nextPage()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}" >Next Step</button>
+   <!-- <button ng-click="describe.nextPage()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}" >Next Step
+
+   </button> -->
+
+<!-- ccc -->
+   <div class="modal-demo" ng-controller="buttonController as $ctrl">
+ <!-- <a ng-click="$ctrl.open()" >Sign up!</a> -->
+ <button ng-click= "$ctrl.open()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}" >Next Step</button>
 
   </div>
+<!-- /// -->
+
+<!-- /// -->
 
 
+</div>
 <br>
 
 <!-- </div> -->
