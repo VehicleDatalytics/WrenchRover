@@ -55,7 +55,7 @@ module.exports = exports = function(app) {
     };
 
     Resource.prototype.getVin = function() {
-      return $http.get(this.url + 'vin/' + this.vehicle.vin)
+      return $http.get(this.url + this.vehicle.vin)
       .then( (res) => {
         this.vehicle.year = res.data.year;
         this.vehicle.make = res.data.make;
