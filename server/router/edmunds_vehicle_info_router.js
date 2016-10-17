@@ -90,7 +90,7 @@ vehicleInfoRouter.trim.get('/vehicleInfo/:makeNiceName/:modelNiceName/:year', (r
   });
 });
 
-vehicleInfoRouter.vin.get('/vehicleInfo/vin/:vin', (req, res) => {
+vehicleInfoRouter.vin.get('/vehicleInfo/vin/:vin(/\S{17}/)', (req, res) => {
   var vinTrigger = new EventEmitter();
 console.log('vin router');
   request.get('https://api.edmunds.com/api/v1/vehicle/vin/' + req.params.vin +

@@ -1,7 +1,7 @@
 module.exports = exports = function(app) {
   app.controller('UserDashboardController', ['userDashboardResource', function(Resource) {
     this.userObject = {
-      id: 7,
+      id: 2, // 7
       userName: '',
       userEmail: '',
       userPhone: '',
