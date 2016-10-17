@@ -10,7 +10,12 @@ module.exports = function(app) {
     this.oils = [];
     this.service = cmService;
     this.selection = null;
+
     this.previouslyEntered = localStorage.getItem('describeIssue');
+    this.localStorageOil = localStorage.getItem('oilChosen');
+    this.localStorageDash = localStorage.getItem('dashChosen');
+    this.localStorageChosen = localStorage.getItem('chosen');
+
     var that = this;
     that.value = this.value;
     this.placeholder = "Tell us what's happening with your car.";
@@ -88,13 +93,10 @@ module.exports = function(app) {
 
     this.oilSelected = function(x, y) {
       var value = this.value;
-
       cmService.oilSelected(value, y);
     };
 
     this.checkedSelected = function(x, y) {
-
-
       console.log('(else)parenthetical checkSelcted values: ' + x);
       var value = this.value;
       cmService.checkedSelected(value, y);
@@ -128,9 +130,9 @@ module.exports = function(app) {
 
     };
 
-    this.nextPage = function() {
-      cmService.nextPage();
-    };
+    // this.nextPage = function() {
+    //   cmService.nextPage();
+    // };
 
     this.removeChosenService = function(z) {
       var x = z;

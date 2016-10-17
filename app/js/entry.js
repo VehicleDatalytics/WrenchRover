@@ -46,7 +46,6 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   controller: 'userSignUpController',
   controllerAs: 'userctrl'
 
-
 })
 .state('mechanic_sign_up', {
   url: '/mechanic_sign_up',
