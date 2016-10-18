@@ -23,6 +23,7 @@ module.exports = function(app) {
     this.createUser = function() {
       remote.create(this.newUser)
       .then(() => {
+        // this.creating = true;
         console.log(this.newUser);
         this.newUser = null;
         // this.concatLS();

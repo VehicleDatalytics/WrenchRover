@@ -5,5 +5,17 @@
 
  <!-- <a ui-sref="common_repairs.{{description.label}}">{{description.name}}</a> -->
 
- <a ui-sref="common_repairs_view.{{description.label}}">{{description.name}}</a>
+
+
+
+
+ <a  ui-sref="common_repairs_view.{{description.label}}"><img src="../../../images/common_icons/{{description.label}}.png" alt=""
+
+  ng-class="{'btn btn-primary': hover, 'btn btn-default': !hover}"
+   ng-mouseover="hover = true"
+   ng-mouseleave = "hover = false ">
+ </a> 
+
+
+
 </li>

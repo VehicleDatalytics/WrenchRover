@@ -5,14 +5,30 @@
 
   <!-- ////////// -->
 
+
 <!-- <div ng-controller="describeController as describe"> -->
     <ol id = "descriptionList">
         <describe-item data-ng-repeat = "descriptions in describe.descriptions" data-description="descriptions">
 
       </describe-item>
     </ol>
-<div ng-class="{'temporaryDiv': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.textInput || describe.service.dashCount > 0, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}">
+<!-- <div ng-class="{'temporaryDiv': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.textInput || describe.service.dashCount > 0, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}"> -->
 
+  <!-- <div ng-class="{'temporaryDiv': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.textInput || describe.service.dashCount > 0"> -->
+
+    <div class= "temporaryDiv">
+  <!--  -->
+<p> Your Vehicle:</p>
+<!-- <div ng-controller = "describeController as describe"> -->
+  <div>
+{{describe.storedVehicle.year}} {{describe.storedVehicle.make.name}}
+{{describe.storedVehicle.model.name}}
+{{describe.storedVehicle.trim.name}}
+mileage: {{describe.storedVehicle.mileage}}
+
+</div>
+
+<!--  -->
 
 <p ng-class="{'text-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}">Your Services:</p>
 
@@ -51,11 +67,7 @@
 
  </div>
 
-   <!-- <button ng-click="describe.nextPage()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}" >Next Step
 
-   </button> -->
-
-<!-- ccc -->
    <div class="modal-demo" ng-controller="buttonController as $ctrl">
  <!-- <a ng-click="$ctrl.open()" >Sign up!</a> -->
  <button ng-click= "$ctrl.open()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'hidden': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}" >Next Step</button>
