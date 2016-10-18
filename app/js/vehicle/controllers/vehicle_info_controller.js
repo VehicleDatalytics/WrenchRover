@@ -35,7 +35,7 @@ module.exports = exports = function(app) {
     this.newTrimSelected = clearSelections.newTrimSelected.bind(clearSelections);
 
     this.saveToLocalStorage = function() {
-      window.localStorage.vehicle = this.vehicleObject;
+      window.localStorage.vehicleYear = JSON.stringify(this.vehicleObject);
     };
 
     this.logVehicle = function() {
