@@ -16,6 +16,11 @@ module.exports = function(app) {
     this.localStorageDash = localStorage.getItem('dashChosen');
     this.localStorageChosen = localStorage.getItem('chosen');
 
+    // this.storedVehicle = localStorage.getItem('vehicle');
+    this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
+
+    // console.log(this.storedVehicle);
+
     var that = this;
     that.value = this.value;
     this.placeholder = "Tell us what's happening with your car.";
@@ -23,9 +28,16 @@ module.exports = function(app) {
     this.button = that.button;
     this.dashArr2 = [];
     this.dashChild = [];
+    this.mainLights = [];
+
+    this.commonLight = {
+      common: '../../../images/common_icons/common.png',
+      dash: '../../../images/common_icons/dash.png',
+      describe: '../../../images/common_icons/describe.png' };
+    this.mainLights.push(this.commonLight);
+    // console.log(this.mainLights);
 
     this.dash = {
-
       one: '../../../images/dashlights/001.png',
       two: '../../../images/dashlights/002.png',
       three: '../../../images/dashlights/003.png',
