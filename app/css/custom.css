@@ -58,6 +58,7 @@ img.warning {filter: none;-webkit-filter: grayscale(100%);-moz-filter: grayscale
 span.dropt span {position: absolute; left: -9999px; top: 450px; margin:0; padding: 5px; border:solid 1px #F26C1E;}
 span.dropt:hover {text-decoration: none; background: #fff; z-index: 6;}
 span.dropt:hover span {margin: 20px 0 0 10px; left: 10px; background: #fff; z-index: 6;}
+
 @media only screen and (max-width: 991px) {
   .probSidenav {
     -webkit-column-count: 3; /* Chrome, Safari, Opera */

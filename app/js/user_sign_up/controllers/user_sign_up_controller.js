@@ -16,12 +16,17 @@ module.exports = function(app) {
       this.allProblems = this.serviceRequests;
     };
 
+    this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
+
     var remote = new Resource(this.users, this.errors, baseUrl + 'users', { errMessages: { create: 'create error' } });
 
     this.getAll = remote.getAll.bind(remote);
 
+
     this.createUser = function() {
-      remote.create(this.newUser)
+      this.newStringed = JSON.stringify(this.newUser);
+      remote.create(this.newStringed)
+    //   remote.create(testUser)
       .then(() => {
         // this.creating = true;
         console.log(this.newUser);
