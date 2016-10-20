@@ -1,7 +1,10 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', function(Resource) {
+  app.controller('userSignUpController', ['wrResource', 'cmService', '$http', function(Resource, cmService, $http) {
+
+    this.count = 0;
+    this.service = cmService;
     this.users = [];
     this.errors = [];
     this.allProblems = null;
@@ -22,11 +25,28 @@ module.exports = function(app) {
 
     this.getAll = remote.getAll.bind(remote);
 
+    // this.countFunc = function() {
+    //   console.log('counting');
+    //   that.count = 4;
+    //   this.count = that.count;
+    // };
 
-    this.createUser = function() {
-      this.newStringed = JSON.stringify(this.newUser);
-      remote.create(this.newStringed)
+    this.createUser = function(resource) {
+      this.count++;
+
+      console.log(this.item);
+      this.x = {
+        user: resource
+      };
+
+      remote.create(this.x);
+      $http.post(baseUrl + 'autos', this.storedVehicle)
     //   remote.create(testUser)
+    .then(
+        (res) => {
+          console.log(res);
+          console.log(res.data.id);
+        })
       .then(() => {
         // this.creating = true;
         console.log(this.newUser);
@@ -37,9 +57,11 @@ module.exports = function(app) {
         // var issue = this.serviceRequests;
         // $http.post(baseUrl + 'service_requests', { request_issue: issue });
       });
-    }.bind(this);
-  }
 
+
+    }.bind(this);
+
+  }
 
 ]);
 };

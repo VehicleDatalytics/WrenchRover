@@ -37,6 +37,8 @@ require('./user_dashboard')(wrApp);
 require('./modal_window')(wrApp);
 require('./modal_button')(wrApp);
 require('./nav')(wrApp);
+require('./modal_button_sign_in')(wrApp);
+require('./modal_window_sign_in')(wrApp);
 
 
 wrApp.config(function($stateProvider, $urlRouterProvider) {

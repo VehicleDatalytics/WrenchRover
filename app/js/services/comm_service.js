@@ -14,7 +14,7 @@ module.exports = function(app) {
     this.nextCount = 0;
     this.dashCount = 0;
     this.textInput = null;
-
+    this.thing = 'andrews';
 
     console.log(this.count);
 
