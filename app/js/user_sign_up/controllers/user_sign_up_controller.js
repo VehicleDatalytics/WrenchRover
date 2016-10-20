@@ -1,10 +1,9 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', 'cmService', '$http', function(Resource, cmService, $http) {
+  app.controller('userSignUpController', ['wrResource', '$http', function(Resource, $http) {
 
-    this.count = 0;
-    this.service = cmService;
+
     this.users = [];
     this.errors = [];
     this.allProblems = null;
@@ -23,25 +22,25 @@ module.exports = function(app) {
 
     var remote = new Resource(this.users, this.errors, baseUrl + 'users', { errMessages: { create: 'create error' } });
 
-    this.getAll = remote.getAll.bind(remote);
+    this.auto = {
+      year: this.storedVehicle.year,
+      make: this.storedVehicle.make.name,
+      model: this.storedVehicle.model.name,
+      trim: this.storedVehicle.trim.name,
+      engine: this.storedVehicle.engine,
+      mileage: this.storedVehicle.mileage
 
-    // this.countFunc = function() {
-    //   console.log('counting');
-    //   that.count = 4;
-    //   this.count = that.count;
-    // };
 
+    };
     this.createUser = function(resource) {
-      this.count++;
-
-      console.log(this.item);
       this.x = {
         user: resource
       };
+      console.log(this.x.user[resource]);
+    //   this.x.user['autos'] = ['Dragula', 'Delta Flyer'];
 
       remote.create(this.x);
-      $http.post(baseUrl + 'autos', this.storedVehicle)
-    //   remote.create(testUser)
+      $http.post(baseUrl + 'autos', this.auto)
     .then(
         (res) => {
           console.log(res);
