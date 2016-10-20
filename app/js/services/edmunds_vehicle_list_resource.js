@@ -38,6 +38,7 @@ module.exports = exports = function(app) {
     };
 
     Resource.prototype.getVehicleEngines = function() {
+
       var optionsArray = this.savedTrims;
       this.vehicleListOptions.engineList = [];
       for (var i = 0; i < optionsArray.length; i++) {

@@ -11,16 +11,23 @@
   <p><label for="user email" class="col-lg-2 control-label"> Email</label>
     <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="xuser.user_email"></p>
 
+    <p><label for="user phone" class="col-lg-2 control-label">Phone Number</label>
+      <input type="text" placeholder = "phone number" name = "userPhone"   data-ng-model="xuser.user_phone"></p>
+
+    <p><label for="password" class="col-lg-2 control-label"> Password</label>
+      <input type="text" placeholder = "password" name = "Password"   data-ng-model="xuser.password"></p>
+
+
+
+
     <p><label for="user zip" class="col-lg-2 control-label"> Zip Code</label>
       <input type="text" placeholder = "Zip" name = "userZip" data-ng-model="xuser.user_zip"></p>
+
+
      <button type = "submit" id = "newUser" class="btn btn-primary">{{buttonText}}</button>
 </div>
 </fieldset>
 
-<div class="modal-demo" ng-controller="buttonController as $ctrl">
-<a ng-click="$ctrl.ok()" >close</a>
+
      <ng-transclude></ng-transclude>
    </form>
-
-
-</div>
