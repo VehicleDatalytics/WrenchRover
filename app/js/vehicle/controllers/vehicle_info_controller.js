@@ -42,5 +42,9 @@ module.exports = exports = function(app) {
     this.logVehicle = function() {
       console.log(this.vehicleObject);
     };
+
+    this.showMe = function(id) {
+      document.getElementById(id).disabled = false;
+    };
   }]);
 };

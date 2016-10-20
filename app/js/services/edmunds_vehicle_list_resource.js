@@ -53,10 +53,11 @@ module.exports = exports = function(app) {
         this.vehicleListOptions.engineList.sort();
         this.vehicleListOptions.engineList.push('Not Sure');
       }
+      console.log(this.vehicle);
     };
 
     Resource.prototype.getVin = function() {
-      return $http.get(this.url + this.vehicle.vin)
+      return $http.get(this.url + 'vin/vin/vin/' + this.vehicle.vin)
       .then( (res) => {
         this.vehicle.year = res.data.year;
         this.vehicle.make = res.data.make;
