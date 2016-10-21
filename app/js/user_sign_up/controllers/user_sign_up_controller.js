@@ -1,7 +1,9 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', function(Resource) {
+  app.controller('userSignUpController', ['wrResource', '$http', function(Resource, $http) {
+
+
     this.users = [];
     this.errors = [];
     this.allProblems = null;
@@ -20,13 +22,30 @@ module.exports = function(app) {
 
     var remote = new Resource(this.users, this.errors, baseUrl + 'users', { errMessages: { create: 'create error' } });
 
-    this.getAll = remote.getAll.bind(remote);
+    this.auto = {
+      year: this.storedVehicle.year,
+      make: this.storedVehicle.make.name,
+      model: this.storedVehicle.model.name,
+      trim: this.storedVehicle.trim.name,
+      engine: this.storedVehicle.engine,
+      mileage: this.storedVehicle.mileage
 
 
-    this.createUser = function() {
-      this.newStringed = JSON.stringify(this.newUser);
-      remote.create(this.newStringed)
-    //   remote.create(testUser)
+    };
+    this.createUser = function(resource) {
+      this.x = {
+        user: resource
+      };
+      console.log(this.x.user[resource]);
+    //   this.x.user['autos'] = ['Dragula', 'Delta Flyer'];
+
+      remote.create(this.x);
+      $http.post(baseUrl + 'autos', this.auto)
+    .then(
+        (res) => {
+          console.log(res);
+          console.log(res.data.id);
+        })
       .then(() => {
         // this.creating = true;
         console.log(this.newUser);
@@ -37,9 +56,11 @@ module.exports = function(app) {
         // var issue = this.serviceRequests;
         // $http.post(baseUrl + 'service_requests', { request_issue: issue });
       });
-    }.bind(this);
-  }
 
+
+    }.bind(this);
+
+  }
 
 ]);
 };
