@@ -3,7 +3,7 @@ var baseUrl = require('../../config').baseUrl;
 module.exports = function(app) {
   app.controller('userSignUpController', ['wrResource', '$http', function(Resource, $http) {
 
-
+    var that = this;
     this.users = [];
     this.errors = [];
     this.allProblems = null;
@@ -12,6 +12,7 @@ module.exports = function(app) {
     this.localStorageDash = localStorage.getItem('dashChosen');
     this.localStorageChosen = localStorage.getItem('chosen');
     this.serviceRequests = [];
+
     this.concatLS = function() {
       this.serviceRequests = this.previouslyEntered.concat(this.localStorageOil).concat(this.localStorageDash).concat(this.localStorageEntered);
       console.log(this.serviceRequests);
@@ -29,33 +30,60 @@ module.exports = function(app) {
       trim: this.storedVehicle.trim.name,
       engine: this.storedVehicle.engine,
       mileage: this.storedVehicle.mileage
-
-
+    //   user_id: 20903
     };
+
+    // this.y = {
+    //   user_id: 163,
+    //   work_request: this.allProblems
+    //
+    // };
     this.createUser = function(resource) {
+      this.concatLS();
+
+      this.y = {
+        // user_id: 163,
+        work_request: this.allProblems
+
+      };
       this.x = {
         user: resource
       };
-      console.log(this.x.user[resource]);
-    //   this.x.user['autos'] = ['Dragula', 'Delta Flyer'];
 
-      remote.create(this.x);
+      console.log(this.auto);
+      console.log(this.x.user);
+
       $http.post(baseUrl + 'autos', this.auto)
     .then(
         (res) => {
           console.log(res);
           console.log(res.data.id);
+          this.x.user['auto_id'] = res.data.id;
+          this.x.user['service_requests'] = this.allProblems;
+          console.log(this.x.user);
+
         })
-      .then(() => {
-        // this.creating = true;
-        console.log(this.newUser);
-        this.newUser = null;
-        // this.concatLS();
-        //
-        // console.log(this.serviceRequests);
-        // var issue = this.serviceRequests;
-        // $http.post(baseUrl + 'service_requests', { request_issue: issue });
-      });
+        .then(() => {
+          remote.create(this.x);
+        })
+        .then(() => {
+
+          console.log(this.newUser);
+          this.newUser = null;
+
+        //   this.z = {
+        //     service_requests: this.y
+        //   };
+        // .then(() => {
+          var issue = this.serviceRequests;
+          $http.post(baseUrl + 'service_requests', this.y);
+          console.log(this.y);
+        // });
+
+          console.log(this.serviceRequests);
+        //   var issue = this.serviceRequests;
+        //   $http.post(baseUrl + 'service_requests', { request_issue: issue });
+        });
 
 
     }.bind(this);
