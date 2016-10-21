@@ -38,14 +38,18 @@ module.exports = function(app) {
     //   work_request: this.allProblems
     //
     // };
+
+    // y = {
+    //   user_id: res.data.id,
+    //   work_request: this.allProblems.toString()
+    // };
+
     this.createUser = function(resource) {
+
+
       this.concatLS();
 
-      this.y = {
-        // user_id: 163,
-        work_request: this.allProblems
 
-      };
       this.x = {
         user: resource
       };
@@ -64,26 +68,39 @@ module.exports = function(app) {
 
         })
         .then(() => {
-          remote.create(this.x);
-        })
-        .then(() => {
+        //   remote.create(this.x);
 
-          console.log(this.newUser);
-          this.newUser = null;
+          $http.post(baseUrl + 'users', this.x)
+          .then((res) => {
+            console.log(res);
+            console.log(this.newUser);
+            this.newUser = null;
+            y = {
+              user_id: res.data.id,
+              work_request: this.allProblems.toString()
+            };
+            var issue = this.serviceRequests;
+            $http.post(baseUrl + 'service_requests', y);
+            console.log(this.y);
+            console.log(this.serviceRequests);
 
-        //   this.z = {
-        //     service_requests: this.y
-        //   };
-        // .then(() => {
-          var issue = this.serviceRequests;
-          $http.post(baseUrl + 'service_requests', this.y);
-          console.log(this.y);
-        // });
+          });
 
-          console.log(this.serviceRequests);
-        //   var issue = this.serviceRequests;
-        //   $http.post(baseUrl + 'service_requests', { request_issue: issue });
         });
+        // .then((res) => {
+        //   console.log(res);
+        //   console.log(this.newUser);
+        //   this.newUser = null;
+        //   y = {
+        //     user_id: res.data.id,
+        //     work_request: this.allProblems.toString()
+        //   };
+        //   var issue = this.serviceRequests;
+        //   $http.post(baseUrl + 'service_requests', y);
+        //   console.log(this.y);
+        //   console.log(this.serviceRequests);
+        //
+        // });
 
 
     }.bind(this);
