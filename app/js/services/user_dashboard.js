@@ -26,6 +26,14 @@ module.exports = exports = function(app) {
       });
     };
 
+    // dashboardResource.prototype.saveNewVehicleInfo = function() {
+    // POST new vehicle object to database
+    // };
+
+    // dashboardResource.prototype.deleteVehicle = function() {
+    // DELETE vehicle object from database
+    // }
+
     // dashboardResource.prototype.getUserServiceQuotes = function() {
     //   return $http.get(this.quotesUrl + this.user.id)
     //   .then( (res) => {

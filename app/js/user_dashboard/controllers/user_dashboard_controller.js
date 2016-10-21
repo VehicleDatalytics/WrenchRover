@@ -1,5 +1,5 @@
 module.exports = exports = function(app) {
-  app.controller('UserDashboardController', ['userDashboardResource', function(Resource) {
+  app.controller('UserDashboardController', ['userDashboardResource', function(UserDashResource) {
     this.userObject = {
       id: 2, // 7
       userName: '',
@@ -12,9 +12,9 @@ module.exports = exports = function(app) {
     };
     this.errors = [];
 
-    var resource = new Resource(this.userObject, this.errors);
+    var userDash = new UserDashResource(this.userObject, this.errors);
 
-    this.getUserInfo = resource.getUserInfo.bind(resource);
+    this.getUserInfo = userDash.getUserInfo.bind(userDash);
 
     this.logUser = function() {
       console.log('user object from controller');
