@@ -16,10 +16,8 @@ module.exports = function(app) {
     this.localStorageDash = localStorage.getItem('dashChosen');
     this.localStorageChosen = localStorage.getItem('chosen');
 
-    // this.storedVehicle = localStorage.getItem('vehicle');
     this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
 
-    // console.log(this.storedVehicle);
 
     var that = this;
     that.value = this.value;
@@ -35,25 +33,8 @@ module.exports = function(app) {
       dash: '../../../images/common_icons/dash.png',
       describe: '../../../images/common_icons/describe.png' };
     this.mainLights.push(this.commonLight);
-    // console.log(this.mainLights);
 
-    this.dash = {
-      one: '../../../images/dashlights/001.png',
-      two: '../../../images/dashlights/002.png',
-      three: '../../../images/dashlights/003.png',
-      four: '../../../images/dashlights/004.png',
-      five: '../../../images/dashlights/005.png',
-      ten: '../../../images/dashlights/010.png',
-      eleven: '../../../images/dashlights/011.png',
-      twelve: '../../../images/dashlights/012.png',
-      fifteen: '../../../images/dashlights/015.png',
-      sixteen: '../../../images/dashlights/016.png',
-      seventeen: '../../../images/dashlights/017.png',
-      eighteen: '../../../images/dashlights/018.png'
-    };
-    this.dashArr = ['../../../images/dashlights/001.png', '../../../images/dashlights/002.png', '../../../images/dashlights/003.png', '../../../images/dashlights/004.png', '../../../images/dashlights/005.png', '../../../images/dashlights/010.png', '../../../images/dashlights/011.png', '../images/dashlights/012.png', '../../../images/dashlights/015.png', '../../../images/dashlights/016.png', '../../../images/dashlights/017.png', '../images/dashlights/018.png'];
 
-    this.dashArr2.push(this.dash);
     this.sbArr = [];
 
 
@@ -86,37 +67,6 @@ module.exports = function(app) {
                 name3: 'Tire Pressure Light',
                 name4: 'Lightbulb Light'
               }
-
-
-          // //
-
-
-        //  { imageSrc: '../../../images/dashlights/002.png',
-        //   name: 'Battery Light' },
-        //   { imageSrc: '../../../images/dashlights/003.png',
-        //    name: 'encircled exclamation point' },
-        //    // /////////
-         //
-        //    { imageSrc2: '../../../images/dashlights/004.png',
-        //     name: 'Airbag Light' }
-
-
-        //     { imageSrc2: '../../../images/dashlights/005.png',
-        //      name: 'Temperature Light' },
-        //      { imageSrc2: '../../../images/dashlights/010.png',
-        //       name: 'ABS warning' },
-        //       { imageSrc3: '../../../images/dashlights/011.png',
-        //        name: 'Check Engine Light' },
-        //        { imageSrc3: '../../../images/dashlights/012.png',
-        //    name: 'Sprocket Circle Exclamation Point' },
-        //        { imageSrc3: '../../../images/dashlights/015.png',
-        //         name: 'coils' },
-        //         { imageSrc4: '../../../images/dashlights/016.png',
-        //          name: 'triangle exclamation mark' },
-        //          { imageSrc4: '../../../images/dashlights/017.png',
-        //           name: 'Tire Pressures' },
-        //           { imageSrc4: '../../../images/dashlights/018.png',
-        //       name: 'Light Bulb Light' }
       ]
     };
 
