@@ -15,7 +15,7 @@
             </describe-item>
           </ul>
         </nav>
-    
+
       </div>
     <div class = "probContainer col-md-7 col-sm-12" style="overflow:auto;">
         <ui-view></ui-view>
@@ -34,6 +34,7 @@ Your Vehicle:
 {{describe.storedVehicle.engine}}
 mileage: {{describe.storedVehicle.mileage}}
 </div>
+
 
 <div class="col-md-12 col-sm-12 carHeader">
           Your Services
@@ -65,69 +66,12 @@ mileage: {{describe.storedVehicle.mileage}}
 </div>
 </div>
 </div>
-<!-- <ssssssss -->
+
 </div>
 
-<!-- <div class="row H"><br> -->
   <div id="common" class="row H">
 
-    <!-- <div class="col-md-10 col-sm-12 G" style="padding:0px;"> -->
 
-<!-- UI-VIEW -->
-
-      <!-- <div class = "probContainer col-md-10 col-sm-12 G" ui-view> -->
-        <!-- <ui-view></ui-view> -->
-                        <!-- PUT COMMON SERVICES DATA HERE -->
-                        <!-- </div> -->
-
-
-
-<!-- //////////////////////////// -->
-  <!-- <div class="col-md-3 col-sm-12">
-    <div class="row text-center carContain">
-    <div class="col-md-12 col-sm-12 carHeader"> -->
- <!-- Your Vehicle:
-</div>
-  <div class="col-md-12 col-sm-12 carData">
-<strong>{{describe.storedVehicle.year}} {{describe.storedVehicle.make.name}}
-{{describe.storedVehicle.model.name}}</strong>
-{{describe.storedVehicle.trim.name}}
-{{describe.storedVehicle.engine}}
-mileage: {{describe.storedVehicle.mileage}}
-</div>
-
-<div class="col-md-12 col-sm-12 carHeader">
-            Your Services
-          </div>
-  <ul>
-    <chosen-oil data-ng-repeat="chosenoil in describe.service.oilChosen" data-chosenoil="chosenoil">
-    </chosen-oil>
-
-  </ul> -->
-  <!-- displays chosen list of services -->
-  <!-- <ul>
-  <chosen-service data-ng-repeat="chosenservice in describe.service.chosen" data-chosenservice="chosenservice">
-
-  </chosen-service>
-</ul>
-
-<ul>
-  <chosen-dash data-ng-repeat="chosendash in describe.service.dashChosen" data-chosendash = "chosendash"></chosen-dash>
-
-</ul> -->
-
-<!-- <p ng-class="{'text-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">You wrote:</p> -->
-
-<!-- displays user described issue in the shopping cart -->
-<!-- <div ng-class="{'temporaryInsideDiv': describe.service.textInput, 'hidden': !describe.service.textInput}">
- {{describe.service.textInput}}
- <a ui-sref="common_repairs_view.describe_issue" ng-click = "describe.changeText()" ng-class="{'text-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">Edit</a>
-  <button ng-click="describe.editThis()"  ng-disabled="describe.service.textInput === '' || !describe.service.textInput" ng-class="{'btn btn-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">X</button>
- </div>
-</div>
-</div> -->
-
-<!-- ////////////////////// -->
 <br>
 <div class="row text-center">
 <div class="modal-demo col-md-12 col-sm-12" ng-controller="buttonController as $ctrl"><br>
@@ -138,7 +82,5 @@ mileage: {{describe.storedVehicle.mileage}}
 
 </div>
 
-    <!-- <div class = "probContainer" style="overflow:auto;" ui-view></div>
-    </div> -->
+
   </div>
-<!-- </section> -->
