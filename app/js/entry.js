@@ -51,6 +51,10 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   controllerAs: 'userctrl'
 
 })
+.state('common_repairs_view.get_started', {
+  url: '/get_started',
+  templateUrl: 'templates/describe/views/get_started.html'
+})
 .state('mechanic_sign_up', {
   url: '/mechanic_sign_up',
   templateUrl: 'templates/mechanic_sign_up/views/mechanic_sign_up_form_view.html',
