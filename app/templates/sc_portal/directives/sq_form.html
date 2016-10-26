@@ -1,0 +1,17 @@
+<p>sq form will be here</p>
+
+
+<div ng-controller="scPortalController as portal">
+
+  <pre>Selected date is: <em>{{portal.dt | date:'fullDate' }}</em></pre>
+
+ <div style="display:inline-block; min-height:290px;">
+   <div uib-datepicker ng-model="portal.dt" class="well well-sm" datepicker-options="options"></div>
+ </div>
+
+ <hr />
+ <button type="button" class="btn btn-sm btn-info" ng-click="portal.today()">Today</button>
+ <button type="button" class="btn btn-sm btn-default" ng-click="portal.setDate(2009, 7, 24)">2009-08-24</button>
+ <button type="button" class="btn btn-sm btn-danger" ng-click="portal.clear()">Clear</button>
+</div>
+<ng-transclude></ng-transclude>
