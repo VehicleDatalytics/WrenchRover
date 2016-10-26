@@ -1,9 +1,27 @@
-<p>sq form will be here</p>
+
 
 
 <div ng-controller="scPortalController as portal">
 
-  <pre>Selected date is: <em>{{portal.dt | date:'fullDate' }}</em></pre>
+
+        <div class="col-md-6">
+          <p class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="portal.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="portal.open2()"> Cal Icon</button>
+            </span>
+          </p>
+        </div>
+  <!-- //// -->
+
+
+            <p><textarea name="customer notes" id=""   ng-model="value" placeholder="customer notes"></textarea></p>
+
+
+
+            
+
+  <!-- <pre>Selected date is: <em>{{portal.dt | date:'fullDate' }}</em></pre>
 
  <div style="display:inline-block; min-height:290px;">
    <div uib-datepicker ng-model="portal.dt" class="well well-sm" datepicker-options="options"></div>
@@ -12,6 +30,6 @@
  <hr />
  <button type="button" class="btn btn-sm btn-info" ng-click="portal.today()">Today</button>
  <button type="button" class="btn btn-sm btn-default" ng-click="portal.setDate(2009, 7, 24)">2009-08-24</button>
- <button type="button" class="btn btn-sm btn-danger" ng-click="portal.clear()">Clear</button>
+ <button type="button" class="btn btn-sm btn-danger" ng-click="portal.clear()">Clear</button> -->
 </div>
 <ng-transclude></ng-transclude>
