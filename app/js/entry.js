@@ -123,6 +123,31 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
   controllerAs: 'portal'
 })
 
+.state('sc_portal_view.active_view', {
+  url: '/active_bids',
+  templateUrl: 'templates/sc_portal/views/active_view.html',
+  controller: 'scPortalController',
+  controllerAs: 'portal'
+})
+
+.state('sc_portal_view.pending_view', {
+  url: '/pending_bids',
+  templateUrl: 'templates/sc_portal/views/pending_view.html',
+  controller: 'scPortalController',
+  controllerAs: 'portal'
+})
+.state('sc_portal_view.past_view', {
+  url: '/past_bids',
+  templateUrl: 'templates/sc_portal/views/past_view.html',
+  controller: 'scPortalController',
+  controllerAs: 'portal'
+})
+.state('sc_portal_view.appointments_view', {
+  url: '/appointments',
+  templateUrl: 'templates/sc_portal/views/appointments_view.html',
+  controller: 'scPortalController',
+  controllerAs: 'portal'
+})
 
 ;
   $urlRouterProvider.otherwise('/');
