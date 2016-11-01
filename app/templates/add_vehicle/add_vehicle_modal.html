@@ -14,9 +14,17 @@
     <div class="panel-body">
 
       <div ng-controller="VehicleInfoController as VehicleInfoController">
-        <my-vehicle-select data-buttonText="SAVE">
-
-        </my-vehicle-select>
+        <my-vehicle-select></my-vehicle-select>
+        <div class="form-group row text-center">
+          <div class="col-md-12 col-sm-12">
+            <button type="submit"
+                    class="'btn btn-primary'"
+                    style="width:100px;"
+                    ng-click="$ctrl.ok()"> <!-- ADD SAVE FUNCTION -->
+                    SAVE
+            </button>
+          </div>
+        </div>
 
         <button class="btn btn-primary"
                 type="button"

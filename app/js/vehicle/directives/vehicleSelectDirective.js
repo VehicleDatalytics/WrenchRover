@@ -7,8 +7,7 @@ module.exports = exports = function(app) {
       templateUrl: '/templates/vehicle/directives/vehicle_dropdown_selection.html',
       transclude: true,
       scope: {
-        buttonText: '@',
-        click: '@'
+        
       },
       link: function(scope, element, attrs, controller) {
         var clicks = {
