@@ -1,0 +1,43 @@
+
+
+    <button ng-click="showme=!showme">Show Calendar</button>
+
+    <table ng-show="showme">
+      <tr>
+        <td>
+          <div
+          uib-datepicker
+          ng-model='portal.activeDate'
+          multi-select='portal.selectedDates'
+          select-range='{{portal.type=="range"}}'
+          datepicker-options='portal.options'
+          ng-disabled="portal.selectedDates.length >= 3"
+
+
+          ></div>
+        </td>
+        <td style='width:50px'>
+        </td>
+        <td>
+          <div ng-if='portal.type=="individual"'>
+            Selected Dates:
+            <div class='well well-sm'>
+
+                      <div ng-repeat='d in portal.selectedDates | orderBy'>
+                {{d | date : 'fullDate'}}
+
+                <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>Remove</button>
+              </div>
+              <p ng-if="portal.selectedDates.length >= 3"> Thank you for choosing three dates.</p>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+
+    </table>
+
+
+
+
+<ng-transclude></ng-transclude>
