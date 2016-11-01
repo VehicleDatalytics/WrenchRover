@@ -1,23 +1,31 @@
+
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
   app.controller('userSignUpController', ['wrResource', '$http', function(Resource, $http) {
 
-    var that = this;
     this.users = [];
     this.errors = [];
     this.allProblems = null;
+
+    this.previousItem;
+    this.localStorageOil;
+    this.localStorageDash;
+    this.localStorageChosen;
+
+
     this.previouslyEntered = localStorage.getItem('describeIssue');
     this.localStorageOil = localStorage.getItem('oilChosen');
     this.localStorageDash = localStorage.getItem('dashChosen');
     this.localStorageChosen = localStorage.getItem('chosen');
-    this.serviceRequests = [];
 
-    this.concatLS = function() {
-      this.serviceRequests = this.previouslyEntered.concat(this.localStorageOil).concat(this.localStorageDash).concat(this.localStorageEntered);
-      console.log(this.serviceRequests);
-      this.allProblems = this.serviceRequests;
-    };
+    var arr = [this.previouslyEntered, this.localStorageOil, this.localStorageChosen, this.localStorageDash];
+
+    var arrFilter = arr.filter(function(z) {
+      return z != null;
+    });
+
+    console.log(arrFilter);
 
     this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
 
@@ -33,19 +41,24 @@ module.exports = function(app) {
     //   user_id: 20903
     };
 
-    // this.y = {
-    //   user_id: 163,
-    //   work_request: this.allProblems
-    //
-    // };
+
     this.createUser = function(resource) {
-      this.concatLS();
+    //   console.log(this.previouslyEntered);
+    //   this.concatLS();
 
-      this.y = {
-        // user_id: 163,
-        work_request: this.allProblems
+    // ///
+      this.requests = [];
+      for (var i = 0; i < arrFilter.length; i++) {
+        if (Array.isArray(arrFilter[i])) {
+          this.requests = this.requests.concat(flatten(arrFilter[i]));
+        }
+        else (this.requests.push(arrFilter[i]));
+      }
+      console.log('xx');
 
-      };
+
+    // ///
+
       this.x = {
         user: resource
       };
@@ -59,32 +72,30 @@ module.exports = function(app) {
           console.log(res);
           console.log(res.data.id);
           this.x.user['auto_id'] = res.data.id;
-          this.x.user['service_requests'] = this.allProblems;
+          this.x.user['service_requests'] = this.requests;
+          console.log(this.requests);
           console.log(this.x.user);
 
         })
         .then(() => {
-          remote.create(this.x);
-        })
-        .then(() => {
+          $http.post(baseUrl + 'users', this.x)
+          .then((res) => {
+            console.log(res);
+            console.log(this.newUser);
+            this.newUser = null;
+            this.y = {
+              user_id: res.data.id,
+              work_request: this.requests.toString()
+            };
+            // var issue = this.serviceRequests;
+            $http.post(baseUrl + 'service_requests', this.y);
+            console.log(this.y);
+            console.log(this.requests);
+            // console.log(this.totalProblemsArr);
 
-          console.log(this.newUser);
-          this.newUser = null;
+          });
 
-        //   this.z = {
-        //     service_requests: this.y
-        //   };
-        // .then(() => {
-          var issue = this.serviceRequests;
-          $http.post(baseUrl + 'service_requests', this.y);
-          console.log(this.y);
-        // });
-
-          console.log(this.serviceRequests);
-        //   var issue = this.serviceRequests;
-        //   $http.post(baseUrl + 'service_requests', { request_issue: issue });
         });
-
 
     }.bind(this);
 
