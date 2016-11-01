@@ -1,35 +1,43 @@
 
 
+    <button ng-click="showme=!showme">Show Calendar</button>
 
-<div ng-controller="scPortalController as portal">
-
-
-        <div class="col-md-6">
-          <p class="input-group">
-            <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="portal.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="portal.open2()"> Cal Icon</button>
-            </span>
-          </p>
-        </div>
-  <!-- //// -->
-
-
-            <p><textarea name="customer notes" id=""   ng-model="value" placeholder="customer notes"></textarea></p>
+    <table ng-show="showme">
+      <tr>
+        <td>
+          <div
+          uib-datepicker
+          ng-model='portal.activeDate'
+          multi-select='portal.selectedDates'
+          select-range='{{portal.type=="range"}}'
+          datepicker-options='portal.options'
+          ng-disabled="portal.selectedDates.length >= 3"
 
 
+          ></div>
+        </td>
+        <td style='width:50px'>
+        </td>
+        <td>
+          <div ng-if='portal.type=="individual"'>
+            Selected Dates:
+            <div class='well well-sm'>
 
-            
+                      <div ng-repeat='d in portal.selectedDates | orderBy'>
+                {{d | date : 'fullDate'}}
 
-  <!-- <pre>Selected date is: <em>{{portal.dt | date:'fullDate' }}</em></pre>
+                <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>Remove</button>
+              </div>
+              <p ng-if="portal.selectedDates.length >= 3"> Thank you for choosing three dates.</p>
+            </div>
+          </div>
 
- <div style="display:inline-block; min-height:290px;">
-   <div uib-datepicker ng-model="portal.dt" class="well well-sm" datepicker-options="options"></div>
- </div>
+        </td>
+      </tr>
 
- <hr />
- <button type="button" class="btn btn-sm btn-info" ng-click="portal.today()">Today</button>
- <button type="button" class="btn btn-sm btn-default" ng-click="portal.setDate(2009, 7, 24)">2009-08-24</button>
- <button type="button" class="btn btn-sm btn-danger" ng-click="portal.clear()">Clear</button> -->
-</div>
+    </table>
+
+
+
+
 <ng-transclude></ng-transclude>

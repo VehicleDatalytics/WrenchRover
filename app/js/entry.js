@@ -6,9 +6,10 @@ require('angular-ui-router');
 require('angular-ui-bootstrap');
 require('angular-animate');
 require('angular-sanitize');
+require('gm.datepicker-multi-select');
 
 
-const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'uiGmapgoogle-maps'])
+const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'gm.datepickerMultiSelect', 'ui.router', 'uiGmapgoogle-maps'])
 
 
 .config(['uiGmapGoogleMapApiProvider', function(GoogleMapApi) {
