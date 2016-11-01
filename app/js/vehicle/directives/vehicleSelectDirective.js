@@ -4,9 +4,18 @@ module.exports = exports = function(app) {
       restrict: 'EAC',
       controller: 'VehicleInfoController',
       controllerAs: 'VehicleInfoController',
-      templateUrl: '/templates/vehicle/vehicle_dropdown_selection.html',
+      templateUrl: '/templates/vehicle/directives/vehicle_dropdown_selection.html',
       transclude: true,
-      scope: {}
+      scope: {
+        buttonText: '@',
+        click: '@'
+      },
+      link: function(scope, element, attrs, controller) {
+        var clicks = {
+          localStorage: controller.saveToLocalStorage
+        };
+        scope.save = clicks[scope.click];
+      }
     };
   });
 };
