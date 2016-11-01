@@ -74,6 +74,7 @@ span.dropt:hover span {margin: 20px 0 0 10px; left: 10px; background: #fff; z-in
   .dropt img {width:20%; height:auto;}
   .navbar-brand img {width:90%;height:auto;}
 }
+
 @media only screen and (max-width: 768px) {
   .navbar-collapse li a { background:#ff6600;color:#fff;}
   .navbar-collapse li a:hover { background:#D95700;color:#fff;}
