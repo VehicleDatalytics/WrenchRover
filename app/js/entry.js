@@ -71,7 +71,7 @@ wrApp.config(function($stateProvider, $urlRouterProvider) {
 })
 .state('vehicle_dropdown_selection', {
   url: '/',
-  templateUrl: 'templates/vehicle/vehicle_dropdown_selection.html',
+  templateUrl: 'templates/vehicle/views/stepOne.html',
   controller: 'VehicleInfoController',
   controllerAs: 'VehicleInfoController'
 })
