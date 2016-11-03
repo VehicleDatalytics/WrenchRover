@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-// const port = process.env.PORT || 3000;
 
 app.set('port', process.env.PORT || 3000);
 
@@ -29,15 +28,6 @@ res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, token')
 res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   next();
 });
-
-// app.listen(app.get('port'), () => {
-//     console.log('up on ', app.get('port'));
-// });
-
-
-// module.exports = exports = app.listen(port, () => {
-//   console.log('server up on ' + port);
-// });
 
 module.exports = exports = app.listen(app.get('port'), () => {
     console.log('up on ', app.get('port'));
