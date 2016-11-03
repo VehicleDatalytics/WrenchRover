@@ -1,9 +1,9 @@
 const gulp = require('gulp');
-const eslint = require('gulp-eslint');
-const mocha = require('gulp-mocha');
-const protractor = require('gulp-protractor').protractor;
+// const eslint = require('gulp-eslint');
+// const mocha = require('gulp-mocha');
+// const protractor = require('gulp-protractor').protractor;
 const webpack = require('webpack-stream');
-const KarmaServer = require('karma').Server;
+// const KarmaServer = require('karma').Server;
 
 
 var files = {
@@ -28,7 +28,7 @@ gulp.task('lint:app', () => {
 gulp.task('lint', ['lint:server', 'lint:app']);
 
 // build dev tasks
-gulp.task('webpack:dev', ['lint'], () => {
+gulp.task('webpack:dev', () => {
   return gulp.src('app/js/entry.js')
   .pipe(webpack({
     devtool: 'source-map',
