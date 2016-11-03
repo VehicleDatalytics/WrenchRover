@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
+
+app.set('port', process.env.PORT || 3000);
 
 const vehicleInfoRouter = require(__dirname + '/router/edmunds_vehicle_info_router');
 
@@ -28,6 +30,15 @@ res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   next();
 });
 
-module.exports = exports = app.listen(port, () => {
-  console.log('server up on ' + port);
+// app.listen(app.get('port'), () => {
+//     console.log('up on ', app.get('port'));
+// });
+
+
+// module.exports = exports = app.listen(port, () => {
+//   console.log('server up on ' + port);
+// });
+
+module.exports = exports = app.listen(app.get('port'), () => {
+    console.log('up on ', app.get('port'));
 });

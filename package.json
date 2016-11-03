@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp && node index.js"
+    "start": "gulp && node index"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/CWShelly/WrenchRover#readme",
   "dependencies": {
+    "angular": "^1.5.8",
     "angular-resource": "^1.5.8",
     "angular-simple-logger": "^0.1.7",
     "express": "^4.14.0",
@@ -28,7 +29,7 @@
   "devDependencies": {
     "angular": "^1.5.7",
     "angular-animate": "^1.5.8",
-    "angular-google-maps": "^2.3.3",
+    "angular-google-maps": "^2.4.0",
     "angular-mocks": "^1.5.7",
     "angular-resource": "^1.5.8",
     "angular-route": "^1.5.7",

@@ -1,7 +1,7 @@
 const angular = require('angular');
+require('lodash');
 require('angular-google-maps');
 require('angular-simple-logger');
-require('lodash');
 require('angular-ui-router');
 require('angular-ui-bootstrap');
 require('angular-animate');
@@ -43,7 +43,7 @@ require('./modal_window_sign_in')(wrApp);
 require('./sc_portal')(wrApp);
 
 
-wrApp.config(function($stateProvider, $urlRouterProvider) {
+wrApp.config(($stateProvider, $urlRouterProvider) => {
   $stateProvider
 .state('user_sign_up_form_view_page_one', {
   url: '/sign_up',
