@@ -13,8 +13,19 @@ app.use('/api', vehicleInfoRouter.trim);
 app.use('/api', vehicleInfoRouter.vin);
 
 
-app.use(express.static(__dirname + '/../build')).get('*', (req, res) => {
-  res.redirect('/#' + req.url);
+// app.use(express.static(__dirname + '/../build')).get('*', (req, res) => {
+//   res.redirect('/#' + req.url);
+// });
+
+app.use(express.static(__dirname + '/../build'));
+
+app.get('*', (req, res, next) => {
+
+    if (req.headers['x-forward-proto'] != 'https') {
+res.redirect('/#' + req.url);
+} else {
+    next();
+}
 });
 
 app.use('/*', (req, res) => {
