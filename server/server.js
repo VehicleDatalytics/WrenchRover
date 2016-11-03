@@ -30,9 +30,9 @@ app.use(express.static(__dirname + '/../build'));
 // }
 // });
 
-app.use('/*', (req, res) => {
-  res.status(404).send('not found');
-});
+// app.use('/*', (req, res) => {
+//   res.status(404).send('not found');
+// });
 
 
 app.use((req, res, next) => {
