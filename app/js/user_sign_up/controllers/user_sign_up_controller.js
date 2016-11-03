@@ -31,15 +31,17 @@ module.exports = function(app) {
 
     var remote = new Resource(this.users, this.errors, baseUrl + 'users', { errMessages: { create: 'create error' } });
 
-    this.auto = {
-      year: this.storedVehicle.year,
-      make: this.storedVehicle.make.name,
-      model: this.storedVehicle.model.name,
-      trim: this.storedVehicle.trim.name,
-      engine: this.storedVehicle.engine,
-      mileage: this.storedVehicle.mileage
-    //   user_id: 20903
-    };
+
+    if (this.storedVehicle) {
+      this.auto = {
+        year: this.storedVehicle.year,
+        make: this.storedVehicle.make.name,
+        model: this.storedVehicle.model.name,
+        trim: this.storedVehicle.trim.name,
+        engine: this.storedVehicle.engine,
+        mileage: this.storedVehicle.mileage
+      };
+    }
 
 
     this.createUser = function(resource) {

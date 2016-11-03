@@ -85,3 +85,39 @@ span.dropt:hover span {margin: 20px 0 0 10px; left: 10px; background: #fff; z-in
 .carContain {border:solid 1px #000;margin-left:0;}
 .carHeader {background-color:#000;color:#fff;padding:10px;font-size:110%;}
 .carData {padding:15px;font-size:120%;}
+
+/*/////*/
+
+.chk-hidden {
+border: 0;
+clip: rect(0 0 0 0);
+height: 1px;
+margin: -1px;
+overflow: hidden;
+padding: 0;
+position: absolute;
+width: 1px;
+}
+
+label {
+margin: 5px;
+padding: 5px 10px;
+background-color: #ddd;
+color: #000;
+border-radius:8px;
+}
+
+input:focus + label {
+background-color: #ddd;
+color: #000;
+}
+
+input:checked + label {
+background-color: #ff6600;
+color: #fff;
+}
+
+input:focus:checked + label {
+background-color: #ff6600;
+color: #fff;
+}
