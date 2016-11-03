@@ -1,3 +1,4 @@
+
 <section data-ng-controller="UserDashboardController as UserDashCtrl">
     <button class="btn btn-default"
             type="submit"
@@ -5,22 +6,13 @@
             test get user
     </button>
 
-    <a href="#"
-       editable-text="UserDashCtrl.userObject.userName"
-       e-label="User Name">{{ UserDashCtrl.userObject.userName }}</a>
-
     <div id="profile">
-      <form editable-form name="editableForm" onaftersave="UserDashCtrl.saveUser()">
 
         <p>Your Profile</p>
         <br>
         <img id ="profilePicture">
-
-
-
-        <!-- <span editable-text="UserDashCtrl.userObject.userName"
-              e-name="name"
-              e-required>{{UserDashCtrl.userObject.userName}}</span> -->
+        <br>
+        <span> {{UserDashCtrl.userObject.userName}} </span>
         <br>
         <span class="title">Member Since: </span>
         <br>
@@ -29,60 +21,27 @@
         <span class="title">Vehicles: </span>
         <br>
         <span data-ng-repeat="auto in UserDashCtrl.userObject.autos">
-          <span editable-text="auto.year"
-                e-name="year"
 
-                e-required>{{ auto.year || "empty" }}
-          </span>
-          <span editable-text="auto.make"
-                e-name="make"
-
-                e-required> {{auto.make}}
-          </span>
-          <span editable-text="auto.model"
-                e-name="model"
-
-                e-required> {{auto.model}}
-          </span>
+          <span> {{auto.make}} </span>
+          <span> {{auto.model}} </span>
           <br>
-          <span class="title">Trim: </span>
-          <span editable-text="auto.trim"
-                e-name="trim"
-
-                e-required>{{auto.trim}}
-          </span>
+          <span class="title"> Trim: </span>
+          <span> {{auto.trim}} </span>
           <br>
           <span class="title">Engine: </span>
-          <span editable-text="auto.engine"
-                e-name="engine"
-
-                e-required>{{auto.engine}}
-          </span>
+          <span> {{auto.engine}} </span>
           <br>
         </span>
-        <div class="buttons">
-          <!-- button to show form -->
-          <button type="button"
-                  class="btn btn-default"
-                  ng-click="editableForm.$show()"
-                  ng-show="!editableForm.$visible">
-                  Edit
-          </button>
-          <!-- buttons to submit / cancel form -->
-          <span ng-show="editableForm.$visible">
-            <button type="submit"
-                    class="btn btn-primary"
-                    ng-disabled="editableForm.$waiting">
-                    Save
+
+        <div class="row text-center">
+          <div class="modal-demo col-md-12 col-sm-12"
+               ng-controller="AddVehicleButtonController as $ctrl"><br>
+            <button ng-click= "$ctrl.open()"
+                    ng-class="'btn btn-primary'">
+                    Add a Vehicle
             </button>
-            <button type="button"
-                    class="btn btn-default"
-                    ng-disabled="editableForm.$waiting"
-                    ng-click="editableForm.$cancel()">
-                    Cancel
-            </button>
-          </span>
+          </div>
         </div>
-      </form>
+
     </div>
 </section>
