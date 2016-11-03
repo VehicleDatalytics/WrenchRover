@@ -21,8 +21,9 @@ app.use(express.static(__dirname + '/../build'));
 
 app.get('*', (req, res, next) => {
 
-    if (req.headers['x-forwarded-proto'] == 'https') {
-res.redirect('/#' + req.url);
+    if (req.headers['x-forwarded-proto'] != 'https' && process.env.NODE_ENV === 'production') {
+// res.redirect('/#' + req.url);
+res.redirect('https://' + req.hostname + '/#' req.url)
 } else {
     // console.log(req.hostname);
     // res.redirect('/#' + req.url);
