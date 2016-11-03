@@ -24,6 +24,7 @@ app.get('*', (req, res, next) => {
     if (req.headers['x-forwarded-proto'] != 'https') {
 res.redirect('https://' + req.hostname + '/#' + req.url);
 } else {
+    console.log(req.hostname);
     next();
 }
 });
