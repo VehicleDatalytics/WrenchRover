@@ -19,17 +19,16 @@ app.use('/api', vehicleInfoRouter.vin);
 
 app.use(express.static(__dirname + '/../build'));
 
-app.get('*', (req, res, next) => {
-
-    if (req.headers['x-forwarded-proto'] != 'https' && process.env.NODE_ENV === 'production') {
-// res.redirect('/#' + req.url);
-res.redirect('https://' + req.hostname + '/#' + req.url);
-} else {
-    // console.log(req.hostname);
-    // res.redirect('/#' + req.url);
-    next();
-}
-});
+// app.get('*', (req, res, next) => {
+//
+//     if (req.headers['x-forwarded-proto'] != 'https' && process.env.NODE_ENV === 'production') {
+//
+// res.redirect('https://' + req.hostname + '/#' + req.url);
+// } else {
+//
+//     next();
+// }
+// });
 
 app.use('/*', (req, res) => {
   res.status(404).send('not found');
