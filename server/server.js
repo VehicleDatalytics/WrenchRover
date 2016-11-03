@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/../build'));
 
 app.get('*', (req, res, next) => {
 
-    if (req.headers['x-forwarded-proto'] != 'https') {
+    if (req.headers['x-forwarded-proto'] == 'https') {
 res.redirect('/#' + req.url);
 } else {
     // console.log(req.hostname);
