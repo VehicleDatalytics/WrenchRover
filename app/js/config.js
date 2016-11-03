@@ -6,6 +6,6 @@ if (port === 5553) {
   };
 } else {
   module.exports = {
-    baseUrl: 'https://wrenchroverapi.herokuapp.com/'
+    baseUrl: 'wrenchroverapi.herokuapp.com/'
   };
 }
