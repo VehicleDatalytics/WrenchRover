@@ -12,6 +12,10 @@ require('gm.datepicker-multi-select');
 const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'gm.datepickerMultiSelect', 'ui.router', 'uiGmapgoogle-maps'])
 
 
+// /
+
+
+// //
 .config(['uiGmapGoogleMapApiProvider', function(GoogleMapApi) {
   GoogleMapApi.configure({
     // key: PROCESS.ENV.GMAP,

@@ -41,32 +41,32 @@ module.exports = function(app) {
     this.sb = {
       children: [
         { imageSrc: '../../../images/dashlights/001.png',
-        imageSrc2: '../../../images/dashlights/002.png',
-        imageSrc3: '../../../images/dashlights/003.png',
-        imageSrc4: '../../../images/dashlights/004.png',
-            name: 'Oil Light',
-            name2: 'Battery Light',
-            name3: 'Encircled Exclamation Point',
-            name4: 'Airbag Light'
-          },
-          { imageSrc: '../../../images/dashlights/005.png',
+          imageSrc2: '../../../images/dashlights/002.png',
+          imageSrc3: '../../../images/dashlights/003.png',
+          imageSrc4: '../../../images/dashlights/004.png',
+          name: 'Oil Light',
+          name2: 'Battery Light',
+          name3: 'Encircled Exclamation Point',
+          name4: 'Airbag Light'
+        },
+        { imageSrc: '../../../images/dashlights/005.png',
           imageSrc2: '../../../images/dashlights/010.png',
           imageSrc3: '../../../images/dashlights/011.png',
           imageSrc4: '../../../images/dashlights/012.png',
-              name: 'Temperature Light',
-              name2: 'ABS Light',
-              name3: 'Check Engine Light',
-              name4: 'Sprocket Light'
-            },
-            { imageSrc: '../../../images/dashlights/015.png',
-            imageSrc2: '../../../images/dashlights/016.png',
-            imageSrc3: '../../../images/dashlights/017.png',
-            imageSrc4: '../../../images/dashlights/018.png',
-                name: 'Coily Light',
-                name2: 'Hazard Light',
-                name3: 'Tire Pressure Light',
-                name4: 'Lightbulb Light'
-              }
+          name: 'Temperature Light',
+          name2: 'ABS Light',
+          name3: 'Check Engine Light',
+          name4: 'Sprocket Light'
+        },
+        { imageSrc: '../../../images/dashlights/015.png',
+          imageSrc2: '../../../images/dashlights/016.png',
+          imageSrc3: '../../../images/dashlights/017.png',
+          imageSrc4: '../../../images/dashlights/018.png',
+          name: 'Coily Light',
+          name2: 'Hazard Light',
+          name3: 'Tire Pressure Light',
+          name4: 'Lightbulb Light'
+        }
       ]
     };
 
@@ -83,8 +83,7 @@ module.exports = function(app) {
       for (var i = 0; i < res.data[0].children.length; i++) {
         if (res.data[0].children[i].name != 'Oil Change') {
           this.childrens.push(res.data[0].children[i]);
-        }
-        else {
+        } else {
           this.oils.push(res.data[0].children[i]);
         }
       }
@@ -151,6 +150,10 @@ module.exports = function(app) {
       cmService.removeChosenOil(x);
     };
 
+    this.autoX = function() {
+      console.log('describe autox');
+      cmService.autoX();
+    };
 
   }]);
 };

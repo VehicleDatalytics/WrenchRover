@@ -1,22 +1,16 @@
 
-<!-- <form class = "form-horizontal" data-ng-submit = "save(xuser)" > -->
-<form class = "form-horizontal" data-ng-submit = "validate(xuser)" >
+<form class = "form-horizontal" data-ng-submit = "save(login)" >
+<!-- <form class = "form-horizontal" data-ng-submit = "validate(login)" > -->
 
 <fieldset>
   <div class="form-group">
-<p ng-hide="submitted"><label for="user name" class="col-lg-2 control-label"> User Name</label>
-
-  <input type="text" placeholder = "Name" name = "user_name"
-   data-ng-model="xuser.user_name">
-</p>
-
 
   <p ng-hide="submitted"><label for="user email" class="col-lg-2 control-label"> Email</label>
-    <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="xuser.user_email"></p>
+    <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="login.user_email"></p>
 
 
-    <p ng-hide="submitted"><label for="password" class="col-lg-2 control-label"> Password</label>
-      <input type="JSON" placeholder = "password" name = "Password"   data-ng-model="xuser.password"></p>
+    <p ng-hide="submitted"><label for="passwordx" class="col-lg-2 control-label"> Password</label>
+      <input type="JSON" placeholder = "password" name = "Password"   data-ng-model="login.password"></p>
 
 
 
