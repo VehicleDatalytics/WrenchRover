@@ -1,7 +1,11 @@
 module.exports = exports = function(app) {
   app.controller('UserDashboardController', ['userDashboardResource', function(UserDashResource) {
+
+    // this.user_id = localStorage.getItem('user_id');
+    this.user_id = JSON.parse(localStorage.getItem('user_id'));
+
     this.userObject = {
-      id: 12,
+      id: this.user_id,
       userName: '',
       userEmail: '',
       userPhone: '',
@@ -25,22 +29,6 @@ module.exports = exports = function(app) {
       }
     };
 
-
-    // app.controller('windowController', function($uibModalInstance) {
-    //   console.log('modal controller open');
-    //   console.log($uibModalInstance);
-    //   var $ctrl = this;
-    //   console.log($uibModalInstance);
-    //
-    //   $ctrl.ok = function() {
-    //     console.log('okay, then');
-    //     $uibModalInstance.close();
-    //   };
-    //
-    //   $ctrl.cancel = function() {
-    //     console.log('cancelling');
-    //     $uibModalInstance.dismiss('cancel');
-    //   };
 
   }]);
 };

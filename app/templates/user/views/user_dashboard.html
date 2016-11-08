@@ -1,5 +1,5 @@
 
-<section data-ng-controller="UserDashboardController as UserDashCtrl">
+<section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo(); UserDashCtrl.logUser()">
     <button class="btn btn-default"
             type="submit"
             ng-click="UserDashCtrl.getUserInfo(); UserDashCtrl.logUser()">

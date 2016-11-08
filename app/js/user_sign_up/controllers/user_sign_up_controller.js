@@ -2,7 +2,7 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', '$http', function(Resource, $http) {
+  app.controller('userSignUpController', ['wrResource', '$http', '$state', function(Resource, $http, $state) {
 
 
     this.users = [];
@@ -74,6 +74,7 @@ module.exports = function(app) {
         this.auto.user_id = config.id;
         this.serviceRequests.user_id = config.id;
         console.log(new Date().getTime());
+        window.localStorage.user_id = config.id;
       })
 
       .success(() => {
@@ -104,6 +105,9 @@ module.exports = function(app) {
               console.log('auto obj: ');
               console.log(this.auto);
             });
+          })
+          .success(() => {
+            $state.go('user_dashboard');
           });
         });
 
@@ -138,12 +142,17 @@ module.exports = function(app) {
           if (config[i].user_email === this.signedInUser) {
             console.log('yes');
             console.log(config[i].id);
+            window.localStorage.user_id = config[i].id;
           } else {
             console.log('no');
           }
 
 
         }
+      })
+      .success(() => {
+        console.log('yes');
+        $state.go('user_dashboard');
       });
     });
 
