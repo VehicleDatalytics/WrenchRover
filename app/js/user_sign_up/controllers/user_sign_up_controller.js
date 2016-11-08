@@ -110,5 +110,24 @@ module.exports = function(app) {
 
     }.bind(this);
 
+    this.logIn = function(resource) {
+      console.log('loggin in');
+      console.log(resource);
+      $http.post(baseUrl + 'authenticate', resource)
+      .success((data, status, headers, config) => {
+        config.headers.Authorization = data.auth_token;
+        this.token = data.auth_token;
+        $http.defaults.headers.common.Authorization = this.token.toString();
+        console.log($http.defaults.headers.common.Authorization);
+        window.localStorage.token = this.token;
+      });
+
+    };
+
+    this.logout = function() {
+      console.log('logging out');
+      $http.defaults.headers.common.Authorization = '';
+    };
+
   }]);
 };
