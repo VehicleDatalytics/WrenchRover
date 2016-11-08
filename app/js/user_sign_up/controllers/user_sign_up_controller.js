@@ -2,7 +2,7 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', '$http', 'wrAuth', function(Resource, $http, auth) {
+  app.controller('userSignUpController', ['wrResource', '$http', function(Resource, $http) {
 
 
     this.users = [];
