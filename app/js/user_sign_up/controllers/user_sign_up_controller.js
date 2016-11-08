@@ -14,6 +14,7 @@ module.exports = function(app) {
     this.localStorageDash;
     this.localStorageChosen;
 
+    this.signedInUser = null;
 
     this.previouslyEntered = localStorage.getItem('describeIssue');
     this.localStorageOil = localStorage.getItem('oilChosen');
@@ -115,12 +116,36 @@ module.exports = function(app) {
       console.log(resource);
       $http.post(baseUrl + 'authenticate', resource)
       .success((data, status, headers, config) => {
+        console.log(config);
+        console.log(data);
         config.headers.Authorization = data.auth_token;
         this.token = data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
         window.localStorage.token = this.token;
+        console.log(resource);
+        console.log(resource.user_email);
+        console.log(this.login.user_email);
+        this.signedInUser = resource.user_email;
+      })
+    .success(() => {
+      $http.get(baseUrl + 'users').
+      success((config) => {
+        console.log(this.signedInUser);
+        // console.log(config);
+        for (var i = 0; i < config.length; i++) {
+        //   console.log(config[i].user_email);
+          if (config[i].user_email === this.signedInUser) {
+            console.log('yes');
+            console.log(config[i].id);
+          } else {
+            console.log('no');
+          }
+
+
+        }
       });
+    });
 
     };
 
