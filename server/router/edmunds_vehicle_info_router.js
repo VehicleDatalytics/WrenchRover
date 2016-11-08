@@ -9,9 +9,6 @@ vehicleInfoRouter.engine = Router();
 vehicleInfoRouter.trim = Router();
 vehicleInfoRouter.vin = Router();
 
-// request.get('https://api.edmunds.com/api/vehicle/v2/makes?' +
-//             '&year=' + req.params.year + '&view=basic&fmt=json&api_key=' +
-//             process.env.EDMUNDS_API)
 
 vehicleInfoRouter.make.get('/vehicleInfo/:year', (req, res) => {
   var makeTrigger = new EventEmitter();

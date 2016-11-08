@@ -1,5 +1,6 @@
 module.exports = exports = function(app) {
   app.controller('VehicleInfoController', ['edmundsVehicleListResource', 'vicClearSelections', function(Resource, ClearSelections) {
+    this.cookies = navigator.cookieEnabled;
     this.vehicleObject = {
       year: 0,
       make: '',
