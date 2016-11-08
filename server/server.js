@@ -5,6 +5,13 @@ app.set('port', process.env.PORT || 3000);
 
 const vehicleInfoRouter = require(__dirname + '/router/edmunds_vehicle_info_router');
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, token');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
+
 
 app.use('/api', vehicleInfoRouter.make);
 app.use('/api', vehicleInfoRouter.model);

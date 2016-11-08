@@ -11,8 +11,8 @@ module.exports = exports = function(app) {
     };
     this.vehicleListOptions = {
       yearsList: [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000,
-                    2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
-                    2012, 2013, 2014, 2015, 2016],
+        2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
+        2012, 2013, 2014, 2015, 2016],
       makeList: [],
       modelList: [],
       trimList: [],
@@ -35,6 +35,7 @@ module.exports = exports = function(app) {
     this.newTrimSelected = clearSelections.newTrimSelected.bind(clearSelections);
 
     this.saveToLocalStorage = function() {
+      console.log('save to local');
       window.localStorage.vehicle = JSON.stringify(this.vehicleObject);
       console.log(this.vehicleObject);
     };

@@ -2,7 +2,8 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', '$http', function(Resource, $http) {
+  app.controller('userSignUpController', ['wrResource', '$http', 'wrAuth', function(Resource, $http, auth) {
+
 
     this.users = [];
     this.errors = [];
@@ -21,7 +22,7 @@ module.exports = function(app) {
 
     var arr = [this.previouslyEntered, this.localStorageOil, this.localStorageChosen, this.localStorageDash];
 
-    var arrFilter = arr.filter(function(z) {
+    var arrFilter = arr.filter((z) => {
       return z != null;
     });
 
@@ -39,69 +40,75 @@ module.exports = function(app) {
         model: this.storedVehicle.model.name,
         trim: this.storedVehicle.trim.name,
         engine: this.storedVehicle.engine,
-        mileage: this.storedVehicle.mileage
+        mileage: this.storedVehicle.mileage,
+        user_id: null,
+        service_request_id: null
       };
     }
 
+    this.serviceRequests = {
+      user_id: null,
+      work_request: null
+    };
 
     this.createUser = function(resource) {
-    //   console.log(this.previouslyEntered);
-    //   this.concatLS();
-
-    // ///
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
         if (Array.isArray(arrFilter[i])) {
           this.requests = this.requests.concat(flatten(arrFilter[i]));
-        }
-        else (this.requests.push(arrFilter[i]));
+          console.log(this.requests);
+        } else this.requests.push(arrFilter[i]);
+        console.log(this.requests);
       }
-      console.log('xx');
-
-
-    // ///
+      this.serviceRequests.work_request = this.requests.toString();
 
       this.x = {
         user: resource
       };
 
-      console.log(this.auto);
-      console.log(this.x.user);
+      $http.post(baseUrl + 'users', this.x)
+      .success((config) => {
+        console.log(1);
+        console.log(config);
+        this.auto.user_id = config.id;
+        this.serviceRequests.user_id = config.id;
+        console.log(new Date().getTime());
+      })
 
-      $http.post(baseUrl + 'autos', this.auto)
-    .then(
-        (res) => {
-          console.log(res);
-          console.log(res.data.id);
-          this.x.user['auto_id'] = res.data.id;
-          this.x.user['service_requests'] = this.requests;
-          console.log(this.requests);
-          console.log(this.x.user);
-
+      .success(() => {
+        $http.post(baseUrl + 'authenticate', resource)
+        .success((data, status, headers, config) => {
+          config.headers.Authorization = data.auth_token;
+          this.token = data.auth_token;
+          $http.defaults.headers.common.Authorization = this.token.toString();
+          console.log($http.defaults.headers.common.Authorization);
+          window.localStorage.token = this.token;
         })
-        .then(() => {
-          $http.post(baseUrl + 'users', this.x)
-          .then((res) => {
-            console.log(res);
-            console.log(this.newUser);
-            this.newUser = null;
-            this.y = {
-              user_id: res.data.id,
-              work_request: this.requests.toString()
-            };
-            // var issue = this.serviceRequests;
-            $http.post(baseUrl + 'service_requests', this.y);
-            console.log(this.y);
-            console.log(this.requests);
-            // console.log(this.totalProblemsArr);
 
+        .success(() => {
+          console.log(3);
+          $http.post(baseUrl + 'service_requests', this.serviceRequests)
+          .success((config) => {
+
+            this.auto.service_request_id = config.id;
+          })
+
+          .success(() => {
+            console.log(new Date().getTime());
+            $http.post(baseUrl + 'autos', this.auto)
+            .success((config) => {
+              console.log(this.auto.service_request_id);
+              console.log(new Date().getTime());
+              console.log(config);
+              console.log('auto obj: ');
+              console.log(this.auto);
+            });
           });
-
         });
+
+      });
 
     }.bind(this);
 
-  }
-
-]);
+  }]);
 };

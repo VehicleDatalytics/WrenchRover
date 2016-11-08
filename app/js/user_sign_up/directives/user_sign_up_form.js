@@ -14,11 +14,13 @@ module.exports = function(app) {
         action: '@'
       },
       link: function(scope, element, attrs, controller) {
-        var actions = {
-          create: controller.createUser
-        };
-
-        scope.save = actions[scope.action];
+        // var actions = {
+        //   create: controller.createUser,
+        //   auto: controller.autoX
+        // };
+        scope.save = controller.createUser;
+        scope.auto = controller.autoX;
+        // scope.save = actions[scope.action];
         console.log(scope.save);
 
       }
