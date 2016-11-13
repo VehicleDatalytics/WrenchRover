@@ -4,7 +4,6 @@ var baseUrl = require('../../config').baseUrl;
 module.exports = function(app) {
   app.controller('userSignUpController', ['wrResource', '$http', '$state', function(Resource, $http, $state) {
 
-
     this.users = [];
     this.errors = [];
     this.allProblems = null;
@@ -57,9 +56,9 @@ module.exports = function(app) {
       for (var i = 0; i < arrFilter.length; i++) {
         if (Array.isArray(arrFilter[i])) {
           this.requests = this.requests.concat(flatten(arrFilter[i]));
-          console.log(this.requests);
+        //   console.log(this.requests);
         } else this.requests.push(arrFilter[i]);
-        console.log(this.requests);
+        // console.log(this.requests);
       }
       this.serviceRequests.work_request = this.requests.toString();
 
@@ -71,6 +70,7 @@ module.exports = function(app) {
       .success((config) => {
         console.log(1);
         console.log(config);
+
         this.auto.user_id = config.id;
         this.serviceRequests.user_id = config.id;
         console.log(new Date().getTime());
@@ -91,9 +91,11 @@ module.exports = function(app) {
           console.log(3);
           $http.post(baseUrl + 'service_requests', this.serviceRequests)
           .success((config) => {
-
+            console.log(config);
+            window.localStorage.service_requests = JSON.stringify(config);
             this.auto.service_request_id = config.id;
             window.localStorage.service_request_id = config.id;
+            // window.localStorage.service_requests = config.service_requests;
 
           })
 
@@ -101,14 +103,25 @@ module.exports = function(app) {
             console.log(new Date().getTime());
             $http.post(baseUrl + 'autos', this.auto)
             .success((config) => {
-              console.log(this.auto.service_request_id);
-              console.log(new Date().getTime());
               console.log(config);
+            //   console.log(this.auto.service_request_id);
+              console.log(new Date().getTime());
+            //   console.log(config);
               console.log('auto obj: ');
               console.log(this.auto);
+
+
+            //   window.localStorage.service_requests = JSON.stringify(config.service_request);
+              console.log(new Date().getTime());
+              console.log(window.localStorage.service_requests);
+
+              this.srthing = JSON.parse(localStorage.getItem('service_requests'));
+              console.log(this.srthing);
+
             });
           })
           .success(() => {
+            console.log(JSON.parse(localStorage.getItem('service_requests')));
             $state.go('user_dashboard');
           });
         });
@@ -143,7 +156,11 @@ module.exports = function(app) {
             console.log(config[i].id);
             console.log(config[i]);
             window.localStorage.user_id = config[i].id;
-            window.localStorage.service_requests = JSON.stringify(config[i].service_requests);
+
+            // //////
+            window.localStorage.service_requests = JSON.stringify(config[i].service_requests[0]);
+
+            // ///
             window.localStorage.service_request_id = config[i].service_requests[0].id;
           } else {
             console.log('no');
@@ -151,6 +168,7 @@ module.exports = function(app) {
         }
       })
       .success(() => {
+        console.log(JSON.parse(localStorage.getItem('service_requests')));
         console.log('yes');
         $state.go('user_dashboard');
       });

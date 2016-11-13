@@ -3,12 +3,20 @@ module.exports = exports = function(app) {
 
 
     this.user_id = JSON.parse(localStorage.getItem('user_id'));
+    console.log(this.user_id);
     this.arr = [];
-    this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
+    // this.service_requests = localStorage.getItem('service_requests');
 
-    this.service_request_object = this.service_requests[0];
-    console.log(this.service_request_object);
+    this.service_object_thing = null;
+    this.service_requestObj = JSON.parse(localStorage.getItem('service_requests'));
+
+    console.log(this.service_requestObj);
+
+    console.log(new Date().getTime());
+
+
     this.service_request_id = JSON.parse(localStorage.getItem('service_request_id'));
+    console.log(this.service_request_id);
 
     this.url = 'https://wrenchroverapi.herokuapp.com/';
     this.userObject = {};
@@ -25,7 +33,7 @@ module.exports = exports = function(app) {
       existence: 'maybe'
     };
 
-    // this.arr.push(this.serviceQuotes);
+
     console.log(this.arr);
     this.errors = [];
 
@@ -46,9 +54,16 @@ module.exports = exports = function(app) {
     };
 
     console.log(this.arr);
-
+    console.log(this.service_object_thing);
     // /////
     this.getUserInfo = function() {
+      console.log(this.service_object_thing);
+      console.log(JSON.parse(localStorage.getItem('service_requests')));
+
+    //   this.previouslyEntered = localStorage.getItem('describeIssue');
+    //   console.log(this.previouslyEntered);
+
+
       $http.get(this.url + 'users/' + this.user_id)
       .then((res) => {
         console.log(res.data);
@@ -62,6 +77,7 @@ module.exports = exports = function(app) {
         $http.get(this.url + 'service_requests/' + this.sr_id)
         .then((res) => {
           console.log(res.data);
+          this.service_object_thing = res.data;
           console.log(res.data.service_quotes.length);
           console.log(res.data.service_quotes);
           if (res.data.service_quotes.length >= 1) {
