@@ -1,11 +1,32 @@
 
-<p><sq-form></sq-form></p>
+<!-- <p><sq-form></sq-form></p> -->
 <br>
 <br>
 <br>
 
-
+<!-- data-sr="servicerequests" -->
 <uib-accordion>
-<div uib-accordion-group class="panel" heading="{{sample.id}}. {{sample.work_request}}" ng-repeat="sample in portal.servicerequests" data-sr="servicerequests">
+<div uib-accordion-group class="panel" heading="{{sample.id}}. {{sample.work_request}}" ng-repeat="sample in portal.servicerequests" >
+
+{{sample.user_id}}, {{sample.id}}
+<!-- <button ng-click="portal.createQuote(sample.user_id)
+">capture user id </button> -->
+
+<form name = "authform" class = "form-horizontal" data-ng-submit = "save(scquote)" >
+
+<!-- <p ng-repeat="sample in portal.servicerequests">{{sample.user_id}}</p> -->
+    <p><label for="x" class="col-lg-2 control-label"> Quote</label>
+      <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost"></p>
+
+
+        <p><label for="x" class="col-lg-2 control-label"> Mechanic's Notes</label>
+          <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p>
+
+
+      <button type="submit" ng-click="portal.createQuote(sample.user_id, scquote, sample.id)">enter it</button>
+    </form>
+
+
+
 </div>
 </uib-accordion>

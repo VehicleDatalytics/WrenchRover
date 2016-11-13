@@ -1,31 +1,41 @@
-  <div class="panel panel-primary">
+<div class="panel panel-primary">
 
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">X</button>
-    <div class="panel-heading">
+  <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">X</button>
+  <div class="panel-heading">
 
-      <h3 class="panel-title">Sign in</h3>
-    </div>
-
-  <div class="panel panel-success">
-
-    <div class="panel-body">
-
-
-  <div ng-controller="userSignUpController as userctrl">
-
-
-  <user-sign-in-form
-  data-button-text="Log-In"
-  data-login="login"
-  data-action = "create"
-  >
-
-  </user-sign-in-form>
-
-  <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Close</button>
+    <h3 class="panel-title">Sign in</h3>
   </div>
 
-    </div>
-  </div>
+<div class="panel panel-success">
 
-  </div>
+  <div class="panel-body">
+
+<button ng-click="x=!x">Service Center?</button>
+
+<div ng-hide="x" ng-controller="userSignUpController as userctrl">
+
+
+<user-sign-in-form
+data-button-text="Log-In"
+data-login="login"
+data-action = "create"
+>
+
+</user-sign-in-form>
+</div>
+
+<div ng-hide="!x" ng-controller="mechanicSignUpController as mech">
+  <mechanic-sign-in
+    data-action= "create"
+      data-button-text="Mechanic Log-in"
+        data-mech="mech"
+
+
+  ></mechanic-sign-in>
+</div>
+<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Close</button>
+<!-- </div> -->
+
+</div>
+
+</div>

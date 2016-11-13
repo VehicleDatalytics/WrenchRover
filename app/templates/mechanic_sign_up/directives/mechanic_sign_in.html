@@ -1,14 +1,14 @@
 
-<form class = "form-horizontal" data-ng-submit = "save(login)" >
+<form class = "form-horizontal" data-ng-submit = "save(mech)" >
 <fieldset>
   <div class="form-group">
 
   <p ng-hide="submitted"><label for="user email" class="col-lg-2 control-label"> Email</label>
-    <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="login.user_email"></p>
+    <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="mech.user_email"></p>
 
 
     <p ng-hide="submitted"><label for="passwordx" class="col-lg-2 control-label"> Password</label>
-      <input type="password" placeholder = "password" name = "Password"   data-ng-model="login.password"></p>
+      <input type="password" placeholder = "password" name = "Password"   data-ng-model="mech.password"></p>
 
 
 
@@ -16,7 +16,7 @@
 
      >{{buttonText}}</button>
 
-<p ng-hide="!hover">Welcome back! Taking you to your dashboard now...</p>
+<p ng-hide="!hover">Welcome back! Taking you to your portal now...</p>
 
 </div>
 </fieldset>
@@ -24,3 +24,6 @@
 
      <ng-transclude></ng-transclude>
    </form>
+
+
+<ng-transclude></ng-transclude>

@@ -1,8 +1,9 @@
 
-<section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo(); UserDashCtrl.logUser()">
+<section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()">
     <button class="btn btn-default"
             type="submit"
-            ng-click="UserDashCtrl.getUserInfo(); UserDashCtrl.logUser()">
+            ng-click="UserDashCtrl.getUserInfo();
+               UserDashCtrl.logUser()">
             test get user
     </button>
 
@@ -18,6 +19,17 @@
         <br>
         <span>{{UserDashCtrl.userObject.memberSince}}</span>
         <br>
+{{UserDashCtrl.userObject.user_name}}
+
+  <span>
+    {{UserDashCtrl.service.serviceQuotes.quote_text}}
+  </span>
+  <br>
+<span>{{UserDashCtrl.service.serviceQuotes.quote_cost}} </span>
+<br>
+
+<span>{{UserDashCtrl.service.serviceQuotes.service_request}}</span>
+
         <span class="title">Vehicles: </span>
         <br>
         <span data-ng-repeat="auto in UserDashCtrl.userObject.autos">
@@ -31,8 +43,25 @@
           <span class="title">Engine: </span>
           <span> {{auto.engine}} </span>
           <br>
+          <!-- <span>auto object: </span>
+          <span> {{auto}}</span>
+          <br> -->
         </span>
 
+
+        <!-- <uib-accordion>
+        <div uib-accordion-group class="panel" heading="{{sample.service_center_id}}, {{sample.quote_cost}}, {{sample.quote_text}}"  ng-repeat = "sample in UserDashCtrl.service_quotes">
+
+  {{sample.quote_text}}
+        </div> -->
+<!-- <ol> -->
+  <!-- <p ng-repeat="sample in UserDashCtrl.service_quotes" ng-repeat="sample in UserDashCtrl.service_quotes_table">{{sample.quote_text}} / {{sample.service_center.service_name}}
+  </p> -->
+
+  <p>Your work request:   {{UserDashCtrl.service_request_object.work_request}}:</p>
+<ol>
+<li ng-repeat="sample in UserDashCtrl.service_quotes_table"> {{sample.service_center.service_name}}, ${{sample.quote_cost}}, {{sample.quote_text}}</li>
+</ol>
         <div class="row text-center">
           <div class="modal-demo col-md-12 col-sm-12"
                ng-controller="AddVehicleButtonController as $ctrl"><br>
