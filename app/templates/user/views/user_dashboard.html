@@ -30,6 +30,7 @@
 
 <span>{{UserDashCtrl.service.serviceQuotes.service_request}}</span>
 
+
         <span class="title">Vehicles: </span>
         <br>
         <span data-ng-repeat="auto in UserDashCtrl.userObject.autos">
@@ -60,7 +61,8 @@
 
   <p>Your work request:   {{UserDashCtrl.service_requestObj.work_request}}:</p>
 <ol>
-<li ng-repeat="sample in UserDashCtrl.service_quotes_table"> {{sample.service_center.service_name}}, ${{sample.quote_cost}}, {{sample.quote_text}}</li>
+<li ng-repeat="sample in UserDashCtrl.service_quotes_table"> {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+  Shop Notes: {{sample.quote_text}}, Available: {{sample.availible_dates}}</li>
 </ol>
         <div class="row text-center">
           <div class="modal-demo col-md-12 col-sm-12"
