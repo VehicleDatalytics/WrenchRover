@@ -16,10 +16,13 @@
 <input type="text" placeholder = "Zip Code" name = "businessZip" data-ng-model="servicecenter.service_zip"></p>
 
   <p><label for="email">Email</label>
-    <input type="text" placeholder = "Email" name = "businessEmail" data-ng-model="servicecenter.service_email"></p>
+    <input type="text" placeholder = "Email" name = "businessEmail" data-ng-model="servicecenter.user_email"></p>
 
   <p>  <label for="phone number"> Phone Number</label>
       <input type="text" placeholder = "Phone Number" name = "businessPhone" data-ng-model="servicecenter.service_phone"></p>
+
+      <p>  <label for="password"> password</label>
+          <input type="password" placeholder = "password" name = "password" data-ng-model="servicecenter.password"></p>
   <!-- ////// -->
 
      <button type = "submit" id = "newServiceCenter">{{buttonText}}</button>

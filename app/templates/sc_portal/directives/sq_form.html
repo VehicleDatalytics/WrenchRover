@@ -1,4 +1,4 @@
-
+<!--
 
     <button ng-click="showme=!showme">Show Calendar</button>
 
@@ -35,9 +35,16 @@
         </td>
       </tr>
 
-    </table>
+    </table> -->
+<form name = "authform" class = "form-horizontal" data-ng-submit = "save(scquote)" >
+<!-- <p ng-repeat="sample in portal.servicerequests">{{sample.user_id}}</p> -->
+    <p><label for="x" class="col-lg-2 control-label"> Quote</label>
+      <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost"></p>
+
+      <button type="submit">{{buttonText}}</button>
 
 
+    </form>
 
 
 <ng-transclude></ng-transclude>

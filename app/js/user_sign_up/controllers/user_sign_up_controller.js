@@ -82,9 +82,9 @@ module.exports = function(app) {
         .success((data, status, headers, config) => {
           config.headers.Authorization = data.auth_token;
           this.token = data.auth_token;
-          $http.defaults.headers.common.Authorization = this.token.toString();
-          console.log($http.defaults.headers.common.Authorization);
           window.localStorage.token = this.token;
+          $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+          console.log($http.defaults.headers.common.Authorization);
         })
 
         .success(() => {
@@ -93,6 +93,8 @@ module.exports = function(app) {
           .success((config) => {
 
             this.auto.service_request_id = config.id;
+            window.localStorage.service_request_id = config.id;
+
           })
 
           .success(() => {
@@ -136,18 +138,16 @@ module.exports = function(app) {
       $http.get(baseUrl + 'users').
       success((config) => {
         console.log(this.signedInUser);
-        // console.log(config);
         for (var i = 0; i < config.length; i++) {
-        //   console.log(config[i].user_email);
           if (config[i].user_email === this.signedInUser) {
-            console.log('yes');
             console.log(config[i].id);
+            console.log(config[i]);
             window.localStorage.user_id = config[i].id;
+            window.localStorage.service_requests = JSON.stringify(config[i].service_requests);
+            window.localStorage.service_request_id = config[i].service_requests[0].id;
           } else {
             console.log('no');
           }
-
-
         }
       })
       .success(() => {

@@ -6,12 +6,11 @@ module.exports = function(app) {
     this.checkcookies = function() {
       console.log('initting cookie check');
       console.log(navigator.cookieEnabled);
+    };
 
-    //   if (navigator.cookieEnabled) {
-    //     alert('Cookies must be enabled to use this site');
-    //   } else {
-    //     alert('Cookies must be enabled to use this site');
-    //   }
+    this.serviceCenter = false;
+    this.activeButton = function() {
+      this.serviceCenter = !this.serviceCenter;
     };
   }]);
 };
