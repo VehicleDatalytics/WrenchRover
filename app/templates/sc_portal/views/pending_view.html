@@ -23,11 +23,19 @@
           <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p>
 
 
-          <p><label for="x" class="col-lg-2 control-label"> Available Dates</label>
-          <input type="date" placeholder = "dates" name = "Available Dates"   data-ng-model="scquote.date_one"></p>
+        <p>  <label for="x" class="col-lg-2 control-label"> 1. Available Dates and Time</label>
+          <input type="date" placeholder = "dates" name = "Available Dates"   data-ng-model="scquote.date_one">
+          <input type="time" placeholder = "times" name = "Available times"   data-ng-model="scquote.time_one"> </p>
 
-          <p><label for="x" class="col-lg-2 control-label"> Available Times</label>
-          <input type="time" placeholder = "times" name = "Available times"   data-ng-model="scquote.time_one"></p>
+    <p>  <label for="x" class="col-lg-2 control-label"> 2. Available Dates and Time</label>
+      <input type="date" placeholder = "dates" name = "Available Dates2"   data-ng-model="scquote.date_two">
+    <input type="time" placeholder = "times" name = "Available times2"   data-ng-model="scquote.time_two"> </p>
+    </p>
+
+      <p> <label for="x" class="col-lg-2 control-label"> 3. Available Dates and Time</label>
+    <input type="date" placeholder = "dates" name = "Available Dates3"   data-ng-model="scquote.date_three">
+     <input type="time" placeholder = "times" name = "Available times3"   data-ng-model="scquote.time_three">
+        </p>
 
       <button type="submit" ng-click="portal.createQuote(sample.user_id, scquote, sample.id)">enter it</button>
     </form>
