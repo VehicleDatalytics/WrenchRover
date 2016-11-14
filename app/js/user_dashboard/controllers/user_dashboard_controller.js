@@ -5,16 +5,11 @@ module.exports = exports = function(app) {
     this.user_id = JSON.parse(localStorage.getItem('user_id'));
     console.log(this.user_id);
     this.arr = [];
-    // this.service_requests = localStorage.getItem('service_requests');
 
     this.service_object_thing = null;
     this.service_requestObj = JSON.parse(localStorage.getItem('service_requests'));
 
     console.log(this.service_requestObj);
-
-    console.log(new Date().getTime());
-
-
     this.service_request_id = JSON.parse(localStorage.getItem('service_request_id'));
     console.log(this.service_request_id);
 
@@ -25,6 +20,7 @@ module.exports = exports = function(app) {
     this.sr_id = null;
     this.service_quotes = [];
     this.service_quotes_table = [];
+    this.avail_dates = [];
     this.serviceQuotes = {
       user_id: this.user_id,
       quote_cost: '',
@@ -47,7 +43,6 @@ module.exports = exports = function(app) {
     };
 
     this.logUser = function() {
-      console.log('user object from controller');
 
       console.log(this.serviceQuotes);
 
@@ -93,18 +88,46 @@ module.exports = exports = function(app) {
             $http.get(this.url + 'service_quotes')
 
             .then((res) => {
-              console.log(res.data[0]);
-
+              console.log(res.data);
               this.service_quotes_table.splice(0);
               for (var i = 0; i < res.data.length; i++) {
                 if (res.data[i].service_request_id == this.service_request_id) {
                   console.log(res.data[i].service_request_id);
                   console.log(this.service_request_id);
-                  this.service_quotes_table.push(res.data[i]);
-                }
-              }
+                  console.log(res.data[i].availible_dates);
 
-              console.log(this.service_quotes_table);
+
+                  this.avail_dates.push(res.data[i].availible_dates);
+
+                  var values = this.avail_dates[0].toString();
+                  var option_1 = values.split(',');
+                  console.log(option_1);
+                  console.log(option_1[0]);
+                  res.data[i].option_1 = option_1[0];
+                  res.data[i].option_2 = option_1[1];
+                  res.data[i].option_3 = option_1[2];
+
+                  this.service_quotes_table.push(res.data[i]);
+                  console.log(this.service_quotes_table);
+                }
+
+
+              }
+            //   console.log(this.service_quotes_table);
+            //   console.log(this.avail_dates);
+            //   var values = this.avail_dates[0].toString();
+            //   var option_1 = values.split(',');
+            //   console.log(option_1);
+            //   console.log(option_1[0]);
+            //   console.log(option_1[1]);
+            //   console.log(option_1[2]);
+              //
+            //   res.data[i].option_1 = option_1[0];
+            //   res.data[i].option_2 = option_1[1];
+            //   res.data[i].option_3 = option_1[2];
+            //   this.service_quotes_table.push(res.data[i]);
+            //   console.log(this.service_quotes_table);
+
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
               console.log(this.service_quotes_all);
             });
@@ -115,9 +138,6 @@ module.exports = exports = function(app) {
         });
       });
     };
-
-    // ////
-
 
   }]);
 };
