@@ -56,9 +56,7 @@ module.exports = function(app) {
       for (var i = 0; i < arrFilter.length; i++) {
         if (Array.isArray(arrFilter[i])) {
           this.requests = this.requests.concat(flatten(arrFilter[i]));
-        //   console.log(this.requests);
         } else this.requests.push(arrFilter[i]);
-        // console.log(this.requests);
       }
       this.serviceRequests.work_request = this.requests.toString();
 

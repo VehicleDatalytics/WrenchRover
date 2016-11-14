@@ -15,27 +15,42 @@
 
             this.quote_X = y;
             this.quote_X.user_id = x;
+            console.log(this.time_three);
+            this.quote_X.dateArr = [];
 
+            // this.quote_X.availible_dateArr = [];
+            // this.quote_X.availible_dateArr.splice(0);
+            this.quote_X.dateArr.splice(0);
 
-            this.quote_X.avail_one = this.quote_X.date_one.toLocaleDateString() + ' at ' + this.quote_X.time_one.toLocaleTimeString();
+            if (this.quote_X.date_one && this.quote_X.time_one) {
+              this.quote_X.avail_one = this.quote_X.date_one.toLocaleDateString() + ' at ' + this.quote_X.time_one.toLocaleTimeString();
+              console.log(this.quote_X.avail_one);
+              this.quote_X.dateArr.push(this.quote_X.avail_one);
+              console.log('one');
+            }
 
-            this.quote_X.avail_two = this.quote_X.date_two.toLocaleDateString() + ' at ' + this.quote_X.time_two.toLocaleTimeString();
+            if (this.quote_X.date_two && this.quote_X.time_two) {
+              this.quote_X.avail_two = this.quote_X.date_two.toLocaleDateString() + ' at ' + this.quote_X.time_two.toLocaleTimeString();
+              console.log(this.quote_X.avail_two);
+              console.log('two');
+              this.quote_X.dateArr.push(this.quote_X.avail_two);
+            }
 
-            this.quote_X.avail_three = this.quote_X.date_three.toLocaleDateString() + ' at ' + this.quote_X.time_three.toLocaleTimeString();
+            if (this.quote_X.date_three && this.quote_X.time_three) {
+              this.quote_X.avail_three = this.quote_X.date_three.toLocaleDateString() + ' at ' + this.quote_X.time_three.toLocaleTimeString();
+              console.log(this.quote_X.avail_three);
+              console.log('three');
+              this.quote_X.dateArr.push(this.quote_X.avail_three);
+            }
 
-            this.quote_X.availible_dateArr = [];
 
             console.log(this.quote_X.availible_dates);
 
-            this.quote_X.availible_dateArr.push(this.quote_X.avail_one, this.quote_X.avail_two, this.quote_X.avail_three);
-            // console.log(this.quote_X.availible_dates);
+            console.log(this.quote_X.dateArr);
+            // this.quote_X.availible_dates = this.quote_X.availible_dateArr.toString();
+            this.quote_X.availible_dates =
+            this.quote_X.dateArr.toString();
 
-            this.quote_X.availible_dates = this.quote_X.availible_dateArr.toString();
-            //
-            // this.quote_X.availible_dates = JSON.stringify(this.quote_X.available_dateArr);
-
-            // this.quote_X.availible_dates = this.quote_X.date_one.toLocaleDateString() + ' at ' + this.quote_X.time_one.toLocaleTimeString();
-            // console.log(this.quote_X.availible_dates);
 
             this.quote_X.service_center_id = JSON.parse(localStorage.getItem('service_center_id'));
             this.quote_X.service_request_id = z;

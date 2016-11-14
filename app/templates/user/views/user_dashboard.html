@@ -62,7 +62,9 @@
   <p>Your work request:   {{UserDashCtrl.service_requestObj.work_request}}:</p>
 <ol>
 <li ng-repeat="sample in UserDashCtrl.service_quotes_table"> {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
-  Shop Notes: {{sample.quote_text}}, Available: 1.{{sample.option_1}} 2. {{sample.option_2}} 3. {{sample.option_3}}
+  <!-- Shop Notes: {{sample.quote_text}}, Available: 1.{{sample.option_1}} 2. {{sample.option_2}} 3. {{sample.option_3}} -->
+
+  AD: {{sample.availible_dates}}
 
 </li>
 </ol>
