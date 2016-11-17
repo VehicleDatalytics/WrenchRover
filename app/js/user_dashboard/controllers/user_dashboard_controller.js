@@ -1,7 +1,6 @@
 module.exports = exports = function(app) {
   app.controller('UserDashboardController', ['$http', function($http) {
-
-
+    var that = this;
     this.user_id = JSON.parse(localStorage.getItem('user_id'));
     console.log(this.user_id);
     this.arr = [];
@@ -90,25 +89,13 @@ module.exports = exports = function(app) {
             .then((res) => {
               console.log(res.data);
               this.service_quotes_table.splice(0);
+
+              this.obj_quote = this.service_quotes_table[0];
               for (var i = 0; i < res.data.length; i++) {
                 if (res.data[i].service_request_id == this.service_request_id) {
 
-                  console.log(res.data[i].service_request_id);
-                  console.log(this.service_request_id);
-                  console.log(res.data[i].availible_dates);
+                  this.avail_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
 
-
-                  this.avail_dates.push(res.data[i].availible_dates);
-                  console.log(this.avail_dates);
-
-                  var values = this.avail_dates[0].toString();
-                  console.log(values);
-                  var option_1 = values.split(',');
-                  console.log(option_1);
-                  console.log(option_1[0]);
-                  res.data[i].option_1 = option_1[0];
-                  res.data[i].option_2 = option_1[1];
-                  res.data[i].option_3 = option_1[2];
 
                   this.service_quotes_table.push(res.data[i]);
                   console.log(this.service_quotes_table);
@@ -117,8 +104,30 @@ module.exports = exports = function(app) {
 
               }
 
+              that.value = '';
+              that.newValue = function(value, x) {
+                console.log(value);
+                // console.log(this.x);
+                console.log(x);
+              };
+
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
               console.log(this.service_quotes_all);
+              this.confirm = function(value, x, y) {
+                console.log(value);
+                console.log(x);
+                console.log(y);
+                this.sq_obj = y;
+                this.sq_obj.accepted = value;
+                console.log(this.sq_obj);
+                $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
+                .success((config) => {
+                  console.log(config);
+                });
+
+
+              };
+
             });
 
           } else {

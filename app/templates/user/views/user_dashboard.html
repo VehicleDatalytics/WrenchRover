@@ -61,13 +61,39 @@
 
   <p>Your work request:   {{UserDashCtrl.service_requestObj.work_request}}:</p>
 <ol>
-<li ng-repeat="sample in UserDashCtrl.service_quotes_table"> {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
-  <!-- Shop Notes: {{sample.quote_text}}, Available: 1.{{sample.option_1}} 2. {{sample.option_2}} 3. {{sample.option_3}} -->
+<li ng-repeat="sample in UserDashCtrl.service_quotes_table">
+<!-- <li> -->
 
-  AD: {{sample.availible_dates}}
+   {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+  Shop Notes: {{sample.quote_text}}
+
+  <!-- UserDashCtrl. -->
+
+
+<!--
+Availability: 1.<input type="radio" ng-model="UserDashCtrl.value" value="{{sample.service_center.service_name}} on {{sample.available_date_1}} for ${{sample.quote_cost}} "  ng-change='newValue(value)'>{{sample.available_date_1}}
+2. <input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.service_center.service_name}} on {{sample.available_date_2}} for ${{sample.quote_cost}}" ng-change='newValue(value)'> {{sample.available_date_2}}
+3.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.service_center.service_name}} on {{sample.available_date_3}} for ${{sample.quote_cost}}" ng-change='newValue(value)'> {{sample.available_date_3}} -->
+
+<!-- ///// -->
+
+Availability: 1.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_1}}"  ng-change='newValue(value)'>{{sample.available_date_1}}
+2. <input type="radio" ng-model="UserDashCtrl.value" value="  {{sample.available_date_2}} " ng-change='newValue(value)'> {{sample.available_date_2}}
+3.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_3}} " ng-change='newValue(value)'> {{sample.available_date_3}}
+
+
+
+<button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
+<hr>
+</div>
 
 </li>
 </ol>
+<!-- You've chosen:  {{UserDashCtrl.value}} -->
+
+
+<!-- <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl)">Confirm Appointment</button> -->
+<!-- <p>{{sample.service_center.service_name}} on {{UserDashCtrl.value}}</p> -->
         <div class="row text-center">
           <div class="modal-demo col-md-12 col-sm-12"
                ng-controller="AddVehicleButtonController as $ctrl"><br>
