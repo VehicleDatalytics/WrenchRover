@@ -1,53 +1,39 @@
     var baseUrl = 'https://wrenchroverapi.herokuapp.com/';
     module.exports = function(app) {
       app.factory('scCommService', ['$http', function($http) {
-        this.quoteObj = {
-          user_id: null,
-          quote: null
-
-        };
+        // this.quoteObj = {
+        //   user_id: null,
+        //   quote: null
+        //
+        // };
+        //
 
         return {
-          createQuote: function(x, y, z, a) {
+
+          addDates: function(x) {
+            console.log(x);
+            console.log(x[0], x[1], x[2]);
+            console.log('adding dates');
+            for (var i = 0; i < x.length; i++) {
+              console.log(new Date(x[i]));
+            //   this.arr.push(new Date(x[i]));
+            }
+
+          },
+          createQuote: function(x, y, z, a, times) {
+            console.log(a);
+            console.log(new Date(a[0]));
+            console.log(times);
+
             this.quoteObj = x;
-            console.log(x, y);
+            console.log(x, y, z);
 
 
             this.quote_X = y;
             this.quote_X.user_id = x;
-            console.log(this.time_three);
-            this.quote_X.dateArr = [];
-
-            this.quote_X.dateArr.splice(0);
-
-            if (this.quote_X.date_one && this.quote_X.time_one) {
-              this.quote_X.available_date_1 = this.quote_X.date_one.toLocaleDateString() + ' at ' + this.quote_X.time_one.toLocaleTimeString();
-            //   console.log(this.quote_X.avail_one);
-            //   this.quote_X.dateArr.push(this.quote_X.avail_one);
-              console.log('one');
-            }
-
-            if (this.quote_X.date_two && this.quote_X.time_two) {
-              this.quote_X.available_date_2 = this.quote_X.date_two.toLocaleDateString() + ' at ' + this.quote_X.time_two.toLocaleTimeString();
-            //   console.log(this.quote_X.avail_two);
-              console.log('two');
-            //   this.quote_X.dateArr.push(this.quote_X.avail_two);
-            }
-
-            if (this.quote_X.date_three && this.quote_X.time_three) {
-              this.quote_X.available_date_3 = this.quote_X.date_three.toLocaleDateString() + ' at ' + this.quote_X.time_three.toLocaleTimeString();
-              console.log(this.quote_X.avail_three);
-              console.log('three');
-            //   this.quote_X.dateArr.push(this.quote_X.avail_three);
-            }
-
-
-            // console.log(this.quote_X.available_dates);
-
-            // console.log(this.quote_X.dateArr);
-            // this.quote_X.availible_dates = this.quote_X.availible_dateArr.toString();
-            // this.quote_X.availible_dates =
-            // this.quote_X.dateArr.toString();
+            this.quote_X.available_date_1 = new Date(a[0]).toLocaleDateString() + ' at ' + times[0];
+            this.quote_X.available_date_2 = new Date(a[1]).toLocaleDateString() + ' at ' + times[1];
+            this.quote_X.available_date_3 = new Date(a[2]).toLocaleDateString() + ' at ' + times[2];
 
 
             this.quote_X.service_center_id = JSON.parse(localStorage.getItem('service_center_id'));

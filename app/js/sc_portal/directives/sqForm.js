@@ -18,9 +18,12 @@ module.exports = function(app) {
         var actions = {
         //   update: controller.updateMug,
         //   create: controller.createQuote
-          create: controller.createQuote
+          create: controller.createQuote,
+          add: controller.addDates,
+          both: controller.addDates && controller.createQuote
         };
         scope.save = actions[scope.action];
+
       }
     };
   });

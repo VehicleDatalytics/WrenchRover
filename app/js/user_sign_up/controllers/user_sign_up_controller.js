@@ -140,37 +140,32 @@ module.exports = function(app) {
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
         window.localStorage.token = this.token;
+        window.localStorage.user_id = data.user_id;
+
+        // window.localStorage.service_requests = JSON.stringify(config[i].service_requests[0]);
+
         console.log(resource);
         console.log(resource.user_email);
         console.log(this.login.user_email);
         this.signedInUser = resource.user_email;
-      })
-    .success(() => {
-      $http.get(baseUrl + 'users').
-      success((config) => {
-        console.log(this.signedInUser);
-        for (var i = 0; i < config.length; i++) {
-          if (config[i].user_email === this.signedInUser) {
-            console.log(config[i].id);
-            console.log(config[i]);
-            window.localStorage.user_id = config[i].id;
+        var x = data.user_id.toString();
+        console.log(x);
+        console.log(typeof x);
+        this.user_id = data.user_id;
+        $http.get(baseUrl + 'users/' + this.user_id )
+    //   })
 
-            // //////
-            window.localStorage.service_requests = JSON.stringify(config[i].service_requests[0]);
-
-            // ///
-            window.localStorage.service_request_id = config[i].service_requests[0].id;
-          } else {
-            console.log('no');
-          }
-        }
-      })
+        .success((config) => {
+          console.log(this.signedInUser);
+          console.log(config);
+          window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
+        })
       .success(() => {
         console.log(JSON.parse(localStorage.getItem('service_requests')));
         console.log('yes');
         $state.go('user_dashboard');
       });
-    });
+      });
 
     };
 

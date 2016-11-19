@@ -59,23 +59,13 @@
   <!-- <p ng-repeat="sample in UserDashCtrl.service_quotes" ng-repeat="sample in UserDashCtrl.service_quotes_table">{{sample.quote_text}} / {{sample.service_center.service_name}}
   </p> -->
 
-  <p>Your work request:   {{UserDashCtrl.service_requestObj.work_request}}:</p>
+  <p>Your work request:   {{UserDashCtrl.service_requestObj.work_request}}</p>
 <ol>
 <li ng-repeat="sample in UserDashCtrl.service_quotes_table">
 <!-- <li> -->
 
    {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
   Shop Notes: {{sample.quote_text}}
-
-  <!-- UserDashCtrl. -->
-
-
-<!--
-Availability: 1.<input type="radio" ng-model="UserDashCtrl.value" value="{{sample.service_center.service_name}} on {{sample.available_date_1}} for ${{sample.quote_cost}} "  ng-change='newValue(value)'>{{sample.available_date_1}}
-2. <input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.service_center.service_name}} on {{sample.available_date_2}} for ${{sample.quote_cost}}" ng-change='newValue(value)'> {{sample.available_date_2}}
-3.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.service_center.service_name}} on {{sample.available_date_3}} for ${{sample.quote_cost}}" ng-change='newValue(value)'> {{sample.available_date_3}} -->
-
-<!-- ///// -->
 
 Availability: 1.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_1}}"  ng-change='newValue(value)'>{{sample.available_date_1}}
 2. <input type="radio" ng-model="UserDashCtrl.value" value="  {{sample.available_date_2}} " ng-change='newValue(value)'> {{sample.available_date_2}}
