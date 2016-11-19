@@ -54,9 +54,6 @@ module.exports = exports = function(app) {
       console.log(this.service_object_thing);
       console.log(JSON.parse(localStorage.getItem('service_requests')));
 
-    //   this.previouslyEntered = localStorage.getItem('describeIssue');
-    //   console.log(this.previouslyEntered);
-
 
       $http.get(this.url + 'users/' + this.user_id)
       .then((res) => {
@@ -89,20 +86,22 @@ module.exports = exports = function(app) {
             .then((res) => {
               console.log(res.data);
               this.service_quotes_table.splice(0);
-
+              console.log(this.service_request_id);
+              console.log(this.sr_id);
               this.obj_quote = this.service_quotes_table[0];
               for (var i = 0; i < res.data.length; i++) {
-                if (res.data[i].service_request_id == this.service_request_id) {
+                if (res.data[i].service_request_id == this.sr_id) {
 
                   this.avail_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
 
 
                   this.service_quotes_table.push(res.data[i]);
-                  console.log(this.service_quotes_table);
+
                 }
 
 
               }
+              console.log(this.service_quotes_table);
 
               that.value = '';
               that.newValue = function(value, x) {
@@ -120,10 +119,6 @@ module.exports = exports = function(app) {
                 this.sq_obj = y;
                 this.sq_obj.accepted = value;
                 console.log(this.sq_obj);
-                $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
-                .success((config) => {
-                  console.log(config);
-                });
 
 
               };
