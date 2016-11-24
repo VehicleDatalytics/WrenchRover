@@ -1,5 +1,5 @@
 const angular = require('angular');
-require('ngMap');
+require('ngmap');
 // require('lodash');
 // require('angular-google-maps');
 // require('angular-simple-logger');
