@@ -1,5 +1,24 @@
+ /* eslint-disable prefer-arrow-callback */
+var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
+  // app.controller('UserDashboardController', ['$http', 'NgMap', function($http, NgMap) {
   app.controller('UserDashboardController', ['$http', function($http) {
+    // console.log(NgMap.getMap);
+
+    var vm = this;
+    vm.positions = [];
+    var loc_obj = {};
+
+    var map_icons = [ '../../../images/map_icons/number_1.png',
+      '../../../images/map_icons/number_2.png' ];
+    //
+
+    // NgMap.getMap().then(function(map) {
+    //   console.log('map', map);
+    //   vm.map = map;
+    // });
+
+
     var that = this;
     this.user_id = JSON.parse(localStorage.getItem('user_id'));
     console.log(this.user_id);
@@ -32,25 +51,20 @@ module.exports = exports = function(app) {
     console.log(this.arr);
     this.errors = [];
 
-    this.bothFunctions = function() {
-      console.log('getting both functions');
-      this.getUserInfo().then(() => {
-        console.log(this.sq_d);
-        this.getQuoteInfo();
-      });
+    // this.bothFunctions = function() {
+    //   console.log('getting both functions');
+    //   this.getUserInfo().then(() => {
+    //     console.log(this.sq_d);
+    //     this.getQuoteInfo();
+    //   });
+    // };
 
-    };
-
-    this.logUser = function() {
-
-      console.log(this.serviceQuotes);
-
-    };
 
     console.log(this.arr);
     console.log(this.service_object_thing);
     // /////
     this.getUserInfo = function() {
+      this.user_id = JSON.parse(localStorage.getItem('user_id'));
       console.log(this.service_object_thing);
       console.log(JSON.parse(localStorage.getItem('service_requests')));
 
@@ -69,7 +83,6 @@ module.exports = exports = function(app) {
         .then((res) => {
           console.log(res.data);
           this.service_object_thing = res.data;
-          console.log(res.data.service_quotes.length);
           console.log(res.data.service_quotes);
           if (res.data.service_quotes.length >= 1) {
             console.log(res.data.service_quotes[0].id);
@@ -80,9 +93,7 @@ module.exports = exports = function(app) {
 
             console.log(this.service_quotes);
 
-
             $http.get(this.url + 'service_quotes')
-
             .then((res) => {
               console.log(res.data);
               this.service_quotes_table.splice(0);
@@ -91,16 +102,37 @@ module.exports = exports = function(app) {
               this.obj_quote = this.service_quotes_table[0];
               for (var i = 0; i < res.data.length; i++) {
                 if (res.data[i].service_request_id == this.sr_id) {
+                //   vm.positions.splice(0);
+                  var loc_obj = { pos:
+
+                     res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things'
+
+                  };
+
+                  vm.positions.push(loc_obj);
+
+                //   console.log(vm.positions);
+                //   vm.positions[0].more_things = 'vodka';
+
+
+                  console.log(vm.positions);
 
                   this.avail_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
 
-
                   this.service_quotes_table.push(res.data[i]);
-
+                //   return loc_obj;
                 }
-
+              }
+              console.log(loc_obj);
+              for (var j = 0; j < vm.positions.length; j++) {
+                vm.positions[j].map_icon_pics = map_icons[j];
 
               }
+
+              console.log(vm.positions);
+
+              console.log(vm.positions);
+              console.log(vm.positions.length);
               console.log(this.service_quotes_table);
 
               that.value = '';
@@ -119,8 +151,14 @@ module.exports = exports = function(app) {
                 this.sq_obj = y;
                 this.sq_obj.accepted = value;
                 console.log(this.sq_obj);
+                console.log(this.sq_obj.id);
+                console.log(window.localStorage.token);
+                $http.put(this.url + 'service_quotes/' + this.sq_obj.id, this.sq_obj)
 
+                .success((res) => {
 
+                  console.log(res);
+                });
               };
 
             });

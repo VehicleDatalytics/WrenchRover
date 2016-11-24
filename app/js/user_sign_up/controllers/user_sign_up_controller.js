@@ -78,6 +78,9 @@ module.exports = function(app) {
       .success(() => {
         $http.post(baseUrl + 'authenticate', resource)
         .success((data, status, headers, config) => {
+          console.log(config);
+          console.log(headers);
+          console.log(data);
           config.headers.Authorization = data.auth_token;
           this.token = data.auth_token;
           window.localStorage.token = this.token;

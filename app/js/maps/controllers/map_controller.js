@@ -1,147 +1,34 @@
-require('angular');
-require('angular-google-maps');
-require('lodash');
-// var lamePrompt = prompt('zip?');
-// var lamePromptAddress = prompt('address?');
 
-var startingAddressLat = [];
-var startingAddressLng = [];
-// console.log(lamePrompt);
-var baseUrl = require('../../config').baseUrl;
+ /* eslint-disable prefer-arrow-callback */
 
 module.exports = function(app) {
-  app.controller('WindowCtrl', ($scope) => {
-    $scope.place = {};
-    $scope.showPlaceDetails = function(param) {
-      $scope.place = param;
+
+  app.controller('mapController', function(NgMap) {
+
+    console.log(NgMap);
+    var vm = this;
+    vm.positions = [];
+
+    NgMap.getMap().then(function(map) {
+      console.log('map', map);
+      vm.map = map;
+    });
+
+    vm.shops = [
+    { id: 'foo', name: 'FOO SHOP', position: [41, -87] },
+    { id: 'bar', name: 'BAR SHOP', position: [42, -86] }
+    ];
+    vm.shop = vm.shops[0];
+
+    vm.showDetail = function(e, shop) {
+      vm.shop = shop;
+      vm.map.showInfoWindow('foo-iw', shop.id);
     };
+
+    vm.hideDetail = function() {
+      vm.map.hideInfoWindow('foo-iw');
+    };
+
+
   });
-
-  app.controller('MapController', ['$scope', '$timeout', 'uiGmapLogger', '$http', 'uiGmapGoogleMapApi',
-    function($scope, $timeout, $log, $http, GoogleMapApi) {
-
-      $scope.toggleMap = function() {
-        $scope.searchbox.options.visible = !$scope.searchbox.options.visible;
-      };
-
-
-      GoogleMapApi.then((maps) => {
-        maps.visualRefresh = true;
-
-        $scope.defaultBounds = new google.maps.LatLngBounds(
-new google.maps.LatLng(47.82148, -122.66450),
-new google.maps.LatLng(47.66541, -122.31715));
-
-      });
-
-      $scope.map = {
-        center: {
-          latitude: 47.610326, longitude: -122.199138
-        },
-
-        zoom: 12,
-        bounds: {} };
-      console.log($scope.map.center);
-      $scope.options = {
-        scrollwheel: false
-      };
-
-
-      var latitude = [];
-      var longitude = [];
-      var place = [];
-
-      console.log('lat: ' + latitude);
-
-
-      var createMarker = function(i, bounds, idKey) {
-/* eslint-disable no-eq-null*/
-/* eslint-disable eqeqeq*/
-        if (idKey == null) {
-          idKey = 'id';
-        }
-        var ret = {
-          latitude: latitude[i],
-          longitude: longitude[i],
-          place: place[i],
-          title: 'm' + i,
-          index: i + 1,
-          show: false
-        };
-
-        ret[idKey] = i;
-        return ret;
-      };
-
-
-      $scope.onClick = function(marker, eventName, model) {
-        model.show = !model.show;
-      };
-
-
-      $scope.randomMarkers = [];
-
-      $scope.$watch(
-
-         () => {
-           return $scope.map.bounds;
-         }, (nv, ov) => {
-        if (!ov.southwest && nv.southwest) {
-          var markers = [];
-
-          console.log(latitude);
-
-          $http.get(baseUrl + '/service_centers')
-                 .then((res) => {
-                   for (var i = 0; i < res.data.length - 1; i++) {
-
-                     console.log('i: ' + i);
-                     place.push(res.data[i].service_name + '\n' + res.data[i].service_address + '\n' + res.data[i].service_city + '\n' + res.data[i].service_zip);
-                     console.log(res.data[i].service_address, res.data[i].service_zip);
-
-                     geocodeAddress(res.data[i].service_address + ', ' + res.data[i].service_city + ', ' + res.data[i].service_state, (latLng) => {
-
-                       for (var j = 0; j < 5; j++) {
-
-                         latitude.push(latLng.lat());
-                         longitude.push(latLng.lng());
-                         markers.push(createMarker(i, $scope.map.bounds));
-                       }
-
-                     }
-                 );
-
-                   }
-
-                 }
-             );
-
-
-          $scope.randomMarkers = markers;
-
-
-          var geocodeAddress = function(address, callback) {
-
-            var geocoder = new google.maps.Geocoder();
-
-            geocoder.geocode( { 'address': address }, (results, status) => {
-              if (status == google.maps.GeocoderStatus.OK) {
-                callback(results[0].geometry.location);
-              } else {
-                console.log('Geocode was not successful for the following reason: ' + status);
-              }
-              for (var i = 0; i < longitude.length - 1; i++) {
-                markers.push(createMarker(i, $scope.map.bounds));
-              }
-
-            });
-
-
-          };
-
-
-        }
-      }, true);
-
-    }]);
 };
