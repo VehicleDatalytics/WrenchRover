@@ -10,7 +10,7 @@ require('angular-sanitize');
 require('gm.datepicker-multi-select');
 
 
-const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'gm.datepickerMultiSelect', 'ui.router', 'ngMap']);
+const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'gm.datepickerMultiSelect', 'ui.router', 'ngmap']);
 
 
 require('./services')(wrApp);
