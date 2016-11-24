@@ -4,6 +4,7 @@ module.exports = exports = function(app) {
   // app.controller('UserDashboardController', ['$http', 'NgMap', function($http, NgMap) {
   app.controller('UserDashboardController', ['$http', function($http) {
     // console.log(NgMap.getMap);
+    this.googleMapsUrl = 'https://maps.googleapis.com/maps/api/js?key=PROCESS.ENV.GMAP';
 
     var vm = this;
     vm.positions = [];
