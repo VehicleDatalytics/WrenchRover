@@ -1,12 +1,7 @@
     var baseUrl = 'https://wrenchroverapi.herokuapp.com/';
     module.exports = function(app) {
       app.factory('scCommService', ['$http', function($http) {
-        // this.quoteObj = {
-        //   user_id: null,
-        //   quote: null
-        //
-        // };
-        //
+
 
         return {
 

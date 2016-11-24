@@ -1,11 +1,30 @@
 
 <section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()">
-    <button class="btn btn-default"
-            type="submit"
-            ng-click="UserDashCtrl.getUserInfo();
-               UserDashCtrl.logUser()">
-            test get user
-    </button>
+
+   <section id = "map_canvas">
+    <!-- <ng-map zoom="11" center="current-location"> -->
+    <ng-map zoom="11" center="2901 3rd Ave, Seattle, WA, 98121">
+
+
+<!-- <marker position = "current-location" animation="Animation.BOUNCE" centered="true">
+</marker> -->
+<!-- label="{{p.num}}" -->
+    <!-- icon = '../../../images/map_icons/number_1.png' -->
+<marker position = "2901 3rd Ave, Seattle, WA, 98121" animation="Animation.BOUNCE" centered="true">
+</marker>
+    <marker ng-repeat="p in UserDashCtrl.positions"
+        position="{{p.pos}}"
+
+icon="{{p.map_icon_pics}}"
+
+
+        data="{{data[$index]}}"
+        on-click="UserDashCtrl.showData()";
+        title="pos: {{p.pos}}"></marker>
+   </ng-map>
+  </section>
+
+
 
     <div id="profile">
 
@@ -30,6 +49,7 @@
 
 <span>{{UserDashCtrl.service.serviceQuotes.service_request}}</span>
 
+<h1>{{userDashCtrl.userObject.autos}}</h1>
 
         <span class="title">Vehicles: </span>
         <br>

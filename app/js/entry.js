@@ -1,7 +1,8 @@
 const angular = require('angular');
-require('lodash');
-require('angular-google-maps');
-require('angular-simple-logger');
+require('ngMap');
+// require('lodash');
+// require('angular-google-maps');
+// require('angular-simple-logger');
 require('angular-ui-router');
 require('angular-ui-bootstrap');
 require('angular-animate');
@@ -9,21 +10,8 @@ require('angular-sanitize');
 require('gm.datepicker-multi-select');
 
 
-const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'gm.datepickerMultiSelect', 'ui.router', 'uiGmapgoogle-maps'])
+const wrApp = angular.module('wrApp', [require('angular-route'), 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'gm.datepickerMultiSelect', 'ui.router', 'ngMap']);
 
-
-.config(['uiGmapGoogleMapApiProvider', function(GoogleMapApi) {
-  GoogleMapApi.configure({
-    // key: PROCESS.ENV.GMAP,
-    v: '3.17',
-    libraries: 'places'
-  });
-}])
-
-.run(['$templateCache', function($templateCache) {
-  $templateCache.put('searchbox.tpl.html', '<input id="pac-input" class="pac-controls" type="text" placeholder="Search">');
-  $templateCache.put('window.tpl.html', '<div ng-controller="WindowCtrl" ng-init="showPlaceDetails(parameter)">{{place.name}}</div>');
-}]);
 
 require('./services')(wrApp);
 require('./maps')(wrApp);
@@ -63,12 +51,7 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controllerAs: 'scctrl'
 })
 
-.state('/map_view', {
-  url: '/map',
-  templateUrl: 'templates/maps/views/map_view.html',
-  controller: 'MapController',
-  controllerAs: 'xxctrl'
-})
+
 .state('vehicle_dropdown_selection', {
   url: '/',
   templateUrl: 'templates/vehicle/views/stepOne.html',
@@ -149,6 +132,20 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controller: 'scPortalController',
   controllerAs: 'portal'
 })
+
+.state('map_view', {
+  url: '/map',
+  templateUrl: 'templates/maps/views/map_view.html',
+  controller: 'mapController',
+  controllerAs: 'vm'
+})
+// .state('user_dashboard.map_view', {
+//   url: '/getmap',
+//   templateUrl: 'templates/maps/views/map_view.html',
+//   controller: 'mapController',
+//   controllerAs: 'vm'
+// })
+
 
 ;
   $urlRouterProvider.otherwise('/');

@@ -2,6 +2,9 @@
 var baseUrl = require('../../config').baseUrl;
 module.exports = function(app) {
   app.controller('scPortalController', ['$http', 'scCommService', function($http, scCommService) {
+    this.initfunction = function() {
+      console.log('iniTting the functions!!!!!');
+    };
 
     this.mytime = new Date();
     console.log(this.mytime);
@@ -17,9 +20,7 @@ module.exports = function(app) {
 
     this.servicerequests = [];
     this.workrequests = [];
-    this.bid = 'eg. 50.00';
-    this.dt2 = 'whatever';
-
+    this.servicequotes = [];
 
     this.getAll = () => {
       $http.get(baseUrl + '/service_requests')
@@ -29,11 +30,20 @@ module.exports = function(app) {
         for (var i = 0; i < res.data.length; i++) {
           this.workrequests.push(res.data[i]);
         }
-
-
       });
     };
 
+    this.getQuotes = function() {
+      $http.get(baseUrl + '/service_quotes')
+      .then((res) => {
+        console.log(res.data);
+        this.servicerequests = res.data;
+        this.servicequotes.splice(0);
+        for (var i = 0; i < res.data.length; i++) {
+          this.servicequotes.push(res.data[i]);
+        }
+      });
+    };
 
     var _this = this;
     this.activeDate = null;
