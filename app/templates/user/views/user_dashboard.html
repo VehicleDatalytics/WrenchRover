@@ -1,7 +1,7 @@
 
 <section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()">
 
-   <section  map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{UserDashCtrl.googleMapsUrl}}" id = "map_canvas">
+      <section map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
     <!-- <ng-map zoom="11" center="current-location"> -->
     <ng-map zoom="11" center="2901 3rd Ave, Seattle, WA, 98121">
 
