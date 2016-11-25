@@ -4,7 +4,8 @@ module.exports = exports = function(app) {
   // app.controller('UserDashboardController', ['$http', 'NgMap', function($http, NgMap) {
   app.controller('UserDashboardController', ['$http', function($http) {
     // console.log(NgMap.getMap);
-    this.googleMapsUrl = 'https://maps.googleapis.com/maps/api/js?key=PROCESS.ENV.GMAP';
+    this.googleMapsUrl = 'https://maps.googleapis.com/maps/api/js?key=&PROCESS.ENV.GMAP';
+    console.log(this.googleMapsUrl);
 
     var vm = this;
     vm.positions = [];
@@ -111,9 +112,6 @@ module.exports = exports = function(app) {
                   };
 
                   vm.positions.push(loc_obj);
-
-                //   console.log(vm.positions);
-                //   vm.positions[0].more_things = 'vodka';
 
 
                   console.log(vm.positions);
