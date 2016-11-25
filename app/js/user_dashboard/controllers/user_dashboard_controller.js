@@ -2,9 +2,10 @@
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
   // app.controller('UserDashboardController', ['$http', 'NgMap', function($http, NgMap) {
-  app.controller('UserDashboardController', ['$http', function($http) {
-    // console.log(NgMap.getMap);
-    this.googleMapsUrl = 'https://maps.googleapis.com/maps/api/js?key=&PROCESS.ENV.GMAP';
+  app.controller('UserDashboardController', ['$http', 'string', function($http, string) {
+
+    this.key = string;
+
     console.log(this.googleMapsUrl);
 
     var vm = this;
