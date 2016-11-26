@@ -88,7 +88,7 @@ module.exports = function(app) {
       })
       .success(() => {
         console.log('yes');
-        $state.go('sc_portal_view');
+        $state.go('sc_portal_view.pending_view');
       });
     });
 
