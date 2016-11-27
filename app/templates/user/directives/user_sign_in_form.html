@@ -2,19 +2,42 @@
 <form class = "form-horizontal" data-ng-submit = "save(login)" >
 <fieldset>
   <div class="form-group">
-
+<!--
   <p ng-hide="submitted"><label for="user email" class="col-lg-2 control-label"> Email</label>
-    <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="login.user_email"></p>
+    <input type="text" placeholder = "Email" name = "userEmail"   data-ng-model="login.user_email"></p> -->
+<!--  -->
+
+<p ng-hide="submitted">
+
+  <div class="form-group">
+    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="inputEmail" placeholder="Email" data-ng-model="login.user_email">
+    </div>
+  </div></p>
+<!--  -->
+<p ng-hide="submitted"><div class="form-group">
+      <div class="form-group">
+<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+<div class="col-lg-10">
+<input type="password" class="form-control" id="inputPassword" placeholder="Password" data-ng-model="login.password">
+</div>
+</div></p>
+
+    <!-- <p ng-hide="submitted"><label for="passwordx" class="col-lg-2 control-label"> Password</label>
+      <input type="password" placeholder = "password" name = "Password"   data-ng-model="login.password"></p> -->
 
 
-    <p ng-hide="submitted"><label for="passwordx" class="col-lg-2 control-label"> Password</label>
-      <input type="password" placeholder = "password" name = "Password"   data-ng-model="login.password"></p>
+
+     <!-- <button type = "submit" id = "newUser" ng-class="{'btn btn-primary': !hover, 'hidden': hover}"  ng-click="hover = !hover; submitted = !submitted"
+
+     >{{buttonText}}</button> -->
 
 
-
-     <button type = "submit" id = "newUser" ng-class="{'btn btn-primary': !hover, 'hidden': hover}"  ng-click="hover = !hover; submitted = !submitted"
-
-     >{{buttonText}}</button>
+     <div class="form-group">
+       <div class="col-lg-10 col-lg-offset-2">
+         <button type = "submit" id = "newUser" ng-class="{'btn btn-primary': !hover, 'hidden': hover}"  ng-click="hover = !hover; submitted = !submitted">{{buttonText}}</button>
+       </div>
 
 <p ng-hide="!hover">Welcome back! Taking you to your dashboard now...</p>
 
