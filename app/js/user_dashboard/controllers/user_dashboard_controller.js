@@ -99,10 +99,11 @@ module.exports = exports = function(app) {
                 if (res.data[i].service_request_id == this.sr_id) {
                 //   vm.positions.splice(0);
                   console.log(res.data[i]);
-                  var loc_obj = { id: res.data[i].service_center.service_name,
+                  var loc_obj = { id: res.data[i].service_center.service_name, cost: res.data[i].quote_cost, notes: res.data[i].quote_text, available_date_1: res.data[i].available_date_1, available_date_2: res.data[i].available_date_2, available_date_3: res.data[i].available_date_3,
                     pos:
 
                      res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
+                    quote_id: res.data[i].id,
 
                     position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip
 
@@ -122,6 +123,7 @@ module.exports = exports = function(app) {
               console.log(loc_obj);
               for (var j = 0; j < vm.positions.length; j++) {
                 vm.positions[j].map_icon_pics = map_icons[j];
+                vm.positions[j].item_number = j + 1;
               }
 
               console.log(vm.positions);
@@ -134,7 +136,7 @@ module.exports = exports = function(app) {
 
               vm.showDetail = function(e, shop) {
                 console.log(shop);
-                console.log(shop.id);
+                // console.log(shop.id);
                 vm.shop = shop;
                 vm.map.showInfoWindow('foo-iw', shop.id);
                 console.log(vm.map);
@@ -154,6 +156,7 @@ module.exports = exports = function(app) {
               };
 
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
+
               console.log(this.service_quotes_all);
               this.confirm = function(value, x, y) {
                 console.log(value);
@@ -164,7 +167,7 @@ module.exports = exports = function(app) {
                 console.log(this.sq_obj);
                 console.log(this.sq_obj.id);
                 console.log(window.localStorage.token);
-                $http.put(this.url + 'service_quotes/' + this.sq_obj.id, this.sq_obj)
+                $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
 
                 .success((res) => {
 
