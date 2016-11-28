@@ -9,19 +9,24 @@
 <marker position = "current-location" animation="Animation.BOUNCE" centered="true">
 </marker>
 
+<!-- Position 2: {{anchor.getPosition()}}
+<br/> -->
 
         <marker id='{{p.id}}' position="{{p.pos}}"
            ng-repeat="p in UserDashCtrl.positions"
            on-click="UserDashCtrl.showDetail(p)"
           icon="{{p.map_icon_pics}}"
-          title="pos: {{p.pos}}"></marker>
+          title="pos: {{p.pos}}"
+            on-mouseover="UserDashCtrl.showDetail(p)"
+              on-mouseout="UserDashCtrl.hideDetail()"
+
+          ></marker>
 
         <info-window id="foo-iw">
    <div ng-non-bindable="">
-     id: {{UserDashCtrl.shop.id}}<br/>
-     Position 1: {{UserDashCtrl.p}}<br/>
+    {{UserDashCtrl.shop.id}}<br/>
+     {{UserDashCtrl.shop.pos}}<br/>
 
-     Position 2: {{anchor.getPosition()}}<br/>
 
 
   <br/>
@@ -30,12 +35,13 @@
  </info-window>
    </ng-map>
 
-   <button ng-click="UserDashCtrl.showDetail(e, UserDashCtrl.shop)">
+
+   <!-- <button ng-click="UserDashCtrl.showDetail(e, UserDashCtrl.shop)">
      show InfoWindow of the shop
    </button>
    <button ng-click="UserDashCtrl.hideDetail(e, UserDashCtrl.shop)">
      Hide InfoWindow of the shop
-   </button>
+   </button> -->
   </section>
 
 
