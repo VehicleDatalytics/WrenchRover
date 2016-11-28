@@ -1,12 +1,12 @@
  /* eslint-disable prefer-arrow-callback */
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
-  // app.controller('UserDashboardController', ['$http', 'NgMap', function($http, NgMap) {
-  app.controller('UserDashboardController', ['$http', 'string', function($http, string) {
+  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', function($http, NgMap, string) {
+  // app.controller('UserDashboardController', ['$http', 'string', function($http, string) {
 
     this.key = string;
 
-    console.log(this.googleMapsUrl);
+    // console.log(this.googleMapsUrl);
 
     var vm = this;
     vm.positions = [];
@@ -14,12 +14,13 @@ module.exports = exports = function(app) {
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
       '../../../images/map_icons/number_2.png' ];
-    //
 
-    // NgMap.getMap().then(function(map) {
-    //   console.log('map', map);
-    //   vm.map = map;
-    // });
+
+    NgMap.getMap().then(function(map) {
+      console.log('stuffffffs');
+      console.log('map', map);
+      vm.map = map;
+    });
 
 
     var that = this;
@@ -53,15 +54,6 @@ module.exports = exports = function(app) {
 
     console.log(this.arr);
     this.errors = [];
-
-    // this.bothFunctions = function() {
-    //   console.log('getting both functions');
-    //   this.getUserInfo().then(() => {
-    //     console.log(this.sq_d);
-    //     this.getQuoteInfo();
-    //   });
-    // };
-
 
     console.log(this.arr);
     console.log(this.service_object_thing);
@@ -106,9 +98,13 @@ module.exports = exports = function(app) {
               for (var i = 0; i < res.data.length; i++) {
                 if (res.data[i].service_request_id == this.sr_id) {
                 //   vm.positions.splice(0);
-                  var loc_obj = { pos:
+                  console.log(res.data[i]);
+                  var loc_obj = { id: res.data[i].service_center.service_name,
+                    pos:
 
-                     res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things'
+                     res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
+
+                    position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip
 
                   };
 
@@ -126,13 +122,28 @@ module.exports = exports = function(app) {
               console.log(loc_obj);
               for (var j = 0; j < vm.positions.length; j++) {
                 vm.positions[j].map_icon_pics = map_icons[j];
-
               }
 
               console.log(vm.positions);
 
               console.log(vm.positions);
               console.log(vm.positions.length);
+
+              vm.shop = vm.positions[0];
+              console.log(vm.shop);
+
+              vm.showDetail = function(e, shop) {
+                console.log(shop);
+                console.log(shop.id);
+                vm.shop = shop;
+                vm.map.showInfoWindow('foo-iw', shop.id);
+                console.log(vm.map);
+              };
+
+              vm.hideDetail = function() {
+                vm.map.hideInfoWindow('foo-iw');
+              };
+
               console.log(this.service_quotes_table);
 
               that.value = '';

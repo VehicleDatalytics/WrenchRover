@@ -3,25 +3,39 @@
 
       <section map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
     <!-- <ng-map zoom="11" center="current-location"> -->
-    <ng-map zoom="11" center="2901 3rd Ave, Seattle, WA, 98121">
+    <ng-map  default-style="true" zoom="11" center="current-location">
 
 
-<!-- <marker position = "current-location" animation="Animation.BOUNCE" centered="true">
-</marker> -->
-<!-- label="{{p.num}}" -->
-    <!-- icon = '../../../images/map_icons/number_1.png' -->
-<marker position = "2901 3rd Ave, Seattle, WA, 98121" animation="Animation.BOUNCE" centered="true">
+<marker position = "current-location" animation="Animation.BOUNCE" centered="true">
 </marker>
-    <marker ng-repeat="p in UserDashCtrl.positions"
-        position="{{p.pos}}"
-
-icon="{{p.map_icon_pics}}"
 
 
-        data="{{data[$index]}}"
-        on-click="UserDashCtrl.showData()";
-        title="pos: {{p.pos}}"></marker>
+        <marker id='{{p.id}}' position="{{p.pos}}"
+           ng-repeat="p in UserDashCtrl.positions"
+           on-click="UserDashCtrl.showDetail(p)"
+          icon="{{p.map_icon_pics}}"
+          title="pos: {{p.pos}}"></marker>
+
+        <info-window id="foo-iw">
+   <div ng-non-bindable="">
+     id: {{UserDashCtrl.shop.id}}<br/>
+     Position 1: {{UserDashCtrl.p}}<br/>
+
+     Position 2: {{anchor.getPosition()}}<br/>
+
+
+  <br/>
+
+   </div>
+ </info-window>
    </ng-map>
+
+   <button ng-click="UserDashCtrl.showDetail(e, UserDashCtrl.shop)">
+     show InfoWindow of the shop
+   </button>
+   <button ng-click="UserDashCtrl.hideDetail(e, UserDashCtrl.shop)">
+     Hide InfoWindow of the shop
+   </button>
   </section>
 
 
