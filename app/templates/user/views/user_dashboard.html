@@ -35,13 +35,39 @@
  </info-window>
    </ng-map>
 
+   <p ng-click="UserDashCtrl.showDetail(p)"> {{UserDashCtrl.shop.item_number}}. {{UserDashCtrl.shop.id}}, {{UserDashCtrl.shop.available_date_1}}</p>
+{{UserDashCtrl.shop.quote_id}}
 
-   <!-- <button ng-click="UserDashCtrl.showDetail(e, UserDashCtrl.shop)">
-     show InfoWindow of the shop
-   </button>
-   <button ng-click="UserDashCtrl.hideDetail(e, UserDashCtrl.shop)">
-     Hide InfoWindow of the shop
-   </button> -->
+ Availability: 1.<input type="radio" ng-model="UserDashCtrl.value" value=" {{UserDashCtrl.shop.available_date_1}}"  ng-change='newValue(value)'>{{UserDashCtrl.shop.available_date_1}}
+  Availability: 2.<input type="radio" ng-model="UserDashCtrl.value" value=" {{UserDashCtrl.shop.available_date_2}}"  ng-change='newValue(value)'>{{UserDashCtrl.shop.available_date_2}}
+   Availability: 3.<input type="radio" ng-model="UserDashCtrl.value" value=" {{UserDashCtrl.shop.available_date_3}}"  ng-change='newValue(value)'>{{UserDashCtrl.shop.available_date_3}}
+
+<button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl.shop.quote_id, UserDashCtrl.shop)">Accept Bid</button>
+
+<hr>
+<!--  -->
+<br>
+<br>
+
+h4: List of bids:
+<ol>
+<li ng-repeat="sample in UserDashCtrl.service_quotes_table">
+   {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+  Shop Notes: {{sample.quote_text}}
+Availability: 1.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_1}}"  ng-change='newValue(value)'>{{sample.available_date_1}}
+
+2. <input type="radio" ng-model="UserDashCtrl.value" value="  {{sample.available_date_2}} " ng-change='newValue(value)'> {{sample.available_date_2}}
+3.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_3}} " ng-change='newValue(value)'> {{sample.available_date_3}}
+
+<button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
+
+<hr>
+</div>
+
+</li>
+</ol>
+<!--  -->
+
   </section>
 
 
@@ -90,36 +116,27 @@
         </span>
 
 
-        <!-- <uib-accordion>
-        <div uib-accordion-group class="panel" heading="{{sample.service_center_id}}, {{sample.quote_cost}}, {{sample.quote_text}}"  ng-repeat = "sample in UserDashCtrl.service_quotes">
-
-  {{sample.quote_text}}
-        </div> -->
-<!-- <ol> -->
-  <!-- <p ng-repeat="sample in UserDashCtrl.service_quotes" ng-repeat="sample in UserDashCtrl.service_quotes_table">{{sample.quote_text}} / {{sample.service_center.service_name}}
-  </p> -->
-
   <p>Your work request:   {{UserDashCtrl.service_requestObj.work_request}}</p>
-<ol>
-<li ng-repeat="sample in UserDashCtrl.service_quotes_table">
-<!-- <li> -->
 
+
+
+<!-- <ol>
+<li ng-repeat="sample in UserDashCtrl.service_quotes_table">
    {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
   Shop Notes: {{sample.quote_text}}
-
 Availability: 1.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_1}}"  ng-change='newValue(value)'>{{sample.available_date_1}}
+
 2. <input type="radio" ng-model="UserDashCtrl.value" value="  {{sample.available_date_2}} " ng-change='newValue(value)'> {{sample.available_date_2}}
 3.<input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_3}} " ng-change='newValue(value)'> {{sample.available_date_3}}
 
-
-
 <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
+
 <hr>
 </div>
 
 </li>
-</ol>
-<!-- You've chosen:  {{UserDashCtrl.value}} -->
+</ol> -->
+
 
 
 <!-- <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl)">Confirm Appointment</button> -->
