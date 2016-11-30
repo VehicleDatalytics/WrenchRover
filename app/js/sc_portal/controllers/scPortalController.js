@@ -10,12 +10,22 @@ module.exports = function(app) {
     console.log(this.mytime);
     this.ismeridian = true;
 
+    // value.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
+
+    // this.timeChange = function(value, value2, value3) {
+    //   console.log(value, value2, value3);
+    //   console.log(value.toLocaleTimeString());
+    //   console.log(value2.toLocaleTimeString());
+    //   console.log(value3.toLocaleTimeString());
+    // };
+
     this.timeChange = function(value, value2, value3) {
       console.log(value, value2, value3);
       console.log(value.toLocaleTimeString());
       console.log(value2.toLocaleTimeString());
       console.log(value3.toLocaleTimeString());
     };
+
     this.service = scCommService;
 
     this.servicerequests = [];
@@ -102,6 +112,12 @@ module.exports = function(app) {
     //   }
     // };
 
+        //   var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
+
+    // h.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+    // i.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+    // j.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+
     this.createQuote = function(x, y, z, d, e, f) {
       console.log('creating the quote');
       this.times = [];
@@ -109,9 +125,17 @@ module.exports = function(app) {
       console.log(y);
       console.log(z);
       console.log(d, e, f );
-      var h = d.toLocaleTimeString();
-      var i = e.toLocaleTimeString();
-      var j = f.toLocaleTimeString();
+
+      var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+      var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+      var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+    //   var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
+    //   var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
+    //   var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
+
+    //   var h = d.toLocaleTimeString();
+    //   var i = e.toLocaleTimeString();
+    //   var j = f.toLocaleTimeString();
       this.times.push(h, i, j);
       console.log(this.times);
       console.log(d.toLocaleTimeString());

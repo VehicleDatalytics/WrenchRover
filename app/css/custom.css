@@ -121,3 +121,38 @@ input:focus:checked + label {
 background-color: #ff6600;
 color: #fff;
 }
+
+#oilchange {
+    margin:4px;
+    float:left;
+}
+
+#oilchange label {
+    /*float:left;*/
+    margin:5px;
+    border-radius:5px;
+    padding:0px 0px;
+    width: auto;
+    overflow:auto;
+}
+
+#oilchange label span {
+    text-align:center;
+    padding:13px 10px;
+    display:block;
+}
+
+#oilchange label input {
+    position:absolute;
+    top:-20px;
+}
+
+#oilchange input:checked + span {
+    background-color:#ff6600;
+    color:#fff;
+}
+
+#oilchange .defaultbutton {
+    background-color:#ddd;
+    color:#000;
+}

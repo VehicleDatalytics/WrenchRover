@@ -8,7 +8,7 @@
 <uib-accordion>
 <div uib-accordion-group class="panel" heading="{{sample.id}}. {{sample.work_request}}" ng-repeat="sample in portal.servicerequests" >
 
-{{sample.user_id}}, {{sample.id}}
+<!-- {{sample.user_id}}, {{sample.id}} -->
 <!-- <button ng-click="portal.createQuote(sample.user_id)
 ">capture user id </button> -->
 
@@ -68,7 +68,7 @@
 
 <!-- <button ng-click="portal.timeChange(portal.mytime, portal.mytime2, portal.mytime3)">time click</button> -->
 
-      <button type = "submit" ng-click="portal.addDates(portal.selectedDates); portal.createQuote(sample.user_id, scquote, sample.id, portal.mytime, portal.mytime2, portal.mytime3)"> enter it </button>
+      <button type = "submit" ng-click="portal.addDates(portal.selectedDates); portal.createQuote(sample.user_id, scquote, sample.id, portal.mytime, portal.mytime2, portal.mytime3)" btn btn-default> enter it </button>
     </form>
 
 
