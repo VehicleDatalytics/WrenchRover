@@ -13,7 +13,12 @@ module.exports = exports = function(app) {
     var loc_obj = {};
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
-      '../../../images/map_icons/number_2.png' ];
+      '../../../images/map_icons/number_2.png',
+      '../../../images/map_icons/number_3.png', '../../../images/map_icons/number_4.png',
+      '../../../images/map_icons/number_5.png', '../../../images/map_icons/number_6.png', '../../../images/map_icons/number_7.png',
+      '../../../images/map_icons/number_8.png',
+      '../../../images/map_icons/number_9.png',
+      '../../../images/map_icons/number_10.png' ];
 
 
     NgMap.getMap().then(function(map) {
@@ -27,6 +32,7 @@ module.exports = exports = function(app) {
     this.user_id = JSON.parse(localStorage.getItem('user_id'));
     console.log(this.user_id);
     this.arr = [];
+
 
     this.service_object_thing = null;
     this.service_requestObj = JSON.parse(localStorage.getItem('service_requests'));
@@ -43,6 +49,7 @@ module.exports = exports = function(app) {
     this.service_quotes = [];
     this.service_quotes_table = [];
     this.avail_dates = [];
+    this.user_dates = [];
     this.serviceQuotes = {
       user_id: this.user_id,
       quote_cost: '',
@@ -105,11 +112,16 @@ module.exports = exports = function(app) {
                      res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
                     quote_id: res.data[i].id,
 
-                    position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip
+                    position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip,
+                    dates: [ res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3]
+
 
                   };
 
+                  this.user_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
+
                   vm.positions.push(loc_obj);
+                  console.log(loc_obj);
 
 
                   console.log(vm.positions);
@@ -117,6 +129,8 @@ module.exports = exports = function(app) {
                   this.avail_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
 
                   this.service_quotes_table.push(res.data[i]);
+
+                  console.log(this.avail_dates);
                 //   return loc_obj;
                 }
               }
