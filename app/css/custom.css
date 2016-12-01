@@ -159,10 +159,19 @@ color: #fff;
 
 
 #ud_container{
-  border: 2px red solid
+  border: 2px red solid;
 }
 
 #bid_container{
   overflow:auto;
+  height: 375px;
+}
+
+#mouseover_list{
+  border: 2px green solid;
+}
+
+.bid_container_long{
+  color: red;
   height: 375px;
 }
