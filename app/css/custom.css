@@ -156,3 +156,13 @@ color: #fff;
     background-color:#ddd;
     color:#000;
 }
+
+
+#ud_container{
+  border: 2px red solid
+}
+
+#bid_container{
+  overflow:auto;
+  height: 375px;
+}

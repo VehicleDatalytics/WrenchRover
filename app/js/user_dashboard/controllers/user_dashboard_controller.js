@@ -2,12 +2,8 @@
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
   app.controller('UserDashboardController', ['$http', 'NgMap', 'string', function($http, NgMap, string) {
-  // app.controller('UserDashboardController', ['$http', 'string', function($http, string) {
 
     this.key = string;
-
-    // console.log(this.googleMapsUrl);
-
     var vm = this;
     vm.positions = [];
     var loc_obj = {};
@@ -43,6 +39,7 @@ module.exports = exports = function(app) {
 
     this.url = 'https://wrenchroverapi.herokuapp.com/';
     this.userObject = {};
+
     this.sq_object = [];
     this.sq_id = null;
     this.sr_id = null;
@@ -75,6 +72,9 @@ module.exports = exports = function(app) {
       .then((res) => {
         console.log(res.data);
         this.userObject = res.data;
+        console.log(res.data.autos[0]);
+        this.userObject.autos = res.data.autos[0];
+
         console.log(res.data.service_requests[0].id);
         this.sr_id = res.data.service_requests[0].id;
         console.log(this.sr_id);

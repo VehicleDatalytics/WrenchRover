@@ -1,114 +1,109 @@
+<!--
+<section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()"  > -->
 
-<section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()">
 
-  <section map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
-    <ng-map  default-style="true" zoom="11" center="current-location">
+<!-- <div> -->
+<div class="container" data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()" id="ud_container">
+    <div class="row" >
+    <!-- Main page content -->
 
-     <marker position = "current-location" animation="Animation.BOUNCE" centered="true"> </marker>
+    <!-- radio -->
+    <div class="col-md-3 col-sm-3" id = "bid_container">
+        <ol>
+          <li ng-repeat="sample in UserDashCtrl.service_quotes_table">
+         <div id="oilchange">
+         {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+          Shop Notes: {{sample.quote_text}}
+         Availability:
 
-        <marker id='{{p.id}}' position="{{p.pos}}"
+           <label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_1}}" name="toggle" ng-change='newValue(value)'><span>1.{{sample.available_date_1}}<span></label>
+          <label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" name="toggle" value="  {{sample.available_date_2}} " ng-change='newValue(value)'> <span> 2. {{sample.available_date_2}}</span></label>
+          <label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_3}} "name="toggle" ng-change='newValue(value)'> <span>  3.{{sample.available_date_3}}</span></label>
+         </div>
+             <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
+         </li>
+         </ol>
+              </div>
+    <!-- radio ends -->
+    <div class="col-md-6 col-sm-6">
+    <div class="row">
+
+        <div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
+          <ng-map  default-style="true" zoom="11" center="current-location">
+
+          <marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
+          <marker id='{{p.id}}' position="{{p.pos}}"
            ng-repeat="p in UserDashCtrl.positions"
            on-click="UserDashCtrl.showDetail(p)"
            icon="{{p.map_icon_pics}}"
            title="pos: {{p.pos}}"
            on-mouseover="UserDashCtrl.showDetail(p)"
            on-mouseout="UserDashCtrl.hideDetail()">
-        </marker>
-
-        <info-window id="foo-iw">
-         <div ng-non-bindable="">
-         {{UserDashCtrl.shop.id}}<br/>
-         {{UserDashCtrl.shop.pos}}<br/>
-         <br/>
-         </div>
+          </marker>
+          <info-window id="foo-iw">
+           <div ng-non-bindable="">
+           {{UserDashCtrl.shop.id}}<br/>
+           {{UserDashCtrl.shop.pos}}<br/>
+           <br/>
+           </div>
          </info-window>
-   </ng-map>
+       </ng-map>
 
-     <p ng-click="UserDashCtrl.showDetail(p)"> {{UserDashCtrl.shop.item_number}}. {{UserDashCtrl.shop.id}}, {{UserDashCtrl.shop.available_date_1}}</p>
+     <!-- <p ng-click="UserDashCtrl.showDetail(p)"> {{UserDashCtrl.shop.item_number}}. {{UserDashCtrl.shop.id}}, {{UserDashCtrl.shop.available_date_1}}</p> -->
+<!--
+      <div>
+       <select ng-model="UserDashCtrl.value" ng-options = "x for x in UserDashCtrl.shop.dates" ng-change = "UserDashCtrl.newValue(value)">{{x}}</select>
+      </div>
 
-   <div>
-     <select ng-model="UserDashCtrl.value" ng-options = "x for x in UserDashCtrl.shop.dates" ng-change = "UserDashCtrl.newValue(value)">{{x}}</select>
-   </div>
-
-<button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl.shop.quote_id, UserDashCtrl.shop)">Accept Bid</button>
-
-<hr>
-<!--  -->
-<br>
-<br>
-
-<hr>
- <!-- List of bids in radio form: -->
- <ol >
- <li ng-repeat="sample in UserDashCtrl.service_quotes_table">
-
-<div id="oilchange">
-    {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
-   Shop Notes: {{sample.quote_text}}
-   Availability:
-
- <label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_1}}" name="toggle" ng-change='newValue(value)'><span>1.{{sample.available_date_1}}<span></label>
-
-<label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" name="toggle" value="  {{sample.available_date_2}} " ng-change='newValue(value)'> <span> 2. {{sample.available_date_2}}</span></label>
-
-
-<label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_3}} "name="toggle" ng-change='newValue(value)'> <span>  3.{{sample.available_date_3}}</span></label>
-
+     <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl.shop.quote_id, UserDashCtrl.shop)">Accept Bid</button>
+   </div> -->
+<!-- map ends -->
 </div>
- <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
-
- <hr>
- </div>
-
- </li>
- </ol>
-
-
-
-<!--  -->
-
-
-<!-- remaking radio into list with options menu -->
-<!-- <ol>
-<li ng-repeat="sample in UserDashCtrl.service_quotes_table">
-   {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
-  Shop Notes: {{sample.quote_text}}
-Availability: <select ng-model="UserDashCtrl.value" ng-options = "x for x in UserDashCtrl.shop.dates" ng-change = "UserDashCtrl.newValue(value)">{{x}}</select>
-
-<button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
-
 <hr>
 </div>
-</li>
-</ol> -->
-<!-- remaking radio into list with options menu end-->
 
 
-  </section>
+  </div>
+  <!-- List of bids in radio form: -->
 
+          <!-- </div> -->
+
+  <!-- </div> -->
+
+  <!-- radio bids end -->
   <!-- dru's profile -->
-  <div class="col-md-3 col-sm-3" style="background-color:#ddd;">
-				<div>
-					<h3>Your Profile</h3>
-					<img src="images/user.png" style="float:left;margin-right:15px;"><br><h4> {{UserDashCtrl.userObject.user_name}}</h4>Member since (err) {{UserDashCtrl.userObject.memberSince}} <br>
-					<a href="#" data-toggle="modal" data-target="#mysmallModal">Edit</a><br clear="all"><br>
-				</div>
-				<div>
-					<h3>Your Vehicle</h3>
-					<div style="float:left;margin-right:15px;" ata-ng-repeat="auto in UserDashCtrl.userObject.autos">
-						<img src="images/car.png" style="float:left;margin-right:15px;">
-						<b>{{auto.make}} </b><br>
-						{{auto.model}}<br>
-						<a href="#" data-toggle="modal" data-target="#mysmallModal">Delete</a><br><br>
-					</div>
-				</div>
-				<div style="margin-top:50px;"    ng-controller="AddVehicleButtonController as $ctrl">
-					<button type="submit" ng-click= "$ctrl.open()" class="btn btn-primary" style="width:auto;" >ADD NEW VEHICLE</button>
-					<br clear="all"><br>
-				</div>
-			</div>
+
+ <div class="col-md-3 col-sm-3" style="background-color:#ddd;">
+        <div>
+          <h3>Your Profile</h3>
+          <img src="images/user.png" style="float:left;margin-right:15px;"><br><h4> {{UserDashCtrl.userObject.user_name}}</h4>Member since (err) {{UserDashCtrl.userObject.memberSince}} <br>
+          <a href="#" data-toggle="modal" data-target="#mysmallModal">Edit</a><br clear="all"><br>
+        </div>
+        <div>
+          <h3>Your Vehicle</h3>
+          <div style="float:left;margin-right:15px;" ata-ng-repeat="auto in UserDashCtrl.userObject.autos">
+
+          
+            <img src="images/car.png" style="float:left;margin-right:15px;">
+            <b>{{auto.make}} </b><br>
+            {{auto.model}}<br>
+            <a href="#" data-toggle="modal" data-target="#mysmallModal">Delete</a><br><br>
+          </div>
+        </div>
+        <div style="margin-top:50px;"    ng-controller="AddVehicleButtonController as $ctrl">
+          <button type="submit" ng-click= "$ctrl.open()" class="btn btn-primary" style="width:auto;" >ADD NEW VEHICLE</button>
+          <br clear="all"><br>
+        </div>
+      </div>
+
 
   <!-- dru's profile end -->
+<!-- </div> -->
+<!-- </div> -->
 
 
-</section>
+
+</div>
+</div>
+
+<!-- </section> -->
