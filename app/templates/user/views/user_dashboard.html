@@ -1,14 +1,28 @@
-<!--
-<section data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()"  > -->
 
-
-<!-- <div> -->
 <div class="container" data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()" id="ud_container">
     <div class="row" >
     <!-- Main page content -->
 
     <!-- radio -->
     <div class="col-md-3 col-sm-3" id = "bid_container">
+     <div id=mouseover_list  ng-class="{bid_container_long: hover}" ng-mouseenter="hover = true" ng-mouseleave = "hover = false">
+
+      <p ng-click="UserDashCtrl.showDetail(p)"> {{UserDashCtrl.shop.item_number}}. {{UserDashCtrl.shop.id}} <br/>
+
+      <!-- {{UserDashCtrl.shop.notes}}   </br> -->
+      Quote: $.{{UserDashCtrl.shop.cost}}  </br>
+
+      </p>
+
+       <!-- <div> -->
+       Availabilty:
+        <select ng-model="UserDashCtrl.value" ng-options = "x for x in UserDashCtrl.shop.dates" ng-change = "UserDashCtrl.newValue(value)">{{x}}</select>
+       <!-- </div> -->
+
+      <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl.shop.quote_id, UserDashCtrl.shop)">Accept Bid</button>
+      </div>
+
+
         <ol>
           <li ng-repeat="sample in UserDashCtrl.service_quotes_table">
          <div id="oilchange">
@@ -37,7 +51,7 @@
            on-click="UserDashCtrl.showDetail(p)"
            icon="{{p.map_icon_pics}}"
            title="pos: {{p.pos}}"
-           on-mouseover="UserDashCtrl.showDetail(p)"
+           on-mouseover="UserDashCtrl.showDetail(p);"
            on-mouseout="UserDashCtrl.hideDetail()">
           </marker>
           <info-window id="foo-iw">
@@ -77,17 +91,17 @@
         <div>
           <h3>Your Profile</h3>
           <img src="images/user.png" style="float:left;margin-right:15px;"><br><h4> {{UserDashCtrl.userObject.user_name}}</h4>Member since (err) {{UserDashCtrl.userObject.memberSince}} <br>
-          <a href="#" data-toggle="modal" data-target="#mysmallModal">Edit</a><br clear="all"><br>
+          <a href="#" data-toggle="modal" data-target="#mysmallModal">Edit(not functional yet)</a><br clear="all"><br>
         </div>
         <div>
           <h3>Your Vehicle</h3>
-          <div style="float:left;margin-right:15px;" ata-ng-repeat="auto in UserDashCtrl.userObject.autos">
+          <div style="float:left;margin-right:15px;" data-ng-repeat="auto in UserDashCtrl.userObject.autos">
 
-          
+
             <img src="images/car.png" style="float:left;margin-right:15px;">
             <b>{{auto.make}} </b><br>
             {{auto.model}}<br>
-            <a href="#" data-toggle="modal" data-target="#mysmallModal">Delete</a><br><br>
+            <a href="#" data-toggle="modal" data-target="#mysmallModal">Delete(not functional yet)</a><br><br>
           </div>
         </div>
         <div style="margin-top:50px;"    ng-controller="AddVehicleButtonController as $ctrl">

@@ -73,7 +73,8 @@ module.exports = exports = function(app) {
         console.log(res.data);
         this.userObject = res.data;
         console.log(res.data.autos[0]);
-        this.userObject.autos = res.data.autos[0];
+        this.userObject.autos = res.data.autos;
+        console.log(this.userObject.autos);
 
         console.log(res.data.service_requests[0].id);
         this.sr_id = res.data.service_requests[0].id;
@@ -111,6 +112,8 @@ module.exports = exports = function(app) {
 
                      res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
                     quote_id: res.data[i].id,
+                    cost: res.data[i].quote_cost,
+                    notes: res.data[i].quote_text,
 
                     position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip,
                     dates: [ res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3]
