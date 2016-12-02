@@ -18,8 +18,6 @@ module.exports = exports = function(app) {
 
 
     NgMap.getMap().then(function(map) {
-      console.log('stuffffffs');
-      console.log('map', map);
       vm.map = map;
     });
 
@@ -29,13 +27,12 @@ module.exports = exports = function(app) {
     console.log(this.user_id);
     this.arr = [];
 
-
     this.service_object_thing = null;
+
     this.service_requestObj = JSON.parse(localStorage.getItem('service_requests'));
 
     console.log(this.service_requestObj);
     this.service_request_id = JSON.parse(localStorage.getItem('service_request_id'));
-    console.log(this.service_request_id);
 
     this.url = 'https://wrenchroverapi.herokuapp.com/';
     this.userObject = {};
@@ -47,6 +44,7 @@ module.exports = exports = function(app) {
     this.service_quotes_table = [];
     this.avail_dates = [];
     this.user_dates = [];
+
     this.serviceQuotes = {
       user_id: this.user_id,
       quote_cost: '',
@@ -63,16 +61,27 @@ module.exports = exports = function(app) {
     console.log(this.service_object_thing);
     // /////
     this.getUserInfo = function() {
+      console.log('initting the ud');
       this.user_id = JSON.parse(localStorage.getItem('user_id'));
-      console.log(this.service_object_thing);
+      console.log(this.user_id);
+
       console.log(JSON.parse(localStorage.getItem('service_requests')));
+
+      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+      console.log(localStorage.getItem('token'));
 
 
       $http.get(this.url + 'users/' + this.user_id)
       .then((res) => {
+
+        // $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+        console.log(localStorage.getItem('token'));
+
+
+        console.log(res);
         console.log(res.data);
         this.userObject = res.data;
-        console.log(res.data.autos[0]);
+        // console.log(res.data.autos[0]);
         this.userObject.autos = res.data.autos;
         console.log(this.userObject.autos);
 
@@ -80,6 +89,12 @@ module.exports = exports = function(app) {
         this.sr_id = res.data.service_requests[0].id;
         console.log(this.sr_id);
       })
+
+      .catch((res) => {
+        console.log(res);
+        console.log('error is here');
+      })
+
       .then(() => {
         console.log(this.sr_id);
         $http.get(this.url + 'service_requests/' + this.sr_id)
@@ -105,7 +120,7 @@ module.exports = exports = function(app) {
               this.obj_quote = this.service_quotes_table[0];
               for (var i = 0; i < res.data.length; i++) {
                 if (res.data[i].service_request_id == this.sr_id) {
-                //   vm.positions.splice(0);
+
                   console.log(res.data[i]);
                   var loc_obj = { id: res.data[i].service_center.service_name, cost: res.data[i].quote_cost, notes: res.data[i].quote_text, available_date_1: res.data[i].available_date_1, available_date_2: res.data[i].available_date_2, available_date_3: res.data[i].available_date_3,
                     pos:

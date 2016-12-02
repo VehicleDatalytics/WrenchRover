@@ -15,6 +15,7 @@ module.exports = function(app) {
 
     this.signedInUser = null;
 
+
     this.previouslyEntered = localStorage.getItem('describeIssue');
     this.localStorageOil = localStorage.getItem('oilChosen');
     this.localStorageDash = localStorage.getItem('dashChosen');
@@ -113,17 +114,9 @@ module.exports = function(app) {
             $http.post(baseUrl + 'autos', this.auto)
             .success((config) => {
               console.log(config);
-            //   console.log(this.auto.service_request_id);
-              console.log(new Date().getTime());
-            //   console.log(config);
-              console.log('auto obj: ');
               console.log(this.auto);
-
-
             //   window.localStorage.service_requests = JSON.stringify(config.service_request);
-              console.log(new Date().getTime());
               console.log(window.localStorage.service_requests);
-
               this.srthing = JSON.parse(localStorage.getItem('service_requests'));
               console.log(this.srthing);
 
@@ -140,18 +133,16 @@ module.exports = function(app) {
     }.bind(this);
 
     this.logIn = function(resource) {
-      console.log('loggin in');
-      console.log(resource);
       $http.post(baseUrl + 'authenticate', resource)
       .success((data, status, headers, config) => {
         this.message = 'Welcome back! Taking you to your dashboard now!';
-        console.log(config);
-        console.log(data);
         config.headers.Authorization = data.auth_token;
         this.token = data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
+
         window.localStorage.token = this.token;
+
         window.localStorage.user_id = data.user_id;
 
         // window.localStorage.service_requests = JSON.stringify(config[i].service_requests[0]);
@@ -161,19 +152,12 @@ module.exports = function(app) {
         console.log(this.login.user_email);
         this.signedInUser = resource.user_email;
         var x = data.user_id.toString();
-        console.log(x);
-        console.log(typeof x);
         this.user_id = data.user_id;
 
         $http.get(baseUrl + 'users/' + this.user_id )
         .success((config) => {
         //   console.log(this.signedInUser);
-        //   console.log(config);
-        //   console.log(config.autos.length);
-        //   console.log(config.service_requests.length);
-
           if (config.service_requests.length !== 0 && config.autos.length !== 0) {
-
             window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
           } else {
             console.log('no requests or saved cars');
@@ -181,26 +165,14 @@ module.exports = function(app) {
           }
         })
       .success((data, status, headers, config) => {
-        // console.log(JSON.parse(localStorage.getItem('service_requests')));
-        console.log(status);
         if (localStorage.getItem('service_requests')) {
-          console.log('going to ud');
           $state.go('user_dashboard');
         } else {
-          console.log('you might be a mechanic');
+          console.log('Should go to mechanic');
         }
       });
-
-    //   .error((data, status, headers, config) => {
-    //     console.log('error');
-    //     console.log(status);
-    //     this.message = 'Sorry, either your email or your password was wrong. Try again.';
-    //   });
       })
-
       .error((data, status, headers, config) => {
-        console.log('error');
-        console.log(status);
         this.message = 'Sorry, either your email or your password was wrong. Try again.';
       });
 
