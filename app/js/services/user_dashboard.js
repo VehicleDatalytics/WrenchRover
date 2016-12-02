@@ -10,9 +10,11 @@ module.exports = exports = function(app) {
       console.log(this.quotes);
       this.arrQuotes = quoteArr;
       console.log(this.arrQuotes);
-      this.sq_id = thing;
+    //   this.sq_id = thing;
+
       console.log(this.sq_id);
     };
+
     this.sq_id = null;
     this.sr_id = null;
 
@@ -26,9 +28,6 @@ module.exports = exports = function(app) {
         this.user.userEmail = res.data.user_email;
         this.user.userPhone = res.data.user_phone;
         this.user.userZip = res.data.user_zip;
-        // this.user.auto_id = res.data.autos[0].id;
-        // this.user.service_request_id = res.data.autos[0].service_request_id;
-        // console.log(this.user.auto_id);
         for (var i = 0; i < res.data.autos.length; i++) {
           this.user.autos.push(res.data.autos[i]);
         }
@@ -42,14 +41,10 @@ module.exports = exports = function(app) {
     .then(() => {
       $http.get('https://wrenchroverapi.herokuapp.com/service_requests/' + this.user.service_request_id)
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.service_quotes);
-        console.log(res.data.service_quotes[0]);
 
         if (res.data.service_quotes[0] != undefined) {
           console.log(res.data.service_quotes[0].id);
         //   this.sq_id = res.data.service_quotes[0].id;
-          console.log('quote');
           dashboardResource.prototype.getQuoteInfo(this.sq_id);
           window.localStorage.sq_id = res.data.service_quotes[0].id;
 

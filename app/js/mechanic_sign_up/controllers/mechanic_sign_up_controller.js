@@ -53,8 +53,6 @@ module.exports = function(app) {
     };
 
     this.login = function(resource) {
-      console.log(' mech loggin in');
-      console.log(resource);
       $http.post(baseUrl + 'authenticate', resource)
       .success((data, status, headers, config) => {
         this.message = 'Welcome back! Taking you to your portal now!';
@@ -73,12 +71,9 @@ module.exports = function(app) {
     .success(() => {
       $http.get(baseUrl + 'service_centers').
       success((config) => {
-        // console.log(config);
         console.log(this.signedInUser);
         for (var i = 0; i < config.length; i++) {
           if (config[i].service_email === this.signedInUser) {
-            console.log(config[i].id);
-            console.log(config[i]);
             window.localStorage.user_id = config[i].id;
             window.localStorage.service_center_id = config[i].id;
           } else {
@@ -91,8 +86,6 @@ module.exports = function(app) {
       });
     })
     .error((data, status, headers, config) => {
-      console.log(' sc error');
-      console.log(status);
       this.message = 'Sorry, either your email or your password was wrong. Try again.';
     });
 
