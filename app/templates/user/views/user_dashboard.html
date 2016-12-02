@@ -63,42 +63,23 @@
          </info-window>
        </ng-map>
 
-       <!-- <h1>{{UserDashCtrl.serviceQuotes.existence}}</h1> -->
-
-     <!-- <p ng-click="UserDashCtrl.showDetail(p)"> {{UserDashCtrl.shop.item_number}}. {{UserDashCtrl.shop.id}}, {{UserDashCtrl.shop.available_date_1}}</p> -->
-<!--
-      <div>
-       <select ng-model="UserDashCtrl.value" ng-options = "x for x in UserDashCtrl.shop.dates" ng-change = "UserDashCtrl.newValue(value)">{{x}}</select>
-      </div>
-
-     <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl.shop.quote_id, UserDashCtrl.shop)">Accept Bid</button>
-   </div> -->
-<!-- map ends -->
 </div>
 <hr>
 </div>
 
 
   </div>
-  <!-- List of bids in radio form: -->
-
-          <!-- </div> -->
-
-  <!-- </div> -->
-
-  <!-- radio bids end -->
   <!-- dru's profile -->
 
  <div class="col-md-3 col-sm-3" style="background-color:#ddd;">
         <div>
           <h3>Your Profile</h3>
-          <img src="images/user.png" style="float:left;margin-right:15px;"><br><h4> {{UserDashCtrl.userObject.user_name}}</h4>Member since (err) {{UserDashCtrl.userObject.memberSince}} <br>
+          <img src="images/user.png" style="float:left;margin-right:15px;"><br><h4> {{UserDashCtrl.userObject.user_name}}</h4>Member since {{UserDashCtrl.memberSince}} <br>
           <a href="#" data-toggle="modal" data-target="#mysmallModal">Edit(not functional yet)</a><br clear="all"><br>
         </div>
         <div>
           <h3>Your Vehicle</h3>
           <div style="float:left;margin-right:15px;" data-ng-repeat="auto in UserDashCtrl.userObject.autos">
-
 
             <img src="images/car.png" style="float:left;margin-right:15px;">
             <b>{{auto.make}} </b><br>

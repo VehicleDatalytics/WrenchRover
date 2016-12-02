@@ -1,6 +1,8 @@
 module.exports = exports = function(app) {
   app.factory('userDashboardResource', ['$http', 'wrHandleError', function($http, errorHandler) {
     var dashboardResource = function(userObject, serviceQuotes, quoteArr, thing, errors) {
+
+
       this.user = userObject;
       this.quotes = serviceQuotes;
       this.errorsArray = errors;
