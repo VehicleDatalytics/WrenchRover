@@ -73,14 +73,23 @@ module.exports = exports = function(app) {
 
       $http.get(this.url + 'users/' + this.user_id)
       .then((res) => {
-
-        // $http.defaults.headers.common.Authorization = localStorage.getItem('token');
         console.log(localStorage.getItem('token'));
 
+        // dashboardResource.calculateMemberDate = function(res) {
+        var month = parseInt(res.data.created_at.slice(5, 7), 10);
+        var year = res.data.created_at.slice(0, 4);
+        var monthsArray = ['January', 'February', 'March', 'April', 'May',
+          'June', 'July', 'August', 'September', 'October',
+          'November', 'December'];
+        var memberDate = monthsArray[month - 1] + ' ' + year;
+        console.log(memberDate);
 
-        console.log(res);
-        console.log(res.data);
+        this.userObject.memberSince = memberDate;
+        this.memberSince = memberDate;
+        console.log(this.userObject.memberSince);
+
         this.userObject = res.data;
+        console.log(this.userObject);
         // console.log(res.data.autos[0]);
         this.userObject.autos = res.data.autos;
         console.log(this.userObject.autos);
