@@ -2,7 +2,7 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', '$http', '$state', function(Resource, $http, $state) {
+  app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', '$q', function(Resource, $http, $state, wrError, $q) {
 
     this.users = [];
     this.errors = [];
@@ -74,10 +74,12 @@ module.exports = function(app) {
         console.log(new Date().getTime());
         window.localStorage.user_id = config.id;
       })
-
       .success(() => {
+
         $http.post(baseUrl + 'authenticate', resource)
+
         .success((data, status, headers, config) => {
+
           console.log(config);
           console.log(headers);
           console.log(data);
@@ -87,6 +89,12 @@ module.exports = function(app) {
           $http.defaults.headers.common.Authorization = localStorage.getItem('token');
           console.log($http.defaults.headers.common.Authorization);
         })
+
+     .error((error, status) => {
+       console.log('error');
+       this.data.error = { message: error, status: status };
+       console.log(this.data.error.status);
+     })
 
         .success(() => {
           console.log(3);
@@ -136,6 +144,7 @@ module.exports = function(app) {
       console.log(resource);
       $http.post(baseUrl + 'authenticate', resource)
       .success((data, status, headers, config) => {
+        this.message = 'Welcome back! Taking you to your dashboard now!';
         console.log(config);
         console.log(data);
         config.headers.Authorization = data.auth_token;
@@ -155,19 +164,44 @@ module.exports = function(app) {
         console.log(x);
         console.log(typeof x);
         this.user_id = data.user_id;
-        $http.get(baseUrl + 'users/' + this.user_id )
-    //   })
 
+        $http.get(baseUrl + 'users/' + this.user_id )
         .success((config) => {
-          console.log(this.signedInUser);
-          console.log(config);
-          window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
+        //   console.log(this.signedInUser);
+        //   console.log(config);
+        //   console.log(config.autos.length);
+        //   console.log(config.service_requests.length);
+
+          if (config.service_requests.length !== 0 && config.autos.length !== 0) {
+
+            window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
+          } else {
+            console.log('no requests or saved cars');
+            this.message = "Are you sure you're not a mechanic?";
+          }
         })
-      .success(() => {
-        console.log(JSON.parse(localStorage.getItem('service_requests')));
-        console.log('yes');
-        $state.go('user_dashboard');
+      .success((data, status, headers, config) => {
+        // console.log(JSON.parse(localStorage.getItem('service_requests')));
+        console.log(status);
+        if (localStorage.getItem('service_requests')) {
+          console.log('going to ud');
+          $state.go('user_dashboard');
+        } else {
+          console.log('you might be a mechanic');
+        }
       });
+
+    //   .error((data, status, headers, config) => {
+    //     console.log('error');
+    //     console.log(status);
+    //     this.message = 'Sorry, either your email or your password was wrong. Try again.';
+    //   });
+      })
+
+      .error((data, status, headers, config) => {
+        console.log('error');
+        console.log(status);
+        this.message = 'Sorry, either your email or your password was wrong. Try again.';
       });
 
     };
