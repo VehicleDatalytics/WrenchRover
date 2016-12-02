@@ -44,8 +44,7 @@ module.exports = function(app) {
         });
       })
       .success(() => {
-        console.log('yes sc');
-        $state.go('sc_portal_view');
+        $state.go('sc_portal_view.pending_view');
       });
 
     });
@@ -58,6 +57,7 @@ module.exports = function(app) {
       console.log(resource);
       $http.post(baseUrl + 'authenticate', resource)
       .success((data, status, headers, config) => {
+        this.message = 'Welcome back! Taking you to your portal now!';
         console.log(config);
         console.log(data);
         config.headers.Authorization = data.auth_token;
@@ -87,9 +87,13 @@ module.exports = function(app) {
         }
       })
       .success(() => {
-        console.log('yes');
         $state.go('sc_portal_view.pending_view');
       });
+    })
+    .error((data, status, headers, config) => {
+      console.log(' sc error');
+      console.log(status);
+      this.message = 'Sorry, either your email or your password was wrong. Try again.';
     });
 
     };
