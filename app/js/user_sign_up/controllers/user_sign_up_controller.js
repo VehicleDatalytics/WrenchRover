@@ -13,7 +13,7 @@ module.exports = function(app) {
     this.localStorageDash;
     this.localStorageChosen;
 
-    this.signedInUser = null;
+    this.message = null;
 
 
     this.previouslyEntered = localStorage.getItem('describeIssue');
@@ -53,6 +53,7 @@ module.exports = function(app) {
     };
 
     this.createUser = function(resource) {
+    //   this.xuser.user_email;
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
         if (Array.isArray(arrFilter[i])) {
@@ -65,9 +66,19 @@ module.exports = function(app) {
         user: resource
       };
 
+
+    //   $http.post(baseUrl + 'authenticate', resource)
+    //   .success((data, status, headers, config) => {
+    //     console.log('already signed up');
+    //
+    //     this.message = 'User email already taken. Sign in?';
+    //   })
+    //   .error((data, status, headers, config) => {
+    //     this.message = 'Sorry, either your email or your password was wrong. Try again.';
+    // //   });
+
       $http.post(baseUrl + 'users', this.x)
       .success((config) => {
-        console.log(1);
         console.log(config);
 
         this.auto.user_id = config.id;
@@ -89,6 +100,8 @@ module.exports = function(app) {
           window.localStorage.token = this.token;
           $http.defaults.headers.common.Authorization = localStorage.getItem('token');
           console.log($http.defaults.headers.common.Authorization);
+
+
         })
 
      .error((error, status) => {
@@ -96,6 +109,22 @@ module.exports = function(app) {
        this.data.error = { message: error, status: status };
        console.log(this.data.error.status);
      })
+
+
+        // .success(() => {
+        //   $http.get(baseUrl + 'users')
+        //     .success((config) => {
+        //       console.log(config);
+        //
+        //       for (var i = 0; i < config.length; i++) {
+        //         if (config[i].user_email === this.xuser.user_email) {
+        //           console.log('yes');
+        //         } else {
+        //           console.log('not here');
+        //         }
+        //       }
+        //     });
+        // })
 
         .success(() => {
           console.log(3);
@@ -123,6 +152,7 @@ module.exports = function(app) {
             });
           })
           .success(() => {
+            this.message = 'Thank you for signing up!';
             console.log(JSON.parse(localStorage.getItem('service_requests')));
             $state.go('user_dashboard');
           });
@@ -130,11 +160,23 @@ module.exports = function(app) {
 
       });
 
+    //   });
+
     }.bind(this);
 
     this.logIn = function(resource) {
+      console.log(this.login.user_email);
+      //
+    //   $http.get(baseUrl + 'users')
+    //   .success((config) => {
+    //     console.log(config);
+    //   });
+    //   console.log(resource);
+
       $http.post(baseUrl + 'authenticate', resource)
       .success((data, status, headers, config) => {
+        console.log(config);
+        console.log(headers);
         this.message = 'Welcome back! Taking you to your dashboard now!';
         config.headers.Authorization = data.auth_token;
         this.token = data.auth_token;
@@ -155,7 +197,11 @@ module.exports = function(app) {
         this.user_id = data.user_id;
 
         $http.get(baseUrl + 'users/' + this.user_id )
-        .success((config) => {
+        .success((config, status, headers, data) => {
+          console.log(data);
+          console.log(status);
+          console.log(headers);
+          console.log(config);
         //   console.log(this.signedInUser);
           if (config.service_requests.length !== 0 && config.autos.length !== 0) {
             window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
@@ -175,6 +221,7 @@ module.exports = function(app) {
       .error((data, status, headers, config) => {
         this.message = 'Sorry, either your email or your password was wrong. Try again.';
       });
+
 
     };
 

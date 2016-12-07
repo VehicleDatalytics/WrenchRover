@@ -1,46 +1,36 @@
 
-<form class = "form-horizontal" data-ng-submit = "save(mech)" >
-<fieldset>
-  <div class="form-group">
 
-  <p ng-hide="submitted">
+    <!-- Page Content -->
+    <div class="container"  >
 
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-      <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputEmail" placeholder="Email" data-ng-model="mech.user_email">
-      </div>
-    </div></p>
+        <div class="row">
+        <!-- Signin content -->
+			<div class="col-md-12 col-sm-12">
+			  <form class="form-signin" name="signin" data-ng-submit = "save(mech)">
+				<h2 class="form-signin-heading">Sign In</h2>
 
-    <!--  -->
 
-<!-- <div> -->
-    <p ng-hide="submitted"><div class="form-group">
-          <div class="form-group">
-  <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-  <div class="col-lg-10">
-    <input type="password" class="form-control" id="inputPassword" placeholder="Password" data-ng-model="mech.password">
-  </div>
-</div></p>
-<!--  -->
-<div class="form-group">
-  <div class="col-lg-10 col-lg-offset-2">
-    <button type = "submit" id = "newUser" ng-class="{'btn btn-primary': !hover, 'hidden': hover}"  ng-click="hover = !hover; submitted = !submitted">{{buttonText}}</button>
-  </div>
+				<label for="inputEmail" class="sr-only">Email Address</label>
+				<input type="email" id="inputEmail" class="form-control formtop" placeholder="Email address" data-ng-model="mech.user_email" required autofocus>
 
-     <!-- <button type = "submit" id = "newUser" ng-class="{'btn btn-primary': !hover, 'hidden': hover}"  ng-click="hover = !hover; submitted = !submitted"
+				<label for="inputPassword" class="sr-only">Password</label>
+				<input type="password" id="inputPassword" class="form-control formbot" placeholder="Password" data-ng-model="mech.password" required>
 
-     >{{buttonText}}</button> -->
+        <!-- <input type="checkbox"  ng-model="x"> I am a Service Center. -->
 
-<!-- <p ng-hide="!hover">Welcome back! Taking you to your portal now...</p> -->
+				<!-- <div class="checkbox center">
+				  <label style="text-align:center;">
+					<input type="checkbox" value="service-center">I am a Service Center
+				  </label>
+				</div> -->
+
+				<button id = "newUser" class="btn btn-lg btn-primary btn-block" type="submit">{{buttonText}}</button>
+			  </form>
 <h2>{{this.message}}</h2>
+			  <!-- <div class="center">
+			  Dont have an account? <a href="#">Click here to create one.</a>
+			  </div> -->
+			</div>
+		</div>
 
-</div>
-</fieldset>
-
-
-     <ng-transclude></ng-transclude>
-   </form>
-
-
-<ng-transclude></ng-transclude>
+    </div>

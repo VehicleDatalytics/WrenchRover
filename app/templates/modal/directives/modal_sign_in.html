@@ -10,31 +10,54 @@
 
   <div class="panel-body">
 
-<button ng-click="x=!x">Service Center?</button>
+<!-- <button ng-click="x=!x">Service Center?</button> -->
 
 <div ng-hide="x" ng-controller="userSignUpController as userctrl">
 
-
+<!-- user sign in -->
 <user-sign-in-form
 data-button-text="Log-In"
 data-login="login"
 data-action = "create"
+ng-hide = "y"
 >
 
 </user-sign-in-form>
+
+<p class="center" ng-hide="y"> Don't have an account? <a ng-click = "y=!y">Click here to create one</a></p>
+
+<hr>
+
+<!-- user sign up -->
+<user-sign-up-form-page-one
+data-button-text="Join today!"
+data-action="create"
+data-xuser="userctrl.newUser"
+ng-hide="!y"
+>
+
+</user-sign-up-form-page-one>
+
+<p class="center" ng-hide="!y">Already have an account? <a ng-click = "y=!y">Click here to log-in</a></p>
 </div>
+
+
+<!-- <button ng-click="x=!x">Service Center?</button> -->
+<input type="checkbox"  ng-model="x"> I am a Service Center.
+
+<!-- mechanic sign in -->
 
 <div ng-hide="!x" ng-controller="mechanicSignUpController as mech">
   <mechanic-sign-in
     data-action= "create"
       data-button-text="Mechanic Log-in"
-        data-mech="mech"
-
-
-  ></mechanic-sign-in>
+        data-mech="mech">
+    </mechanic-sign-in>
 </div>
-<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Close</button>
-<!-- </div> -->
+
+
+<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Cancel</button>
+
 
 </div>
 
