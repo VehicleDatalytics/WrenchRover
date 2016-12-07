@@ -10,15 +10,6 @@ module.exports = function(app) {
     console.log(this.mytime);
     this.ismeridian = true;
 
-    // value.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
-
-    // this.timeChange = function(value, value2, value3) {
-    //   console.log(value, value2, value3);
-    //   console.log(value.toLocaleTimeString());
-    //   console.log(value2.toLocaleTimeString());
-    //   console.log(value3.toLocaleTimeString());
-    // };
-
     this.timeChange = function(value, value2, value3) {
       console.log(value, value2, value3);
       console.log(value.toLocaleTimeString());
@@ -129,13 +120,7 @@ module.exports = function(app) {
       var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
       var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
       var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
-    //   var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
-    //   var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
-    //   var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) .replace(/(:\d{2}| [AP]M)$/, '');
 
-    //   var h = d.toLocaleTimeString();
-    //   var i = e.toLocaleTimeString();
-    //   var j = f.toLocaleTimeString();
       this.times.push(h, i, j);
       console.log(this.times);
       console.log(d.toLocaleTimeString());
@@ -149,15 +134,12 @@ module.exports = function(app) {
 
 
     this.getPastBids = function() {
-    //   this.service_request_id = JSON.parse(localStorage.getItem('service_request_id'));
       this.service_center_id = localStorage.getItem('service_center_id');
-    //   this.token = localStorage.getItem('token');
       console.log(this.token);
       console.log(this.service_center_id);
 
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
-        // console.log(res.data);
         this.pastbids.splice(0);
         this.acceptedbids.splice(0);
         for (var i = 0; i < res.data.length; i++) {

@@ -48,30 +48,28 @@
                ui-sref="mechanic_sign_up">
                Service Center Sign Up
             </a>
-          <li>
-
-            <!-- <h1>{{navctrl.message}}</h1> -->
+          <!-- <li>
             <span class="modal-demo"
                   ng-controller="buttonController as $ctrl">
               <a ng-disabled="$ctrl.theCookie=true" ng-click="$ctrl.open()">
                 Sign up!
               </a>
             </span>
-          </li>
-          <li>
-            <span class="modal-login"
-                  ng-controller="signInButtonController as $ctrl">
-              <a ng-click="$ctrl.open()">
-                Log In
+          </li> -->
+          <li class="modal-login centerSignup"   ng-controller="signInButtonController as $ctrl">
+            <!-- <span class="modal-login" -->
+
+              <a class = "btn btn-primary" ng-click="$ctrl.open()">
+                Signup / Log In
               </a>
-            </span>
+            <!-- </span> -->
           </li>
-          <li>
-            <span ng-controller="userSignUpController as $ctrl">
-<a ng-click=$ctrl.logout()>
+          <li ng-controller="userSignUpController as $ctrl" class="centerSignup">
+            <!-- <span ng-controller="userSignUpController as $ctrl"> -->
+<a class = "btn btn-primary" ng-click=$ctrl.logout()>
   Log Out
 </a>
-            </span>
+            <!-- </span> -->
           </li>
         </ul>
       </div>
