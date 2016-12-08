@@ -1,8 +1,5 @@
 const angular = require('angular');
 require('ngmap');
-// require('lodash');
-// require('angular-google-maps');
-// require('angular-simple-logger');
 require('angular-ui-router');
 require('angular-ui-bootstrap');
 require('angular-animate');

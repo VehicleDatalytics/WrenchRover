@@ -5,13 +5,10 @@
 
     <!-- radio -->
     <div class="col-md-3 col-sm-3" id = "bid_container">
-     <div id=mouseover_list  ng-class="{bid_container_long: hover}" ng-mouseenter="hover = true" ng-mouseleave = "hover = false">
+     <!-- <div id=mouseover_list  ng-class="{bid_container_long: hover}" ng-mouseenter="hover = true" ng-mouseleave = "hover = false">
 
       <p ng-click="UserDashCtrl.showDetail(p)"> {{UserDashCtrl.shop.item_number}}. {{UserDashCtrl.shop.id}} <br/>
-
-      Quote: $.{{UserDashCtrl.shop.cost}}  </br>
-
-      </p>
+      Quote: $.{{UserDashCtrl.shop.cost}}  </br></p>
 
 
        Availabilty:
@@ -19,7 +16,7 @@
 
 
       <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl.shop.quote_id, UserDashCtrl.shop)">Accept Bid</button>
-      </div>
+      </div> -->
 
 
 <!-- new radio buttons -->
@@ -37,52 +34,32 @@
         <br>
 
 
-          <!-- <div class="col-md-4 col-sm-4 col-xs-4"> -->
               <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
                   <input type="radio" name="dates" value="{{sample.available_date_1}}"> <span>{{sample.available_date_1}}</span>
               </label>
-          <!-- </div> -->
 
 
-          <!-- <div class="col-md-4 col-sm-4 col-xs-4"> -->
+
               <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
                   <input type="radio" name="dates" value="{{sample.available_date_2}}"><span>{{sample.available_date_2}}</span>
               </label>
-          <!-- </div> -->
 
-         <!-- <div class="col-md-4 col-sm-4 col-xs-4"> -->
+
+
               <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
                   <input type="radio" name="dates" value="{{sample.available_date_3}}"><span>{{sample.available_date_3}}</span>
               </label>
-          <!-- </div> -->
+                 </div>
 
 
-  </div>
-</div>
+                 <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
+                </div>
 
 
   <!-- new radio buttons end -->
 
-        <!-- <ol>
-          <li ng-repeat="sample in UserDashCtrl.service_quotes_table">
-         <div id="oilchange">
-         {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
-          Shop Notes: {{sample.quote_text}}
-         Availability:
-
-           <label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_1}}" name="toggle" ng-change='newValue(value)'><span>1.{{sample.available_date_1}}<span></label>
-
-          <label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" name="toggle" value="  {{sample.available_date_2}} " ng-change='newValue(value)'> <span> 2. {{sample.available_date_2}}</span></label>
-
-          <label class="defaultbutton"><input type="radio" ng-model="UserDashCtrl.value" value=" {{sample.available_date_3}} "name="toggle" ng-change='newValue(value)'> <span>  3.{{sample.available_date_3}}</span></label>
-         </div>
-
-             <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
-         </li>
-         </ol> -->
-
               </div>
-    <!-- radio ends -->
+
     <div class="col-md-6 col-sm-6">
     <div class="row">
 
