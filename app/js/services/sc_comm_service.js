@@ -17,8 +17,10 @@
           },
           createQuote: function(x, y, z, a, times) {
             console.log(a);
-            console.log(new Date(a[0]));
-            console.log(new Date(a[0]).toLocaleDateString());
+            // console.log(a.length);
+            console.log(a[0].length);
+            console.log(a[1].length);
+            console.log(a[2].length);
             console.log(times);
 
             this.quoteObj = x;
@@ -28,30 +30,35 @@
             this.quote_X = y;
             this.quote_X.user_id = x;
 
-            function trimTheDate(date) {
+            // function trimTheDate(date) {
+            //
+            //   var trimDate;
+            //   if (new Date(date).toLocaleDateString().length > 9) {
+            //     trimDate = new Date(date).toLocaleDateString().slice(0, 5);
+            //   } else if (new Date(date).toLocaleDateString().length === 8) {
+            //     trimDate = new Date(date).toLocaleDateString().slice(0, 3);
+            //   } else {
+            //     trimDate = new Date(date).toLocaleDateString().slice(0, 4);
+            //   }
+            //   return trimDate;
+            // }
 
-              var trimDate;
-              if (new Date(date).toLocaleDateString().length > 9) {
-                trimDate = new Date(date).toLocaleDateString().slice(0, 5);
-              } else if (new Date(date).toLocaleDateString().length === 8) {
-                trimDate = new Date(date).toLocaleDateString().slice(0, 3);
-              } else {
-                trimDate = new Date(date).toLocaleDateString().slice(0, 4);
-              }
+            function trimTheDate(date, item) {
+              var trimDate = a[item].slice(0, 10);
               return trimDate;
             }
+            console.log(trimTheDate(a[0], 0));
+            console.log(trimTheDate(a[1], 1));
+            console.log(trimTheDate(a[2], 2));
 
-            // this.quote_X.available_date_1 = new Date(a[0]).toLocaleDateString().slice(0, 5) + ' at ' + times[0];
 
-            this.quote_X.available_date_1 = trimTheDate(a[0]) + ' at ' + times[0];
+            this.quote_X.available_date_1 = trimTheDate(a[0], 0) + ' at ' + times[0];
 
 
-            // this.quote_X.available_date_2 = new Date(a[1]).toLocaleDateString().slice(0, 5) + ' at ' + times[1];
-            this.quote_X.available_date_2 = trimTheDate(a[1]) + ' at ' + times[0];
+            this.quote_X.available_date_2 = trimTheDate(a[1], 1) + ' at ' + times[1];
 
-            // this.quote_X.available_date_3 = new Date(a[2]).toLocaleDateString().slice(0, 5) + ' at ' + times[2];
 
-            this.quote_X.available_date_3 = trimTheDate(a[2]) + ' at ' + times[2];
+            this.quote_X.available_date_3 = trimTheDate(a[2], 2) + ' at ' + times[2];
 
 
             this.quote_X.service_center_id = JSON.parse(localStorage.getItem('service_center_id'));

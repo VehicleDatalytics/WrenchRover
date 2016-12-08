@@ -3,7 +3,7 @@
 <br>
 <br>
 <br>
-<section ng-init = "portal.getAll()"></section>
+<section ng-init = "portal.getAll()">
 <!-- data-sr="servicerequests" -->
 <uib-accordion>
 <div uib-accordion-group class="panel" heading="{{sample.id}}. {{sample.work_request}}" ng-repeat="sample in portal.servicerequests" >
@@ -14,12 +14,11 @@
     <p><label for="x" class="col-lg-2 control-label"> Quote</label>
       <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost"></p>
 
-
         <p><label for="x" class="col-lg-2 control-label"> Mechanic's Notes</label>
           <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p>
 
 
-<!-- ui begin -->
+<!-- ui  calendar begin -->
 <table>
   <tr>
     <td>
@@ -36,49 +35,53 @@
     </td>
     <td>
 
-
-      <div ng-if='portal.type=="individual"' class = "row">
+        <div>
         Selected Dates:
           <div class="date_holder col-md-4 col-sm-4 col-xs-6">
 
                   <div ng-repeat='d in portal.selectedDates | orderBy' class = col-md-4 col-sm-4 col-xs-6>
-                  {{d | date : 'fullDate'}}
 
-                 <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button>
-
-            <!-- new times -->
-
-            <!-- <div class="timeHolder col-md-2 col-sm-2 col-xs-2">
-            <div ng-repeat= 'x in portal.appointmentTimes' >
-              <button class="buttonTimes btn btn-primary" ng-model="portal.buttonTime1" ng-click = "portal.pickATime(x)">{{x}}</button>
-            </div>
-            </div> -->
-
-            <!-- new times end-->
+                  <p ng-init="portal.capture(d)">  {{d | date : 'fullDate'}}    <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
           </div>
+
           <p ng-if="portal.selectedDates.length >= 3"> Thank you for choosing three dates.</p>
-        <!-- </div> -->
       </div>
-
-
     </td>
   </tr>
 </table>
 
 <!-- new repeated dates -->
 <div>
-  <!-- <div> -->
+
 <div ng-repeat='d in portal.selectedDates | orderBy' class = col-md-4 col-sm-4 col-xs-6>
   </div>
+
+
 </div>
 <!-- repeted dates end -->
 
-<div uib-timepicker ng-model="portal.mytime" show-meridian="portal.ismeridian"></div>
+<div class="row">
+
+  <div  class= "col-md-3 col-sm-3 col-xs-3" >
+      Day 1: <p ng-if = "portal.captured_dates.length > 0">{{portal.captured_dates[0]}}</p>
+
+<div  uib-timepicker ng-model="portal.mytime" show-meridian="portal.ismeridian"></div>
+</div>
+
+
+<div class= "col-md-3 col-sm-3 col-xs-3">
+  Day 2: <p ng-if = "portal.captured_dates.length > 1">{{portal.captured_dates[1]}}</p>
 
 <div uib-timepicker ng-model="portal.mytime2" show-meridian="portal.ismeridian"></div>
+</div>
 
+
+<div  class= "col-md-3 col-sm-3 col-xs-3">
+  Day 3: <p ng-if = "portal.captured_dates.length > 2">{{portal.captured_dates[2]}}</p>
 <div uib-timepicker ng-model="portal.mytime3" show-meridian="portal.ismeridian"></div>
+</div>
 
+</div>
 
       <button type = "submit" ng-click="portal.addDates(portal.selectedDates); portal.createQuote(sample.user_id, scquote, sample.id, portal.mytime, portal.mytime2, portal.mytime3)" btn btn-default> enter it </button>
     </form>
@@ -86,11 +89,9 @@
 <br>
 <br>
 
-<!-- <div class="timeHolder col-md-2 col-sm-2 col-xs-2">
-<div ng-repeat= 'x in portal.appointmentTimes' >
-  <button class="buttonTimes btn btn-primary" ng-click = "portal.pickATime(x)">{{x}}</button>
-</div>
-</div> -->
+
 
 </div>
 </uib-accordion>
+
+</section>

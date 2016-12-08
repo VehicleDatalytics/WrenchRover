@@ -7,6 +7,39 @@ module.exports = function(app) {
     };
 
 
+    this.captured_dates = [];
+    this.capture = function(value) {
+      console.log(value);
+
+      console.log(new Date(value).toDateString());
+      this.captured_dates.push(new Date(value).toDateString());
+    };
+    if (this.captured_dates.length === 1) {
+      this.day_one = this.captured_dates[0];
+    }
+    if (this.captured_dates.length === 2) {
+      this.day_one = this.captured_dates[0];
+      this.day_two = this.captured_dates[1];
+    }
+    if (this.captured_dates.length === 3) {
+      this.day_one = this.captured_dates[0];
+      this.day_two = this.captured_dates[1];
+      this.day_three = this.captured_dates[2];
+
+    }
+
+
+    this.initP = function() {
+      console.log('interesting');
+    //   this.selectedDates[3] = 'aaaa';
+      console.log(this.selectedDates);
+    };
+
+    this.initQ = function() {
+      console.log('so yeah');
+      this.selectedDates[3] = 'aaaa';
+
+    };
     this.mytime = new Date();
     this.ismeridian = true;
 
@@ -62,6 +95,7 @@ module.exports = function(app) {
 
     this.selectedDates = [];
 
+
     if (this.activeDate = null) {
 //   this.selectedDates.push(new Date().setHours(0, 0, 0, 0));
       this.selectedDates.push(new Date().toLocaleDateString);
@@ -103,11 +137,9 @@ module.exports = function(app) {
 
     this.createQuote = function(x, y, z, d, e, f) {
       console.log('creating the quote');
+      console.log(x, y, z, d, e, f);
       this.times = [];
-      console.log(x);
-      console.log(y);
-      console.log(z);
-      console.log(d, e, f );
+
 
       var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
       var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
@@ -121,7 +153,9 @@ module.exports = function(app) {
       console.log(this.selectedDates);
       console.log(this.quote_cost);
 
-      scCommService.createQuote(x, y, z, this.selectedDates, this.times);
+    //   scCommService.createQuote(x, y, z, this.selectedDates, this.times);
+
+      scCommService.createQuote(x, y, z, this.captured_dates, this.times);
     };
 
 
