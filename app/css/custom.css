@@ -278,3 +278,34 @@ color: #fff;
     background-color:#ddd;
     color:#000;
 }
+
+/*new date well*/
+.date_holder{
+  border: 1px solid black;
+  height: auto;
+  width: auto;
+}
+
+/*new times exp*/
+
+.timeHolder{
+  height: 100px;
+  width: auto;
+  overflow: auto;
+  border: 1px solid blue;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top:10px;
+}
+
+/*.buttonTimes {background-color:#ff6600;color:#fff; border: 1px #000 solid}
+
+.buttonTimes:hover {background-color:#000;color:#fff; border: 1px #ff6600 solid;}*/
+
+.buttonTimes {
+  background-color:#fff;
+  color:#ff6600;
+  border: 1px #000 solid
+}
+
+.buttonTimes:hover {background-color:#ff6600; color:#fff; border: 1px #ff6600 solid;}

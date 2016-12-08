@@ -8,10 +8,6 @@
 <uib-accordion>
 <div uib-accordion-group class="panel" heading="{{sample.id}}. {{sample.work_request}}" ng-repeat="sample in portal.servicerequests" >
 
-<!-- {{sample.user_id}}, {{sample.id}} -->
-<!-- <button ng-click="portal.createQuote(sample.user_id)
-">capture user id </button> -->
-
 <form name = "authform" class = "form-horizontal" data-ng-submit = "save(scquote)" >
 
 <!-- <p ng-repeat="sample in portal.servicerequests">{{sample.user_id}}</p> -->
@@ -22,7 +18,6 @@
         <p><label for="x" class="col-lg-2 control-label"> Mechanic's Notes</label>
           <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p>
 
-<!-- <sq-form data-action="create" data-button-text="enter things here" ></button></sq-form> -->
 
 <!-- ui begin -->
 <table>
@@ -40,21 +35,43 @@
     <td style='width:50px'>
     </td>
     <td>
-      <div ng-if='portal.type=="individual"'>
-        Selected Dates:
-        <div class='well well-sm'>
-                  <div ng-repeat='d in portal.selectedDates | orderBy'>
-            {{d | date : 'fullDate'}}
 
-            <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>Remove</button>
+
+      <div ng-if='portal.type=="individual"' class = "row">
+        Selected Dates:
+          <div class="date_holder col-md-4 col-sm-4 col-xs-6">
+
+                  <div ng-repeat='d in portal.selectedDates | orderBy' class = col-md-4 col-sm-4 col-xs-6>
+                  {{d | date : 'fullDate'}}
+
+                 <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button>
+
+            <!-- new times -->
+
+            <!-- <div class="timeHolder col-md-2 col-sm-2 col-xs-2">
+            <div ng-repeat= 'x in portal.appointmentTimes' >
+              <button class="buttonTimes btn btn-primary" ng-model="portal.buttonTime1" ng-click = "portal.pickATime(x)">{{x}}</button>
+            </div>
+            </div> -->
+
+            <!-- new times end-->
           </div>
           <p ng-if="portal.selectedDates.length >= 3"> Thank you for choosing three dates.</p>
         <!-- </div> -->
       </div>
+
+
     </td>
   </tr>
 </table>
 
+<!-- new repeated dates -->
+<div>
+  <!-- <div> -->
+<div ng-repeat='d in portal.selectedDates | orderBy' class = col-md-4 col-sm-4 col-xs-6>
+  </div>
+</div>
+<!-- repeted dates end -->
 
 <div uib-timepicker ng-model="portal.mytime" show-meridian="portal.ismeridian"></div>
 
@@ -62,16 +79,18 @@
 
 <div uib-timepicker ng-model="portal.mytime3" show-meridian="portal.ismeridian"></div>
 
-<!-- <pre class="alert alert-info">Time is: {{portal.mytime | date:'shortTime' }}</pre> -->
-
-<!-- ui time ends -->
-
-<!-- <button ng-click="portal.timeChange(portal.mytime, portal.mytime2, portal.mytime3)">time click</button> -->
 
       <button type = "submit" ng-click="portal.addDates(portal.selectedDates); portal.createQuote(sample.user_id, scquote, sample.id, portal.mytime, portal.mytime2, portal.mytime3)" btn btn-default> enter it </button>
     </form>
 
+<br>
+<br>
 
+<!-- <div class="timeHolder col-md-2 col-sm-2 col-xs-2">
+<div ng-repeat= 'x in portal.appointmentTimes' >
+  <button class="buttonTimes btn btn-primary" ng-click = "portal.pickATime(x)">{{x}}</button>
+</div>
+</div> -->
 
 </div>
 </uib-accordion>
