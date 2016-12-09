@@ -29,18 +29,8 @@ module.exports = function(app) {
     }
 
 
-    this.initP = function() {
-      console.log('interesting');
-    //   this.selectedDates[3] = 'aaaa';
-      console.log(this.selectedDates);
-    };
+    // this.mytime = new Date().setHours(0);
 
-    this.initQ = function() {
-      console.log('so yeah');
-      this.selectedDates[3] = 'aaaa';
-
-    };
-    this.mytime = new Date();
     this.ismeridian = true;
 
     this.timeChange = function(value, value2, value3) {
@@ -57,14 +47,6 @@ module.exports = function(app) {
     this.pastbids = [];
     this.acceptedbids = [];
 
-    this.appointmentTimes = ['8:00 a.m', '8:30 a.m', '9:00 a.m', '9:30 a.m', '10:00 a.m', '10:30 a.m', '11:00 a.m', '11:30 a.m', '12:00 p.m', '12:30 p.m', '1:00 p.m', '1:30 p.m', '2:00 p.m', '2:30 p.m', '3:00 p.m', '3:30 p.m', '4:00 p.m', '4:30 p.m', '5:00 p.m', '5:30 p.m', '6:00 p.m', '6:30 p.m', '7:00 p.m', '7:30 p.m.', '8:00 p.m.'];
-
-
-    this.pickATime = function(time) {
-      console.log(time);
-
-      return time;
-    };
 
     this.getAll = () => {
       $http.get(baseUrl + '/service_requests')
@@ -97,17 +79,12 @@ module.exports = function(app) {
 
 
     if (this.activeDate = null) {
-//   this.selectedDates.push(new Date().setHours(0, 0, 0, 0));
       this.selectedDates.push(new Date().toLocaleDateString);
-//   this.selectedDates.push('whatever');
-      console.log('stuff');
       console.log(this.selectedDates);
     }
 
     this.type = 'individual';
     this.options = {
-//   startingDay: 1,
-//   minDate: new Date(),
       customClass: function(data) {
         if (_this.selectedDates.indexOf(data.date) > -1 && _this.selectedDates.length <= 3) {
           return 'selected';
@@ -123,15 +100,29 @@ module.exports = function(app) {
 
     this.removeFromSelected = function(dt) {
       _this.selectedDates.splice(_this.selectedDates.indexOf(dt), 1);
+
+      _this.captured_dates.splice(_this.captured_dates.indexOf(new Date(dt).toDateString()), 1);
+
+
+    //   this.captured_dates.push(new Date(value).toDateString());
     // / Need to change activeDate for datepicker to call customClass again
       _this.activeDate = dt;
+      console.log(this.selectedDates);
+      console.log(_this.selectedDates);
+      console.log(this.selectedDates.length);
+      console.log(_this.captured_dates);
+      console.log(this.captured_dates);
     };
 
 
     this.addDates = function(value) {
 
       console.log(value);
-      scCommService.addDates(value);
+      if (this.selectedDates.length < 3) {
+        this.message = 'Please, pick three dates';
+      } else {
+        scCommService.addDates(value);
+      }
     };
 
 
@@ -140,22 +131,27 @@ module.exports = function(app) {
       console.log(x, y, z, d, e, f);
       this.times = [];
 
+      if (d != undefined && e != undefined && f != undefined) {
+        var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
 
-      var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
-      var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
-      var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+        var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+        var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
 
-      this.times.push(h, i, j);
-      console.log(this.times);
-      console.log(d.toLocaleTimeString());
-      console.log(e.toLocaleTimeString());
-      console.log(f.toLocaleTimeString());
-      console.log(this.selectedDates);
-      console.log(this.quote_cost);
+        this.times.push(h, i, j);
+        console.log(this.times);
+        console.log(d.toLocaleTimeString());
+        console.log(e.toLocaleTimeString());
+        console.log(f.toLocaleTimeString());
+        console.log(this.selectedDates);
+        console.log(this.quote_cost);
 
     //   scCommService.createQuote(x, y, z, this.selectedDates, this.times);
-
-      scCommService.createQuote(x, y, z, this.captured_dates, this.times);
+        this.message = 'Thank you';
+        scCommService.createQuote(x, y, z, this.captured_dates, this.times);
+      } else {
+        console.log('times are undefined');
+        this.message = 'Please, select three dates and times';
+      }
     };
 
 

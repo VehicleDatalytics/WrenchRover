@@ -17,10 +17,6 @@
           },
           createQuote: function(x, y, z, a, times) {
             console.log(a);
-            // console.log(a.length);
-            console.log(a[0].length);
-            console.log(a[1].length);
-            console.log(a[2].length);
             console.log(times);
 
             this.quoteObj = x;
@@ -30,18 +26,6 @@
             this.quote_X = y;
             this.quote_X.user_id = x;
 
-            // function trimTheDate(date) {
-            //
-            //   var trimDate;
-            //   if (new Date(date).toLocaleDateString().length > 9) {
-            //     trimDate = new Date(date).toLocaleDateString().slice(0, 5);
-            //   } else if (new Date(date).toLocaleDateString().length === 8) {
-            //     trimDate = new Date(date).toLocaleDateString().slice(0, 3);
-            //   } else {
-            //     trimDate = new Date(date).toLocaleDateString().slice(0, 4);
-            //   }
-            //   return trimDate;
-            // }
 
             function trimTheDate(date, item) {
               var trimDate = a[item].slice(0, 10);
