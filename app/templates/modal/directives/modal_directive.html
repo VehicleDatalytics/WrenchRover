@@ -18,14 +18,11 @@
 
 <div ng-controller="userSignUpController as userctrl">
 
-<user-sign-up-form-page-one
-data-button-text="Join today!"
-data-action="create"
-data-xuser="userctrl.newUser"
->
-
-</user-sign-up-form-page-one>
-
+          <user-sign-up-form-page-one
+          data-button-text="Join today!"
+          data-action="create"
+          data-xuser="userctrl.newUser">
+          </user-sign-up-form-page-one>
 
 
 <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Close</button>

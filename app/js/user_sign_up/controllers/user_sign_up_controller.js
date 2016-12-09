@@ -3,6 +3,7 @@ var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
   app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', '$q', function(Resource, $http, $state, wrError, $q) {
+    console.log('user sign up controller open');
 
     this.users = [];
     this.errors = [];
@@ -45,15 +46,85 @@ module.exports = function(app) {
         user_id: null,
         service_request_id: null
       };
+      console.log(this.storedVehicle);
+      console.log(this.auto);
+
+
     }
+
 
     this.serviceRequests = {
       user_id: null,
       work_request: null
     };
+// alt
+    this.createUserAlt = function(resource) {
+      console.log(resource);
+      console.log('alternative');
+      this.x = {
+        user: resource
+      };
+      $http.post(baseUrl + 'users', this.x)
+      .success((config) => {
+        console.log(config.id);
+        console.log(config);
+    // this.auto.user_id = config.id;
+        window.localStorage.user_id = config.id;
+      })
+      .success(() => {
+        $http.post(baseUrl + 'authenticate', resource)
+      .success((data, status, headers, config) => {
+        config.headers.Authorization = data.auth_token;
+        this.token = data.auth_token;
+        window.localStorage.token = this.token;
+        $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+        console.log($http.defaults.headers.common.Authorization);
+      });
+      });
+    };
+
+    this.addServiceRequests = function() {
+      this.previouslyEntered = localStorage.getItem('describeIssue');
+      this.localStorageOil = localStorage.getItem('oilChosen');
+      this.localStorageDash = localStorage.getItem('dashChosen');
+      this.localStorageChosen = localStorage.getItem('chosen');
+
+      var arr = [this.previouslyEntered, this.localStorageOil, this.localStorageChosen, this.localStorageDash];
+
+      var arrFilter = arr.filter((z) => {
+        return z != null;
+      });
+      console.log(arr);
+      console.log(arrFilter);
+      this.requests = [];
+      for (var i = 0; i < arrFilter.length; i++) {
+        if (Array.isArray(arrFilter[i])) {
+          console.log(arrFilter[i]);
+          this.requests = this.requests.concat(flatten(arrFilter[i]));
+        } else this.requests.push(arrFilter[i]);
+        console.log(arrFilter[i]);
+      }
+
+      this.serviceRequests.work_request = this.requests.toString();
+      this.serviceRequests.user_id = localStorage.getItem('user_id');
+      this.serviceRequests.auto = {};
+      this.serviceRequests.auto.id = localStorage.getItem('auto_id');
+
+      console.log(this.serviceRequests);
+      $http.post(baseUrl + 'service_requests', this.serviceRequests)
+      .success((res) => {
+        console.log(res);
+      });
+    };
+
+
+// alt ends
+
+
+    // original:
 
     this.createUser = function(resource) {
-    //   this.xuser.user_email;
+      console.log('original');
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
         if (Array.isArray(arrFilter[i])) {
@@ -61,47 +132,23 @@ module.exports = function(app) {
         } else this.requests.push(arrFilter[i]);
       }
       this.serviceRequests.work_request = this.requests.toString();
-
       this.x = {
         user: resource
       };
-
-
-    //   $http.post(baseUrl + 'authenticate', resource)
-    //   .success((data, status, headers, config) => {
-    //     console.log('already signed up');
-    //
-    //     this.message = 'User email already taken. Sign in?';
-    //   })
-    //   .error((data, status, headers, config) => {
-    //     this.message = 'Sorry, either your email or your password was wrong. Try again.';
-    // //   });
-
       $http.post(baseUrl + 'users', this.x)
       .success((config) => {
-        console.log(config);
-
         this.auto.user_id = config.id;
         this.serviceRequests.user_id = config.id;
-        console.log(new Date().getTime());
         window.localStorage.user_id = config.id;
       })
       .success(() => {
-
         $http.post(baseUrl + 'authenticate', resource)
-
         .success((data, status, headers, config) => {
-
-          console.log(config);
-          console.log(headers);
-          console.log(data);
           config.headers.Authorization = data.auth_token;
           this.token = data.auth_token;
           window.localStorage.token = this.token;
           $http.defaults.headers.common.Authorization = localStorage.getItem('token');
           console.log($http.defaults.headers.common.Authorization);
-
-
         })
 
      .error((error, status) => {
@@ -109,42 +156,20 @@ module.exports = function(app) {
        this.data.error = { message: error, status: status };
        console.log(this.data.error.status);
      })
-
-
-        // .success(() => {
-        //   $http.get(baseUrl + 'users')
-        //     .success((config) => {
-        //       console.log(config);
-        //
-        //       for (var i = 0; i < config.length; i++) {
-        //         if (config[i].user_email === this.xuser.user_email) {
-        //           console.log('yes');
-        //         } else {
-        //           console.log('not here');
-        //         }
-        //       }
-        //     });
-        // })
-
         .success(() => {
-          console.log(3);
           $http.post(baseUrl + 'service_requests', this.serviceRequests)
           .success((config) => {
             console.log(config);
             window.localStorage.service_requests = JSON.stringify(config);
             this.auto.service_request_id = config.id;
             window.localStorage.service_request_id = config.id;
-            // window.localStorage.service_requests = config.service_requests;
-
           })
 
           .success(() => {
-            console.log(new Date().getTime());
             $http.post(baseUrl + 'autos', this.auto)
             .success((config) => {
               console.log(config);
               console.log(this.auto);
-            //   window.localStorage.service_requests = JSON.stringify(config.service_request);
               console.log(window.localStorage.service_requests);
               this.srthing = JSON.parse(localStorage.getItem('service_requests'));
               console.log(this.srthing);
@@ -160,18 +185,11 @@ module.exports = function(app) {
 
       });
 
-    //   });
 
     }.bind(this);
 
     this.logIn = function(resource) {
       console.log(this.login.user_email);
-      //
-    //   $http.get(baseUrl + 'users')
-    //   .success((config) => {
-    //     console.log(config);
-    //   });
-    //   console.log(resource);
 
       $http.post(baseUrl + 'authenticate', resource)
       .success((data, status, headers, config) => {
@@ -187,8 +205,6 @@ module.exports = function(app) {
 
         window.localStorage.user_id = data.user_id;
 
-        // window.localStorage.service_requests = JSON.stringify(config[i].service_requests[0]);
-
         console.log(resource);
         console.log(resource.user_email);
         console.log(this.login.user_email);
@@ -198,17 +214,15 @@ module.exports = function(app) {
 
         $http.get(baseUrl + 'users/' + this.user_id )
         .success((config, status, headers, data) => {
-          console.log(data);
-          console.log(status);
-          console.log(headers);
-          console.log(config);
+
         //   console.log(this.signedInUser);
-          if (config.service_requests.length !== 0 && config.autos.length !== 0) {
-            window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
-          } else {
-            console.log('no requests or saved cars');
-            this.message = "Are you sure you're not a mechanic?";
-          }
+        //   if (config.service_requests.length !== 0 && config.autos.length !== 0) {
+          window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
+        //   } else {
+        //
+        //     console.log('no requests or saved cars');
+        //     this.message = "Are you sure you're not a mechanic?";
+        //   }
         })
       .success((data, status, headers, config) => {
         if (localStorage.getItem('service_requests')) {
