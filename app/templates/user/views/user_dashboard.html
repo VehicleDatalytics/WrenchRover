@@ -5,22 +5,7 @@
 
     <!-- radio -->
     <div class="col-md-3 col-sm-3" id = "bid_container">
-     <!-- <div id=mouseover_list  ng-class="{bid_container_long: hover}" ng-mouseenter="hover = true" ng-mouseleave = "hover = false">
 
-      <p ng-click="UserDashCtrl.showDetail(p)"> {{UserDashCtrl.shop.item_number}}. {{UserDashCtrl.shop.id}} <br/>
-      Quote: $.{{UserDashCtrl.shop.cost}}  </br></p>
-
-
-       Availabilty:
-        <select ng-model="UserDashCtrl.value" ng-options = "x for x in UserDashCtrl.shop.dates" ng-change = "UserDashCtrl.newValue(value)">{{x}}</select>
-
-
-      <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, UserDashCtrl.shop.quote_id, UserDashCtrl.shop)">Accept Bid</button>
-      </div> -->
-
-
-<!-- new radio buttons -->
-<!-- <ol><li ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
 
 
       <div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table">
@@ -101,10 +86,12 @@
         <div>
           <h3>Your Vehicle</h3>
           <div style="float:left;margin-right:15px;" data-ng-repeat="auto in UserDashCtrl.userObject.autos">
+            <!-- {{auto}} -->
 
             <img src="images/car.png" style="float:left;margin-right:15px;">
             <b>{{auto.make}} </b><br>
             {{auto.model}}<br>
+            <a ng-click="UserDashCtrl.addRequest(auto.id)">New Service Requests</a>
             <a href="#" data-toggle="modal" data-target="#mysmallModal">Delete(not functional yet)</a><br><br>
           </div>
         </div>
@@ -116,12 +103,7 @@
 
 
   <!-- dru's profile end -->
-<!-- </div> -->
-<!-- </div> -->
-
 
 
 </div>
 </div>
-
-<!-- </section> -->

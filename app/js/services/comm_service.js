@@ -16,18 +16,6 @@ module.exports = function(app) {
     this.textInput = null;
     this.thing = 'andrews';
 
-    // this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
-    // console.log(this.storedVehicle);
-    // if (this.storedVehicle) {
-    //   this.auto = {
-    //     year: this.storedVehicle.year,
-    //     make: this.storedVehicle.make.name,
-    //     model: this.storedVehicle.model.name,
-    //     trim: this.storedVehicle.trim.name,
-    //     engine: this.storedVehicle.engine,
-    //     mileage: this.storedVehicle.mileage
-    //   };
-    // }
 
     console.log(this.count);
 
@@ -175,7 +163,7 @@ module.exports = function(app) {
             mileage: this.storedVehicle.mileage
           };
         }
-        console.log('autoing');
+
         console.log(this.auto);
         $http.post('https://wrenchroverapi.herokuapp.com/autos', this.auto)
         .then((res) => {

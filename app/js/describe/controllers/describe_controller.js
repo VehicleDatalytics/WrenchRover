@@ -11,6 +11,12 @@ module.exports = function(app) {
     this.service = cmService;
     this.selection = null;
 
+
+    if (localStorage.getItem('token') != undefined || null) {
+      this.token = localStorage.getItem('token');
+    }
+
+
     this.previouslyEntered = localStorage.getItem('describeIssue');
     this.localStorageOil = localStorage.getItem('oilChosen');
     this.localStorageDash = localStorage.getItem('dashChosen');

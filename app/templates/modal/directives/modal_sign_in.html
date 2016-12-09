@@ -31,7 +31,7 @@ ng-hide = "y"
 
 
 <!-- user sign up -->
-<user-sign-up-form-page-one
+<!-- <user-sign-up-form-page-one
 
 data-button-text="Join today!"
 data-action="create"
@@ -39,7 +39,25 @@ data-xuser="userctrl.newUser"
 ng-hide="!y"
 >
 
-</user-sign-up-form-page-one>
+</user-sign-up-form-page-one> -->
+
+
+<user-sign-up-form-page-one
+    ng-if = "!this.storedVehicle"
+    ng-hide="!y"
+    data-button-text="Sign up v 2!"
+    data-xuser="userctrl.newUser"
+    data-action="createAlt">
+ </user-sign-up-form-page-one>
+
+  <user-sign-up-form-page-one
+      ng-if = "this.storedVehicle"
+  ng-hide="!y"
+
+  data-button-text="Join today!"
+  data-action="create"
+  data-xuser="userctrl.newUser">
+  </user-sign-up-form-page-one>
 </div>
 
 <div class="checkbox center">
@@ -49,7 +67,7 @@ ng-hide="!y"
       </div>
 
 
-<p class="center" ng-hide="!y">Already have an account? <a ng-click = "y=!y">Click here to log-in</a></p>
+<p class="center" ng-hide="y">Already have an account? <a ng-click = "y=!y">Click here to log-in</a></p>
 
 
 

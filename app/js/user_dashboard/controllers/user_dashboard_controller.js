@@ -1,7 +1,7 @@
  /* eslint-disable prefer-arrow-callback */
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
-  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', function($http, NgMap, string) {
+  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', function($http, NgMap, string, $state) {
 
     this.key = string;
     var vm = this;
@@ -59,6 +59,13 @@ module.exports = exports = function(app) {
 
     console.log(this.arr);
     console.log(this.service_object_thing);
+
+    this.addRequest = function(x) {
+      console.log(x);
+      console.log('adding request');
+      $state.go('common_repairs_view.get_started');
+    };
+
     // /////
     this.getUserInfo = function() {
       console.log('initting the ud');
@@ -70,9 +77,27 @@ module.exports = exports = function(app) {
       $http.defaults.headers.common.Authorization = localStorage.getItem('token');
       console.log(localStorage.getItem('token'));
 
-
       $http.get(this.url + 'users/' + this.user_id)
       .then((res) => {
+        console.log(res);
+        this.storedVehicle = {
+          make: {
+            name: res.data.autos[0].make
+          },
+          model: {
+            name: res.data.autos[0].model
+          },
+          trim: {
+            name: res.data.autos[0].trim
+          },
+          mileage: res.data.autos[0].mileage,
+          id: res.data.autos[0].id,
+          user_id: res.data.autos[0].user_id,
+          year: res.data.autos[0].year
+        };
+        window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
+
+        window.localStorage.auto_id = this.storedVehicle.id;
         console.log(localStorage.getItem('token'));
 
         // dashboardResource.calculateMemberDate = function(res) {
@@ -138,18 +163,14 @@ module.exports = exports = function(app) {
                     quote_id: res.data[i].id,
                     cost: res.data[i].quote_cost,
                     notes: res.data[i].quote_text,
-
                     position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip,
                     dates: [ res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3]
-
-
                   };
 
                   this.user_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
 
                   vm.positions.push(loc_obj);
                   console.log(loc_obj);
-
 
                   console.log(vm.positions);
 
@@ -199,6 +220,8 @@ module.exports = exports = function(app) {
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
 
               console.log(this.service_quotes_all);
+
+
               this.confirm = function(value, x, y) {
                 console.log(value);
                 console.log(x);
@@ -209,9 +232,7 @@ module.exports = exports = function(app) {
                 console.log(this.sq_obj.id);
                 console.log(window.localStorage.token);
                 $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
-
                 .success((res) => {
-
                   console.log(res);
                 });
               };
@@ -221,9 +242,16 @@ module.exports = exports = function(app) {
           } else {
             console.log('nope');
           }
+
+
         });
+
+
       });
     };
 
-  }]);
+  }
+
+
+  ]);
 };
