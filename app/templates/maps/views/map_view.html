@@ -1,0 +1,29 @@
+<section id = "map_canvas">
+<ng-map zoom="11" center="current-location">
+
+  <marker id='{{shop.id}}' position="{{shop.position}}"
+ng-repeat="shop in vm.shops"
+on-click="vm.showDetail(shop)">
+</marker>
+<info-window id="foo-iw">
+<div ng-non-bindable="">
+id: {{vm.shop.id}}<br/>
+name: {{vm.shop.name}}<br/>
+Position 1: {{vm.shop.position}}<br/>
+Position 2: {{anchor.getPosition()}}<br/>
+Position 3: {{vm.map.markers[vm.shop.id].getPosition()}}<br/>
+
+</div>
+</info-window>
+<marker position = "current-location" animation="Animation.BOUNCE" centered="true">
+</marker>
+
+<marker ng-repeat="p in UserDashCtrl.positions"
+    position="{{p.pos}}"
+    data="{{data[$index]}}"
+    on-click="UserDashCtrl.showData()";
+    title="pos: {{p.pos}}"></marker>
+</ng-map>
+
+</section>
+</section>

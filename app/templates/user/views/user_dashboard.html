@@ -1,0 +1,109 @@
+
+<div class="container" data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()" id="ud_container">
+    <div class="row" >
+    <!-- Main page content -->
+
+    <!-- radio -->
+    <div class="col-md-3 col-sm-3" id = "bid_container">
+
+
+
+      <div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table">
+
+        <div class="radiobutton">
+
+        {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+         Shop Notes: {{sample.quote_text}}
+        Availability:
+        <br>
+        <br>
+
+
+              <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+                  <input type="radio" name="dates" value="{{sample.available_date_1}}"> <span>{{sample.available_date_1}}</span>
+              </label>
+
+
+
+              <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+                  <input type="radio" name="dates" value="{{sample.available_date_2}}"><span>{{sample.available_date_2}}</span>
+              </label>
+
+
+
+              <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+                  <input type="radio" name="dates" value="{{sample.available_date_3}}"><span>{{sample.available_date_3}}</span>
+              </label>
+                 </div>
+
+
+                 <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
+                </div>
+
+
+  <!-- new radio buttons end -->
+
+              </div>
+
+    <div class="col-md-6 col-sm-6">
+    <div class="row">
+
+        <div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
+          <ng-map  default-style="true" zoom="11" center="current-location">
+
+          <marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
+          <marker id='{{p.id}}' position="{{p.pos}}"
+           ng-repeat="p in UserDashCtrl.positions"
+           on-click="UserDashCtrl.showDetail(p)"
+           icon="{{p.map_icon_pics}}"
+           title="pos: {{p.pos}}"
+           on-mouseover="UserDashCtrl.showDetail(p);"
+           on-mouseout="UserDashCtrl.hideDetail()">
+          </marker>
+          <info-window id="foo-iw">
+           <div ng-non-bindable="">
+           {{UserDashCtrl.shop.id}}<br/>
+           {{UserDashCtrl.shop.pos}}<br/>
+           <br/>
+           </div>
+         </info-window>
+       </ng-map>
+
+</div>
+<hr>
+</div>
+
+
+  </div>
+  <!-- dru's profile -->
+
+ <div class="col-md-3 col-sm-3" style="background-color:#ddd;">
+        <div>
+          <h3>Your Profile</h3>
+          <img src="images/user.png" style="float:left;margin-right:15px;"><br><h4> {{UserDashCtrl.userObject.user_name}}</h4>Member since {{UserDashCtrl.memberSince}} <br>
+          <a href="#" data-toggle="modal" data-target="#mysmallModal">Edit(not functional yet)</a><br clear="all"><br>
+        </div>
+        <div>
+          <h3>Your Vehicle</h3>
+          <div style="float:left;margin-right:15px;" data-ng-repeat="auto in UserDashCtrl.userObject.autos">
+            <!-- {{auto}} -->
+
+            <img src="images/car.png" style="float:left;margin-right:15px;">
+            <b>{{auto.make}} </b><br>
+            {{auto.model}}<br>
+            <a ng-click="UserDashCtrl.addRequest(auto.id)">New Service Requests</a>
+            <a href="#" data-toggle="modal" data-target="#mysmallModal">Delete(not functional yet)</a><br><br>
+          </div>
+        </div>
+        <div style="margin-top:50px;"    ng-controller="AddVehicleButtonController as $ctrl">
+          <button type="submit" ng-click= "$ctrl.open()" class="btn btn-primary" style="width:auto;" >ADD NEW VEHICLE</button>
+          <br clear="all"><br>
+        </div>
+      </div>
+
+
+  <!-- dru's profile end -->
+
+
+</div>
+</div>
