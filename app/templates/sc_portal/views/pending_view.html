@@ -83,9 +83,13 @@
 
       </div>
 
-        <button type = "submit"  ng-class="{'btn btn-primary': portal.selectedDates.length >= 3 || portal.mytime != undefined || portal.mytime2 != undefined || portal.mytime3 != undefined, 'hidden': portal.selectedDates.length < 3 || portal.mytime == undefined || portal.mytime2 == undefined || portal.mytime3 == undefined }"
+
+
+          <button type = "submit"
 
        ng-click="portal.addDates(portal.selectedDates); portal.createQuote(sample.user_id, scquote, sample.id, portal.mytime, portal.mytime2, portal.mytime3)" btn btn-default> Place Bid</button>
+
+           <!-- <button type = "submit"  ng-class="{'btn btn-primary': portal.selectedDates.length >= 3 || portal.mytime != undefined || portal.mytime2 != undefined || portal.mytime3 != undefined, 'hidden': portal.selectedDates.length < 3 || portal.mytime == undefined || portal.mytime2 == undefined || portal.mytime3 == undefined }" -->
     </form>
 
 
