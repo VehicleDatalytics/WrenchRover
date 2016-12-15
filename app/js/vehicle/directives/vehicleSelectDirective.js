@@ -1,5 +1,5 @@
 module.exports = exports = function(app) {
-  app.directive('myVehicleSelect', function() {
+  app.directive('myVehicleSelect', () => {
     return {
       restrict: 'EAC',
       controller: 'VehicleInfoController',
@@ -7,7 +7,9 @@ module.exports = exports = function(app) {
       templateUrl: '/templates/vehicle/directives/vehicle_dropdown_selection.html',
       transclude: true,
       scope: {
-        
+        buttonText: '@',
+        click: '@'
+
       },
       link: function(scope, element, attrs, controller) {
         var clicks = {

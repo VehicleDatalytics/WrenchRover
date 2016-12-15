@@ -1,4 +1,6 @@
-<div class="container">
+
+
+ <div class="container">
   <div class="row probBanner">
   <!-- Main page content -->
     <div class="col-md-12 col-sm-12">
@@ -14,21 +16,12 @@
 
       <div class="col-md-6 col-sm-12"
            style="background:URL('../images/transparent.png');border:solid 1px black;height:auto;margin-top:25px;">
-        <h3>What type of vehicle to you have?</h3>
+        <h3>What type of vehicle do you have?</h3>
         <div class="container" style="width:auto;height:auto;">
 
-          <my-vehicle-select></my-vehicle-select>
-          <div class="form-group row text-center">
-            <div class="col-md-12 col-sm-12">
-              <button type="submit"
-                      class="'btn btn-primary'"
-                      style="width:100px;"
-                      ui-sref="common_repairs_view.get_started"
-                      >
-                      START
-              </button>
-            </div>
-          </div>
+          <my-vehicle-select
+data-button-text="Start"></my-vehicle-select>
+
         </div>
       </div>
 

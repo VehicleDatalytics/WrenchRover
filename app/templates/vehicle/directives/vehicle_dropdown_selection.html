@@ -3,6 +3,8 @@
 
     <section id="vehicleSelectMenu" data-ng-controller="VehicleInfoController as VehicleInfoController">
       <form>
+      <!-- <form data-ng-submit = "save(x)"> -->
+
         <div class="form-group row">
           <div class="col-md-6 col-sm-12">
             <select class="form-control"
@@ -104,6 +106,22 @@
           </div>
         </div>
         <!-- lookup -->
-        
+        <!-- experimental transclusion -->
+        <div class="form-group row text-center">
+          <div class="col-md-12 col-sm-12">
+            <button class="btn btn-primary"
+                    type="submit"
+                    ng-disabled="!VehicleInfoController.cookies"
+                    ng-click="VehicleInfoController.saveToLocalStorage()"
+                    >
+                    {{buttonText}}
+            </button>
+
+                  <!-- ui-sref="common_repairs_view.get_started" -->
+
+          </div>
+        </div>
+        <!-- experimental transclution -->
+
       </form>
     </section>

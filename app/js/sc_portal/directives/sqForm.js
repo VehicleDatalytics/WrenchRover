@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.directive('sqForm', function() {
+  app.directive('sqForm', () => {
     return {
       restrict: 'EAC',
       require: '^ngController',
@@ -11,16 +11,19 @@ module.exports = function(app) {
       scope: {
         sq: '=',
         buttonText: '@',
-        action: '@'
+        action: '@',
+        scquote: '='
       },
       link: function(scope, element, attrs, controller) {
-        console.log('controller: ', controller);
-        console.log('scope:', scope);
         var actions = {
         //   update: controller.updateMug,
-          create: controller.createServiceCenter
+        //   create: controller.createQuote
+          create: controller.createQuote,
+          add: controller.addDates,
+          both: controller.addDates && controller.createQuote
         };
         scope.save = actions[scope.action];
+
       }
     };
   });

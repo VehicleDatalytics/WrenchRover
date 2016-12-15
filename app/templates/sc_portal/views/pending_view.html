@@ -1,11 +1,101 @@
-
-<p><sq-form></sq-form></p>
+<!--
 <br>
 <br>
-<br>
+<br> -->
+  <section ng-init = "portal.getAll()">
+
+    <uib-accordion>
+      <div uib-accordion-group class="panel" heading="{{sample.id}}. {{sample.work_request}}" ng-repeat="sample in portal.servicerequests" >
+
+      <form name = "authform" class = "form-horizontal" data-ng-submit = "save(scquote)" >
+          <p><label for="x" class="col-lg-2 control-label"> Quote</label>
+            <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost"></p>
+
+          <p><label for="x" class="col-lg-2 control-label"> Mechanic's        Notes</label>
+          <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p>
 
 
-<uib-accordion>
-<div uib-accordion-group class="panel" heading="{{sample.id}}. {{sample.work_request}}" ng-repeat="sample in portal.servicerequests" data-sr="servicerequests">
-</div>
-</uib-accordion>
+<!-- ui  calendar begin -->
+              <table>
+                <tr>
+                  <td>
+                    <div
+                    uib-datepicker
+                    ng-model='scquote.activeDate'
+                    multi-select='portal.selectedDates'
+                    select-range='{{portal.type=="range"}}'
+                    datepicker-options='portal.options'
+                    ng-disabled="portal.selectedDates.length >= 3"
+                    ></div>
+                  </td>
+                  <td style='width:50px'>
+                  </td>
+                  <td>
+
+                      <div ng-hide="true === true">
+                      Selected Dates:
+                        <div class="date_holder col-md-4 col-sm-4 col-xs-6">
+
+                                <div ng-repeat='d in portal.selectedDates | orderBy' class = col-md-4 col-sm-4 col-xs-6>
+
+                                <p  ng-hide="true === true" ng-init="portal.capture(d)">  {{d | date : 'fullDate'}}    <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button>
+
+                                </p>
+                        </div>
+
+
+                        <p ng-if="portal.selectedDates.length >= 3"> Thank you for choosing three dates.</p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+
+        <div>
+
+      <div ng-repeat='d in portal.selectedDates | orderBy' class = col-md-4 col-sm-4 col-xs-6>
+        </div>
+
+
+       </div>
+
+
+  <div class="row">
+
+  <div  ng-hide = "portal.captured_dates[0] == undefined" class= "col-md-3 col-sm-3 col-xs-3" >
+      Day 1: <p ng-if = "portal.captured_dates.length > 0">{{portal.captured_dates[0]}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
+
+      <div  uib-timepicker ng-model="portal.mytime" show-meridian="portal.ismeridian"></div>
+      </div>
+
+
+      <div ng-hide = "portal.captured_dates[1] == undefined"  class= "col-md-3 col-sm-3 col-xs-3">
+        Day 2: <p ng-if = "portal.captured_dates.length > 1">{{portal.captured_dates[1]}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
+
+      <div uib-timepicker ng-model="portal.mytime2" show-meridian="portal.ismeridian"></div>
+      </div>
+
+
+      <div ng-hide = "portal.captured_dates[2] == undefined"  class= "col-md-3 col-sm-3 col-xs-3">
+          Day 3: <p ng-if = "portal.captured_dates.length > 2">{{portal.captured_dates[2]}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
+        <div uib-timepicker ng-model="portal.mytime3" show-meridian="portal.ismeridian"></div>
+        </div>
+
+      </div>
+
+
+
+          <button type = "submit"
+
+       ng-click="portal.addDates(portal.selectedDates); portal.createQuote(sample.user_id, scquote, sample.id, portal.mytime, portal.mytime2, portal.mytime3)" btn btn-default> Place Bid</button>
+
+           <!-- <button type = "submit"  ng-class="{'btn btn-primary': portal.selectedDates.length >= 3 || portal.mytime != undefined || portal.mytime2 != undefined || portal.mytime3 != undefined, 'hidden': portal.selectedDates.length < 3 || portal.mytime == undefined || portal.mytime2 == undefined || portal.mytime3 == undefined }" -->
+    </form>
+
+
+<h1>{{portal.message}}</h1>
+
+      </div>
+    </uib-accordion>
+
+    </section>
