@@ -16,7 +16,10 @@
 
           },
           createQuote: function(x, y, z, a, times) {
+            // console.log(x, y, z);
+            console.log(y);
             console.log(a);
+            console.log(new Date(a[0]));
             console.log(times);
 
             this.quoteObj = x;
@@ -28,7 +31,10 @@
 
 
             function trimTheDate(date, item) {
-              var trimDate = a[item].slice(0, 10);
+              console.log(date, item);
+
+              var convertedDate = new Date(a[item]);
+              var trimDate = convertedDate.toString().slice(0, 10);
               return trimDate;
             }
             console.log(trimTheDate(a[0], 0));

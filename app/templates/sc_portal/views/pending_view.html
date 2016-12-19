@@ -32,13 +32,13 @@
                   </td>
                   <td>
 
-                      <div ng-hide="true === true">
+                      <div ng-hide="true === true" ng-if='portal.type==="individual"'>
                       Selected Dates:
                         <div class="date_holder col-md-4 col-sm-4 col-xs-6">
 
                                 <div ng-repeat='d in portal.selectedDates | orderBy' class = col-md-4 col-sm-4 col-xs-6>
 
-                                <p  ng-hide="true === true" ng-init="portal.capture(d)">  {{d | date : 'fullDate'}}    <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button>
+                                <p ng-hide="true === true">  {{d | date : 'fullDate'}}    <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button>
 
                                 </p>
                         </div>
@@ -62,28 +62,26 @@
 
   <div class="row">
 
-  <div  ng-hide = "portal.captured_dates[0] == undefined" class= "col-md-3 col-sm-3 col-xs-3" >
-      Day 1: <p ng-if = "portal.captured_dates.length > 0">{{portal.captured_dates[0]}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
+  <div  ng-hide = "portal.selectedDates[0] == undefined" class= "col-md-3 col-sm-3 col-xs-3" >
+      Day 1: <p ng-if = "portal.selectedDates.length > 0" ng-init = "portal.date1 =portal.capture(portal.selectedDates[i], portal.i)">{{portal.date1}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
 
       <div  uib-timepicker ng-model="portal.mytime" show-meridian="portal.ismeridian"></div>
       </div>
 
 
-      <div ng-hide = "portal.captured_dates[1] == undefined"  class= "col-md-3 col-sm-3 col-xs-3">
-        Day 2: <p ng-if = "portal.captured_dates.length > 1">{{portal.captured_dates[1]}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
+      <div ng-hide = "portal.selectedDates[1] == undefined"  class= "col-md-3 col-sm-3 col-xs-3">
+        Day 2: <p ng-if = "portal.selectedDates.length > 1" ng-init = "portal.date2 = portal.capture(portal.selectedDates[1])">{{portal.date2}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
 
       <div uib-timepicker ng-model="portal.mytime2" show-meridian="portal.ismeridian"></div>
       </div>
 
 
-      <div ng-hide = "portal.captured_dates[2] == undefined"  class= "col-md-3 col-sm-3 col-xs-3">
-          Day 3: <p ng-if = "portal.captured_dates.length > 2">{{portal.captured_dates[2]}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
+      <div ng-hide = "portal.selectedDates[2] == undefined"  class= "col-md-3 col-sm-3 col-xs-3">
+          Day 3: <p ng-if = "portal.selectedDates.length > 2" ng-init = "portal.date3  = portal.capture(portal.selectedDates[2])">{{portal.date3}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
         <div uib-timepicker ng-model="portal.mytime3" show-meridian="portal.ismeridian"></div>
         </div>
 
       </div>
-
-
 
           <button type = "submit"
 
