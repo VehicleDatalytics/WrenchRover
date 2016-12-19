@@ -63,7 +63,7 @@
   <div class="row">
 
   <div  ng-hide = "portal.selectedDates[0] == undefined" class= "col-md-3 col-sm-3 col-xs-3" >
-      Day 1: <p ng-if = "portal.selectedDates.length > 0" ng-init = "portal.date1 =portal.capture(portal.selectedDates[0])">{{portal.date1}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
+      Day 1: <p ng-if = "portal.selectedDates.length > 0" ng-init = "portal.date1 =portal.capture(portal.selectedDates[i], portal.i)">{{portal.date1}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
 
       <div  uib-timepicker ng-model="portal.mytime" show-meridian="portal.ismeridian"></div>
       </div>
