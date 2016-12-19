@@ -70,11 +70,19 @@ module.exports = exports = function(app) {
 
     this.logVehicle = function() {
       console.log(this.vehicleObject);
-
     };
 
     this.showMe = function(id) {
       document.getElementById(id).disabled = false;
+    };
+
+    this.disableMe = function(id) {
+      document.getElementById(id).disabled = true;
+    };
+
+    this.fillOutDropdown = function() {
+      document.getElementById('b').disabled = false;
+      document.getElementById('b').text = this.vehicleObject.make;
     };
   }]);
 };
