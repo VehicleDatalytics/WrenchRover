@@ -6,27 +6,8 @@ module.exports = function(app) {
       console.log('iniTting the functions!!!!!');
     };
 
-
-    this.captured_dates = [];
-    this.capture = function(value) {
-      console.log(value);
-
-      console.log(new Date(value).toDateString());
-      this.captured_dates.push(new Date(value).toDateString());
-    };
-    if (this.captured_dates.length === 1) {
-      this.day_one = this.captured_dates[0];
-    }
-    if (this.captured_dates.length === 2) {
-      this.day_one = this.captured_dates[0];
-      this.day_two = this.captured_dates[1];
-    }
-    if (this.captured_dates.length === 3) {
-      this.day_one = this.captured_dates[0];
-      this.day_two = this.captured_dates[1];
-      this.day_three = this.captured_dates[2];
-
-    }
+    var count = 0;
+    // this.captured_dates = [];
 
 
     // this.mytime = new Date().setHours(0);
@@ -101,7 +82,7 @@ module.exports = function(app) {
     this.removeFromSelected = function(dt) {
       _this.selectedDates.splice(_this.selectedDates.indexOf(dt), 1);
 
-      _this.captured_dates.splice(_this.captured_dates.indexOf(new Date(dt).toDateString()), 1);
+    //   _this.captured_dates.splice(_this.captured_dates.indexOf(new Date(dt).toDateString()), 1);
 
 
     //   this.captured_dates.push(new Date(value).toDateString());
@@ -110,8 +91,25 @@ module.exports = function(app) {
       console.log(this.selectedDates);
       console.log(_this.selectedDates);
       console.log(this.selectedDates.length);
-      console.log(_this.captured_dates);
-      console.log(this.captured_dates);
+
+    };
+    // this.captured_dates = [];
+    //
+    // if (this.captured_dates.length === 1) {
+    //   this.date1 = this.captured_dates[0];
+    // }
+    // if (this.captured_dates.length === 2) {
+    //   this.date2 = this.captured_dates[1];
+    // }
+    // if (this.captured_dates.length === 3) {
+    //   this.date3 = this.captured_dates[2];
+    // }
+
+
+    this.capture = function(value) {
+      this.dateConverted = new Date(value);
+      this.captured_date = this.dateConverted.toDateString().slice(0, 10);
+      return this.captured_date;
     };
 
 
@@ -127,6 +125,7 @@ module.exports = function(app) {
 
 
     this.createQuote = function(x, y, z, d, e, f) {
+        // x = user_id, y = scquote, z = sample.id, d/e/f = mytime(1-3)
       console.log('creating the quote');
       console.log(x, y, z, d, e, f);
       this.times = [];
@@ -147,7 +146,7 @@ module.exports = function(app) {
 
     //   scCommService.createQuote(x, y, z, this.selectedDates, this.times);
         this.message = 'Thank you';
-        scCommService.createQuote(x, y, z, this.captured_dates, this.times);
+        scCommService.createQuote(x, y, z, this.selectedDates, this.times);
       } else {
         console.log('times are undefined');
         this.message = 'Please, select three dates and times';
@@ -169,7 +168,6 @@ module.exports = function(app) {
         //   console.log(res.data[i].service_center_id);
           if (res.data[i].service_center_id !== null && res.data[i].service_center_id == this.service_center_id) {
             console.log('yes');
-            // console.log(res.data[i].service_center);
 
             console.log(this.pastbids);
             console.log(res.data[i]);
