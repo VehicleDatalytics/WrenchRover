@@ -221,13 +221,19 @@ module.exports = exports = function(app) {
 
               console.log(this.service_quotes_all);
 
+              this.testConfirm = function() {
+                console.log('testing confirm ');
+                console.log(this.available_date);
+              };
 
+              this.available_date = 1;
               this.confirm = function(value, x, y) {
+                console.log(this.available_date);
                 console.log(value);
                 console.log(x);
                 console.log(y);
                 this.sq_obj = y;
-                this.sq_obj.accepted = value;
+                this.sq_obj.accepted = this.available_date;
                 console.log(this.sq_obj);
                 console.log(this.sq_obj.id);
                 console.log(window.localStorage.token);
