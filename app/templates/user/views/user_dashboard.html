@@ -6,39 +6,34 @@
     <!-- radio -->
     <div class="col-md-3 col-sm-3" id = "bid_container">
 
-
-
       <div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table">
 
         <div class="radiobutton">
 
-        {{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
-         Shop Notes: {{sample.quote_text}}
-        Availability:
-        <br>
-        <br>
 
-
+{{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+   Shop Notes: {{sample.quote_text}}
+  Availability:
+  <br>
+  <br>
               <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
-                  <input type="radio" name="dates" value="{{sample.available_date_1}}"> <span>{{sample.available_date_1}}</span>
+                  <input type="radio" name="dates" ng-model = "UserDashCtrl.available_date" value="{{sample.available_date_1}}"> <span>{{sample.available_date_1}}</span>
               </label>
 
 
-
               <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
-                  <input type="radio" name="dates" value="{{sample.available_date_2}}"><span>{{sample.available_date_2}}</span>
+                  <input type="radio" name="dates" ng-model = "UserDashCtrl.available_date"  value="{{sample.available_date_2}}"><span>{{sample.available_date_2}}</span>
               </label>
 
-
-
               <label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
-                  <input type="radio" name="dates" value="{{sample.available_date_3}}"><span>{{sample.available_date_3}}</span>
+                  <input type="radio" name="dates" ng-model = "UserDashCtrl.available_date" value="{{sample.available_date_3}}"><span>{{sample.available_date_3}}</span>
               </label>
                  </div>
 
 
-                 <button ng-click="UserDashCtrl.confirm(UserDashCtrl.value, sample.id, sample)">Go</button>
+                 <button ng-click="UserDashCtrl.confirm(UserDashCtrl.available_date, sample.id, sample)">Go</button>
                 </div>
+                <!-- <button ng-click = "UserDashCtrl.testConfirm()">test it</button> -->
 
 
   <!-- new radio buttons end -->
