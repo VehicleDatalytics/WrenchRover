@@ -10,7 +10,10 @@
             <select class="form-control"
                     id="a"
                     data-ng-model="VehicleInfoController.vehicleObject.year"
-                    ng-change="VehicleInfoController.newYearSelected(); VehicleInfoController.getVehicleMakes(); VehicleInfoController.showMe('b')"
+                    ng-change="VehicleInfoController.newYearSelected();
+                               VehicleInfoController.getVehicleMakes();
+                               VehicleInfoController.showMe('b');
+                               VehicleInfoController.disableMe('Vvin')"
                     ng-options="year for year in VehicleInfoController.vehicleListOptions.yearsList">
               <option value="">Year</option>
             </select>
@@ -69,6 +72,22 @@
                    data-ng-model="VehicleInfoController.vehicleObject.mileage">
           </div>
         </div>
+        <div class="row">
+          <!-- start button -->
+            <div class="form-group row text-center">
+              <div class="col-md-12 col-sm-12">
+                <button class="btn btn-primary"
+                        type="submit"
+                        ng-disabled="!VehicleInfoController.cookies"
+                        ng-click="VehicleInfoController.saveToLocalStorage()"
+                        >
+                        {{buttonText}}
+                </button>
+              </div>
+            </div>
+          <!-- start button -->
+        </div>
+        
         <div class="form-group row text-center">
           <div class="col-md-12 col-sm-12">
             <hr class="vehicleHR">
@@ -95,33 +114,18 @@
                    data-ng-model="VehicleInfoController.vehicleObject.mileage">
           </div>
         </div>
-        <!-- need a lookup button -->
+
         <div class="form-group row text-center">
           <div class="col-md-12 col-sm-12">
             <button class="btn btn-primary"
                     type="submit"
-                    ng-click="VehicleInfoController.logVehicle(); VehicleInfoController.getVin()">
+                    ng-click="VehicleInfoController.disableMe('a');
+                              VehicleInfoController.getVin()">
                     Lookup Vehicle
             </button>
           </div>
         </div>
-        <!-- lookup -->
-        <!-- experimental transclusion -->
-        <div class="form-group row text-center">
-          <div class="col-md-12 col-sm-12">
-            <button class="btn btn-primary"
-                    type="submit"
-                    ng-disabled="!VehicleInfoController.cookies"
-                    ng-click="VehicleInfoController.saveToLocalStorage()"
-                    >
-                    {{buttonText}}
-            </button>
 
-                  <!-- ui-sref="common_repairs_view.get_started" -->
-
-          </div>
-        </div>
-        <!-- experimental transclution -->
 
       </form>
     </section>
