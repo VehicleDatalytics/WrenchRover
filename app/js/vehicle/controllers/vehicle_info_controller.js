@@ -4,13 +4,14 @@ module.exports = exports = function(app) {
   app.controller('VehicleInfoController', ['edmundsVehicleListResource', 'vicClearSelections', '$state', '$http', function(Resource, ClearSelections, $state, $http) {
     this.cookies = navigator.cookieEnabled;
     this.vehicleObject = {
-      year: 0,
+      year: '',
       make: '',
       model: '',
       trim: '',
       engine: '',
       miles: '',
-      vin: ''
+      vin: '',
+      vinMiles: ''
     };
     this.vehicleListOptions = {
       yearsList: [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000,
@@ -39,20 +40,24 @@ module.exports = exports = function(app) {
 
     this.saveToLocalStorage = function() {
       console.log('save to local');
+      if (this.vehicleObject.miles === null) {
+        this.vehicleObject.miles = this.vehicleObject.vinMiles;
+      }
+      if (this.vehicleObject.engine === 'N/A' || this.vehicleObject.engine === 'Not Sure') {
+        this.vehicleObject.engine = '';
+      }
       window.localStorage.vehicle = JSON.stringify(this.vehicleObject);
       console.log(this.vehicleObject);
 
-
       if (localStorage.getItem('token')) {
         console.log('there is a token');
-
         this.auto = {
           year: this.vehicleObject.year,
           make: this.vehicleObject.make.name,
           model: this.vehicleObject.model.name,
           trim: this.vehicleObject.trim.name,
           engine: this.vehicleObject.engine,
-          mileage: this.vehicleObject.mileage,
+          mileage: this.vehicleObject.miles,
           user_id: localStorage.getItem('user_id'),
           service_request_id: null
         };
@@ -65,7 +70,6 @@ module.exports = exports = function(app) {
         console.log('there is not a token');
         $state.go('common_repairs_view.get_started');
       }
-
     };
 
     this.logVehicle = function() {
@@ -80,9 +84,5 @@ module.exports = exports = function(app) {
       document.getElementById(id).disabled = true;
     };
 
-    this.fillOutDropdown = function() {
-      document.getElementById('b').disabled = false;
-      document.getElementById('b').text = this.vehicleObject.make;
-    };
   }]);
 };
