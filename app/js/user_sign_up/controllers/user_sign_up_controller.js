@@ -192,7 +192,7 @@ module.exports = function(app) {
       console.log(this.login.user_email);
 
       $http.post(baseUrl + 'authenticate', resource)
-      .success((data, status, headers, config) => {
+      .then((data, status, headers, config) => {
         console.log(config);
         console.log(headers);
         this.message = 'Welcome back! Taking you to your dashboard now!';
@@ -213,24 +213,24 @@ module.exports = function(app) {
         this.user_id = data.user_id;
 
         $http.get(baseUrl + 'users/' + this.user_id )
-        .success((config, status, headers, data) => {
+          .success((config, status, headers, data) => {
 
-        //   console.log(this.signedInUser);
-        //   if (config.service_requests.length !== 0 && config.autos.length !== 0) {
-          window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
-        //   } else {
-        //
-        //     console.log('no requests or saved cars');
-        //     this.message = "Are you sure you're not a mechanic?";
-        //   }
-        })
-      .success((data, status, headers, config) => {
-        if (localStorage.getItem('service_requests')) {
-          $state.go('user_dashboard');
-        } else {
-          console.log('Should go to mechanic');
-        }
-      });
+          //   console.log(this.signedInUser);
+          //   if (config.service_requests.length !== 0 && config.autos.length !== 0) {
+            window.localStorage.service_requests = JSON.stringify(config.service_requests[0]);
+          //   } else {
+          //
+          //     console.log('no requests or saved cars');
+          //     this.message = "Are you sure you're not a mechanic?";
+          //   }
+          })
+        .success((data, status, headers, config) => {
+          if (localStorage.getItem('service_requests')) {
+            $state.go('user_dashboard');
+          } else {
+            console.log('Should go to mechanic');
+          }
+        });
       })
       .error((data, status, headers, config) => {
         this.message = 'Sorry, either your email or your password was wrong. Try again.';
