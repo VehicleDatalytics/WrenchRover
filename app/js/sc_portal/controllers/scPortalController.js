@@ -82,31 +82,20 @@ module.exports = function(app) {
     this.removeFromSelected = function(dt) {
       _this.selectedDates.splice(_this.selectedDates.indexOf(dt), 1);
 
-    //   _this.captured_dates.splice(_this.captured_dates.indexOf(new Date(dt).toDateString()), 1);
-
-
-    //   this.captured_dates.push(new Date(value).toDateString());
-    // / Need to change activeDate for datepicker to call customClass again
       _this.activeDate = dt;
       console.log(this.selectedDates);
       console.log(_this.selectedDates);
       console.log(this.selectedDates.length);
 
     };
-    // this.captured_dates = [];
-    //
-    // if (this.captured_dates.length === 1) {
-    //   this.date1 = this.captured_dates[0];
-    // }
-    // if (this.captured_dates.length === 2) {
-    //   this.date2 = this.captured_dates[1];
-    // }
-    // if (this.captured_dates.length === 3) {
-    //   this.date3 = this.captured_dates[2];
-    // }
+    this.i = 0;
 
+    this.capture = function(value, index) {
+      console.log(value, index);
 
-    this.capture = function(value) {
+      this.i++;
+      console.log(value);
+      this.x = [];
       this.dateConverted = new Date(value);
       this.captured_date = this.dateConverted.toDateString().slice(0, 10);
       return this.captured_date;

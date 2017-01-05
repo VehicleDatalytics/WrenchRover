@@ -61,7 +61,7 @@ mileage: {{describe.storedVehicle.mileage}}
 <!-- displays user described issue in the shopping cart -->
 <div ng-class="{'temporaryInsideDiv': describe.service.textInput, 'hidden': !describe.service.textInput}">
 {{describe.service.textInput}}
-<a ui-sref="common_repairs_view.describe_issue" ng-click = "describe.changeText()" ng-class="{'text-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">Edit</a>
+<!-- <a ui-sref="common_repairs_view.describe_issue" ng-click = "describe.changeText()" ng-class="{'text-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">Edit</a> -->
 <button ng-click="describe.editThis()"  ng-disabled="describe.service.textInput === '' || !describe.service.textInput" ng-class="{'btn btn-primary': describe.service.textInput || describe.service.textInput !== '', 'hidden': !describe.service.textInput || describe.service.textInput === ''}">X</button>
 </div>
 </div>

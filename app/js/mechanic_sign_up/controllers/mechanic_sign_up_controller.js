@@ -22,28 +22,28 @@ module.exports = function(app) {
       };
 
       $http.post(baseUrl + 'users', this.x)
-    .success((config) => {
-      console.log(config);
-      window.localStorage.user_id = config.id;
+    .then((res) => {
+      console.log(res);
+      window.localStorage.user_id = res.data.id;
     })
-    .success(() => {
+    .then(() => {
       $http.post(baseUrl + 'authenticate', resource)
-      .success((data, status, headers, config) => {
-        config.headers.Authorization = data.auth_token;
-        this.token = data.auth_token;
+      .then((res) => {
+        res.headers.Authorization = res.data.auth_token;
+        this.token = res.data.auth_token;
         window.localStorage.token = this.token;
         $http.defaults.headers.common.Authorization = localStorage.getItem('token');
         console.log($http.defaults.headers.common.Authorization);
       })
-      .success(() => {
+      .then(() => {
         this.resource.user_id = JSON.parse(localStorage.getItem('user_id'));
         $http.post(baseUrl + 'service_centers', resource)
-        .success((config) => {
-          console.log(config);
-          window.localStorage.service_center_id = config.id;
+        .then((res) => {
+          console.log(res);
+          window.localStorage.service_center_id = res.data.id;
         });
       })
-      .success(() => {
+      .then(() => {
         $state.go('sc_portal_view.pending_view');
       });
 
@@ -54,12 +54,12 @@ module.exports = function(app) {
 
     this.login = function(resource) {
       $http.post(baseUrl + 'authenticate', resource)
-      .success((data, status, headers, config) => {
+      .then((res) => {
         this.message = 'Welcome back! Taking you to your portal now!';
-        console.log(config);
-        console.log(data);
-        config.headers.Authorization = data.auth_token;
-        this.token = data.auth_token;
+        console.log(res);
+
+        res.headers.Authorization = res.data.auth_token;
+        this.token = res.data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
         window.localStorage.token = this.token;
@@ -68,24 +68,24 @@ module.exports = function(app) {
         console.log(this.mech.user_email);
         this.signedInUser = resource.user_email;
       })
-    .success(() => {
+    .then(() => {
       $http.get(baseUrl + 'service_centers').
-      success((config) => {
+      then((res) => {
         console.log(this.signedInUser);
-        for (var i = 0; i < config.length; i++) {
-          if (config[i].service_email === this.signedInUser) {
-            window.localStorage.user_id = config[i].id;
-            window.localStorage.service_center_id = config[i].id;
+        for (var i = 0; i < res.data.length; i++) {
+          if (res.data[i].service_email === this.signedInUser) {
+            window.localStorage.user_id = res.data[i].id;
+            window.localStorage.service_center_id = res.data[i].id;
           } else {
             console.log('no');
           }
         }
       })
-      .success(() => {
+      .then(() => {
         $state.go('sc_portal_view.pending_view');
       });
     })
-    .error((data, status, headers, config) => {
+    .catch(() => {
       this.message = 'Sorry, either your email or your password was wrong. Try again.';
     });
 
