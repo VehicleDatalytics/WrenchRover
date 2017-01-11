@@ -24,17 +24,11 @@ module.exports = function(app) {
 
       that.exit = function() {
         modalInstance.result.then(() => {
-          console.log('dismissed');
+          console.log('dismissed from buttonController');
         });
       };
 
     };
-
-
-    // //////////
-
-
-    // /////////
 
 
   }]);

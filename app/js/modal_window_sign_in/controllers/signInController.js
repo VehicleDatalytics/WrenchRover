@@ -4,10 +4,10 @@ module.exports = function(app) {
     console.log('modal controller open');
     console.log($uibModalInstance);
     var $ctrl = this;
-    console.log($uibModalInstance);
 
-    $ctrl.ok = function() {
-      console.log('okay, then close');
+    // this.service = modalService;
+    $ctrl.close = function() {
+      console.log('okay, then closing');
       $uibModalInstance.close();
     };
 
@@ -16,7 +16,10 @@ module.exports = function(app) {
       $uibModalInstance.dismiss('cancel');
     };
 
-  });
+  }
+  // ]
 
+);
+// ]
 
 };

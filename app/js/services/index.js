@@ -6,4 +6,5 @@ module.exports = exports = function(app) {
   require('./user_dashboard')(app);
   require('./comm_service')(app);
   require('./sc_comm_service.js')(app);
+  require('./modal_service.js')(app);
 };
