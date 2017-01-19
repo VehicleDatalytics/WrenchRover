@@ -9,7 +9,6 @@ module.exports = function(app) {
 
     this.open = function(parentSelector) {
 
-
       this.modalObj = {
         templateUrl: 'templates/modal/directives/modal_sign_in.html',
         controller: 'signInController',
