@@ -3,7 +3,9 @@
      <div class="row">
 			<div class="col-md-6" style="padding-left: 0px">
 			  <form class="form-signin" name="signup" data-ng-submit = "save(xuser)">
-				<h2 class="form-signin-heading">Create New Account</h2>
+				<h2 class="form-signin-heading">{{userctrl.msg}}</h2>
+        
+        {{userctrl.errorMsg}}
 
 				<label for="inputName" class="sr-only">Name</label>
 

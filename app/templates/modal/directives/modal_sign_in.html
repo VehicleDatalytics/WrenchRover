@@ -43,7 +43,7 @@ ng-hide="!y"
 
 
 <user-sign-up-form-page-one
-    ng-if = "!this.storedVehicle"
+    ng-if = "!userctrl.storedVehicle"
     ng-hide="!y"
     data-button-text="Sign up v 2!"
     data-xuser="userctrl.newUser"
@@ -51,7 +51,7 @@ ng-hide="!y"
  </user-sign-up-form-page-one>
 
   <user-sign-up-form-page-one
-      ng-if = "this.storedVehicle"
+    ng-if = "userctrl.storedVehicle"
   ng-hide="!y"
 
   data-button-text="Join today!"

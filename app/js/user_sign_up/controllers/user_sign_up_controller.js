@@ -6,6 +6,9 @@ var modalObj = require('../../modalObject').modalObj;
 module.exports = function(app) {
   app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', 'modalService', '$uibModal', function(Resource, $http, $state, wrError, modalService, $uibModal) {
     var that = this;
+    this.msg = 'Create New Account';
+    this.errorMsg = null;
+
 
     this.service = modalService;
     console.log(modalService.instance);
@@ -15,6 +18,12 @@ module.exports = function(app) {
       console.log(modalService.instance);
       modalService.instance.close();
     };
+
+
+    function display() {
+      that.errorMsg = 'not here!';
+      console.log('erroring');
+    }
 
 
     $ctrl = this;
@@ -90,6 +99,13 @@ module.exports = function(app) {
         // console.log(config);
         // this.auto.user_id = res.data.id;
         window.localStorage.user_id = res.data.id;
+      })
+      .catch((res) => {
+        this.errorMsg = 'already taken';
+
+        // display();
+        console.log(res.data.user_email[0]);
+
       })
       .then(() => {
         console.log(resource);
@@ -237,11 +253,16 @@ module.exports = function(app) {
             this.message = 'Thank you for signing up!';
             console.log(JSON.parse(localStorage.getItem('service_requests')));
             $state.go('user_dashboard');
+            // console.log('closing');
+            // that.closeModal();
+          })
+
+          .then(() => {
+            console.log('closing');
+            that.closeModal();
           });
-        //   .then(() => {
-        //     console.log('closing');
-        //     this.modalClose();
-        //   });
+
+
         });
 
       });
@@ -301,8 +322,15 @@ module.exports = function(app) {
       })
 
       .then(() => {
-        console.log('closing');
-        that.closeModal();
+
+
+        if (this.message === 'Sorry, either your email or your password was wrong. Try again.') {
+          console.log('sorry again');
+        } else {
+
+          that.closeModal();
+        }
+
       });
 
 

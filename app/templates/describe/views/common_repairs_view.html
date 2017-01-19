@@ -66,7 +66,10 @@
 
 
 <div class="row text-center">
-<div class="modal-demo col-md-12 col-sm-12" ng-controller="buttonController as $ctrl"><br>
+<div class="modal-demo col-md-12 col-sm-12" ng-controller="signInButtonController as $ctrl"><br>
+
+<!-- <div class="row text-center">
+<div class="modal-demo col-md-12 col-sm-12" ng-controller="buttonController as $ctrl"><br> -->
 
 
 <button  ng-show = "describe.token === undefined || this.token === null" ng-click= "$ctrl.open()" ng-class="{'btn btn-primary': describe.service.count > 0 || describe.service.nextCount > 0 || describe.service.dashCount > 0 || describe.service.textInput, 'btn btn-default': !describe.service.textInput && describe.service.count !== 5 && describe.service.nextCount !== 7 && describe.service.dashCount !== 9}"

@@ -1,7 +1,7 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('mechanicSignUpController', ['wrResource', '$http', '$state', function(Resource, $http, $state) {
+  app.controller('mechanicSignUpController', ['wrResource', '$http', '$state', 'modalService', function(Resource, $http, $state, modalService) {
 
     this.servicecenters = [];
     this.errors = [];
@@ -9,6 +9,16 @@ module.exports = function(app) {
 
     this.getAll = remote.getAll.bind(remote);
     this.signedInUser = null;
+    var that = this;
+
+    this.service = modalService;
+    console.log(modalService.instance);
+
+    this.closeModal = function() {
+      console.log('pastoral');
+      console.log(modalService.instance);
+      modalService.instance.close();
+    };
 
     this.createServiceCenter = function(resource) {
 
@@ -45,7 +55,12 @@ module.exports = function(app) {
       })
       .then(() => {
         $state.go('sc_portal_view.pending_view');
+      })
+      .then(() => {
+        console.log('closing');
+        that.closeModal();
       });
+
 
     });
 
@@ -87,7 +102,12 @@ module.exports = function(app) {
     })
     .catch(() => {
       this.message = 'Sorry, either your email or your password was wrong. Try again.';
+    })
+    .then(() => {
+      console.log('closing');
+      that.closeModal();
     });
+
 
     };
   }]);
