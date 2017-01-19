@@ -24,7 +24,7 @@ module.exports = function(app) {
         // scope.save = controller.createUser;
         // scope.auto = controller.autoX;
         scope.save = actions[scope.action];
-        console.log(scope.save);
+        // console.log(scope.save);
 
       }
     };

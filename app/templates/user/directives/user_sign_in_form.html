@@ -1,12 +1,16 @@
 
+<div class="panel panel-primary">
 
+   <button class="btn btn-primary right" type="button" ng-click="userctrl.closeModal()">x</button>
     <!-- Page Content -->
     <div class="container">
 
         <div class="row">
         <!-- Signin content -->
 			<div class="col-md-12 col-sm-12">
-			  <form class="form-signin" name="signin" data-ng-submit = "save(login)">
+			  <!-- <form class="form-signin" name="signin" data-ng-submit = "save(login)"> -->
+
+        			  <form class="form-signin" name="signin" data-ng-submit = "save(login)">
 				<h2 class="form-signin-heading">Sign In</h2>
 
 				<label for="inputEmail" class="sr-only">Email Address</label>
@@ -16,7 +20,7 @@
 				<input type="password" id="inputPassword" class="form-control formbot" placeholder="Password" data-ng-model="login.password" required>
 
 
-				<button id = "newUser" class="btn btn-lg btn-primary btn-block" type="submit">{{buttonText}}</button>
+				<button id = "newUser" class="btn btn-lg btn-primary btn-block" type="submit" >{{buttonText}}</button>
 
 			  </form>
         <!-- button from modal -->
@@ -26,5 +30,7 @@
 
 			</div>
 		</div>
+
+    </div>
 
     </div>

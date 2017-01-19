@@ -1,6 +1,6 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary" >
 
-   <button class="btn btn-primary right" type="button" ng-click="$ctrl.ok()">X</button>
+   <button class="btn btn-primary right" type="button" ng-click="userctrl.close()">X</button>
   <div class="panel-heading">
   <!-- <h3 class="panel-title">Sign in   <button class="btn btn-primary pull-right" type="button" ng-click="$ctrl.ok()">X</button></h3> -->
     <h3 class="panel-title">Sign in</h3>
@@ -27,7 +27,7 @@ ng-hide = "y"
 
 </user-sign-in-form>
 
-<p class="center" ng-hide="y"> Don't have an account? <a ng-click = "y=!y">Click here to create one</a></p>
+<p class="center" ng-hide="y"> Don't have an awesome account? <a ng-click = "y=!y">Click here to create one</a></p>
 
 
 <!-- user sign up -->
@@ -43,7 +43,7 @@ ng-hide="!y"
 
 
 <user-sign-up-form-page-one
-    ng-if = "!this.storedVehicle"
+    ng-if = "!userctrl.storedVehicle"
     ng-hide="!y"
     data-button-text="Sign up v 2!"
     data-xuser="userctrl.newUser"
@@ -51,7 +51,7 @@ ng-hide="!y"
  </user-sign-up-form-page-one>
 
   <user-sign-up-form-page-one
-      ng-if = "this.storedVehicle"
+    ng-if = "userctrl.storedVehicle"
   ng-hide="!y"
 
   data-button-text="Join today!"
@@ -83,7 +83,7 @@ ng-hide="!y"
 </div>
 
 
-<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Cancel</button>
+<button class="btn btn-primary" type="button" ng-click="userctrl.close()">Cancel</button>
 
 
 </div>

@@ -1,38 +1,35 @@
 
 module.exports = function(app) {
-  app.controller('signInButtonController', ['$uibModal', '$log', '$document', '$http', function($uibModal, $log, $document, $http) {
+  app.controller('signInButtonController', ['$uibModal', '$log', '$document', '$http', 'modalService', function($uibModal, $log, $document, $http, modalService ) {
+
+    console.log('sign in button controller');
+
+    this.service = modalService;
     var that = this;
 
     this.open = function(parentSelector) {
-      var parentElem = parentSelector ?
-             angular.element($document[0].querySelector('.modal-login ' + parentSelector)) : undefined;
 
-      var modalInstance = $uibModal.open({
+
+      this.modalObj = {
         templateUrl: 'templates/modal/directives/modal_sign_in.html',
         controller: 'signInController',
-        controllerAs: '$ctrl',
-        appendTo: parentElem
-      });
+        controllerAs: 'userctrl'
 
-      modalInstance.result.then(function() {
-        console.log('dismissed');
-      }, function() {
-        $log.info('Modal dismissed at: ' + new Date());
-      });
-
-      that.exit = function() {
-        modalInstance.result.then(function() {
-          console.log('dismissed');
-        });
       };
 
+      var modalInstance = $uibModal.open(this.modalObj);
+      this.pass = function(modalInstance) {
+        console.log(modalInstance);
+        modalService.pass(modalInstance);
+      };
+
+
+      this.pass(modalInstance);
+    //   modalInstance.result.then(() => {
+    //     console.log('dismissed it');
+    //   });
+
     };
-
-
-    // //////////
-
-
-    // /////////
 
 
   }]);

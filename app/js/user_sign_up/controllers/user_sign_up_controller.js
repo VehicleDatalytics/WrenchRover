@@ -1,8 +1,33 @@
 
 var baseUrl = require('../../config').baseUrl;
 
+var modalObj = require('../../modalObject').modalObj;
+
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', '$q', function(Resource, $http, $state, wrError, $q) {
+  app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', 'modalService', '$uibModal', function(Resource, $http, $state, wrError, modalService, $uibModal) {
+    var that = this;
+    this.msg = 'Create New Account';
+    this.errorMsg = null;
+
+
+    this.service = modalService;
+    console.log(modalService.instance);
+
+    this.closeModal = function() {
+      console.log('pastoral');
+      console.log(modalService.instance);
+      modalService.instance.close();
+    };
+
+
+    function display() {
+      that.errorMsg = 'not here!';
+      console.log('erroring');
+    }
+
+
+    $ctrl = this;
+
     console.log('user sign up controller open');
 
     this.users = [];
@@ -28,7 +53,7 @@ module.exports = function(app) {
       return z != null;
     });
 
-    console.log(arrFilter);
+    // console.log(arrFilter);
 
     this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
 
@@ -74,6 +99,13 @@ module.exports = function(app) {
         // console.log(config);
         // this.auto.user_id = res.data.id;
         window.localStorage.user_id = res.data.id;
+      })
+      .catch((res) => {
+        this.errorMsg = 'already taken';
+
+        // display();
+        console.log(res.data.user_email[0]);
+
       })
       .then(() => {
         console.log(resource);
@@ -221,7 +253,16 @@ module.exports = function(app) {
             this.message = 'Thank you for signing up!';
             console.log(JSON.parse(localStorage.getItem('service_requests')));
             $state.go('user_dashboard');
+            // console.log('closing');
+            // that.closeModal();
+          })
+
+          .then(() => {
+            console.log('closing');
+            that.closeModal();
           });
+
+
         });
 
       });
@@ -230,6 +271,7 @@ module.exports = function(app) {
     }.bind(this);
 
     this.logIn = function(resource) {
+      console.log('logging in');
       console.log(this.login.user_email);
 
       $http.post(baseUrl + 'authenticate', resource)
@@ -277,14 +319,29 @@ module.exports = function(app) {
       })
       .catch((res) => {
         this.message = 'Sorry, either your email or your password was wrong. Try again.';
+      })
+
+      .then(() => {
+
+
+        if (this.message === 'Sorry, either your email or your password was wrong. Try again.') {
+          console.log('sorry again');
+        } else {
+
+          that.closeModal();
+        }
+
       });
 
 
     };
 
+
     this.logout = function() {
       console.log('logging out');
       $http.defaults.headers.common.Authorization = '';
+      localStorage.clear();
+      $state.go('vehicle_dropdown_selection');
     };
 
   }]);
