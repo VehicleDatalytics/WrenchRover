@@ -24,6 +24,7 @@ module.exports = exports = function(app) {
     };
 
     Resource.prototype.getVehicleTrims = function() {
+
       return $http.get(this.url + this.vehicle.make.niceName + '/' +
                       this.vehicle.model.niceName + '/' + this.vehicle.year)
       .then( (res) => {
@@ -59,6 +60,7 @@ module.exports = exports = function(app) {
     Resource.prototype.getVin = function() {
       return $http.get(this.url + 'vin/vin/vin/' + this.vehicle.vin)
       .then( (res) => {
+        console.log(res);
         this.vehicle.make = { name: '' };
         this.vehicle.model = { name: '' };
         this.vehicle.trim = { name: '' };
@@ -68,6 +70,9 @@ module.exports = exports = function(app) {
         this.vehicle.trim.name = res.data.trim;
         if (res.data.engine) this.vehicle.engine = res.data.engine;
         console.log(this.vehicle);
+      })
+      .catch((error) => {
+        console.log(error);
       });
     };
 
