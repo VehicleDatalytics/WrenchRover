@@ -1,5 +1,5 @@
 module.exports = exports = function(app) {
-  app.factory('edmundsVehicleListResource', ['$http', 'wrHandleError', function($http, errorHandler) {
+  app.factory('edmundsVehicleListResource', ['$http', 'wrHandleError', '$state', function($http, errorHandler, $state) {
     var Resource = function(vehicleObject, vehicleListOptions, errors) {
       this.vehicle = vehicleObject;
       this.vehicleListOptions = vehicleListOptions;
@@ -68,12 +68,43 @@ module.exports = exports = function(app) {
         this.vehicle.make.name = res.data.make;
         this.vehicle.model.name = res.data.model;
         this.vehicle.trim.name = res.data.trim;
+        this.vehicle.mileage = this.vehicle.mileage;
         if (res.data.engine) this.vehicle.engine = res.data.engine;
         console.log(this.vehicle);
       })
       .catch((error) => {
         console.log(error);
+      })
+      .then(() => {
+        window.localStorage.vehicle = JSON.stringify(this.vehicle);
+        console.log(localStorage.getItem('vehicle'));
+          // ////
+
+
+        if (localStorage.getItem('token')) {
+          console.log('there is a token');
+          this.auto = {
+            year: this.vehicle.year,
+            make: this.vehicle.make.name,
+            model: this.vehicle.model.name,
+            trim: this.vehicle.trim.name,
+            engine: this.vehicle.engine,
+            mileage: this.vehicle.mileage,
+            user_id: localStorage.getItem('user_id'),
+            service_request_id: null
+          };
+          $http.post(baseUrl + 'autos', this.auto)
+            .then( (config) => {
+              console.log(config);
+            });
+          $state.go('user_dashboard');
+        } else {
+          console.log('there is not a token');
+          $state.go('common_repairs_view.get_started');
+        }
       });
+
+
     };
 
     return Resource;
