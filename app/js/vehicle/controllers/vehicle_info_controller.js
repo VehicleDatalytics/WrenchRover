@@ -3,6 +3,7 @@ var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
   app.controller('VehicleInfoController', ['edmundsVehicleListResource', 'vicClearSelections', '$state', '$http', function(Resource, ClearSelections, $state, $http) {
     this.cookies = navigator.cookieEnabled;
+
     this.vehicleObject = {
       year: '',
       make: '',
@@ -48,6 +49,7 @@ module.exports = exports = function(app) {
       }
       window.localStorage.vehicle = JSON.stringify(this.vehicleObject);
       console.log(this.vehicleObject);
+      console.log(localStorage.getItem('vehicle'));
 
       if (localStorage.getItem('token')) {
         console.log('there is a token');
@@ -62,7 +64,7 @@ module.exports = exports = function(app) {
           service_request_id: null
         };
         $http.post(baseUrl + 'autos', this.auto)
-        .success( (config) => {
+        .then( (config) => {
           console.log(config);
         });
         $state.go('user_dashboard');
@@ -72,7 +74,9 @@ module.exports = exports = function(app) {
       }
     };
 
+
     this.logVehicle = function() {
+
       console.log(this.vehicleObject);
     };
 
