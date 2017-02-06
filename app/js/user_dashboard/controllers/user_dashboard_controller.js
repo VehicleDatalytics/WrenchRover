@@ -7,6 +7,8 @@ module.exports = exports = function(app) {
     var vm = this;
     vm.positions = [];
     var loc_obj = {};
+    this.url = 'https://wrenchroverapi.herokuapp.com/';
+    this.tempMessage = 'temporary message';
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
       '../../../images/map_icons/number_2.png',
@@ -22,7 +24,6 @@ module.exports = exports = function(app) {
     });
 
 
-    var that = this;
     this.user_id = JSON.parse(localStorage.getItem('user_id'));
     console.log(this.user_id);
     this.arr = [];
@@ -31,10 +32,9 @@ module.exports = exports = function(app) {
 
     this.service_requestObj = JSON.parse(localStorage.getItem('service_requests'));
 
-    console.log(this.service_requestObj);
     this.service_request_id = JSON.parse(localStorage.getItem('service_request_id'));
 
-    this.url = 'https://wrenchroverapi.herokuapp.com/';
+
     this.userObject = {};
 
     this.sq_object = [];
@@ -54,10 +54,6 @@ module.exports = exports = function(app) {
     };
 
 
-    console.log(this.arr);
-    this.errors = [];
-
-    console.log(this.arr);
     console.log(this.service_object_thing);
 
     this.addRequest = function(x) {
@@ -66,7 +62,7 @@ module.exports = exports = function(app) {
       $state.go('common_repairs_view.get_started');
     };
 
-    // /////
+
     this.getUserInfo = function() {
       console.log('initting the ud');
       this.user_id = JSON.parse(localStorage.getItem('user_id'));
@@ -107,15 +103,18 @@ module.exports = exports = function(app) {
           'June', 'July', 'August', 'September', 'October',
           'November', 'December'];
         var memberDate = monthsArray[month - 1] + ' ' + year;
-        console.log(memberDate);
+
 
         this.userObject.memberSince = memberDate;
         this.memberSince = memberDate;
-        console.log(this.userObject.memberSince);
-
         this.userObject = res.data;
         console.log(this.userObject);
-        // console.log(res.data.autos[0]);
+
+
+        var reqs = this.userObject.service_requests[0].work_request;
+
+        this.userObject.pipedRequests = reqs.replace(',', ' | ');
+
         this.userObject.autos = res.data.autos;
         console.log(this.userObject.autos);
 
@@ -126,24 +125,21 @@ module.exports = exports = function(app) {
 
       .catch((res) => {
         console.log(res);
-        console.log('error is here');
+        console.log('error');
       })
 
       .then(() => {
         console.log(this.sr_id);
         $http.get(this.url + 'service_requests/' + this.sr_id)
         .then((res) => {
-          console.log(res.data);
+
           this.service_object_thing = res.data;
           console.log(res.data.service_quotes);
           if (res.data.service_quotes.length >= 1) {
             console.log(res.data.service_quotes[0].id);
             this.arr = res.data;
             console.log(this.arr);
-
             this.service_quotes = res.data.service_quotes;
-
-            console.log(this.service_quotes);
 
             $http.get(this.url + 'service_quotes')
             .then((res) => {
@@ -156,9 +152,12 @@ module.exports = exports = function(app) {
                 if (res.data[i].service_request_id == this.sr_id) {
 
                   console.log(res.data[i]);
-                  var loc_obj = { id: res.data[i].service_center.service_name, cost: res.data[i].quote_cost, notes: res.data[i].quote_text, available_date_1: res.data[i].available_date_1, available_date_2: res.data[i].available_date_2, available_date_3: res.data[i].available_date_3,
+                  var loc_obj = {
+                    id: res.data[i].service_center.service_name,
+                    cost: res.data[i].quote_cost,
+                    notes: res.data[i].quote_text,
+                    available_date_1: res.data[i].available_date_1, available_date_2: res.data[i].available_date_2, available_date_3: res.data[i].available_date_3,
                     pos:
-
                      res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
                     quote_id: res.data[i].id,
                     cost: res.data[i].quote_cost,
@@ -189,8 +188,6 @@ module.exports = exports = function(app) {
               }
 
               console.log(vm.positions);
-
-              console.log(vm.positions);
               console.log(vm.positions.length);
 
               vm.shop = vm.positions[0];
@@ -210,35 +207,25 @@ module.exports = exports = function(app) {
 
               console.log(this.service_quotes_table);
 
-              that.value = '';
-              that.newValue = function(value, x) {
-                console.log(value);
-                // console.log(this.x);
-                console.log(x);
+              vm.value = '';
+              vm.newValue = function(value, x) {
+
               };
 
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
 
               console.log(this.service_quotes_all);
 
-              this.testConfirm = function() {
-                console.log('testing confirm ');
-                console.log(this.available_date);
-              };
 
               this.available_date = 1;
+
               this.confirm = function(value, x, y) {
-                console.log(this.available_date);
-                console.log(value);
-                console.log(x);
-                console.log(y);
                 this.sq_obj = y;
                 this.sq_obj.accepted = this.available_date;
-                console.log(this.sq_obj);
-                console.log(this.sq_obj.id);
+
                 console.log(window.localStorage.token);
                 $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
-                .success((res) => {
+                .then((res) => {
                   console.log(res);
                 });
               };

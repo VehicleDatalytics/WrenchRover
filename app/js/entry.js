@@ -91,7 +91,7 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
 
 .state('user_dashboard', {
   url: '/dashboard',
-  templateUrl: 'templates/user/views/user_dashboard.html',
+  templateUrl: 'templates/user/views/user_dashboard2.html',
   controller: 'UserDashboardController',
   controllerAs: 'UserDashboardController'
 })
@@ -134,13 +134,20 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controller: 'mapController',
   controllerAs: 'vm'
 })
-// .state('user_dashboard.map_view', {
-//   url: '/getmap',
-//   templateUrl: 'templates/maps/views/map_view.html',
-//   controller: 'mapController',
-//   controllerAs: 'vm'
-// })
 
+.state('user_dashboard.pending', {
+  url: '/pending',
+  templateUrl: 'templates/user/views/pending.html',
+  controller: 'UserDashboardController',
+  controllerAs: 'UserDashboardController'
+})
+
+.state('user_dashboard.history', {
+  url: '/history',
+  templateUrl: 'templates/user/views/history.html',
+  controller: 'UserDashboardController',
+  controllerAs: 'UserDashboardController'
+})
 
 ;
   $urlRouterProvider.otherwise('/');
