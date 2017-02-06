@@ -7,10 +7,6 @@ module.exports = function(app) {
     };
 
     var count = 0;
-    // this.captured_dates = [];
-
-
-    // this.mytime = new Date().setHours(0);
 
     this.ismeridian = true;
 
@@ -113,33 +109,17 @@ module.exports = function(app) {
     };
 
 
-    this.createQuote = function(x, y, z, d, e, f) {
+    this.createQuote = function(sc_user_id, scquote, sc_id) {
+      console.log(sc_user_id, scquote, sc_id);
         // x = user_id, y = scquote, z = sample.id, d/e/f = mytime(1-3)
       console.log('creating the quote');
-      console.log(x, y, z, d, e, f);
+    //   console.log(x, y, z, d, e, f);
       this.times = [];
 
-      if (d != undefined && e != undefined && f != undefined) {
-        var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
+      this.message = 'Thank you';
+      scCommService.createQuote(sc_user_id, scquote, sc_id);
 
-        var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
-        var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
 
-        this.times.push(h, i, j);
-        console.log(this.times);
-        console.log(d.toLocaleTimeString());
-        console.log(e.toLocaleTimeString());
-        console.log(f.toLocaleTimeString());
-        console.log(this.selectedDates);
-        console.log(this.quote_cost);
-
-    //   scCommService.createQuote(x, y, z, this.selectedDates, this.times);
-        this.message = 'Thank you';
-        scCommService.createQuote(x, y, z, this.selectedDates, this.times);
-      } else {
-        console.log('times are undefined');
-        this.message = 'Please, select three dates and times';
-      }
     };
 
 

@@ -11,29 +11,13 @@ module.exports = function(app) {
 
 
     this.service = modalService;
-    console.log(modalService.instance);
-
     this.closeModal = function() {
-      console.log('pastoral');
-      console.log(modalService.instance);
       modalService.instance.close();
     };
-
-
-    function display() {
-      that.errorMsg = 'not here!';
-      console.log('erroring');
-    }
-
-
-    $ctrl = this;
-
-    console.log('user sign up controller open');
 
     this.users = [];
     this.errors = [];
     this.allProblems = null;
-
     this.previousItem;
     this.localStorageOil;
     this.localStorageDash;
@@ -53,7 +37,6 @@ module.exports = function(app) {
       return z != null;
     });
 
-    // console.log(arrFilter);
 
     this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
 
@@ -91,24 +74,14 @@ module.exports = function(app) {
       };
       $http.post(baseUrl + 'users', this.x)
       .then((res) => {
-
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.id);
-        console.log(res.data.user_email);
-        // console.log(config);
-        // this.auto.user_id = res.data.id;
         window.localStorage.user_id = res.data.id;
       })
       .catch((res) => {
         this.errorMsg = 'already taken';
-
-        // display();
         console.log(res.data.user_email[0]);
 
       })
       .then(() => {
-        console.log(resource);
         $http.post(baseUrl + 'authenticate', resource)
       .then((res) => {
 
@@ -133,6 +106,7 @@ module.exports = function(app) {
       var arr = [this.previouslyEntered, this.localStorageOil, this.localStorageChosen, this.localStorageDash];
 
       var arrFilter = arr.filter((z) => {
+        console.log(z);
         return z != null;
       });
       console.log(arr);
@@ -166,8 +140,6 @@ module.exports = function(app) {
     // user sign up via user flow
 
     this.createUser = function(resource) {
-      console.log('original');
-      console.log(resource);
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
         if (Array.isArray(arrFilter[i])) {
@@ -175,76 +147,41 @@ module.exports = function(app) {
         } else this.requests.push(arrFilter[i]);
       }
       this.serviceRequests.work_request = this.requests.toString();
-      console.log(this.serviceRequests);
-
       this.x = {
         user: resource
       };
-
-      console.log(this.x);
       $http.post(baseUrl + 'users', this.x)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.id);
-        console.log(res.data.user_email);
-          // console.log(config);
         this.auto.user_id = res.data.id;
         this.serviceRequests.user_id = res.data.id;
-        console.log(res.data.id);
-        console.log(this.serviceRequests);
-
         window.localStorage.user_id = res.data.id;
       })
       .then(() => {
         $http.post(baseUrl + 'authenticate', resource)
         .then((res) => {
-
-          console.log(res);
-          console.log(res.data.auth_token);
-
           res.config.headers.Authorization = res.data.auth_token;
           this.token = res.data.auth_token;
-
-
-          console.log(this.token);
           window.localStorage.token = this.token;
           $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-
-
-          console.log($http.defaults.headers.common.Authorization);
         })
 
      .catch((error, status) => {
        console.log('error');
+       console.log(error);
        this.data.error = { message: error, status: status };
-       console.log(this.data.error.status);
      })
         .then(() => {
-          console.log(this.serviceRequests);
           $http.post(baseUrl + 'service_requests', this.serviceRequests)
           .then((res) => {
-            console.log(res);
             window.localStorage.service_requests = JSON.stringify(res.data.work_request);
             this.auto.service_request_id = res.data.id;
             window.localStorage.service_request_id = res.data.id;
-            console.log(localStorage.getItem('service_requests'));
-            console.log(this.auto.service_request_id);
-            console.log(res.data.id);
           })
 
           .then(() => {
-            console.log('auto ing');
-            console.log(this.auto);
             $http.post(baseUrl + 'autos', this.auto)
             .then((res) => {
-              console.log(res);
-              console.log(this.auto);
-
-              console.log(window.localStorage.service_requests);
-
               this.srthing = JSON.parse(localStorage.getItem('service_requests'));
-              console.log(this.srthing);
 
             });
           })
@@ -253,8 +190,6 @@ module.exports = function(app) {
             this.message = 'Thank you for signing up!';
             console.log(JSON.parse(localStorage.getItem('service_requests')));
             $state.go('user_dashboard');
-            // console.log('closing');
-            // that.closeModal();
           })
 
           .then(() => {
@@ -284,20 +219,15 @@ module.exports = function(app) {
         this.token = res.data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
-        //
         window.localStorage.token = this.token;
-        //
         window.localStorage.user_id = res.data.user_id;
-
-        // console.log(resource);
-        // console.log(resource.user_email);
-        // console.log(this.login.user_email);
         this.signedInUser = resource.user_email;
         // var x = data.user_id.toString();
         this.user_id = res.data.user_id;
 
         $http.get(baseUrl + 'users/' + this.user_id )
         .then((res) => {
+          console.log('yes');
 
           console.log(this.signedInUser);
           if (res.data.service_requests.length !== 0 && res.data.autos.length !== 0) {
@@ -311,6 +241,7 @@ module.exports = function(app) {
       .then((res) => {
         console.log(res);
         if (localStorage.getItem('service_requests')) {
+          console.log('GOING TO THE DASHBOARD!');
           $state.go('user_dashboard');
         } else {
           console.log('Should go to mechanic');

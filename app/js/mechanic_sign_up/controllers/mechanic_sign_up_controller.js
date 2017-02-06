@@ -12,10 +12,9 @@ module.exports = function(app) {
     var that = this;
 
     this.service = modalService;
-    console.log(modalService.instance);
+    // console.log(modalService.instance);
 
     this.closeModal = function() {
-      console.log('pastoral');
       console.log(modalService.instance);
       modalService.instance.close();
     };
@@ -33,7 +32,6 @@ module.exports = function(app) {
 
       $http.post(baseUrl + 'users', this.x)
     .then((res) => {
-      console.log(res);
       window.localStorage.user_id = res.data.id;
     })
     .then(() => {
@@ -57,7 +55,6 @@ module.exports = function(app) {
         $state.go('sc_portal_view.pending_view');
       })
       .then(() => {
-        console.log('closing');
         that.closeModal();
       });
 
@@ -71,22 +68,16 @@ module.exports = function(app) {
       $http.post(baseUrl + 'authenticate', resource)
       .then((res) => {
         this.message = 'Welcome back! Taking you to your portal now!';
-        console.log(res);
-
         res.headers.Authorization = res.data.auth_token;
         this.token = res.data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
         window.localStorage.token = this.token;
-        console.log(resource);
-        console.log(resource.user_email);
-        console.log(this.mech.user_email);
         this.signedInUser = resource.user_email;
       })
     .then(() => {
       $http.get(baseUrl + 'service_centers').
       then((res) => {
-        console.log(this.signedInUser);
         for (var i = 0; i < res.data.length; i++) {
           if (res.data[i].service_email === this.signedInUser) {
             window.localStorage.user_id = res.data[i].id;
@@ -104,7 +95,6 @@ module.exports = function(app) {
       this.message = 'Sorry, either your email or your password was wrong. Try again.';
     })
     .then(() => {
-      console.log('closing');
       that.closeModal();
     });
 
