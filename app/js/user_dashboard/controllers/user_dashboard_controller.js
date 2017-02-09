@@ -76,16 +76,11 @@ module.exports = exports = function(app) {
       $http.get(this.url + 'users/' + this.user_id)
       .then((res) => {
         console.log(res);
+        // get user's car:
         this.storedVehicle = {
-          make: {
-            name: res.data.autos[0].make
-          },
-          model: {
-            name: res.data.autos[0].model
-          },
-          trim: {
-            name: res.data.autos[0].trim
-          },
+          make: { name: res.data.autos[0].make },
+          model: { name: res.data.autos[0].model },
+          trim: { name: res.data.autos[0].trim },
           mileage: res.data.autos[0].mileage,
           id: res.data.autos[0].id,
           user_id: res.data.autos[0].user_id,
@@ -95,8 +90,7 @@ module.exports = exports = function(app) {
 
         window.localStorage.auto_id = this.storedVehicle.id;
         console.log(localStorage.getItem('token'));
-
-        // dashboardResource.calculateMemberDate = function(res) {
+        //  get user's date of signup:
         var month = parseInt(res.data.created_at.slice(5, 7), 10);
         var year = res.data.created_at.slice(0, 4);
         var monthsArray = ['January', 'February', 'March', 'April', 'May',
@@ -112,29 +106,26 @@ module.exports = exports = function(app) {
 
 
         var reqs = this.userObject.service_requests[0].work_request;
-
         this.userObject.pipedRequests = reqs.replace(',', ' | ');
-
         this.userObject.autos = res.data.autos;
-        console.log(this.userObject.autos);
-
-        console.log(res.data.service_requests[0].id);
         this.sr_id = res.data.service_requests[0].id;
         console.log(this.sr_id);
       })
-
       .catch((res) => {
         console.log(res);
         console.log('error');
       })
-
       .then(() => {
-        console.log(this.sr_id);
         $http.get(this.url + 'service_requests/' + this.sr_id)
+
+    // ///////////    //
         .then((res) => {
+          console.log(res);
+
 
           this.service_object_thing = res.data;
           console.log(res.data.service_quotes);
+
           if (res.data.service_quotes.length >= 1) {
             console.log(res.data.service_quotes[0].id);
             this.arr = res.data;
@@ -148,9 +139,9 @@ module.exports = exports = function(app) {
               console.log(this.service_request_id);
               console.log(this.sr_id);
               this.obj_quote = this.service_quotes_table[0];
+
               for (var i = 0; i < res.data.length; i++) {
                 if (res.data[i].service_request_id == this.sr_id) {
-
                   console.log(res.data[i]);
                   var loc_obj = {
                     id: res.data[i].service_center.service_name,
@@ -167,20 +158,17 @@ module.exports = exports = function(app) {
                   };
 
                   this.user_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
-
                   vm.positions.push(loc_obj);
                   console.log(loc_obj);
-
                   console.log(vm.positions);
-
                   this.avail_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
-
                   this.service_quotes_table.push(res.data[i]);
-
                   console.log(this.avail_dates);
-                //   return loc_obj;
                 }
-              }
+
+              } // for loop ends
+
+
               console.log(loc_obj);
               for (var j = 0; j < vm.positions.length; j++) {
                 vm.positions[j].map_icon_pics = map_icons[j];
@@ -195,7 +183,6 @@ module.exports = exports = function(app) {
 
               vm.showDetail = function(e, shop) {
                 console.log(shop);
-                // console.log(shop.id);
                 vm.shop = shop;
                 vm.map.showInfoWindow('foo-iw', shop.id);
                 console.log(vm.map);
@@ -205,38 +192,30 @@ module.exports = exports = function(app) {
                 vm.map.hideInfoWindow('foo-iw');
               };
 
-              console.log(this.service_quotes_table);
-
               vm.value = '';
-              vm.newValue = function(value, x) {
-
-              };
+              vm.newValue = function(value, x) {};
 
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
 
               console.log(this.service_quotes_all);
-
-
               this.available_date = 1;
 
-              this.confirm = function(value, x, y) {
-                this.sq_obj = y;
-                this.sq_obj.accepted = this.available_date;
-
-                console.log(window.localStorage.token);
-                $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
-                .then((res) => {
-                  console.log(res);
-                });
-              };
+            //   this.confirm = function(value, x, y) {
+            //     this.sq_obj = y;
+            //     this.sq_obj.accepted = this.available_date;
+              //
+            //     // console.log(window.localStorage.token);
+            //     $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
+            //     .then((res) => {
+            //       console.log(res);
+            //     });
+            //   };
 
             });
 
           } else {
             console.log('nope');
           }
-
-
         });
 
 
