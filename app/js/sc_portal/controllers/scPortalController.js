@@ -79,6 +79,7 @@ module.exports = function(app) {
       _this.selectedDates.splice(_this.selectedDates.indexOf(dt), 1);
 
       _this.activeDate = dt;
+
       console.log(this.selectedDates);
       console.log(_this.selectedDates);
       console.log(this.selectedDates.length);

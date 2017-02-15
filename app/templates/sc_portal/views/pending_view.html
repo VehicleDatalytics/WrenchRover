@@ -1,5 +1,19 @@
 
 <section ng-init = "portal.getAll()">
+
+<!-- /////////// -->
+
+
+<!-- <cal-dir></cal-dir> -->
+
+
+
+<!-- ///////////// -->
+
+
+
+
+
 <div class="container">
   <div class="row" ng-repeat="sample in portal.servicerequests">
      <p class="col-xs-12 col-md-12 col-sm-12">{{sample.created_at}}. {{sample.work_request}}</p>
@@ -12,25 +26,6 @@
          </div>
 
 
-                <div class="col-xs-3">Time
-                  <div  ng-hide = "portal.selectedDates[0] == undefined" class= "col-md-3 col-sm-3 col-xs-3" >
-                      Day 1: <p ng-if = "portal.selectedDates.length > 0" ng-init = "portal.date1 =portal.capture(portal.selectedDates[i], portal.i)">{{portal.date1}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
-
-                      <div  uib-timepicker ng-model="portal.mytime" show-meridian="portal.ismeridian"></div>
-                      </div>
-
-
-                            <div class= "col-md-3 col-sm-3 col-xs-3">
-                              Day 2: <p ng-if = "portal.selectedDates.length > 1" ng-init = "portal.date2 = portal.capture(portal.selectedDates[1])">{{portal.date2}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
-
-                            <div uib-timepicker ng-model="portal.mytime2" show-meridian="portal.ismeridian"></div>
-                            </div>
-                            <div ng-hide = "portal.selectedDates[2] == undefined"  class= "col-md-3 col-sm-3 col-xs-3">
-                                Day 3: <p ng-if = "portal.selectedDates.length > 2" ng-init = "portal.date3  = portal.capture(portal.selectedDates[2])">{{portal.date3}}   <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='portal.removeFromSelected(d)'>x</button></p>
-                              <div uib-timepicker ng-model="portal.mytime3" show-meridian="portal.ismeridian"></div>
-                              </div>
-
-                            </div>
                 </div>
 
       <div class="col-xs-3">
@@ -40,8 +35,12 @@
           <p>
             <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost"></p>
 
+          <!-- <p>
+          <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p> -->
+
           <p>
-          <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p>
+          <textarea type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text">
+          </textarea></p>
 
           <button type = "submit"
 
@@ -51,7 +50,10 @@
 
 
 </div>
+
+          <cal-dir></cal-dir>
           </div>
+
 
 </div>
 </section>

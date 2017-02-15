@@ -1,5 +1,5 @@
 module.exports = exports = function(app) {
-  require('./controllers')(app);
+  require('./compController.js')(app);
   // require('./components')(app);
 
 };

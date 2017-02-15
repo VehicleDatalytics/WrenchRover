@@ -13,7 +13,15 @@ module.exports = function(app) {
         controllerAs: 'userctrl'
       };
 
-      var modalInstance = $uibModal.open(this.modalObj);
+      var modalInstance = $uibModal.open(
+        {
+          templateUrl: 'templates/modal/directives/modal_sign_in.html',
+          controller: 'signInController',
+          controllerAs: 'userctrl'
+        }
+
+
+      );
       this.pass = function(modalInstance) {
         modalService.pass(modalInstance);
       };

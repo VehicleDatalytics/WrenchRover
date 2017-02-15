@@ -24,6 +24,10 @@ require('./nav')(wrApp);
 require('./modal_button_sign_in')(wrApp);
 require('./modal_window_sign_in')(wrApp);
 require('./sc_portal')(wrApp);
+require('./time')(wrApp);
+require('./datemodal')(wrApp);
+require('./newcal')(wrApp);
+require('./componentCtrl')(wrApp);
 
 
 wrApp.config(($stateProvider, $urlRouterProvider) => {
