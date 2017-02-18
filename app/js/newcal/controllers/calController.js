@@ -25,8 +25,7 @@ module.exports = function(app) {
     this._month = d.getMonth();
 
     this._day = d.getDay();
-       //  this._date = d.getDate();
-    this._date = 18;
+    this._date = d.getDate();
     this._today = this.week[this._day];
 
     this._year = d.getFullYear();

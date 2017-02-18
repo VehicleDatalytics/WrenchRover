@@ -10,7 +10,7 @@ module.exports = function(app) {
       timesArr: [],
       instance: this.instance,
       d: new Date(),
-            // _month: this.d.getMonth() + 1,
+
 
       pass: function(x) {
         this.instance = x;

@@ -1,7 +1,7 @@
 
 var baseUrl = require('../../config').baseUrl;
 module.exports = function(app) {
-  app.controller('scPortalController', ['$http', 'scCommService', function($http, scCommService) {
+  app.controller('scPortalController', ['$http', 'scCommService', 'modalService', function($http, scCommService, modalService) {
     this.initfunction = function() {
       console.log('iniTting the functions!!!!!');
     };
@@ -18,6 +18,8 @@ module.exports = function(app) {
     };
 
     this.service = scCommService;
+    this.modalService = modalService;
+
     this.servicerequests = [];
     this.workrequests = [];
     this.servicequotes = [];
@@ -110,19 +112,22 @@ module.exports = function(app) {
     };
 
 
-    this.createQuote = function(sc_user_id, scquote, sc_id) {
-      console.log(sc_user_id, scquote, sc_id);
-        // x = user_id, y = scquote, z = sample.id, d/e/f = mytime(1-3)
-      console.log('creating the quote');
-    //   console.log(x, y, z, d, e, f);
-      this.times = [];
+    this.createQuote = function(sc_user_id, scquote, sc_id, appt_array) {
+      console.log(sc_user_id, scquote, sc_id, appt_array);
+      this.quote_object = scquote;
+      this.quote_object.available_date_1 = appt_array[0];
+      this.quote_object.available_date_2 = appt_array[1];
+      this.quote_object.available_date_3 = appt_array[2];
+      this.quote_object.service_center_id = JSON.parse(localStorage.getItem('service_center_id'));
+      this.quote_object.service_request_id = sc_id;
+      console.log(this.quote_object);
 
-      this.message = 'Thank you';
-      scCommService.createQuote(sc_user_id, scquote, sc_id);
-
-
+      $http.post(baseUrl + 'service_quotes', this.quote_object)
+      .then((res) => {
+        console.log('success!');
+        console.log(res);
+      });
     };
-
 
     this.getPastBids = function() {
       this.service_center_id = localStorage.getItem('service_center_id');

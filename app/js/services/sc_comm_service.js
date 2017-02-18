@@ -5,17 +5,12 @@
 
         return {
 
-          addDates: function(x) {
-            console.log(x);
-            console.log(x[0], x[1], x[2]);
-            console.log('adding dates');
-            for (var i = 0; i < x.length; i++) {
-              console.log(new Date(x[i]));
-            //   this.arr.push(new Date(x[i]));
-            }
 
-          },
           createQuote: function(x, y, z) {
+            // x = sc_user_id;
+            // y = scquote = text, price;
+            // z = apptarray;
+
 
             this.quoteObj = x;
             console.log(x, y, z);
@@ -24,12 +19,6 @@
             this.quote_X = y;
             this.quote_X.user_id = x;
 
-
-            function trimTheDate(date, item) {
-              var convertedDate = new Date(a[item]);
-              var trimDate = convertedDate.toString().slice(0, 10);
-              return trimDate;
-            }
 
             //
             // this.quote_X.available_date_1 = trimTheDate(a[0], 0) + ' at ' + times[0];
