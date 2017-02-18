@@ -1,17 +1,6 @@
 
 <section ng-init = "portal.getAll()">
 
-<!-- /////////// -->
-
-
-<!-- <cal-dir></cal-dir> -->
-
-
-
-<!-- ///////////// -->
-
-
-
 
 
 <div class="container">
@@ -35,23 +24,27 @@
           <p>
             <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost"></p>
 
-          <!-- <p>
-          <input type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text"></p> -->
 
           <p>
           <textarea type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text">
           </textarea></p>
 
+
+          <!-- ///////////calendar//////// -->
+
+    <cal-dir></cal-dir>
+                    <!-- ///////////calendar//////// -->
+
           <button type = "submit"
 
-       ng-click="portal.createQuote(sample.user_id, scquote, sample.id)" btn btn-default> Place Bid</button>
+       ng-click="portal.createQuote(sample.user_id, scquote, sample.id, portal.modalService.apptArr)" btn btn-default> Place Bid</button>
         </form>
         </div>
 
 
 </div>
 
-          <cal-dir></cal-dir>
+
           </div>
 
 
