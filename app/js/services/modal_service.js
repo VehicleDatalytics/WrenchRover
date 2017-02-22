@@ -14,17 +14,14 @@ module.exports = function(app) {
 
       pass: function(x) {
         this.instance = x;
+        console.log(x);
         return this.instance;
       },
+
       addDate: function(x, month, today) {
-        console.log(month);
-        console.log(today);
-
-        console.log(this.mo);
-
 
         if (this.mo - 13 < today < this.mo && x <= 13) {
-          console.log('yes');
+
           this.the_month = month + 1;
         } else {
           this.the_month = month;
@@ -38,22 +35,20 @@ module.exports = function(app) {
       },
 
       getMonthEnd: function(value) {
-        console.log(value);
+        // console.log(value);
         return this.mo = value;
 
       },
 
       pickTimes: function(value) {
 
-                // console.log(this.d);
-                // console.log(this._month);
-        console.log(this.the_month);
 
-        console.log(this.date);
         this.timesArr.push(value);
 
         this.apptArr.push(this.the_month + '/' + this.date + ' at ' + value);
         console.log(this.apptArr);
+
+
         return this.apptArr;
       }
 

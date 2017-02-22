@@ -1,10 +1,13 @@
 module.exports = function(app) {
-  app.controller('timeController', ['modalService', function(modalService) {
+  app.controller('timeController', ['modalService', '$uibModal', function(modalService, $uibModal) {
 
 
-    this.service = modalService;
+    this.modalService = modalService;
     this.closeModal = function() {
+      console.log('time close');
       modalService.instance.close();
+
+
     };
 
 

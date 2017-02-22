@@ -1,17 +1,21 @@
 <div>
 
-Hi. Today's date is {{$ctrl._month + 1}}/{{$ctrl._date}}
+Hi. Today's date is {{$ctrl._month + 1}}/{{$ctrl._date}}. Choose up to three appointment times.
+
+{{$ctrl.message}}
 <table  border="1">
   <th ng-repeat="day in $ctrl.week">{{day}}</th>
   <tr>
 
 
     <td ng-repeat="date in $ctrl.fPart">
-    <button class="btn btn-primary" ng-disabled="$ctrl.available_appts.length >= 3" ng-controller="dateOpenController as vm" ng-click="vm.pickDate(date); vm.open()">{{date}}</button></td></tr>
+    <button class="btn btn-primary"  ng-controller="dateOpenController as vm" ng-disabled="vm.modalService.apptArr.length >= 3" ng-click="vm.pickDate(date);  vm.openTimes()">{{date}}</button></td></tr>
 
 
-    <tr><td ng-repeat="date in $ctrl.nextWeek"><button class="btn btn-primary" ng-disabled="$ctrl.available_appts.length >= 3"ng-controller="dateOpenController as vm" ng-click=" vm.pickDate(date); vm.open()" >{{date}}</a></td></tr>
+    <tr><td ng-repeat="date in $ctrl.nextWeek"><button class="btn btn-primary"  ng-controller="dateOpenController as vm" ng-disabled="vm.modalService.apptArr.length >= 3" ng-click=" vm.pickDate(date);   vm.openTimes()" >{{date}}</a></td></tr>
 </table>
+
+
 
 <ul ng-repeat= "date in $ctrl.available_appts"><li>{{date}}<button ng-click="$ctrl.remove(date)">x</button></li></ul>
 
