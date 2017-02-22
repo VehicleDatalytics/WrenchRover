@@ -71,7 +71,7 @@ module.exports = exports = function(app) {
       console.log(JSON.parse(localStorage.getItem('service_requests')));
 
       $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-      console.log(localStorage.getItem('token'));
+    //   console.log(localStorage.getItem('token'));
 
       $http.get(this.url + 'users/' + this.user_id)
       .then((res) => {
@@ -199,17 +199,6 @@ module.exports = exports = function(app) {
 
               console.log(this.service_quotes_all);
               this.available_date = 1;
-
-            //   this.confirm = function(value, x, y) {
-            //     this.sq_obj = y;
-            //     this.sq_obj.accepted = this.available_date;
-              //
-            //     // console.log(window.localStorage.token);
-            //     $http.put(this.url + 'service_quotes/' + x, this.sq_obj)
-            //     .then((res) => {
-            //       console.log(res);
-            //     });
-            //   };
 
             });
 

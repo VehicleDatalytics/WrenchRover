@@ -15,14 +15,14 @@
          </div>
 
 
-                </div>
+       </div>
 
       <div class="col-xs-3">
         <p>Notes</p>
       <div class = "container">
       <form name = "authform" class = "form-horizontal" data-ng-submit = "save(scquote)" >
           <p>
-            <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost"></p>
+            <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost" required></p>
 
 
           <p>
@@ -30,10 +30,9 @@
           </textarea></p>
 
 
-          <!-- ///////////calendar//////// -->
+    <!-- <cal-dir></cal-dir> -->
+    <button ng-controller="dateOpenController as vm" ng-click="vm.openCalendar()">open calendar</button>
 
-    <cal-dir></cal-dir>
-                    <!-- ///////////calendar//////// -->
 
           <button type = "submit"
 

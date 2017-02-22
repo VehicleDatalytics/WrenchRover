@@ -1,12 +1,29 @@
 module.exports = function(app) {
   app.controller('calController', ['modalService', function(modalService) {
+    console.log('cal controlelr');
     this.service = modalService;
     this.closeModal = function() {
-      modalService.instance.close();
+      console.log(' cal controll closing');
+
+    //   console.log(modalService.instance.close);
+
+      this.modalObj = {
+        templateUrl: 'templates/datemodal/directives/calendar_open.html',
+        controller: 'compController',
+        controllerAs: 'vm'
+      };
+
+      this.service.instance.close(this.modalObj, 'aaa');
+      console.log(modalService.instance.close);
     };
+
 
     this.week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+    // this.message = 'hiiiiii';
+    if (this.service.apptArr >= 3) {
+      this.message = 'thank you for choosing 3 dates.';
+    }
 
     this.available_appts = modalService.apptArr;
     console.log(this.available_appts);
@@ -109,7 +126,7 @@ module.exports = function(app) {
 
        //  this.startingPoint();
     this.firstWeek = this.startingPoint();
-    console.log(this.firstWeek);
+    // console.log(this.firstWeek);
 // end first part// true
 
     for (var i = 1; i < _length; i++) {
@@ -142,8 +159,8 @@ module.exports = function(app) {
       }
     }
 // here
-    console.log(this.secondPart);
-    console.log(this.firstWeek);
+    // console.log(this.secondPart);
+    // console.log(this.firstWeek);
     this.fPart = this.firstWeek.concat(this.secondPart);
 
        //  console.log('second part length : ' + this.secondPart.length);

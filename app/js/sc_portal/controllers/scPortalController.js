@@ -1,33 +1,23 @@
 
 var baseUrl = require('../../config').baseUrl;
 module.exports = function(app) {
-  app.controller('scPortalController', ['$http', 'scCommService', 'modalService', function($http, scCommService, modalService) {
-    this.initfunction = function() {
-      console.log('iniTting the functions!!!!!');
-    };
+  app.controller('scPortalController', ['$http', 'modalService', '$window', function($http, modalService, $window) {
 
-    var count = 0;
 
-    this.ismeridian = true;
-
-    this.timeChange = function(value, value2, value3) {
-      console.log(value, value2, value3);
-      console.log(value.toLocaleTimeString());
-      console.log(value2.toLocaleTimeString());
-      console.log(value3.toLocaleTimeString());
-    };
-
-    this.service = scCommService;
     this.modalService = modalService;
-
     this.servicerequests = [];
     this.workrequests = [];
     this.servicequotes = [];
     this.pastbids = [];
     this.acceptedbids = [];
+    // this.message = 'hiiiiii';
+    // if (this.modalService.apptArr >= 3) {
+    //   this.message = 'thank you for choosing 3 dates.';
+    // }
 
 
     this.getAll = () => {
+      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
       $http.get(baseUrl + '/service_requests')
       .then((res) => {
         this.servicerequests = res.data;
@@ -51,67 +41,6 @@ module.exports = function(app) {
     };
 
 
-    var _this = this;
-    this.activeDate = null;
-
-    this.selectedDates = [];
-
-
-    if (this.activeDate = null) {
-      this.selectedDates.push(new Date().toLocaleDateString);
-      console.log(this.selectedDates);
-    }
-
-    this.type = 'individual';
-    this.options = {
-      customClass: function(data) {
-        if (_this.selectedDates.indexOf(data.date) > -1 && _this.selectedDates.length <= 3) {
-          return 'selected';
-        }
-        return '';
-      }
-    };
-
-
-    this.type = 'individual';
-
-    this.show2pickers = false;
-
-    this.removeFromSelected = function(dt) {
-      _this.selectedDates.splice(_this.selectedDates.indexOf(dt), 1);
-
-      _this.activeDate = dt;
-
-      console.log(this.selectedDates);
-      console.log(_this.selectedDates);
-      console.log(this.selectedDates.length);
-
-    };
-    this.i = 0;
-
-    this.capture = function(value, index) {
-      console.log(value, index);
-
-      this.i++;
-      console.log(value);
-      this.x = [];
-      this.dateConverted = new Date(value);
-      this.captured_date = this.dateConverted.toDateString().slice(0, 10);
-      return this.captured_date;
-    };
-
-
-    this.addDates = function(value) {
-
-      console.log(value);
-      if (this.selectedDates.length < 3) {
-        this.message = 'Please, pick three dates';
-      } else {
-        scCommService.addDates(value);
-      }
-    };
-
-
     this.createQuote = function(sc_user_id, scquote, sc_id, appt_array) {
       console.log(sc_user_id, scquote, sc_id, appt_array);
       this.quote_object = scquote;
@@ -124,8 +53,9 @@ module.exports = function(app) {
 
       $http.post(baseUrl + 'service_quotes', this.quote_object)
       .then((res) => {
-        console.log('success!');
         console.log(res);
+        this.modalService.appt_array = [];
+        $window.location.reload();
       });
     };
 
@@ -139,7 +69,7 @@ module.exports = function(app) {
         this.pastbids.splice(0);
         this.acceptedbids.splice(0);
         for (var i = 0; i < res.data.length; i++) {
-          console.log('loop');
+
         //   console.log(res.data[i].service_center_id);
           if (res.data[i].service_center_id !== null && res.data[i].service_center_id == this.service_center_id) {
             console.log('yes');
