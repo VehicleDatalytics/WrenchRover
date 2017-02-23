@@ -8,6 +8,7 @@ module.exports = function(app) {
     this._date = d.getDate();
     // console.log($uibModal);
 
+
     this.modalService = modalService;
 
     this.pickDate = function(value) {

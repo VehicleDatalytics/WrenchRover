@@ -3,6 +3,7 @@ module.exports = function(app) {
     console.log('this instance');
 
     this.instance = 'instance';
+    this.a = true;
     return {
 
       apptArr: [],
