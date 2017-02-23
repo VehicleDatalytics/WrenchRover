@@ -1,18 +1,19 @@
 <div>
 
-  <h1>Pick a time for {{$ctrl.service.the_month}}/ {{$ctrl.service.date}}</h1>
+  <!-- <h1>Pick a time for {{$ctrl.service.the_month}}/ {{$ctrl.service.date}}</h1> -->
+<p>pick a time</p>
 
 
   <table border= "1">
     <tr ng-repeat="item in $ctrl.times">
-      <td> <button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.pickTimes(item.colA); $ctrl.closeModal()"> {{item.colA}}</button></td>
+      <td> <button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.pickTimes(item.colA)"> {{item.colA}}</button></td>
 
-      <td><button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click= "$ctrl.pickTimes(item.colB); $ctrl.closeModal()">{{item.colB}}</button></td>
+      <td><button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click= "$ctrl.pickTimes(item.colB)">{{item.colB}}</button></td>
 
 
-      <td><button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.pickTimes(item.colC); $ctrl.closeModal()">{{item.colC}}</button></td>
+      <td><button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.pickTimes(item.colC)">{{item.colC}}</button></td>
     </tr>
   </table>
-  <button ng-click="$ctrl.closeModal()"> Close</button>
+  <!-- <button ng-click="$ctrl.closeModal()"> Close</button> -->
 
 </div>

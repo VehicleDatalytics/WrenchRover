@@ -1,27 +1,22 @@
 module.exports = function(app) {
   app.controller('calController', ['modalService', function(modalService) {
     console.log('cal controlelr');
-    this.service = modalService;
+    this.modalService = modalService;
     this.closeModal = function() {
       console.log(' cal controll closing');
 
-    //   console.log(modalService.instance.close);
 
-      this.modalObj = {
-        templateUrl: 'templates/datemodal/directives/calendar_open.html',
-        controller: 'compController',
-        controllerAs: 'vm'
-      };
+      this.modalService.instance.close();
 
-      this.service.instance.close(this.modalObj, 'aaa');
-      console.log(modalService.instance.close);
     };
 
 
     this.week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+    this.tempArr = [1, 2, 3, 4];
+
     // this.message = 'hiiiiii';
-    if (this.service.apptArr >= 3) {
+    if (this.modalService.apptArr >= 3) {
       this.message = 'thank you for choosing 3 dates.';
     }
 
@@ -191,6 +186,53 @@ module.exports = function(app) {
       this.available_appts.splice(this.available_appts.indexOf(value), 1);
 
     };
+// ///////
+
+
+    this.times = [
+      {
+        colA: '09:00',
+        colB: '12:00',
+        colC: '03:00'
+      },
+      {
+        colA: '09:30',
+        colB: '12:30',
+        colC: '03:30'
+      },
+      {
+        colA: '10:00',
+        colB: '01:00',
+        colC: '04:00'
+      },
+      {
+        colA: '10:30',
+        colB: '01:30',
+        colC: '04:30'
+      },
+      {
+        colA: '11:00',
+        colB: '02:00',
+        colC: '05:00'
+      },
+      {
+        colA: '11:30',
+        colB: '02:30',
+        colC: '05:30'
+      }
+
+
+    ];
+
+
+    this.pickTimes = function(value) {
+      console.log(value);
+      modalService.pickTimes(value);
+
+    };
+
+
+// ///////
 
 
   }
