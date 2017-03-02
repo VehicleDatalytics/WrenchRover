@@ -54,7 +54,33 @@
 			<h3>Your Maintenance</h3>
 
 			<uib-tabset active="active">
-		    <uib-tab index="0" heading="Pending">
+
+				<uib-tab index="0" heading="New Bids({{UserDashCtrl.count}})">
+					<div class="col-md-4 col-sm-12">
+						<h3>Your Location</h3>
+						<div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
+							<ng-map  default-style="true" zoom="11" center="current-location">
+						<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
+							<marker id='{{p.id}}' position="{{p.pos}}"
+							 ng-repeat="p in UserDashCtrl.positions"
+							 on-click="UserDashCtrl.showDetail(p)"
+							 icon="{{p.map_icon_pics}}"
+							 title="pos: {{p.pos}}"
+							 on-mouseover="UserDashCtrl.showDetail(p);"
+							 on-mouseout="UserDashCtrl.hideDetail()">
+							</marker>
+							<info-window id="foo-iw">
+							 <div ng-non-bindable="">
+							 {{UserDashCtrl.shop.id}}<br/>
+							 {{UserDashCtrl.shop.pos}}<br/>
+							 <br/>
+							 </div>
+						 </info-window>
+					 </ng-map>
+			</div>
+					</div>
+		 </uib-tab>
+		    <uib-tab index="1" heading="Pending">
 							<div class="tab-content" style="border:solid 2px #ff6600;">
 								<div id="mainPending" class="tab-pane fade in active">
 
@@ -69,8 +95,7 @@
 										 <!-- {{sample.service_center}} -->
 										Your comments: <i>{{UserDashCtrl.userObject.pipedRequests}}</i><br>
 										Service Notes: <i>{{sample.quote_text}}</i>
-										<!-- </div> -->
-									<!-- </div> -->
+
 									<div class="row">
 										<div class="col-md-6 col-sm-12">
 										Service Center: <b>{{sample.service_center.service_name}}</b>
@@ -89,7 +114,7 @@
 								</div>
 							</div>
 </uib-tab>
-		     <uib-tab index="1" heading="Your History">
+		     <uib-tab index="2" heading="Your History">
 					  		<div class="tab-content" style="border:solid 2px #ff6600;">
 				   				<div class="row">
 				   						<div class="col-md-12 col-sm-12">
@@ -111,44 +136,113 @@
 				   						</div>
 				   					</div>
 				   			</div>
-</uib-tab>
+      </uib-tab>
 
+			<uib-tab index="3" heading="map with panel">
+				<div class="col-md-3 col-sm-3" id = "bid_container">
+					<div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table">
+						<div class="radiobutton">
+
+		{{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+			 Shop Notes: {{sample.quote_text}}
+			Availability:
+			<br>
+			<br>
+									<label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+											<input type="radio" name="dates" ng-model = "UserDashCtrl.available_date" value="{{sample.available_date_1}}"> <span>{{sample.available_date_1}}</span>
+									</label>
+									<label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+											<input type="radio" name="dates" ng-model = "UserDashCtrl.available_date"  value="{{sample.available_date_2}}"><span>{{sample.available_date_2}}</span>
+									</label>
+									<label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+											<input type="radio" name="dates" ng-model = "UserDashCtrl.available_date" value="{{sample.available_date_3}}"><span>{{sample.available_date_3}}</span>
+									</label>
+										 </div>
+										 <button ng-click="UserDashCtrl.confirm(UserDashCtrl.available_date, sample.id, sample)">Go</button>
+										</div>
+									</div>
+				<div class="col-md-6 col-sm-6">
+				<div class="row">
+						<div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
+							<ng-map  default-style="true" zoom="11" center="current-location">
+
+							<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
+							<marker id='{{p.id}}' position="{{p.pos}}"
+							 ng-repeat="p in UserDashCtrl.positions"
+							 on-click="UserDashCtrl.showDetail(p)"
+							 icon="{{p.map_icon_pics}}"
+							 title="pos: {{p.pos}}"
+							 on-mouseover="UserDashCtrl.showDetail(p);"
+							 on-mouseout="UserDashCtrl.hideDetail()">
+							</marker>
+							<info-window id="foo-iw">
+							 <div ng-non-bindable="">
+							 {{UserDashCtrl.shop.id}}<br/>
+							 {{UserDashCtrl.shop.pos}}<br/>
+							 <br/>
+							 </div>
+						 </info-window>
+					 </ng-map>
+
+		</div>
+		<hr>
+		</div>
+
+			</uib-tab>
 
 		  </uib-tabset>
     <ui-view></ui-view>
-
-
-
-
-
-
-<!--/////////////////// START YOUR LOCATION COLUMN /////////////////////-->
-		<div class="col-md-4 col-sm-12">
-			<h3>Your Location</h3>
-			<!-- <img src="https://mailinglists.com/sites/default/files/GoogleMap2_small.gif" style="width:300px;"> -->
-      <div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
-        <ng-map  default-style="true" zoom="11" center="current-location">
-
-        <marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
-        <marker id='{{p.id}}' position="{{p.pos}}"
-         ng-repeat="p in UserDashCtrl.positions"
-         on-click="UserDashCtrl.showDetail(p)"
-         icon="{{p.map_icon_pics}}"
-         title="pos: {{p.pos}}"
-         on-mouseover="UserDashCtrl.showDetail(p);"
-         on-mouseout="UserDashCtrl.hideDetail()">
-        </marker>
-        <info-window id="foo-iw">
-         <div ng-non-bindable="">
-         {{UserDashCtrl.shop.id}}<br/>
-         {{UserDashCtrl.shop.pos}}<br/>
-         <br/>
-         </div>
-       </info-window>
-     </ng-map>
-
-</div>
-		</div>
-	</div>
 </div>
 </main>
+
+
+<!-- ////// -->
+<!--
+<div class="col-md-3 col-sm-3" id = "bid_container">
+	<div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table">
+		<div class="radiobutton">
+
+{{sample.service_center.service_name}}, Shop Quote: ${{sample.quote_cost}},
+Shop Notes: {{sample.quote_text}}
+Availability:
+<br>
+<br>
+					<label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+							<input type="radio" name="dates" ng-model = "UserDashCtrl.available_date" value="{{sample.available_date_1}}"> <span>{{sample.available_date_1}}</span>
+					</label>
+					<label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+							<input type="radio" name="dates" ng-model = "UserDashCtrl.available_date"  value="{{sample.available_date_2}}"><span>{{sample.available_date_2}}</span>
+					</label>
+					<label class="datetimeradio col-md-4 col-sm-4 col-xs-4">
+							<input type="radio" name="dates" ng-model = "UserDashCtrl.available_date" value="{{sample.available_date_3}}"><span>{{sample.available_date_3}}</span>
+					</label>
+						 </div>
+						 <button ng-click="UserDashCtrl.confirm(UserDashCtrl.available_date, sample.id, sample)">Go</button>
+						</div>
+					</div>
+<div class="col-md-6 col-sm-6">
+<div class="row">
+		<div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
+			<ng-map  default-style="true" zoom="11" center="current-location">
+
+			<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
+			<marker id='{{p.id}}' position="{{p.pos}}"
+			 ng-repeat="p in UserDashCtrl.positions"
+			 on-click="UserDashCtrl.showDetail(p)"
+			 icon="{{p.map_icon_pics}}"
+			 title="pos: {{p.pos}}"
+			 on-mouseover="UserDashCtrl.showDetail(p);"
+			 on-mouseout="UserDashCtrl.hideDetail()">
+			</marker>
+			<info-window id="foo-iw">
+			 <div ng-non-bindable="">
+			 {{UserDashCtrl.shop.id}}<br/>
+			 {{UserDashCtrl.shop.pos}}<br/>
+			 <br/>
+			 </div>
+		 </info-window>
+	 </ng-map>
+
+</div>
+<hr>
+</div> -->
