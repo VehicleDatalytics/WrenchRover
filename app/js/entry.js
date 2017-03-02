@@ -152,7 +152,12 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controller: 'UserDashboardController',
   controllerAs: 'UserDashboardController'
 })
-
+.state('user_dashboard.mybids', {
+  url: '/mybids',
+  templateUrl: 'templates/user/views/mybids.html',
+  controller: 'UserDashboardController',
+  controllerAs: 'UserDashboardController'
+})
 ;
   $urlRouterProvider.otherwise('/');
 });

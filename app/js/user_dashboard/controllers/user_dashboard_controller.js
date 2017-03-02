@@ -8,7 +8,9 @@ module.exports = exports = function(app) {
     vm.positions = [];
     var loc_obj = {};
     this.url = 'https://wrenchroverapi.herokuapp.com/';
-    this.tempMessage = 'temporary message';
+    this.count = 0;
+    console.log(vm.positions.length);
+
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
       '../../../images/map_icons/number_2.png',
@@ -177,6 +179,7 @@ module.exports = exports = function(app) {
 
               console.log(vm.positions);
               console.log(vm.positions.length);
+              vm.count = vm.positions.length;
 
               vm.shop = vm.positions[0];
               console.log(vm.shop);

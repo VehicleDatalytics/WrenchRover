@@ -80,7 +80,7 @@ module.exports = function(app) {
                //  console.log('start if ');
 
         var limit = this._day - this._date;
-        var x = this.getMonthEnd(this._month); peace;
+        var x = this.getMonthEnd(this._month);
 
 
         for (var i = this._date; i >= 1; i--) {
