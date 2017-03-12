@@ -9,6 +9,7 @@ module.exports = function(app) {
     this.workrequests = [];
     this.servicequotes = [];
     this.pastbids = [];
+    // this.
     this.acceptedbids = [];
     // this.message = 'hiiiiii';
     // if (this.modalService.apptArr >= 3) {
@@ -18,15 +19,35 @@ module.exports = function(app) {
 
     this.getAll = () => {
       $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-      $http.get(baseUrl + '/service_requests')
-      .then((res) => {
-        this.servicerequests = res.data;
-        this.workrequests.splice(0);
-        for (var i = 0; i < res.data.length; i++) {
-          this.workrequests.push(res.data[i]);
-        }
-      });
+
+      if (localStorage.getItem('remainingRequests')) {
+        this.workrequests = JSON.parse(localStorage.getItem('remainingRequests'));
+        console.log('take care of the few that remain');
+        console.log(this.workrequests);
+
+      } else {
+        $http.get(baseUrl + '/service_requests')
+          .then((res) => {
+            console.log(res.data);
+            this.servicerequests = res.data;
+            console.log(this.servicerequests);
+
+            this.workrequests.splice(0);
+            for (var i = 0; i < res.data.length; i++) {
+              res.data[i].converted = new Date(res.data[i].created_at);
+              res.data[i].convertedToString = res.data[i].converted.toString();
+              this.workrequests.push(res.data[i]);
+              console.log(this.workrequests);
+            }
+          }
+
+        //   }
+
+      );
+
+      }
     };
+
 
     this.getQuotes = function() {
       $http.get(baseUrl + '/service_quotes')
@@ -55,15 +76,16 @@ module.exports = function(app) {
       .then((res) => {
         console.log(res);
         this.modalService.appt_array = [];
+
         $window.location.reload();
       });
+
     };
 
     this.getPastBids = function() {
       this.service_center_id = localStorage.getItem('service_center_id');
       console.log(this.token);
       console.log(this.service_center_id);
-
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
         this.pastbids.splice(0);
@@ -72,7 +94,6 @@ module.exports = function(app) {
 
         //   console.log(res.data[i].service_center_id);
           if (res.data[i].service_center_id !== null && res.data[i].service_center_id == this.service_center_id) {
-            console.log('yes');
 
             console.log(this.pastbids);
             console.log(res.data[i]);
@@ -88,6 +109,19 @@ module.exports = function(app) {
       });
 
 
+    };
+
+
+    this.removeDone = function(value) {
+      console.log('remove done');
+      console.log(value);
+      var item = this.workrequests.indexOf(value);
+        //   console.log(this.workrequests.indexOf(value));
+      this.workrequests.splice(item, 1);
+      console.log(this.workrequests);
+
+      window.localStorage.remainingRequests =
+      JSON.stringify(this.workrequests);
     };
   }
   ]
