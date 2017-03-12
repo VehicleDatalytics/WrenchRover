@@ -95,7 +95,7 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
 
 .state('user_dashboard', {
   url: '/dashboard',
-  templateUrl: 'templates/user/views/user_dashboard2.html',
+  templateUrl: 'templates/user/views/user_dashboard3.html',
   controller: 'UserDashboardController',
   controllerAs: 'UserDashboardController'
 })
@@ -115,7 +115,7 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
 
 .state('sc_portal_view.pending_view', {
   url: '/pending_bids',
-  templateUrl: 'templates/sc_portal/views/pending_view.html',
+  templateUrl: 'templates/sc_portal/views/pending_view2.html',
   controller: 'scPortalController',
   controllerAs: 'portal'
 })
@@ -139,25 +139,25 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controllerAs: 'vm'
 })
 
-.state('user_dashboard.pending', {
-  url: '/pending',
-  templateUrl: 'templates/user/views/pending.html',
-  controller: 'UserDashboardController',
-  controllerAs: 'UserDashboardController'
-})
-
-.state('user_dashboard.history', {
-  url: '/history',
-  templateUrl: 'templates/user/views/history.html',
-  controller: 'UserDashboardController',
-  controllerAs: 'UserDashboardController'
-})
-.state('user_dashboard.mybids', {
-  url: '/mybids',
-  templateUrl: 'templates/user/views/mybids.html',
-  controller: 'UserDashboardController',
-  controllerAs: 'UserDashboardController'
-})
+// .state('user_dashboard.pending', {
+//   url: '/pending',
+//   templateUrl: 'templates/user/views/pending.html',
+//   controller: 'UserDashboardController',
+//   controllerAs: 'UserDashboardController'
+// })
+//
+// .state('user_dashboard.history', {
+//   url: '/history',
+//   templateUrl: 'templates/user/views/history.html',
+//   controller: 'UserDashboardController',
+//   controllerAs: 'UserDashboardController'
+// })
+// .state('user_dashboard.mybids', {
+//   url: '/mybids',
+//   templateUrl: 'templates/user/views/mybids.html',
+//   controller: 'UserDashboardController',
+//   controllerAs: 'UserDashboardController'
+// })
 ;
   $urlRouterProvider.otherwise('/');
 });

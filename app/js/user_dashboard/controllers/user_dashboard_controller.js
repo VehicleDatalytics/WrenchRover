@@ -47,6 +47,7 @@ module.exports = exports = function(app) {
     this.avail_dates = [];
     this.user_dates = [];
 
+
     this.serviceQuotes = {
       user_id: this.user_id,
       quote_cost: '',
@@ -199,8 +200,13 @@ module.exports = exports = function(app) {
               vm.newValue = function(value, x) {};
 
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
-
+              console.log('yes');
+              console.log(this.service_quotes_table);
+              console.log('yes 2');
               console.log(this.service_quotes_all);
+
+
+            //   console.log(this.service_quotes_all);
               this.available_date = 1;
 
             });

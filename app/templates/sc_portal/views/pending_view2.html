@@ -1,0 +1,48 @@
+
+<section ng-init = "portal.getAll()">
+
+<div class="container" ng-repeat="sample in portal.workrequests">
+	<div class="row" >
+		<div class="col-md-12 col-sm-12">
+      <b>{{sample.convertedToString}}. {{sample.work_request}}</b>
+		</div>
+    <div class="col-md-12 col-sm-12">
+      Vehicle: {{sample.auto.year}} {{sample.auto.make}} {{sample.auto.model}} {{sample.auto.engine}} {{sample.auto.mileage}} miles
+    </div>
+		<div class="col-md-12 col-sm-12">
+      <!-- note: replace this with new obj property -->
+			Customer notes: FILL THIS IN LATER
+		</div>
+	</div>
+	<div class="row" style="margin:10px 0 10px 0;">
+		<div class="col-md-12 col-sm-12">
+			Add appointment dates <button ng-controller="dateOpenController as vm" ng-click= "vm.openCalendar()" class="btn btn-default">Open<i class="fa fa-calendar"></i></button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5 col-xs-12 inline" style="margin-bottom:10px;width:350px;">
+			<textarea class="form-control" name= "Mechanic's Notes" data-ng-model="scquote.quote_text" placeholder="Send customer Notes"> </textarea>
+		</div>
+		<div class="col-md-7 col-xs-12 inline" style="width:270px;">
+						<button ng-click="portal.removeDone(sample)">index of </button>
+
+      <form name = "authform" data-ng-submit="save(scquote)">
+			<div class="input-group">
+				<span class="input-group-addon">$</span>
+
+				<input type="text" class="form-control" aria-label="Bid amount" name="{{sample.user_id}}" data-ng-model="scquote.quote_cost" required>
+
+				<span class="input-group-btn">
+
+					<button class="btn btn-default" type="submit" ng-click=" portal.createQuote(sample.user_id, scquote, sample.id, portal.modalService.apptArr); portal.removeDone(sample);"><i class="fa fa-check-circle"></i> Place Bid</button>
+				</span>
+			</div>
+      <form>
+
+		</div>
+	</div>
+  <hr>
+</div>
+
+
+</section>

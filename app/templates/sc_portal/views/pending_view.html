@@ -1,51 +1,34 @@
 
 <section ng-init = "portal.getAll()">
 
-
-
 <div class="container">
+
   <div class="row" ng-repeat="sample in portal.servicerequests">
      <p class="col-xs-12 col-md-12 col-sm-12">{{sample.created_at}}. {{sample.work_request}}</p>
-
       <div class = "row">
         <div class= "col-xs-3">       <strong>Vehicle:</strong>
             <p>  {{sample.auto.year}} {{sample.auto.make}} {{sample.auto.model}}</p>
             <p>{{sample.auto.engine}}</p>
             <p>{{sample.auto.mileage}} miles</p>
          </div>
-
-
        </div>
-
       <div class="col-xs-3">
         <p>Notes</p>
       <div class = "container">
       <form name = "authform" class = "form-horizontal" data-ng-submit = "save(scquote)" >
           <p>
             <input type="text" placeholder = "price" name = "{{sample.user_id}}"   data-ng-model="scquote.quote_cost" required></p>
-
-
           <p>
           <textarea type="text" placeholder = "Notes" name = "Mechanic's Notes"   data-ng-model="scquote.quote_text">
           </textarea></p>
-
-
-    <!-- <cal-dir></cal-dir> -->
-    <button ng-controller="dateOpenController as vm" ng-click="vm.openCalendar()">open calendar</button>
-
-
+           <button ng-controller="dateOpenController as vm" ng-click="vm.openCalendar()">open calendar</button>
           <button type = "submit"
 
        ng-click="portal.createQuote(sample.user_id, scquote, sample.id, portal.modalService.apptArr)" btn btn-default> Place Bid</button>
         </form>
         </div>
 
-
 </div>
-
-
-          </div>
-
-
+</div>
 </div>
 </section>
