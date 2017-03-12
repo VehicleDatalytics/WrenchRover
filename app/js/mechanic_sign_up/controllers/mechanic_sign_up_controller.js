@@ -91,7 +91,8 @@ module.exports = function(app) {
         }
       })
       .then(() => {
-        $state.go('sc_portal_view.pending_view');
+        // $state.go('sc_portal_view.pending_view');
+        $state.go('sc_portal_view');
       });
     })
     .catch(() => {
