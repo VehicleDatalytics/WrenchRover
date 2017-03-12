@@ -115,7 +115,7 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
 
 .state('sc_portal_view.pending_view', {
   url: '/pending_bids',
-  templateUrl: 'templates/sc_portal/views/pending_view2.html',
+  templateUrl: 'templates/sc_portal/views/pending_view.html',
   controller: 'scPortalController',
   controllerAs: 'portal'
 })

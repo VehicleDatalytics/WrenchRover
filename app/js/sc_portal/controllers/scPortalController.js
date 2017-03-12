@@ -9,17 +9,13 @@ module.exports = function(app) {
     this.workrequests = [];
     this.servicequotes = [];
     this.pastbids = [];
-    // this.
     this.acceptedbids = [];
-    // this.message = 'hiiiiii';
-    // if (this.modalService.apptArr >= 3) {
-    //   this.message = 'thank you for choosing 3 dates.';
-    // }
+    $http.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 
     this.getAll = () => {
-      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-
+    //   $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+    //   console.log(this.getPastBids());
       if (localStorage.getItem('remainingRequests')) {
         this.workrequests = JSON.parse(localStorage.getItem('remainingRequests'));
         console.log('take care of the few that remain');
@@ -31,7 +27,6 @@ module.exports = function(app) {
             console.log(res.data);
             this.servicerequests = res.data;
             console.log(this.servicerequests);
-
             this.workrequests.splice(0);
             for (var i = 0; i < res.data.length; i++) {
               res.data[i].converted = new Date(res.data[i].created_at);
@@ -39,9 +34,21 @@ module.exports = function(app) {
               this.workrequests.push(res.data[i]);
               console.log(this.workrequests);
             }
+
+// doesn't work, fix
+            var pastbids = this.getPastBids();
+            console.log(this.workrequests.indexOf(pastbids));
+            console.log(pastbids);
+            function checkTwo(value) {
+              console.log(value);
+              console.log('yes');
+              return pastbids.indexOf(value) == -1;
+            }
+            console.log(this.workrequests);
+
+            console.log(this.workrequests.filter(checkTwo));
           }
 
-        //   }
 
       );
 
@@ -84,17 +91,15 @@ module.exports = function(app) {
 
     this.getPastBids = function() {
       this.service_center_id = localStorage.getItem('service_center_id');
-      console.log(this.token);
+    //   console.log(this.token);
       console.log(this.service_center_id);
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
         this.pastbids.splice(0);
         this.acceptedbids.splice(0);
         for (var i = 0; i < res.data.length; i++) {
-
         //   console.log(res.data[i].service_center_id);
           if (res.data[i].service_center_id !== null && res.data[i].service_center_id == this.service_center_id) {
-
             console.log(this.pastbids);
             console.log(res.data[i]);
             this.pastbids.push(res.data[i]);
@@ -103,12 +108,11 @@ module.exports = function(app) {
               console.log('not null');
               this.acceptedbids.push(res.data[i]);
             }
-
           }
         }
       });
 
-
+      return this.pastbids;
     };
 
 
