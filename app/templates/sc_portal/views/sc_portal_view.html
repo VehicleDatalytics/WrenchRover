@@ -1,12 +1,13 @@
 
-<!-- <uib-tabset type="pills"> -->
+
 
 <div>
-<uib-tabset type="active">
+<uib-tabset active="active">
 
 
-  <uib-tab heading="New Bids"  index="0">
-
+  <uib-tab  index="0" heading="New Bids" >
+    <div class="tab-content" style="border:solid 2px #ff6600;">
+      <div id="mainPending" class="tab-pane fade in active">
     <section ng-init = "portal.getAll()">
 
     <div class="container" ng-repeat="sample in portal.workrequests">
@@ -32,8 +33,7 @@
     			<textarea class="form-control" name= "Mechanic's Notes" data-ng-model="scquote.quote_text" placeholder="Send customer Notes"> </textarea>
     		</div>
     		<div class="col-md-7 col-xs-12 inline" style="width:270px;">
-    						<button ng-click="portal.removeDone(sample)">index of </button>
-
+    						<!-- <button ng-click="portal.removeDone(sample)">index of </button> -->
           <form name = "authform" data-ng-submit="save(scquote)">
     			<div class="input-group">
     				<span class="input-group-addon">$</span>
@@ -53,13 +53,14 @@
     </div>
 
     </section>
+  </div></div>
 
   </uib-tab>
 
-    <uib-tab heading="Past Bids"  index = "1" ng-init="portal.getPastBids()">
+    <uib-tab index = "1" heading="Past Bids"   ng-init="portal.getPastBids()">
 
-      <!-- <p ng-init="portal.getPastBids()">past views</p> -->
-
+      <div class="tab-content" style="border:solid 2px #ff6600;">
+        <div id="mainPending" class="tab-pane fade in active">
 
       past bids will show up here
 
@@ -68,21 +69,19 @@
       <br>
       Created At: {{sample.created_at}}.   Mechanic's Notes: {{sample.quote_text}} Available slots: 1.{{sample.available_date_1}} 2.{{sample.available_date_2}} 3.{{sample.available_date_3}} Quote Cost: {{sample.quote_cost}}
       </li>
-
-
+</div></div>
     </uib-tab>
 
 
-  <uib-tab heading="Appointments"  index="2">
+  <uib-tab index="2" heading="Appointments"  >
+    <div class="tab-content" style="border:solid 2px #ff6600;">
+      <div id="mainPending" class="tab-pane fade in active">
     <p>appointments view</p>
+  </div></div>
   </uib-tab>
 
 </uib-tabset>
 
 
-
-
-
-    <!-- <ui-view></ui-view> -->
 
     </div>
