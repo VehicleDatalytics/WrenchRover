@@ -1,4 +1,18 @@
 /* GLOBAL STYLES */
+@import 'font-awesome.css';
+/*@import 'x.css';
+@import '../node_modules/fonts;'*/
+
+html {
+  font-family: Tahoma;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+i {font-family: Tahoma;}
+
+
+
 .btn {width:auto;}
 button:hover {box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
 .hideme {display:none;}
@@ -107,6 +121,20 @@ color: #000;
 border-radius:8px;
 }
 
+
+/*////*/
+
+label:before {
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+label[for*='1']:before { content: '\f253'; }
+label[for*='2']:before { content: '\f005'; }
+label[for*='3']:before { content: '\f01c'; }
+label[for*='4']:before { content: '\f1b9'; }
+/*/////*/
 input:focus + label {
 background-color: #ddd;
 color: #000;
