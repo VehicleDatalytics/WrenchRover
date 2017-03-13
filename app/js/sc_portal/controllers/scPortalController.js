@@ -39,14 +39,13 @@ module.exports = function(app) {
               this.incoming_sr_arr.push(res.data[i].id);
             }
 
-            console.log(this.service_request_id_arr);
+            // console.log(this.service_request_id_arr);
 
             function check(elem) {
               return that.service_request_id_arr.indexOf(elem) === -1;
             }
 
 
-            console.log( this.incoming_sr_arr.filter(check));
             var filteredArr = this.incoming_sr_arr.filter(check);
             console.log(filteredArr);
             console.log(this.incoming_sr_arr);
@@ -66,13 +65,11 @@ module.exports = function(app) {
               res.data[i].converted = new Date(res.data[i].created_at);
               res.data[i].convertedToString = res.data[i].converted.toString();
             //   this.workrequests.push(res.data[i]);
-
             }
-
 
             console.log(this.workrequests);
             console.log(this.servicequotes);
-            console.log(this.incoming_sr_arr);
+            // console.log(this.incoming_sr_arr);
           });
       }
 
@@ -85,10 +82,6 @@ module.exports = function(app) {
         console.log(res.data);
         this.servicerequests = res.data;
         this.servicequotes.splice(0);
-        for (var i = 0; i < res.data.length; i++) {
-          this.servicequotes.push(res.data[i]);
-          this.service_request_id_arr.push(res.data[i].service_request_id);
-        }
 
       });
 
@@ -120,13 +113,15 @@ module.exports = function(app) {
     this.getPastBids = function() {
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         this.pastbids.splice(0);
         this.acceptedbids.splice(0);
         for (var i = 0; i < res.data.length; i++) {
         //   console.log(res.data[i].service_center_id);
           if (res.data[i].service_center_id !== null && res.data[i].service_center_id == this.service_center_id) {
-            console.log(this.pastbids);
+            this.service_request_id_arr.push(res.data[i].service_request_id);
+
+            // console.log(this.pastbids);
             console.log(res.data[i]);
             this.pastbids.push(res.data[i]);
             console.log(this.pastbids);
@@ -136,8 +131,10 @@ module.exports = function(app) {
             }
           }
         }
+
+        console.log(this.service_request_id_arr);
       });
-      return this.pastbids;
+    //   return this.pastbids;
     };
 
 
