@@ -4,55 +4,78 @@ module.exports = function(app) {
   app.controller('scPortalController', ['$http', 'modalService', '$window', function($http, modalService, $window) {
 
 
+    var that = this;
     this.modalService = modalService;
     this.servicerequests = [];
     this.workrequests = [];
     this.servicequotes = [];
     this.pastbids = [];
     this.acceptedbids = [];
+    this.service_request_id_arr = [];
+    this.incoming_sr_arr = [];
     $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+    this.service_center_id = localStorage.getItem('service_center_id');
+    console.log(this.service_center_id);
 
 
     this.getAll = () => {
-    //   $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-    //   console.log(this.getPastBids());
+
+
       if (localStorage.getItem('remainingRequests')) {
         this.workrequests = JSON.parse(localStorage.getItem('remainingRequests'));
         console.log('take care of the few that remain');
         console.log(this.workrequests);
 
       } else {
+        //   mallard
+
+        // that.getQuotes();
+
         $http.get(baseUrl + '/service_requests')
           .then((res) => {
             console.log(res.data);
-            this.servicerequests = res.data;
-            console.log(this.servicerequests);
+            console.log(res.data[0].service_quotes);
+            for (var i = 0; i < res.data.length; i++) {
+              this.incoming_sr_arr.push(res.data[i].id);
+            }
+
+            console.log(this.service_request_id_arr);
+
+            function check(elem) {
+              return that.service_request_id_arr.indexOf(elem) === -1;
+            }
+
+
+            console.log( this.incoming_sr_arr.filter(check));
+            var filteredArr = this.incoming_sr_arr.filter(check);
+            console.log(filteredArr);
+            console.log(this.incoming_sr_arr);
+            console.log(this.service_request_id_arr);
             this.workrequests.splice(0);
+            for (var i = 0; i < res.data.length; i++) {
+            //   console.log(res.data[i].id);
+              console.log(filteredArr.indexOf(res.data[i].id));
+              if (filteredArr.indexOf(res.data[i].id) > -1) {
+                this.workrequests.push(res.data[i]);
+              }
+
+            }
+
+
             for (var i = 0; i < res.data.length; i++) {
               res.data[i].converted = new Date(res.data[i].created_at);
               res.data[i].convertedToString = res.data[i].converted.toString();
-              this.workrequests.push(res.data[i]);
-              console.log(this.workrequests);
+            //   this.workrequests.push(res.data[i]);
+
             }
 
-// doesn't work, fix
-            var pastbids = this.getPastBids();
-            console.log(this.workrequests.indexOf(pastbids));
-            console.log(pastbids);
-            function checkTwo(value) {
-              console.log(value);
-              console.log('yes');
-              return pastbids.indexOf(value) == -1;
-            }
+
             console.log(this.workrequests);
-
-            console.log(this.workrequests.filter(checkTwo));
-          }
-
-
-      );
-
+            console.log(this.servicequotes);
+            console.log(this.incoming_sr_arr);
+          });
       }
+
     };
 
 
@@ -64,8 +87,13 @@ module.exports = function(app) {
         this.servicequotes.splice(0);
         for (var i = 0; i < res.data.length; i++) {
           this.servicequotes.push(res.data[i]);
+          this.service_request_id_arr.push(res.data[i].service_request_id);
         }
+
       });
+
+      console.log( this.service_request_id_arr);
+    //   return this.servicequotes;
     };
 
 
@@ -90,11 +118,9 @@ module.exports = function(app) {
     };
 
     this.getPastBids = function() {
-      this.service_center_id = localStorage.getItem('service_center_id');
-    //   console.log(this.token);
-      console.log(this.service_center_id);
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
+        console.log(res);
         this.pastbids.splice(0);
         this.acceptedbids.splice(0);
         for (var i = 0; i < res.data.length; i++) {
@@ -111,7 +137,6 @@ module.exports = function(app) {
           }
         }
       });
-
       return this.pastbids;
     };
 
