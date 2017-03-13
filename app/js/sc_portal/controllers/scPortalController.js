@@ -16,6 +16,7 @@ module.exports = function(app) {
     $http.defaults.headers.common.Authorization = localStorage.getItem('token');
     this.service_center_id = localStorage.getItem('service_center_id');
     console.log(this.service_center_id);
+    this.your_appointments = [];
 
 
     this.getAll = () => {
@@ -75,20 +76,37 @@ module.exports = function(app) {
 
     };
 
-
+    // this.getQuotes();
     this.getQuotes = function() {
+      console.log('geting the quotesz');
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
         console.log(res.data);
-        this.servicerequests = res.data;
+        // this.servicerequests = res.data;
         this.servicequotes.splice(0);
 
+        this.your_appointments.splice(0);
+
+
+        // res.data[i].converted = new Date(res.data[i].created_at);
+        // res.data[i].convertedToString = res.data[i].converted.toString();
+
+        for (var i = 0; i < res.data.length; i++ ) {
+          if (res.data[i].service_center_id == this.service_center_id && res.data[i].accepted != null) {
+            // res.data[i].converted = new Date(res.data[i].created_at);
+            // res.data[i].convertedToString = res.data[i].converted.toString();
+            this.your_appointments.push(res.data[i]);
+          }
+        }
       });
 
-      console.log( this.service_request_id_arr);
+      console.log(this.your_appointments);
+
+    //   console.log( this.service_request_id_arr);
     //   return this.servicequotes;
     };
 
+    this.getQuotes();
 
     this.createQuote = function(sc_user_id, scquote, sc_id, appt_array) {
       console.log(sc_user_id, scquote, sc_id, appt_array);
@@ -120,6 +138,11 @@ module.exports = function(app) {
         //   console.log(res.data[i].service_center_id);
           if (res.data[i].service_center_id !== null && res.data[i].service_center_id == this.service_center_id) {
             this.service_request_id_arr.push(res.data[i].service_request_id);
+
+            // //
+            res.data[i].converted = new Date(res.data[i].created_at);
+            res.data[i].convertedToString = res.data[i].converted.toString();
+            // /
 
             // console.log(this.pastbids);
             console.log(res.data[i]);

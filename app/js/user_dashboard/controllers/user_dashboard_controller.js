@@ -13,7 +13,15 @@ module.exports = exports = function(app) {
     this.appointment = {};
 
 
-    this.appointment.service_center = localStorage.getItem('appointment_service_center_name');
+    // this.appointment.service_center = localStorage.getItem('appointment_service_center_name');
+
+    if (localStorage.getItem('appointment_date_time')) {
+      this.message = 'You have a new appointment!';
+      this.appointment.service_center = localStorage.getItem('appointment_service_center_name');
+    } else {
+      this.appointment.service_center = 'TBA';
+      this.message = "We're digging for offers!";
+    }
     this.appointment.appointment_date_time = localStorage.getItem('appointment_date_time');
 
 
@@ -70,12 +78,31 @@ module.exports = exports = function(app) {
 
     //   window.localStorage.remainingRequests =
     //   JSON.stringify(this.workrequests);
+      var timeString = time.toString();
+      this.acceptedObject = {};
+      this.acceptedObject.id = value.id;
+      this.acceptedObject.accepted = timeString;
+      this.acceptedObject.service_center_id = value.service_center_id;
+    //   this.acceptedObject.service_request_id = value.service_request_id;
 
+      var resource = this.acceptedObject;
+      console.log(resource);
       window.localStorage.appointment_service_center_name = value.service_center.service_name;
     //   window.localStorage.appointment_date_time = JSON.stringify(time);
       window.localStorage.appointment_date_time = time;
+      //
+      $http.put(baseUrl + 'service_quotes' + '/' + value.id, resource )
+      .then((res) => {
+        console.log(res);
+        console.log('putting');
+        $window.location.reload();
+      })
+      .catch((error, status) => {
+        console.log(error);
+        console.log(status);
+        console.log("fuck. it didn't work");
+      });
 
-      $window.location.reload();
     };
 
     this.addRequest = function(x) {
