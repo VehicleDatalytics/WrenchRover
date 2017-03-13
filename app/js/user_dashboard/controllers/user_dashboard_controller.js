@@ -1,7 +1,7 @@
  /* eslint-disable prefer-arrow-callback */
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
-  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', function($http, NgMap, string, $state) {
+  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', '$window', function($http, NgMap, string, $state, $window) {
 
     this.key = string;
     var vm = this;
@@ -10,6 +10,11 @@ module.exports = exports = function(app) {
     this.url = 'https://wrenchroverapi.herokuapp.com/';
     this.count = 0;
     console.log(vm.positions.length);
+    this.appointment = {};
+
+
+    this.appointment.service_center = localStorage.getItem('appointment_service_center_name');
+    this.appointment.appointment_date_time = localStorage.getItem('appointment_date_time');
 
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
@@ -58,6 +63,20 @@ module.exports = exports = function(app) {
 
 
     console.log(this.service_object_thing);
+
+    this.confirm = function(value, time) {
+      console.log(value);
+      console.log(time);
+
+    //   window.localStorage.remainingRequests =
+    //   JSON.stringify(this.workrequests);
+
+      window.localStorage.appointment_service_center_name = value.service_center.service_name;
+    //   window.localStorage.appointment_date_time = JSON.stringify(time);
+      window.localStorage.appointment_date_time = time;
+
+      $window.location.reload();
+    };
 
     this.addRequest = function(x) {
       console.log(x);
@@ -120,22 +139,18 @@ module.exports = exports = function(app) {
       })
       .then(() => {
         $http.get(this.url + 'service_requests/' + this.sr_id)
+         .then((res) => {
+           console.log(res);
+           this.service_object_thing = res.data;
+           console.log(res.data.service_quotes);
 
-    // ///////////    //
-        .then((res) => {
-          console.log(res);
+           if (res.data.service_quotes.length >= 1) {
+             console.log(res.data.service_quotes[0].id);
+             this.arr = res.data;
+             console.log(this.arr);
+             this.service_quotes = res.data.service_quotes;
 
-
-          this.service_object_thing = res.data;
-          console.log(res.data.service_quotes);
-
-          if (res.data.service_quotes.length >= 1) {
-            console.log(res.data.service_quotes[0].id);
-            this.arr = res.data;
-            console.log(this.arr);
-            this.service_quotes = res.data.service_quotes;
-
-            $http.get(this.url + 'service_quotes')
+             $http.get(this.url + 'service_quotes')
             .then((res) => {
               console.log(res.data);
               this.service_quotes_table.splice(0);
@@ -162,8 +177,8 @@ module.exports = exports = function(app) {
 
                   this.user_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
                   vm.positions.push(loc_obj);
-                  console.log(loc_obj);
-                  console.log(vm.positions);
+                //   console.log(loc_obj);
+                //   console.log(vm.positions);
                   this.avail_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
                   this.service_quotes_table.push(res.data[i]);
                   console.log(this.avail_dates);
@@ -200,21 +215,15 @@ module.exports = exports = function(app) {
               vm.newValue = function(value, x) {};
 
               this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
-              console.log('yes');
-              console.log(this.service_quotes_table);
-              console.log('yes 2');
-              console.log(this.service_quotes_all);
 
-
-            //   console.log(this.service_quotes_all);
               this.available_date = 1;
 
             });
 
-          } else {
-            console.log('nope');
-          }
-        });
+           } else {
+             console.log('nope');
+           }
+         });
 
 
       });

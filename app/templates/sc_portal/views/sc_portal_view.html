@@ -16,6 +16,7 @@
           <b>{{sample.convertedToString}}. {{sample.work_request}}</b>
     		</div>
         <div class="col-md-12 col-sm-12">
+          <!-- {{sample}} -->
           Vehicle: {{sample.auto.year}} {{sample.auto.make}} {{sample.auto.model}} {{sample.auto.engine}} {{sample.auto.mileage}} miles
         </div>
     		<div class="col-md-12 col-sm-12">
@@ -25,7 +26,7 @@
     	</div>
     	<div class="row" style="margin:10px 0 10px 0;">
     		<div class="col-md-12 col-sm-12">
-    			Add appointment dates <button ng-controller="dateOpenController as vm" ng-click= "vm.openCalendar()" class="btn btn-default">Open<i class="fa fa-calendar"></i></button>
+    			Add appointment dates <button ng-controller="dateOpenController as vm" ng-click= "vm.openCalendar()" class="btn btn-default"><i class="fa fa-calendar"></i></button>
     		</div>
     	</div>
     	<div class="row">
