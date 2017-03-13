@@ -1,7 +1,7 @@
 
 
 
- 
+
 <main class="container" data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()" id="ud_container">
 
 <!-- <div class="container" style="margin-top:115px;" ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
@@ -32,7 +32,7 @@
 		</div>
 		<div class="col-md-4 col-sm-12" style="padding:0;"  >
 			<div class="apptHead">Where & When</div>
-			<div class="apptText">NAME OF ACCEPTED SC<br>Tuesday, Feb 3 at 1:30pm</div>
+			<div class="apptText">{{UserDashCtrl.appointment.service_center}}<br>{{UserDashCtrl.appointment.appointment_date_time}}</div>
 		</div>
 		<div class="col-md-3 col-sm-12" style="padding:0;">
 			<div class="apptHead">Your Vehicle</div>
@@ -134,7 +134,7 @@
 
 					</div>
 					<div class="col-md-4 col-sm-4">
-						<button class="btn btn-default pull-right" style="float:right;"><i class="fa fa-check-circle"></i> ACCEPT</button>
+						<button class="btn btn-default pull-right" style="float:right;" ng-click="UserDashCtrl.confirm(sample, UserDashCtrl.selectedTime)"><i class="fa fa-check-circle"></i> ACCEPT</button>
 					</div>
 				</div>
 

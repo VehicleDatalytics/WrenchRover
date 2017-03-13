@@ -50,7 +50,7 @@ module.exports = function(app) {
         model: this.storedVehicle.model.name,
         trim: this.storedVehicle.trim.name,
         engine: this.storedVehicle.engine,
-        mileage: this.storedVehicle.mileage,
+        mileage: this.storedVehicle.miles,
         user_id: null,
         service_request_id: null
       };
@@ -168,6 +168,7 @@ module.exports = function(app) {
      .catch((error, status) => {
        console.log('error');
        console.log(error);
+       console.log(data);
        this.data.error = { message: error, status: status };
      })
         .then(() => {
