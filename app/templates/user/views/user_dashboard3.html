@@ -4,14 +4,13 @@
 
 <main class="container" data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()" id="ud_container">
 
-<!-- <div class="container" style="margin-top:115px;" ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
 
 <div class="container" style="margin-top:115px;" >
 <!--/////////////////// START USER  PROFILE ROW /////////////////////-->
 	<div class="row userRow">
 		<div class="col-md-6 col-sm-6 userText">
 			<div style="float:left;padding:9px 0px;margin-right:15px;"><i class="fa fa-user fa-3x"></i></div>
-			<div style="padding:12px 0px;"><b>{{UserDashCtrl.userObject.user_name}}</b><br>Member since {{UserDashCtrl.memberSince}}</div>
+			<div style="padding:12px 0px;"><b>{{UserDashCtrl.userObject.user_name}}</b><br>Member since {{UserDashCtrl.userObject.memberSince}}</div>
 		</div>
 		<div class="col-md-6 col-sm-6 userText">
 			<div style="float:left;padding:9px 0px;margin-right:15px;"><i class="fa fa-car fa-3x"></i></div>
@@ -49,17 +48,16 @@
 <!--/////////////////// START MAINTENANCE LISTINGS COLUMN /////////////////////-->
 	<div class="row">
 		<div class="col-md-8 col-sm-12">
+		<!-- <div> -->
 			<h3>Your Maintenance</h3>
 
 			<uib-tabset active="active">
 
-				<uib-tab index="0" heading="New Bids({{UserDashCtrl.count}})">
-
-
-
-				<div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table">
+				<uib-tab index="0" heading="New({{UserDashCtrl.count}})">
+				<!-- <div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
+					<div class="row" >
 				<div class="col-md-8 col-sm-8">
-				<div class="row">
+				<div class="row" >
 						<div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
 							<ng-map  default-style="true" zoom="11" center="current-location">
 
@@ -80,15 +78,24 @@
 							 </div>
 						 </info-window>
 					 </ng-map>
-
 				</div>
 				<hr>
 				</div>
 				</div>
+				<!-- <div class="col-md-4 col-sm-4" style="margin-top:15px;" ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
+				<!-- <ol style="list-style-type:decimal;"> -->
 				<div class="col-md-4 col-sm-4" style="margin-top:15px;" >
-				<div class="row">
+    <!-- <ol> -->
+					<ol style="list-style-type:decimal;">
+			<!-- <li ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
+
+				<li  class="mapListNumber" style="list-style-type:none;" ng-repeat="sample in UserDashCtrl.service_quotes_table">
+				<div class="row" style="margin:-27px 0 0 0;">
+
 					<div class="col-md-2 col-sm-2 inline">
-						<span class="badge mapListNumber">1</span>
+						<!-- I took the static number out: -->
+						<!-- <span class="badge mapListNumber"> </span> -->
+						<!-- <li class="mapListNumber" ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
 					</div>
 					<div class="col-md-7 col-sm-7 inline mapListCompany">
 						<!-- Dru's Auto -->
@@ -105,25 +112,6 @@
 				<div class="row">
 					<div class="col-md-6 col-xs-6 col-xs-offset-2 col-md-offset-2 form-group">
 
-<!-- dulles -->
-						<!-- <select ng-model="selectedAppt" ng-options="appt for appt in UserDashControl.user_dates">
-           </select> -->
-
-<!--
-           <select name="appt" id="apptId" ng-model="UserDashCtrl.X.model">
-             <option ng-repeat="appt in UserDashCtrl.user_dates"
-
-
-             value="{{appt}}">{{appt}}</option>
-           </select> -->
-
-
-<!--
-					    <select name="appt" id="apptId" ng-model="UserDashCtrl.X.model">
-					        <option ng-repeat="appt in UserDashCtrl.service_quotes_table"
-					           value="{{appt}}">{{appt.available_date_1}}</option>
-					       </select> -->
-
 								 <select name="apptSelect" id="apptSelect" ng-model="UserDashCtrl.selectedTime">
 
 									<option value="">Please select</option>
@@ -137,48 +125,75 @@
 						<button class="btn btn-default pull-right" style="float:right;" ng-click="UserDashCtrl.confirm(sample, UserDashCtrl.selectedTime)"><i class="fa fa-check-circle"></i> ACCEPT</button>
 					</div>
 				</div>
-
+				<div class="row">
+				<div class="col-md-10 col-xs-10 col-xs-offset-2 col-md-offset-2 mapListAppt">
+						<b>Comments:</b> {{sample.quote_text}}
 				</div>
-
-
-
+		</div><hr>
+		</li></ol>
+				</div>
+<hr>
+			<!-- </li></ol> -->
 				</div>
 
 				</uib-tab>
 
-		    <uib-tab index="1" heading="Pending">
-							<div class="tab-content" style="border:solid 2px #ff6600;">
-								<div id="mainPending" class="tab-pane fade in active">
+		    <uib-tab index="1" heading="Pending" ng-init="UserDashCtrl.getAppointments()">
+        {{UserDashCtrl.pending_message}}
+<!-- ng-init="UserDashCtrl.getAppointments()" -->
+					<div class="row" ng-repeat="sample in UserDashCtrl.appointments_table">
+					<div class="col-md-8 col-sm-8">
+					<div class="row">
+							<div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
+								<ng-map  default-style="true" zoom="11" center="current-location">
 
-									<div class="row">
-										<div class="col-md-12 col-sm-12"  ng-repeat="sample in UserDashCtrl.service_quotes_table">
-										<b>8/22/16 -
+								<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
+								<marker id='{{p.id}}' position="{{p.pos}}"
+								 ng-repeat="p in UserDashCtrl.positions2"
+								 on-click="UserDashCtrl.showDetail(p)"
+								 icon="{{p.map_icon_pics}}"
+								 title="pos: {{p.pos}}"
+								 on-mouseover="UserDashCtrl.showDetail(p);"
+								 on-mouseout="UserDashCtrl.hideDetail()">
+								</marker>
+								<info-window id="foo-iw">
+								 <div ng-non-bindable="">
+								 {{UserDashCtrl.shop.id}}<br/>
+								 {{UserDashCtrl.shop.pos}}<br/>
+								 <br/>
+								 </div>
+							 </info-window>
+						 </ng-map>
+					</div>
+					<hr>
+					</div>
+					</div>
+					<div class="col-md-4 col-sm-4" style="margin-top:15px;" >
+					<div class="row">
+						<div class="col-md-2 col-sm-2 inline">
+							<span class="badge mapListNumber">1</span>
+						</div>
+						<div class="col-md-7 col-sm-7 inline mapListCompany">
+							<!-- Dru's Auto -->
+								{{sample.service_center.service_name}}
+						</div>
+						<div class="col-md-3 col-sm-3 mapListBidPrice">
 
-                       {{UserDashCtrl.userObject.pipedRequests}}
+							${{sample.quote_cost}}
+						</div>
 
-										 </b><br>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-xs-6 col-xs-offset-2 col-md-offset-2 form-group">
+							{{sample.accepted}}
 
-										 <!-- {{sample.service_center}} -->
-										Your comments: <i>{{UserDashCtrl.userObject.pipedRequests}}</i><br>
-										Service Notes: <i>{{sample.quote_text}}</i>
+						</div>
 
-									<div class="row">
-										<div class="col-md-6 col-sm-12">
-										Service Center: <b>{{sample.service_center.service_name}}</b>
-										</div>
-										<div class="col-md-6 col-sm-12">
-										Bid Amount: <b>{{sample.quote_cost}}</b>
-										</div>
-									</div>
-									</div>
-										</div>
-									<div class="row">
-										<div class="col-md-12 col-sm-12">
-										<span style="color:#ff6600; font-weight:bold;">PENDING</span>
-										</div>
-									</div>
-								</div>
-							</div>
+					</div>
+
+					</div>
+					</div>
+
 </uib-tab>
 		     <uib-tab index="2" heading="Your History">
 					  		<div class="tab-content" style="border:solid 2px #ff6600;">

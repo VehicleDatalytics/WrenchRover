@@ -17,6 +17,7 @@ module.exports = function(app) {
     this.service_center_id = localStorage.getItem('service_center_id');
     console.log(this.service_center_id);
     this.your_appointments = [];
+    this.service_request_id = null;
 
 
     this.getAll = () => {
@@ -28,9 +29,6 @@ module.exports = function(app) {
         console.log(this.workrequests);
 
       } else {
-        //   mallard
-
-        // that.getQuotes();
 
         $http.get(baseUrl + '/service_requests')
           .then((res) => {
@@ -39,8 +37,6 @@ module.exports = function(app) {
             for (var i = 0; i < res.data.length; i++) {
               this.incoming_sr_arr.push(res.data[i].id);
             }
-
-            // console.log(this.service_request_id_arr);
 
             function check(elem) {
               return that.service_request_id_arr.indexOf(elem) === -1;
