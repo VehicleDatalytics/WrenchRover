@@ -1,4 +1,4 @@
- /* eslint-disable prefer-arrow-callback */
+/* eslint-disable prefer-arrow-callback */
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
   app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', '$window', function($http, NgMap, string, $state, $window) {
@@ -6,23 +6,12 @@ module.exports = exports = function(app) {
     this.key = string;
     var vm = this;
     vm.positions = [];
+    vm.positions2 = [];
     var loc_obj = {};
     this.url = 'https://wrenchroverapi.herokuapp.com/';
     this.count = 0;
-    console.log(vm.positions.length);
     this.appointment = {};
-
-
-    // this.appointment.service_center = localStorage.getItem('appointment_service_center_name');
-
-    if (localStorage.getItem('appointment_date_time')) {
-      this.message = 'You have a new appointment!';
-      this.appointment.service_center = localStorage.getItem('appointment_service_center_name');
-    } else {
-      this.appointment.service_center = 'TBA';
-      this.message = "We're digging for offers!";
-    }
-    this.appointment.appointment_date_time = localStorage.getItem('appointment_date_time');
+    this.acceptedObject = {};
 
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
@@ -41,67 +30,49 @@ module.exports = exports = function(app) {
 
     this.user_id = JSON.parse(localStorage.getItem('user_id'));
     console.log(this.user_id);
-    this.arr = [];
 
-    this.service_object_thing = null;
 
-    this.service_requestObj = JSON.parse(localStorage.getItem('service_requests'));
+    // console.log(JSON.parse(localStorage.getItem('service_requests')));
+    // console.log(JSON.parse(localStorage.getItem('service_requests').id));
+    this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
+    this.service_request_id = this.service_requests.id;
 
-    this.service_request_id = JSON.parse(localStorage.getItem('service_request_id'));
+    $http.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 
     this.userObject = {};
-
-    this.sq_object = [];
-    this.sq_id = null;
-    this.sr_id = null;
     this.service_quotes = [];
     this.service_quotes_table = [];
-    this.avail_dates = [];
-    this.user_dates = [];
-
-
-    this.serviceQuotes = {
-      user_id: this.user_id,
-      quote_cost: '',
-      quote_text: '',
-      work_request: '',
-      existence: 'maybe'
-    };
-
-
-    console.log(this.service_object_thing);
+    this.appointments_table = [];
 
     this.confirm = function(value, time) {
       console.log(value);
       console.log(time);
 
-    //   window.localStorage.remainingRequests =
-    //   JSON.stringify(this.workrequests);
+      window.localStorage.confirmedAppt = JSON.stringify(value);
+
       var timeString = time.toString();
-      this.acceptedObject = {};
+
       this.acceptedObject.id = value.id;
       this.acceptedObject.accepted = timeString;
       this.acceptedObject.service_center_id = value.service_center_id;
-    //   this.acceptedObject.service_request_id = value.service_request_id;
-
       var resource = this.acceptedObject;
       console.log(resource);
+
       window.localStorage.appointment_service_center_name = value.service_center.service_name;
-    //   window.localStorage.appointment_date_time = JSON.stringify(time);
+   //   window.localStorage.appointment_date_time = JSON.stringify(time);
       window.localStorage.appointment_date_time = time;
-      //
+     //
       $http.put(baseUrl + 'service_quotes' + '/' + value.id, resource )
-      .then((res) => {
-        console.log(res);
-        console.log('putting');
-        $window.location.reload();
-      })
-      .catch((error, status) => {
-        console.log(error);
-        console.log(status);
-        console.log("fuck. it didn't work");
-      });
+     .then((res) => {
+       console.log(res);
+       console.log('Successfully put it to /service_quotes/' + value.id);
+       $window.location.reload();
+     })
+     .catch((error) => {
+       console.log(error);
+       console.log('Failed to put it to /service_quotes/' + value.id);
+     });
 
     };
 
@@ -113,144 +84,226 @@ module.exports = exports = function(app) {
 
 
     this.getUserInfo = function() {
-      console.log('initting the ud');
-      this.user_id = JSON.parse(localStorage.getItem('user_id'));
-      console.log(this.user_id);
+      console.log('getting user info');
 
-      console.log(JSON.parse(localStorage.getItem('service_requests')));
-
-      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-    //   console.log(localStorage.getItem('token'));
 
       $http.get(this.url + 'users/' + this.user_id)
+     .then((res) => {
+       console.log(res);
+       // get user's car:
+       this.storedVehicle = {
+         make: { name: res.data.autos[0].make },
+         model: { name: res.data.autos[0].model },
+         trim: { name: res.data.autos[0].trim },
+         mileage: res.data.autos[0].mileage,
+         id: res.data.autos[0].id,
+         user_id: res.data.autos[0].user_id,
+         year: res.data.autos[0].year
+       };
+       window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
+
+       window.localStorage.auto_id = this.storedVehicle.id;
+    //    console.log(localStorage.getItem('token'));
+       //  get user's date of signup:
+       var month = parseInt(res.data.created_at.slice(5, 7), 10);
+       var year = res.data.created_at.slice(0, 4);
+       var monthsArray = ['January', 'February', 'March', 'April', 'May',
+         'June', 'July', 'August', 'September', 'October',
+         'November', 'December'];
+       var memberDate = monthsArray[month - 1] + ' ' + year;
+
+       this.userObject = res.data;
+       this.userObject.memberSince = memberDate;
+
+       console.log(this.userObject);
+
+       var reqs = this.userObject.service_requests[0].work_request;
+       this.userObject.pipedRequests = reqs.replace(',', ' | ');
+       this.userObject.autos = res.data.autos;
+     })
+     .catch((res) => {
+       console.log(res);
+       console.log('error');
+     })
+     .then(() => {
+
+       $http.get(this.url + 'service_requests/' + this.service_request_id)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data.service_quotes);
+
+          if (res.data.service_quotes.length >= 1) {
+            console.log(res.data.service_quotes[0].id);
+            this.service_quotes = res.data.service_quotes;
+
+            $http.get(this.url + 'service_quotes')
+           .then((res) => {
+            //  console.log(res.data);
+             this.service_quotes_table.splice(0);
+             console.log(this.service_request_id);
+
+
+             for (var i = 0; i < res.data.length; i++) {
+
+
+               if (res.data[i].service_request_id == this.service_request_id) {
+                 console.log('THERE ARE BIDS');
+
+                 vm.tab = 'New';
+
+                 console.log(res.data[i]);
+                 window.localStorage.appointment_service_center_name = res.data[i].service_center.service_name;
+
+
+                 var loc_obj = {
+                   id: res.data[i].service_center.service_name,
+                   cost: res.data[i].quote_cost,
+                   notes: res.data[i].quote_text,
+                   accepted: res.data[i].accepted,
+                   available_date_1: res.data[i].available_date_1, available_date_2: res.data[i].available_date_2, available_date_3: res.data[i].available_date_3,
+                   pos:
+                    res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
+                   quote_id: res.data[i].id,
+                   cost: res.data[i].quote_cost,
+                   notes: res.data[i].quote_text,
+                   position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip,
+                   dates: [ res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3]
+                 };
+
+
+                 vm.positions.push(loc_obj);
+
+                 this.service_quotes_table.push(res.data[i]);
+
+               }
+             } // for loop ends
+             console.log(loc_obj);
+             for (var j = 0; j < vm.positions.length; j++) {
+               vm.positions[j].map_icon_pics = map_icons[j];
+               vm.positions[j].item_number = j + 1;
+             }
+
+             console.log(vm.positions);
+             console.log(vm.positions.length);
+             vm.count = vm.positions.length;
+             vm.shop = vm.positions[0];
+             console.log(vm.shop);
+             vm.showDetail = function(e, shop) {
+               console.log(shop);
+               vm.shop = shop;
+               vm.map.showInfoWindow('foo-iw', shop.id);
+               console.log(vm.map);
+             };
+
+             vm.hideDetail = function() {
+               vm.map.hideInfoWindow('foo-iw');
+             };
+             vm.value = '';
+             vm.newValue = function(value, x) {};
+
+
+             this.available_date = 1;
+           });
+
+          } else {
+            console.log('nope');
+          }
+        });
+// maybe
+       // }
+
+     });
+    };
+
+
+    this.getAppointments = function() {
+
+      $http.get(this.url + 'service_quotes')
       .then((res) => {
-        console.log(res);
-        // get user's car:
-        this.storedVehicle = {
-          make: { name: res.data.autos[0].make },
-          model: { name: res.data.autos[0].model },
-          trim: { name: res.data.autos[0].trim },
-          mileage: res.data.autos[0].mileage,
-          id: res.data.autos[0].id,
-          user_id: res.data.autos[0].user_id,
-          year: res.data.autos[0].year
-        };
-        window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
+        console.log(res.data);
+        // this.service_quotes_table.splice(0);
+        this.appointments_table.splice(0);
+        console.log(this.service_request_id);
 
-        window.localStorage.auto_id = this.storedVehicle.id;
-        console.log(localStorage.getItem('token'));
-        //  get user's date of signup:
-        var month = parseInt(res.data.created_at.slice(5, 7), 10);
-        var year = res.data.created_at.slice(0, 4);
-        var monthsArray = ['January', 'February', 'March', 'April', 'May',
-          'June', 'July', 'August', 'September', 'October',
-          'November', 'December'];
-        var memberDate = monthsArray[month - 1] + ' ' + year;
+        for (var i = 0; i < res.data.length; i++) {
 
+          if (res.data[i].accepted != null && res.data[i].service_request_id == this.service_request_id && res.data.length >= 1) {
+            console.log('THERE IS AN ACCEPTED BID');
+            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+            // i = res.data.length;
+            // console.log();
 
-        this.userObject.memberSince = memberDate;
-        this.memberSince = memberDate;
-        this.userObject = res.data;
-        console.log(this.userObject);
+            vm.message = 'Your upcoming appointment';
+            vm.appointment.appointment_date_time = res.data[i].accepted;
+            vm.appointment.service_center = res.data[i].service_center.service_name;
+            vm.pending_message = 'Your upcoming appointment';
+
+            // vm.tab = 'Appointments';
+            vm.tab = 'New';
+
+            console.log(res.data[i]);
+            window.localStorage.appointment_service_center_name = res.data[i].service_center.service_name;
+            window.localStorage.confirmedAppt = res.data[i].accepted;
+            console.log(res.data[i].accepted);
 
 
-        var reqs = this.userObject.service_requests[0].work_request;
-        this.userObject.pipedRequests = reqs.replace(',', ' | ');
-        this.userObject.autos = res.data.autos;
-        this.sr_id = res.data.service_requests[0].id;
-        console.log(this.sr_id);
-      })
-      .catch((res) => {
-        console.log(res);
-        console.log('error');
-      })
-      .then(() => {
-        $http.get(this.url + 'service_requests/' + this.sr_id)
-         .then((res) => {
-           console.log(res);
-           this.service_object_thing = res.data;
-           console.log(res.data.service_quotes);
-
-           if (res.data.service_quotes.length >= 1) {
-             console.log(res.data.service_quotes[0].id);
-             this.arr = res.data;
-             console.log(this.arr);
-             this.service_quotes = res.data.service_quotes;
-
-             $http.get(this.url + 'service_quotes')
-            .then((res) => {
-              console.log(res.data);
-              this.service_quotes_table.splice(0);
-              console.log(this.service_request_id);
-              console.log(this.sr_id);
-              this.obj_quote = this.service_quotes_table[0];
-
-              for (var i = 0; i < res.data.length; i++) {
-                if (res.data[i].service_request_id == this.sr_id) {
-                  console.log(res.data[i]);
-                  var loc_obj = {
-                    id: res.data[i].service_center.service_name,
-                    cost: res.data[i].quote_cost,
-                    notes: res.data[i].quote_text,
-                    available_date_1: res.data[i].available_date_1, available_date_2: res.data[i].available_date_2, available_date_3: res.data[i].available_date_3,
-                    pos:
-                     res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
-                    quote_id: res.data[i].id,
-                    cost: res.data[i].quote_cost,
-                    notes: res.data[i].quote_text,
-                    position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip,
-                    dates: [ res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3]
-                  };
-
-                  this.user_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
-                  vm.positions.push(loc_obj);
-                //   console.log(loc_obj);
-                //   console.log(vm.positions);
-                  this.avail_dates.push(res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3);
-                  this.service_quotes_table.push(res.data[i]);
-                  console.log(this.avail_dates);
-                }
-
-              } // for loop ends
+            var loc_obj2 = {
+              id: res.data[i].service_center.service_name,
+              cost: res.data[i].quote_cost,
+              notes: res.data[i].quote_text,
+              accepted: res.data[i].accepted,
+              available_date_1: res.data[i].available_date_1, available_date_2: res.data[i].available_date_2, available_date_3: res.data[i].available_date_3,
+              pos:
+               res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip, num: 'things',
+              quote_id: res.data[i].id,
+              cost: res.data[i].quote_cost,
+              notes: res.data[i].quote_text,
+              position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip,
+              dates: [ res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3]
+            };
 
 
-              console.log(loc_obj);
-              for (var j = 0; j < vm.positions.length; j++) {
-                vm.positions[j].map_icon_pics = map_icons[j];
-                vm.positions[j].item_number = j + 1;
-              }
+            vm.positions2.push(loc_obj2);
 
-              console.log(vm.positions);
-              console.log(vm.positions.length);
-              vm.count = vm.positions.length;
+            // this.service_quotes_table.push(res.data[i]);
+            this.appointments_table.push(res.data[i]);
+            console.log(vm.positions2);
 
-              vm.shop = vm.positions[0];
-              console.log(vm.shop);
+            // ////////
+            console.log(loc_obj2);
+            for (var j = 0; j < vm.positions2.length; j++) {
+              vm.positions2[j].map_icon_pics = map_icons[j];
+              vm.positions2[j].item_number = j + 1;
+            }
 
-              vm.showDetail = function(e, shop) {
-                console.log(shop);
-                vm.shop = shop;
-                vm.map.showInfoWindow('foo-iw', shop.id);
-                console.log(vm.map);
-              };
+            vm.shop = vm.positions2[0];
+            console.log(vm.shop);
+            vm.showDetail = function(e, shop) {
+              console.log(shop);
+              vm.shop = shop;
+              vm.map.showInfoWindow('foo-iw', shop.id);
+              console.log(vm.map);
+            };
 
-              vm.hideDetail = function() {
-                vm.map.hideInfoWindow('foo-iw');
-              };
+            vm.hideDetail = function() {
+              vm.map.hideInfoWindow('foo-iw');
+            };
+            vm.value = '';
+            vm.newValue = function(value, x) {};
 
-              vm.value = '';
-              vm.newValue = function(value, x) {};
+            this.available_date = 1;
+            // ///////
+            // return vm.pending_message;
+            return;
 
-              this.service_quotes_all = this.service_quotes.concat(this.service_quotes_table);
-
-              this.available_date = 1;
-
-            });
-
-           } else {
-             console.log('nope');
-           }
-         });
+          } else {
+            console.log('NOTHING YET2');
+            // vm.message = 'You have bids.';
+            vm.appointment.service_center = 'Coming soon...';
+            vm.pending_message = 'Coming soon...';
+            vm.message = 'You have received bids';
+          }
+        } // for loop ends
 
 
       });
