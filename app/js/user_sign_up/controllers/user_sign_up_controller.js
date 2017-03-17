@@ -4,7 +4,7 @@ var baseUrl = require('../../config').baseUrl;
 var modalObj = require('../../modalObject').modalObj;
 
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', 'modalService', '$uibModal', function(Resource, $http, $state, wrError, modalService, $uibModal) {
+  app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', 'modalService', '$uibModal', '$window', function(Resource, $http, $state, wrError, modalService, $uibModal, $window) {
     var that = this;
     this.msg = 'Create New Account';
     this.errorMsg = null;
@@ -259,6 +259,7 @@ module.exports = function(app) {
         if (this.message === 'Sorry, either your email or your password was wrong. Try again.') {
           console.log('sorry again');
         } else {
+
 
           that.closeModal();
         }

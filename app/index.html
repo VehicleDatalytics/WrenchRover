@@ -10,73 +10,54 @@
     <title>Wrench Rover</title>
     <!-- <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="bootstrap.css">
-     <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
-     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/FontAwesome.otf"> -->
     <link rel="stylesheet" href="bootstrap_wrenchrover.css">
     <link rel="stylesheet" href ="custom.css">
-
     <link rel="stylesheet" href="added_style.css">
-
   </head>
 
 <body data-ng-app="wrApp">
+  <!-- <div class="navbar-header" >
+    <a class="navbar-brand"
+       href="/">
+       <img src="/images/WrenchRover_Logo_Web.png" class="img-responsive brand">
+    </a> -->
 
-  <nav class="navbar navbar-fixed-top"
-       role="navigation"
-       ng-controller="navController as navctrl" data-ng-init="navctrl.checkcookies()">
-    <div class="container" style="height:100px;">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header" >
-        <a class="navbar-brand"
-           href="/">
-           <img src="/images/WrenchRover_Logo_Web.png" class="img-responsive brand">
-        </a>
-        <button type="button"
-                class="navbar-toggle"
-                ng-click="navctrl.isNavCollapsed = !navctrl.isNavCollapsed">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse"
-           uib-collapse="navctrl.isNavCollapsed"
-           id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="centerSignup">
-            <a class = "btn btn-primary"
-               ui-sref="mechanic_sign_up">
-               Service Center Sign Up
-            </a>
-          <!-- <li>
-            <span class="modal-demo"
-                  ng-controller="buttonController as $ctrl">
-              <a ng-disabled="$ctrl.theCookie=true" ng-click="$ctrl.open()">
-                Sign up!
-              </a>
-            </span>
-          </li> -->
-          <li class="modal-login centerSignup"
-              ng-controller="signInButtonController as $ctrl">
-            <!-- <span class="modal-login" -->
-              <a class = "btn btn-primary" ng-click="$ctrl.open()">
-                Signup / Log In
-              </a>
-            <!-- </span> -->
-          </li>
-          <li ng-controller="userSignUpController as $ctrl"
-              class="centerSignup">
-            <!-- <span ng-controller="userSignUpController as $ctrl"> -->
-              <a class = "btn btn-primary" ng-click=$ctrl.logout()>
-                Log Out
-              </a>
-            <!-- </span> -->
-          </li>
-        </ul>
-      </div>
+    <nav class="navbar no-border navbar-default menu-lg navbar-fixed-top" role="navigation" style="height:100px; background:#fff;">
+	<div class="container">
+		<div class="navbar-header">
+			<ul class="nav navbar-nav navbar-left">
+			<a class="navbar-brand navbar-left" href="#"><span class="reverse"><img src="images/WrenchRover_Logo_Web.png" class="img-responsive brand"></span></a></ul>
+		</div>
+  <!-- </div> -->
+		<div>
+
+      <!-- //// -->
+      <div class="btn-group" uib-dropdown auto-close="disabled" style="margin-left:50px">
+       <button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
+        <span class="hidden-xs">Account</span> <span class="caret"></span>
+       </button>
+       <div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
+       </div>
+     </div>
+
+
+
+      <!-- ///// -->
     </nav>
+
+  <!-- <div class="btn-group" uib-dropdown auto-close="disabled" style="float:right;">
+   <button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
+    <span class="hidden-xs">Account</span> <span class="caret"></span>
+   </button>
+   <div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
+   </div>
+ </div> -->
+
+
+ </div>
+
+
+
 
     <ui-view></ui-view>
 
@@ -90,6 +71,7 @@
               <li><a href="#">Partners</a></li>
               <li><a href="#">FAQ</a></li>
               <li><a href="#">Accounts</a></li>
+
             </ul>
           </div>
 
@@ -102,6 +84,22 @@
           </div>
       </div>
     </footer>
+
+
+
+         </div>
+
+         <script type="text/ng-template" id="dropdown.html" ng-controller="navController as vm">
+           <div class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="button-template-url" style="width:300px">
+
+             <mega-dir></mega-dir>
+
+
+             </div>
+
+         </script>
+
     <script type="text/javascript" src="/bundle.js"></script>
+
   </body>
 </html>
