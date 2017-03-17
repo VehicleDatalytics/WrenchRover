@@ -15,6 +15,11 @@ module.exports = function(app) {
       modalService.instance.close();
     };
 
+    this.closeDropDown = function() {
+      console.log('closing the drop down');
+      modalService.closeDropDown();
+    };
+
     this.users = [];
     this.errors = [];
     this.allProblems = null;
@@ -93,6 +98,19 @@ module.exports = function(app) {
         window.localStorage.token = this.token;
         console.log($http.defaults.headers.common.Authorization);
       });
+      })
+      .then(() => {
+        $state.go('user_dashboard');
+      })
+      .then(() => {
+        console.log('closing');
+        console.log(modalService.thing);
+        if (modalService.thing === 2) {
+          that.closeModal();
+
+        } else {
+          that.closeDropDown();
+        }
       });
     };
 
@@ -195,7 +213,14 @@ module.exports = function(app) {
 
           .then(() => {
             console.log('closing');
-            that.closeModal();
+            console.log(modalService.thing);
+            if (modalService.thing === 2) {
+              that.closeModal();
+
+            } else {
+              that.closeDropDown();
+            }
+
           });
 
 
@@ -261,7 +286,18 @@ module.exports = function(app) {
         } else {
 
 
-          that.closeModal();
+        //   that.closeModal();
+        //   that.closeDropDown();
+
+
+          console.log(modalService.thing);
+          if (modalService.thing === 2) {
+            that.closeModal();
+
+          } else {
+            that.closeDropDown();
+          }
+
         }
 
       });

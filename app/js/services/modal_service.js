@@ -1,16 +1,28 @@
 module.exports = function(app) {
   app.factory('modalService', () => {
+
+
     console.log('this instance');
 
     this.instance = 'instance';
     this.a = true;
-    return {
 
+    console.log(this.status);
+    return {
+      thing: 1,
       apptArr: [],
       dateArr: [],
       timesArr: [],
       instance: this.instance,
       d: new Date(),
+      status: {
+        isopen: true
+      },
+      closeDropDown: function() {
+
+        this.status.isopen = false;
+        console.log(this.status.isopen);
+      },
 
 
       pass: function(x) {
