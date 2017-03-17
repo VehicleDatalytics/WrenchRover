@@ -1,6 +1,6 @@
 
 module.exports = function(app) {
-  app.controller('navController', [function() {
+  app.controller('navController', ['modalService', function(modalService) {
     var that = this;
     console.log('navbaring');
     // this.isNavCollapsed = true;
@@ -8,6 +8,7 @@ module.exports = function(app) {
       console.log('initting cookie check');
       console.log(navigator.cookieEnabled);
     };
+    this.service = modalService;
 
     this.serviceCenter = false;
     // this.activeButton = function() {
@@ -18,16 +19,11 @@ module.exports = function(app) {
       isopen: true
 
     };
-    this.myFunc = function() {
-      console.log('clicked the thing');
-    };
 
-    // this.status = {
-    //   isopen: false
-    // };
+
     this.toggled = function(open) {
 
-      console.log('Dropdown is now: ', 'something');
+      console.log('Dropdown is now: ', open);
 
     };
 
@@ -35,6 +31,7 @@ module.exports = function(app) {
     this.toggleDropdown = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+    //   this.status.isopen = !this.status.isopen;
       that.status.isopen = !that.status.isopen;
     };
 
