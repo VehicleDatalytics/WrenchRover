@@ -13,6 +13,16 @@ module.exports = exports = function(app) {
     this.appointment = {};
     this.acceptedObject = {};
 
+    this.getDash = function() {
+      if (localStorage.getItem('user_id')) {
+        // $window.location.reload();
+        vm.getUserInfo();
+      } else {
+        console.log('please sign in');
+        vm.mini_dash_message = 'please sign in';
+      }
+    };
+
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
       '../../../images/map_icons/number_2.png',
@@ -27,18 +37,22 @@ module.exports = exports = function(app) {
       vm.map = map;
     });
 
+    if (localStorage.getItem('user_id')) {
 
-    this.user_id = JSON.parse(localStorage.getItem('user_id'));
-    console.log(this.user_id);
+      this.user_id = JSON.parse(localStorage.getItem('user_id'));
+      this.user_id_mini = null;
+
+      console.log(this.user_id);
 
 
-    // console.log(JSON.parse(localStorage.getItem('service_requests')));
-    // console.log(JSON.parse(localStorage.getItem('service_requests').id));
-    this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
-    this.service_request_id = this.service_requests.id;
+      this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
+      this.service_request_id = this.service_requests.id;
 
-    $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-
+      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+    }
+    if (!localStorage.getItem('user_id')) {
+      this.user_id_mini = 'Stranger';
+    }
 
     this.userObject = {};
     this.service_quotes = [];
@@ -114,6 +128,7 @@ module.exports = exports = function(app) {
 
        this.userObject = res.data;
        this.userObject.memberSince = memberDate;
+       this.user_id_mini = this.userObject.user_name;
 
        console.log(this.userObject);
 

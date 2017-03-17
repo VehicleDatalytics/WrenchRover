@@ -28,6 +28,7 @@ require('./time')(wrApp);
 require('./datemodal')(wrApp);
 require('./newcal')(wrApp);
 require('./componentCtrl')(wrApp);
+require('./mega')(wrApp);
 
 
 wrApp.config(($stateProvider, $urlRouterProvider) => {
@@ -97,7 +98,7 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   url: '/dashboard',
   templateUrl: 'templates/user/views/user_dashboard3.html',
   controller: 'UserDashboardController',
-  controllerAs: 'UserDashboardController'
+  controllerAs: 'UserDashCtrl'
 })
 .state('sc_portal_view', {
   url: '/scportal',
@@ -139,6 +140,18 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controllerAs: 'vm'
 })
 
+.state('mega_view', {
+  url: '/mega',
+  templateUrl: 'templates/mega/views/mega_view.html',
+  controller: 'megaController',
+  controllerAs: '$ctrl'
+})
+.state('user_dashboard_mini', {
+  url: '/minidash',
+  templateUrl: 'templates/user/views/user_dashboard_mini.html',
+  controller: 'UserDashboardController',
+  controllerAs: 'UserDashCtrl'
+})
 // .state('user_dashboard.pending', {
 //   url: '/pending',
 //   templateUrl: 'templates/user/views/pending.html',

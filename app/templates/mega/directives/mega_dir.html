@@ -1,0 +1,92 @@
+
+ <div>
+
+
+
+
+ <!-- experimenting with tabs -->
+
+ <uib-tabset active="active">
+
+    <uib-tab index="0" heading="Your Dashboard">
+      dash
+      <mini-dir></mini-dir>
+    </uib-tab>
+
+    <uib-tab index="1" heading="Sign in">
+      <div ng-hide="x" ng-controller="userSignUpController as userctrl">
+
+      <!-- user sign in -->
+      <user-sign-in-form
+      data-button-text="Log-In"
+      data-login="login"
+      data-action = "create"
+      ng-hide = "y"
+
+      >
+
+      </user-sign-in-form>
+    </div>
+
+    </uib-tab>
+
+    <uib-tab index="2" heading= "Sign up">
+        <div  ng-controller="userSignUpController as userctrl">
+      <user-sign-up-form-page-one
+          ng-if = "!userctrl.storedVehicle"
+          data-button-text="Sign up v 2!"
+          data-xuser="userctrl.newUser"
+          data-action="createAlt">
+       </user-sign-up-form-page-one>
+
+        <user-sign-up-form-page-one
+          ng-if = "userctrl.storedVehicle"
+
+
+        data-button-text="Join today!"
+        data-action="create"
+        data-xuser="userctrl.newUser">
+        </user-sign-up-form-page-one>
+      </div>
+
+    </uib-tab>
+    <uib-tab index="3" heading="contact us">
+      <div>
+          <h3 class="text-right"><i class="fa fa-envelope iconpadLG"></i>Contact us</h3>
+            <div class="row">
+              <form role="form">
+                <div class="col-xs-6 col-md-6 ">
+                  <div class="form-group">
+                    <input class="input-sm form-control" id="inputName" name="inputName" placeholder="Your Name" />
+                  </div>
+                </div>
+                <div class="col-xs-6 col-md-6 ">
+                  <div class="form-group">
+                    <input type="email" class="input-sm form-control" id="inputEmail" name="inputEmail" placeholder="Your Email" />
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-12 ">
+                  <div class="form-group">
+                    <input type="text" class="input-sm form-control" id="inputSubject" name="inputSubject" placeholder="Subject" />
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-12 ">
+                  <div class="form-group">
+                    <textarea class="form-control" id="inputMessage" name="inputMessage" rows="3">Description</textarea>
+                  </div>
+                </div>
+                <div class="form-group col-sm-offset-3 col-sm-9">
+                  <button class="btn btn-default pull-right" type="submit">
+                  <i class="fa fa-chevron-circle-right"></i> Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </uib-tab>
+
+  </uib-tabset>
+
+
+
+ </div>
