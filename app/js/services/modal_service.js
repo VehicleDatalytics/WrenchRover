@@ -16,12 +16,13 @@ module.exports = function(app) {
       instance: this.instance,
       d: new Date(),
       status: {
-        isopen: true
+        isopen: false
       },
       closeDropDown: function() {
+        console.log('closing from the ms');
 
         this.status.isopen = false;
-        console.log(this.status.isopen);
+        // console.log(this.status.isopen);
       },
 
 
