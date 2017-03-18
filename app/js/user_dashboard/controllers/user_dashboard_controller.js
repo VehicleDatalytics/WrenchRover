@@ -44,12 +44,21 @@ module.exports = exports = function(app) {
 
       console.log(this.user_id);
 
+      //
+    //   this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
+    //   this.service_request_id = this.service_requests.id;
+
+      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+    }
+
+    if (localStorage.getItem('service_requests')) {
 
       this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
       this.service_request_id = this.service_requests.id;
 
-      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
     }
+
+
     if (!localStorage.getItem('user_id')) {
       this.user_id_mini = 'Stranger';
     }
@@ -103,8 +112,11 @@ module.exports = exports = function(app) {
 
       $http.get(this.url + 'users/' + this.user_id)
      .then((res) => {
+
        console.log(res);
        // get user's car:
+
+       console.log(res.data.autos);
        this.storedVehicle = {
          make: { name: res.data.autos[0].make },
          model: { name: res.data.autos[0].model },
@@ -114,6 +126,8 @@ module.exports = exports = function(app) {
          user_id: res.data.autos[0].user_id,
          year: res.data.autos[0].year
        };
+
+
        window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
 
        window.localStorage.auto_id = this.storedVehicle.id;
