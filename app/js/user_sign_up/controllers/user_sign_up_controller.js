@@ -27,6 +27,7 @@ module.exports = function(app) {
     this.localStorageOil;
     this.localStorageDash;
     this.localStorageChosen;
+    // this.token = 'maybe angels';
 
     this.message = null;
 
@@ -77,6 +78,7 @@ module.exports = function(app) {
       this.x = {
         user: resource
       };
+      console.log(this.x);
       $http.post(baseUrl + 'users', this.x)
       .then((res) => {
         window.localStorage.user_id = res.data.id;
@@ -87,19 +89,29 @@ module.exports = function(app) {
 
       })
       .then(() => {
+        console.log(resource);
         $http.post(baseUrl + 'authenticate', resource)
+        // .catch((error) => {
+        //   console.log('error');
+        //   console.log(error);
+        //
+        // })
       .then((res) => {
-
+        console.log(resource);
         console.log(res);
         res.config.headers.Authorization = res.data.auth_token;
 
-        this.token = res.data.auth_token;
+        that.token = res.data.auth_token;
+        window.localStorage.token = that.token;
         $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-        window.localStorage.token = this.token;
+        // window.localStorage.token = this.token;
         console.log($http.defaults.headers.common.Authorization);
       });
       })
       .then(() => {
+        console.log('and he was smilingly certain');
+        console.log(that.token);
+        console.log(localStorage.getItem('token'));
         $state.go('user_dashboard');
       })
       .then(() => {
@@ -112,8 +124,9 @@ module.exports = function(app) {
           that.closeDropDown();
         }
       });
-    };
+    }.bind(this);
 
+// coctkail
     this.addServiceRequests = function() {
       console.log('service requesting');
       this.previouslyEntered = localStorage.getItem('describeIssue');
@@ -153,7 +166,62 @@ module.exports = function(app) {
 
 
 // alt ends
+// alt2 begins
+    this.createUser2 = function(resource) {
 
+
+      this.x = {
+        user: resource
+      };
+      $http.post(baseUrl + 'users', this.x)
+  .then((res) => {
+
+    window.localStorage.user_id = res.data.id;
+  })
+  .then(() => {
+    $http.post(baseUrl + 'authenticate', resource)
+    .then((res) => {
+      console.log(res);
+      res.config.headers.Authorization = res.data.auth_token;
+      this.token = res.data.auth_token;
+      window.localStorage.token = this.token;
+      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+    })
+
+ .catch((error, status) => {
+   console.log('error');
+   console.log(error);
+   console.log(data);
+   this.data.error = { message: error, status: status };
+ })
+
+
+      .then(() => {
+        console.log('after autos');
+
+        $state.go('user_dashboard');
+      })
+
+      .then(() => {
+        console.log('closing');
+        console.log(modalService.thing);
+        if (modalService.thing === 2) {
+          that.closeModal();
+
+        } else {
+          that.closeDropDown();
+        }
+
+      });
+
+
+  });
+
+  // })
+
+
+    }.bind(this);
+// alt2 ends
 
     // user sign up via user flow
 
@@ -165,6 +233,7 @@ module.exports = function(app) {
         } else this.requests.push(arrFilter[i]);
       }
       this.serviceRequests.work_request = this.requests.toString();
+
       this.x = {
         user: resource
       };

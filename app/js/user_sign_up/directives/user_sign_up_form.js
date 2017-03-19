@@ -16,7 +16,8 @@ module.exports = function(app) {
       link: function(scope, element, attrs, controller) {
         var actions = {
           create: controller.createUser,
-          createAlt: controller.createUserAlt
+        //   createAlt: controller.createUserAlt
+          createAlt: controller.createUser2
 
 
         //   auto: controller.autoX

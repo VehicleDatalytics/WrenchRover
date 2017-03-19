@@ -143,6 +143,7 @@ module.exports = exports = function(app) {
        this.userObject = res.data;
        this.userObject.memberSince = memberDate;
        this.user_id_mini = this.userObject.user_name;
+    //    this.car_year = this.userObject.res.data;
 
        console.log(this.userObject);
 
