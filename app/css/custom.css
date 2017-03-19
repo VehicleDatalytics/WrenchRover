@@ -396,15 +396,15 @@ float: right;
  }
 
  #menuTab .tab-pane{
-   /*background: red;*/
+   border: 1px dotted red;
    /*height: auto;*/
    /*width: auto;*/
  }
 
 
  .dropdown-menu{
-   
-   height: auto;
+
+   height: 250px;
    width: 500px;
 
    /*background: pink;*/

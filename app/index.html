@@ -87,7 +87,10 @@
 
 <!-- autodisclose disabled. close via service-->
 
-<div class="btn-group" uib-dropdown auto-close="disabled"  is-open="vm.service.status.isopen" style="margin-left:50px" ng-controller="navController as vm" >
+<!-- <div class="btn-group" uib-dropdown auto-close="disabled"  is-open="vm.service.status.isopen" style="margin-left:50px" ng-controller="navController as vm" > -->
+
+
+<div class="btn-group" uib-dropdown auto-close="disabled"  is-open="vm.service.status.isopen"   ng-controller="navController as vm" >
 <button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
  <span class="hidden-xs">Account</span> <span class="caret"></span>
 </button>
@@ -136,7 +139,7 @@
 
          </div>
 
-     
+
 
            <script type="text/ng-template" id="dropdown.html" ng-controller="navController as vm" >
              <div class="dropdown-menu dropdown-menu-right "    role="menu" aria-labelledby="button-template-url"  >
