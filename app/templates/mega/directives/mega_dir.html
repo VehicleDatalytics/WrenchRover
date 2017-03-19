@@ -1,56 +1,82 @@
 
- <div>
+ <div  >
 
 
 
 
  <!-- experimenting with tabs -->
 
- <uib-tabset active="active">
+ <uib-tabset id="menuTab" active="active" vertical="true" >
 
-    <uib-tab index="0" heading="Your Dashboard">
-      dash
-      <mini-dir></mini-dir>
+    <uib-tab index="0" >
+<uib-tab-heading>
+
+   <i class="fa fa-unlock-alt"> Sign In</i>
+</uib-tab-heading>
+
+      <div  ng-controller="userSignUpController as userctrl">
+
+
+    <user-sign-in-form
+
+    data-button-text="Log-In"
+    data-login="login"
+    data-action = "create"
+    ng-hide = "y"
+
+    >
+
+    </user-sign-in-form>
+
+    </div>
     </uib-tab>
 
-    <uib-tab index="1" heading="Sign in">
-      <div ng-hide="x" ng-controller="userSignUpController as userctrl">
+    <uib-tab index="1"  >
 
-      <!-- user sign in -->
-      <user-sign-in-form
-      data-button-text="Log-In"
-      data-login="login"
-      data-action = "create"
-      ng-hide = "y"
+      <uib-tab-heading>
 
-      >
+         <i class="fa fa-user"> Sign Up</i>
+      </uib-tab-heading>
+      <div ng-hide="x" ng-controller="userSignUpController as userctrl"    >
 
-      </user-sign-in-form>
+
+
+
+        <user-sign-up-form-page-one
+            ng-if = "!userctrl.storedVehicle"
+            data-button-text="Sign up v 2!"
+            data-xuser="userctrl.newUser"
+            data-action="createAlt">
+         </user-sign-up-form-page-one>
+
+          <user-sign-up-form-page-one
+            ng-if = "userctrl.storedVehicle"
+
+
+          data-button-text="Join today!"
+          data-action="create"
+          data-xuser="userctrl.newUser">
+          </user-sign-up-form-page-one>
+
     </div>
 
     </uib-tab>
 
-    <uib-tab index="2" heading= "Sign up">
-        <div  ng-controller="userSignUpController as userctrl">
-      <user-sign-up-form-page-one
-          ng-if = "!userctrl.storedVehicle"
-          data-button-text="Sign up v 2!"
-          data-xuser="userctrl.newUser"
-          data-action="createAlt">
-       </user-sign-up-form-page-one>
+    <uib-tab index="2">
 
-        <user-sign-up-form-page-one
-          ng-if = "userctrl.storedVehicle"
+      <uib-tab-heading>
 
+         <i class="fa fa-dashboard"> Your Dashboard</i>
+      </uib-tab-heading>
 
-        data-button-text="Join today!"
-        data-action="create"
-        data-xuser="userctrl.newUser">
-        </user-sign-up-form-page-one>
-      </div>
-
+    <mini-dir></mini-dir>
     </uib-tab>
-    <uib-tab index="3" heading="contact us">
+    <uib-tab index="3"  >
+
+      <uib-tab-heading>
+
+         <i class="fa fa-phone"> Contact Us</i>
+      </uib-tab-heading>
       <div>
           <h3 class="text-right"><i class="fa fa-envelope iconpadLG"></i>Contact us</h3>
             <div class="row">

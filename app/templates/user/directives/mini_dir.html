@@ -1,4 +1,4 @@
-<div  data-ng-controller="UserDashboardController as UserDashCtrl"  ng-init="UserDashCtrl.getDash()">
+<div  data-ng-controller="UserDashboardController as UserDashCtrl"  ng-init="UserDashCtrl.getDash()" >
 
 {{UserDashCtrl.mini_dash_message}}
         <h3 class="text-right"><i class="fa fa-home iconpadLG"></i>Welcome back!</h3>
@@ -9,7 +9,7 @@
             <div style="padding:0px 0px;"><b>{{UserDashCtrl.user_id_mini}}</b><br>Member since 2016</div>
             <br>
             <div style="float:left;padding:0px 0px;margin-right:5px;width:52px;"><i class="fa fa-car fa-3x"></i></div>
-            <div style="padding:0px 0px;"><b>2008 Saturn Sky</b><br>Redline 2dr 4cyl</div>
+            <div style="padding:0px 0px;"><b>{{UserDashCtrl.userObject.autos[0].year}}{{UserDashCtrl.userObject.autos[0].make}}  {{UserDashCtrl.userObject.autos[0].model}}</b><br> </div>
           </div>
           <div class="col-md-6 col-sm-12 hidden-xs">
             <div style="padding:0px 0px;margin-right:0px;">
