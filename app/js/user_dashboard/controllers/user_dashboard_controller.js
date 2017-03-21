@@ -44,9 +44,6 @@ module.exports = exports = function(app) {
 
       console.log(this.user_id);
 
-      //
-    //   this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
-    //   this.service_request_id = this.service_requests.id;
 
       $http.defaults.headers.common.Authorization = localStorage.getItem('token');
     }
@@ -60,7 +57,7 @@ module.exports = exports = function(app) {
 
 
     if (!localStorage.getItem('user_id')) {
-      this.user_id_mini = 'Stranger';
+      this.user_id_mini = 'Not Signed In';
     }
 
     this.userObject = {};
@@ -99,58 +96,50 @@ module.exports = exports = function(app) {
 
     };
 
-    this.addRequest = function(x) {
-      console.log(x);
-      console.log('adding request');
-      $state.go('common_repairs_view.get_started');
-    };
-
 
     this.getUserInfo = function() {
       console.log('getting user info');
 
-
       $http.get(this.url + 'users/' + this.user_id)
-     .then((res) => {
+       .then((res) => {
 
-       console.log(res);
-       // get user's car:
+         console.log(res);
 
-       console.log(res.data.autos);
-       this.storedVehicle = {
-         make: { name: res.data.autos[0].make },
-         model: { name: res.data.autos[0].model },
-         trim: { name: res.data.autos[0].trim },
-         mileage: res.data.autos[0].mileage,
-         id: res.data.autos[0].id,
-         user_id: res.data.autos[0].user_id,
-         year: res.data.autos[0].year
-       };
+         console.log(res.data.autos);
+         this.storedVehicle = {
+           make: { name: res.data.autos[0].make },
+           model: { name: res.data.autos[0].model },
+           trim: { name: res.data.autos[0].trim },
+           mileage: res.data.autos[0].mileage,
+           id: res.data.autos[0].id,
+           user_id: res.data.autos[0].user_id,
+           year: res.data.autos[0].year
+         };
 
 
-       window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
+         window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
 
-       window.localStorage.auto_id = this.storedVehicle.id;
+         window.localStorage.auto_id = this.storedVehicle.id;
     //    console.log(localStorage.getItem('token'));
        //  get user's date of signup:
-       var month = parseInt(res.data.created_at.slice(5, 7), 10);
-       var year = res.data.created_at.slice(0, 4);
-       var monthsArray = ['January', 'February', 'March', 'April', 'May',
-         'June', 'July', 'August', 'September', 'October',
-         'November', 'December'];
-       var memberDate = monthsArray[month - 1] + ' ' + year;
+         var month = parseInt(res.data.created_at.slice(5, 7), 10);
+         var year = res.data.created_at.slice(0, 4);
+         var monthsArray = ['January', 'February', 'March', 'April', 'May',
+           'June', 'July', 'August', 'September', 'October',
+           'November', 'December'];
+         var memberDate = monthsArray[month - 1] + ' ' + year;
 
-       this.userObject = res.data;
-       this.userObject.memberSince = memberDate;
-       this.user_id_mini = this.userObject.user_name;
+         this.userObject = res.data;
+         this.userObject.memberSince = memberDate;
+         this.user_id_mini = this.userObject.user_name;
     //    this.car_year = this.userObject.res.data;
 
-       console.log(this.userObject);
+         console.log(this.userObject);
 
-       var reqs = this.userObject.service_requests[0].work_request;
-       this.userObject.pipedRequests = reqs.replace(',', ' | ');
-       this.userObject.autos = res.data.autos;
-     })
+         var reqs = this.userObject.service_requests[0].work_request;
+         this.userObject.pipedRequests = reqs.replace(',', ' | ');
+         this.userObject.autos = res.data.autos;
+       })
      .catch((res) => {
        console.log(res);
        console.log('error');
@@ -177,6 +166,7 @@ module.exports = exports = function(app) {
 
 
                if (res.data[i].service_request_id == this.service_request_id) {
+                 console.log(res.data[i].service_request_id);
                  console.log('THERE ARE BIDS');
 
                  vm.tab = 'New';
@@ -338,6 +328,14 @@ module.exports = exports = function(app) {
 
       });
     };
+
+
+    this.addRequest = function(x) {
+      console.log(x);
+      console.log('adding request');
+      $state.go('common_repairs_view.get_started');
+    };
+
 
   }
 
