@@ -1,4 +1,4 @@
-
+// userSignupcontroller storage while i experiment
 var baseUrl = require('../../config').baseUrl;
 
 var modalObj = require('../../modalObject').modalObj;
@@ -11,14 +11,6 @@ module.exports = function(app) {
 
 
     this.service = modalService;
-    this.closeModal = function() {
-      modalService.instance.close();
-    };
-
-    this.closeDropDown = function() {
-      console.log('closing the drop down');
-      modalService.closeDropDown();
-    };
 
     this.users = [];
     this.errors = [];
@@ -27,7 +19,7 @@ module.exports = function(app) {
     this.localStorageOil;
     this.localStorageDash;
     this.localStorageChosen;
-    // this.token = 'maybe angels';
+
 
     this.message = null;
 
@@ -36,6 +28,7 @@ module.exports = function(app) {
     this.localStorageOil = localStorage.getItem('oilChosen');
     this.localStorageDash = localStorage.getItem('dashChosen');
     this.localStorageChosen = localStorage.getItem('chosen');
+
 
     var arr = [this.previouslyEntered, this.localStorageOil, this.localStorageChosen, this.localStorageDash];
 
@@ -71,6 +64,17 @@ module.exports = function(app) {
       user_id: null,
       work_request: null
     };
+
+
+    this.closeModal = function() {
+      modalService.instance.close();
+    };
+
+    this.closeDropDown = function() {
+      console.log('closing the drop down');
+      modalService.closeDropDown();
+    };
+
 //  user sign up from landing page
     this.createUserAlt = function(resource) {
       console.log(resource);
@@ -91,11 +95,7 @@ module.exports = function(app) {
       .then(() => {
         console.log(resource);
         $http.post(baseUrl + 'authenticate', resource)
-        // .catch((error) => {
-        //   console.log('error');
-        //   console.log(error);
-        //
-        // })
+
       .then((res) => {
         console.log(resource);
         console.log(res);
@@ -126,7 +126,7 @@ module.exports = function(app) {
       });
     }.bind(this);
 
-// coctkail
+
     this.addServiceRequests = function() {
       console.log('service requesting');
       this.previouslyEntered = localStorage.getItem('describeIssue');
@@ -169,36 +169,34 @@ module.exports = function(app) {
 // alt2 begins
     this.createUser2 = function(resource) {
 
-
       this.x = {
         user: resource
       };
       $http.post(baseUrl + 'users', this.x)
-  .then((res) => {
+      .then((res) => {
 
-    window.localStorage.user_id = res.data.id;
-  })
-  .then(() => {
-    $http.post(baseUrl + 'authenticate', resource)
-    .then((res) => {
-      console.log(res);
-      res.config.headers.Authorization = res.data.auth_token;
-      this.token = res.data.auth_token;
-      window.localStorage.token = this.token;
-      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-    })
+        window.localStorage.user_id = res.data.id;
+      })
+       .then(() => {
+         $http.post(baseUrl + 'authenticate', resource)
+        .then((res) => {
+          console.log(res);
+          res.config.headers.Authorization = res.data.auth_token;
+          this.token = res.data.auth_token;
+          window.localStorage.token = this.token;
+          $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+        })
 
- .catch((error, status) => {
-   console.log('error');
-   console.log(error);
-   console.log(data);
-   this.data.error = { message: error, status: status };
- })
+         .catch((error, status) => {
+           console.log('error');
+           console.log(error);
+           console.log(data);
+           this.data.error = { message: error, status: status };
+         })
 
 
       .then(() => {
-        console.log('after autos');
-
+        console.log('alt2 signup ending, going to the user dashboard now');
         $state.go('user_dashboard');
       })
 
@@ -215,9 +213,7 @@ module.exports = function(app) {
       });
 
 
-  });
-
-  // })
+       });
 
 
     }.bind(this);
@@ -307,9 +303,6 @@ module.exports = function(app) {
       $http.post(baseUrl + 'authenticate', resource)
       .then((res) => {
         console.log(res);
-        // console.log(config);
-        // console.log(headers);
-        // this.message = 'Welcome back! Taking you to your dashboard now!';
         res.headers.Authorization = res.data.auth_token;
         this.token = res.data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
@@ -354,11 +347,6 @@ module.exports = function(app) {
           console.log('sorry again');
         } else {
 
-
-        //   that.closeModal();
-        //   that.closeDropDown();
-
-
           console.log(modalService.thing);
           if (modalService.thing === 2) {
             that.closeModal();
@@ -370,7 +358,6 @@ module.exports = function(app) {
         }
 
       });
-
 
     };
 

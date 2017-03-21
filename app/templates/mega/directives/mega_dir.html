@@ -1,46 +1,31 @@
 
- <div  >
+ <div>
 
 
 
+   <uib-tabset id="menuTab" active="active" vertical="true" >
+     <uib-tab index="0" >
+          <uib-tab-heading>
+          <i class="fa fa-unlock-alt"> Sign In</i>
+          </uib-tab-heading>
 
- <!-- experimenting with tabs -->
-
- <uib-tabset id="menuTab" active="active" vertical="true" >
-
-    <uib-tab index="0" >
-<uib-tab-heading>
-
-   <i class="fa fa-unlock-alt"> Sign In</i>
-</uib-tab-heading>
-
-      <div  ng-controller="userSignUpController as userctrl">
-
-
-    <user-sign-in-form
-
-    data-button-text="Log-In"
-    data-login="login"
-    data-action = "create"
-    ng-hide = "y"
-
-    >
-
-    </user-sign-in-form>
-
-    </div>
-    </uib-tab>
+          <div  ng-controller="userSignUpController as userctrl">
+            <user-sign-in-form
+            data-button-text="Log-In"
+            data-login="login"
+            data-action = "create"
+            ng-hide = "y">
+            </user-sign-in-form>
+            </div>
+      </uib-tab>
 
     <uib-tab index="1"  >
 
       <uib-tab-heading>
 
          <i class="fa fa-user"> Sign Up</i>
-      </uib-tab-heading>
+         </uib-tab-heading>
       <div ng-hide="x" ng-controller="userSignUpController as userctrl"    >
-
-
-
 
         <user-sign-up-form-page-one
             ng-if = "!userctrl.storedVehicle"
@@ -51,16 +36,13 @@
 
           <user-sign-up-form-page-one
             ng-if = "userctrl.storedVehicle"
-
-
-          data-button-text="Join today!"
-          data-action="create"
-          data-xuser="userctrl.newUser">
+            data-button-text="Join today!"
+            data-action="create"
+            data-xuser="userctrl.newUser">
           </user-sign-up-form-page-one>
+        </div>
 
-    </div>
-
-    </uib-tab>
+       </uib-tab>
 
     <uib-tab index="2">
 
