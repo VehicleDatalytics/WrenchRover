@@ -204,18 +204,14 @@ color: #fff;
   height: 375px;
 }
 
-/*Monday Dec additions*/
 
-/*body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
-}*/
 
 .form-signin {
   max-width: 330px;
+
   padding: 15px;
   margin: 0 auto;
+  border: 1px dotted orange;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
@@ -328,27 +324,6 @@ ol { counter-reset: level1 }
 
 /*///*/
 
-.tab-pane{
-  /*color:white;*/
-}
-.tab-content{
-  /*color: blue;*/
-  /*background: black;*/
-}
-
-
- /*.nav-tabs {
-border:0;
-float: right;
-
-}*/
-/*
-/*#menuTab {
-  border:0;
-  float: right;
-}*/
-
-
 
 
 #menuTab .nav-tabs{
@@ -363,23 +338,18 @@ float: right;
 
 #menuTab .nav-tabs > li > a {
 
-        border: none; color: #FF6600; background: white;
+  border: none; color: #FF6600; background: white;
 }
 
-/*///*/
+
 #menuTab .nav-tabs > li > a:hover {
-
-        /*border: none; color: white; background:  #FF6600;*/
-            border: none; color: white; background:  rgba(255, 102, 0, .5)
+    border: none; color: white; background:  rgba(255, 102, 0, .5)
 }
 
-
-
-/*////*/
 
     #menuTab .nav-tabs > li.active > a, .nav-tabs > li > a:hover {
 
-              border: none; color: yellow; background: blue
+              border: none; color: white; background: orange
     }
     #menuTab  .nav-tabs > li > a::after {
       content:""; background:#aaa; height:2px; position:absolute; width:100%; left:0px; transition:all 250ms ease 0s; transform:scale(0);
@@ -390,22 +360,29 @@ float: right;
 
  #menuTab .tab-nav > li > a::after {background:#000 none repeat scroll 0% 0%; color:purple;}
 
- #menuTab:{
-  /*overflow: visible*/
-
- }
 
  #menuTab .tab-pane{
-   border: 1px dotted red;
-   /*height: auto;*/
-   /*width: auto;*/
+   border: 1px dotted white;
+
+ }
+
+.dropButton{
+  float: right;
+}
+
+ .megaDir{
+   /*background: red;*/
+
+
+
  }
 
 
- .dropdown-menu{
+ .megaDirHolder{
+   float:right;
 
-   height: 250px;
-   width: 500px;
-
-   /*background: pink;*/
  }
+
+ 1]
+.iconpad {width:20px;}
+.iconpadLG {margin-right:10px;}

@@ -1,7 +1,7 @@
 
- <div>
+ <div class="row">
 
-
+<div class="col-md-12 col-sm-12" style="height:400px; max-width:400px !important; " >
 
    <uib-tabset id="menuTab" active="active" vertical="true" >
      <uib-tab index="0" >
@@ -9,7 +9,7 @@
           <i class="fa fa-unlock-alt"> Sign In</i>
           </uib-tab-heading>
 
-          <div  ng-controller="userSignUpController as userctrl">
+          <div  ng-controller="userSignUpController as userctrl" style="position:absolute; top:0; left: -250px;">
             <user-sign-in-form
             data-button-text="Log-In"
             data-login="login"
@@ -17,6 +17,7 @@
             ng-hide = "y">
             </user-sign-in-form>
             </div>
+
       </uib-tab>
 
     <uib-tab index="1"  >
@@ -25,7 +26,7 @@
 
          <i class="fa fa-user"> Sign Up</i>
          </uib-tab-heading>
-      <div ng-hide="x" ng-controller="userSignUpController as userctrl"    >
+       <div ng-hide="x" ng-controller="userSignUpController as userctrl"    >
 
         <user-sign-up-form-page-one
             ng-if = "!userctrl.storedVehicle"
@@ -95,6 +96,6 @@
 
   </uib-tabset>
 
-
+</div>
 
  </div>

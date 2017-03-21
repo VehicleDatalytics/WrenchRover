@@ -28,7 +28,9 @@
     .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform:scale(0); }
 .tab-nav > li > a::after {background:#000 none repeat scroll 0% 0%; color:#fff;}
 .tab-pane {padding:2px 0;}
-.tab-content{padding:8px; overflow: scroll; height:200px;}
+.tab-content{padding:8px;
+
+}
 
 .userRow {background-color:#ddd; line-height:auto;}
 .userText {vertical-align:middle;}

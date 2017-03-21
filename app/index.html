@@ -8,7 +8,6 @@
     <meta name="author" content="">
     <meta name="google-site-verification" content="BtYPEvvQFpQmRD9rYWkken0J0fx3JpdhTPximytVfeE" />
     <title>Wrench Rover</title>
-    <!-- <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="bootstrap_wrenchrover.css">
     <link rel="stylesheet" href ="custom.css">
@@ -18,87 +17,20 @@
 <body data-ng-app="wrApp">
 
 
-    <nav class="navbar no-border navbar-default menu-lg navbar-fixed-top" role="navigation" style="height:100px; background:#fff;">
-	<div class="container">
-		<div class="navbar-header">
-			<ul class="nav navbar-nav navbar-left">
-			<a class="navbar-brand navbar-left" href="#"><span class="reverse"><img src="images/WrenchRover_Logo_Web.png" class="img-responsive brand"></span></a></ul>
-		</div>
+    <nav class="navbar no-border navbar-default menu-lg navbar-fixed-top" role="navigation" style="height:100px; background:#fff;" >
+    	  <div class="container">
+    		<div class="navbar-header">
+    			<ul class="nav navbar-nav navbar-left">
+    			<a class="navbar-brand navbar-left" href="#"><span class="reverse"><img src="images/WrenchRover_Logo_Web.png" class="img-responsive brand"></span></a></ul>
+    		</div>
 
-		<div>
-
-    <!-- autoclose off -->
-      <!-- <div class="btn-group" uib-dropdown auto-close="disabled" style="margin-left:50px">
-       <button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
-        <span class="hidden-xs">Account</span> <span class="caret"></span>
-       </button>
-       <div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
-       </div>
-     </div> -->
-
-<!-- autoclose on -->
-     <!-- <div class="btn-group" uib-dropdown  style="margin-left:50px">
-      <button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
-       <span class="hidden-xs">Account</span> <span class="caret"></span>
-      </button>
-      <div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
-      </div>
-    </div> -->
-
-
-<!-- autoclose on, status.isopen -->
- <!-- <div class="btn-group" uib-dropdown  style="margin-left:50px" ng-controller="navController as vm" is-open="vm.status.isopen">
- <button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
-  <span class="hidden-xs">Account</span> <span class="caret"></span>
- </button>
- <div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
- </div>
-</div> -->
-
-<!-- autoclose on, status.isopen via service -->
-
-<!-- <div class="btn-group" uib-dropdown  style="margin-left:50px" ng-controller="navController as vm" is-open="vm.service.status.isopen">
-<button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
- <span class="hidden-xs">Account</span> <span class="caret"></span>
-</button>
-<div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
-</div>
-</div> -->
-
-
-<!-- autoclose disabled. status.isopen via service -->
-
-<!-- <div class="btn-group" uib-dropdown auto-close="disabled"  style="margin-left:50px" ng-controller="navController as vm" is-open="vm.service.status.isopen">
-<button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
- <span class="hidden-xs">Account</span> <span class="caret"></span>
-</button>
-<div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
-</div>
-</div> -->
-
-<!-- autoclose disabled, status.isopen via service, but down at the script template. trying to close with service -->
-<!-- <div class="btn-group" uib-dropdown auto-close="disabled" is-open="vm.service.status.isopen" style="margin-left:50px" ng-controller="navController as vm" >
-<button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
- <span class="hidden-xs">Account</span> <span class="caret"></span>
-</button>
-<div class="dropdown-menu" uib-dropdown-menu template-url="dropdown.html" aria-labelledby="button-template-url">
-</div>
-</div> -->
-
-<!-- autodisclose disabled. close via service-->
-
-<!-- <div class="btn-group" uib-dropdown auto-close="disabled"  is-open="vm.service.status.isopen" style="margin-left:50px" ng-controller="navController as vm" > -->
-
-
-<div class="btn-group" uib-dropdown auto-close="disabled"  is-open="vm.service.status.isopen"   ng-controller="navController as vm" >
-<button id="button-template-url" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
- <span class="hidden-xs">Account</span> <span class="caret"></span>
-</button>
-<div class="dropdown-menu pull-left" uib-dropdown-menu pull-left template-url="dropdown.html" aria-labelledby="button-template-url">
-</div>
-</div>
-
-
+        <div class="btn-group dropButton" uib-dropdown auto-close="disabled"  is-open="vm.service.status.isopen"   ng-controller="navController as vm" >
+        <button id="button-template-url" type="button" class="btn btn-primary " uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-user fa-1x iconpad"></i>
+         <span class="hidden-xs">Account</span> <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu pull-left " uib-dropdown-menu pull-left template-url="dropdown.html" aria-labelledby="button-template-url">
+        </div>
+        </div>
     </nav>
 
 
@@ -139,19 +71,26 @@
 
          </div>
 
+<!-- col-xs-12 col-sm-10 col-md-8 col-lg-7 -->
 
 
            <script type="text/ng-template" id="dropdown.html" ng-controller="navController as vm" >
-             <div class="dropdown-menu dropdown-menu-right "    role="menu" aria-labelledby="button-template-url"  >
+             <div class="dropdown-menu dropdown-menu-right "  role="menu" aria-labelledby="button-template-url">
 
-             <mega-dir></mega-dir>
+            <!-- <div class="col-xs-12 col-md-8" style="border:1px solid black;"> -->
+            <div class="container" style="max-width:600px">
+              <div class="row">
 
-         <!-- <ul>
-             <li><a  ng-click="vm.service.closeDropDown()">one</a></li>
-                <li><a href="#">two</a></li>
-         </ul> -->
+                <!-- <div class="col-md-8 col-sm-8 megaDirHolder"> -->
+                  <div class="col-md-6 col-sm-6 megaDirHolder" style="float:right;">
 
-             </div>
+                 <mega-dir></mega-dir>
+
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+           </div>
 
          </script>
 
