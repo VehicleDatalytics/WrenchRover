@@ -20,7 +20,7 @@
 
 
 /*dru's recent additions 2/5*/
-.nav-tabs {border:0;}
+/*.nav-tabs {border:0;}
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {border-width:0; background:#ff6600 !important;}
     .nav-tabs > li > a {border: none; color: #fff; background:#aaa;}
         .nav-tabs > li.active > a, .nav-tabs > li > a:hover {border: none; color: #fff !important; background:#ff6600;}
@@ -30,7 +30,7 @@
 .tab-pane {padding:2px 0;}
 .tab-content{padding:8px;
 
-}
+}*/
 
 .userRow {background-color:#ddd; line-height:auto;}
 .userText {vertical-align:middle;}
