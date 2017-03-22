@@ -11,7 +11,6 @@ module.exports = function(app) {
 
 
     this.service = modalService;
-
     this.users = [];
     this.errors = [];
     this.allProblems = null;
@@ -19,8 +18,6 @@ module.exports = function(app) {
     this.localStorageOil;
     this.localStorageDash;
     this.localStorageChosen;
-
-
     this.message = null;
 
 
@@ -104,12 +101,10 @@ module.exports = function(app) {
         that.token = res.data.auth_token;
         window.localStorage.token = that.token;
         $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-        // window.localStorage.token = this.token;
         console.log($http.defaults.headers.common.Authorization);
       });
       })
       .then(() => {
-        console.log('and he was smilingly certain');
         console.log(that.token);
         console.log(localStorage.getItem('token'));
         $state.go('user_dashboard');
@@ -174,6 +169,7 @@ module.exports = function(app) {
       };
       $http.post(baseUrl + 'users', this.x)
       .then((res) => {
+        console.log(res);
 
         window.localStorage.user_id = res.data.id;
       })
@@ -216,11 +212,12 @@ module.exports = function(app) {
        });
 
 
-    }.bind(this);
+    };
+    // .bind(this);
 // alt2 ends
 
     // user sign up via user flow
-
+// saint
     this.createUser = function(resource) {
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
@@ -242,6 +239,7 @@ module.exports = function(app) {
       .then(() => {
         $http.post(baseUrl + 'authenticate', resource)
         .then((res) => {
+          console.log(res);
           res.config.headers.Authorization = res.data.auth_token;
           this.token = res.data.auth_token;
           window.localStorage.token = this.token;

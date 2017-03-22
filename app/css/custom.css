@@ -327,10 +327,11 @@ ol { counter-reset: level1 }
 
 
 #menuTab .nav-tabs{
-  border:0;
+ border: 1px dotted black;
   float: right;
-}
+  background: blue;
 
+}
 
 #menuTab .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
   border-width:0; background: white;
@@ -343,7 +344,7 @@ ol { counter-reset: level1 }
 
 
 #menuTab .nav-tabs > li > a:hover {
-    border: none; color: white; background:  rgba(255, 102, 0, .5)
+    border: none; color: white; background: rgba(255, 102, 0, .5)
 }
 
 
@@ -363,26 +364,16 @@ ol { counter-reset: level1 }
 
  #menuTab .tab-pane{
    border: 1px dotted white;
-
+/*background: black;*/
  }
 
 .dropButton{
   float: right;
 }
 
- .megaDir{
-   /*background: red;*/
 
-
-
- }
-
-
- .megaDirHolder{
-   float:right;
-
- }
-
- 1]
 .iconpad {width:20px;}
 .iconpadLG {margin-right:10px;}
+.theDrop {
+  background: yellow;
+}
