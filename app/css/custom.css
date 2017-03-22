@@ -328,7 +328,7 @@ ol { counter-reset: level1 }
 
 #menuTab .nav-tabs{
  border: 1px dotted black;
-  float: right;
+  /*float: right;*/
   background: blue;
 
 }
@@ -376,4 +376,14 @@ ol { counter-reset: level1 }
 .iconpadLG {margin-right:10px;}
 .theDrop {
   background: yellow;
+}
+
+@media (min-width: 769px){
+  #menuTab .nav-tabs{
+   border: 1px dotted black;
+    float: right;
+    background: blue;
+
+  }
+
 }
