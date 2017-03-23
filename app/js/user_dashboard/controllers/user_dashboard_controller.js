@@ -61,6 +61,8 @@ module.exports = exports = function(app) {
 
       this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
       this.service_request_id = this.service_requests.id;
+      console.log(this.service_request_id);
+      console.log(this.service_requests.id);
 
     }
 
@@ -113,6 +115,11 @@ module.exports = exports = function(app) {
        .then((res) => {
 
          console.log(res);
+         if (localStorage.getItem('service_requests')) {
+           this.service_request_id = res.data.service_requests[0].id;
+         }
+
+
          if (res.data.autos.length > 0) {
            console.log(res.data.autos);
            this.storedVehicle = {
@@ -165,6 +172,9 @@ module.exports = exports = function(app) {
      })
      .then(() => {
        if (this.service_requests_count > 0) {
+
+         console.log(this.service_request_id);
+
 
          $http.get(this.url + 'service_requests/' + this.service_request_id)
         .then((res) => {
