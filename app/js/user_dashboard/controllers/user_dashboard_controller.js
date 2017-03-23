@@ -16,7 +16,7 @@ module.exports = exports = function(app) {
     this.modalService = 'modalService';
 
     this.func = function() {
-      console.log('feedback, baby');
+      console.log('capturing url');
     //   $location.absUrl();
       console.log($location.absUrl());
     };
