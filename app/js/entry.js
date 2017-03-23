@@ -152,12 +152,12 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controller: 'UserDashboardController',
   controllerAs: 'UserDashCtrl'
 })
-// .state('user_dashboard.pending', {
-//   url: '/pending',
-//   templateUrl: 'templates/user/views/pending.html',
-//   controller: 'UserDashboardController',
-//   controllerAs: 'UserDashboardController'
-// })
+.state('pending', {
+  url: '/resetpassword:token',
+  templateUrl: 'templates/user/views/pending.html',
+  controller: 'UserDashboardController',
+  controllerAs: 'UserDashboardController'
+})
 //
 // .state('user_dashboard.history', {
 //   url: '/history',
