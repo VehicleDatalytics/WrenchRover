@@ -1,7 +1,7 @@
 /* eslint-disable prefer-arrow-callback */
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
-  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', '$window', 'modalService', function($http, NgMap, string, $state, $window, modalService) {
+  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', '$window', 'modalService', '$location', function($http, NgMap, string, $state, $window, modalService, $location) {
 
     this.key = string;
     var vm = this;
@@ -14,6 +14,12 @@ module.exports = exports = function(app) {
     this.acceptedObject = {};
     this.service_requests_count = 0;
     this.modalService = 'modalService';
+
+    this.func = function() {
+      console.log('feedback, baby');
+    //   $location.absUrl();
+      console.log($location.absUrl());
+    };
 
     this.closeDropDown = function() {
       console.log('closing the drop down');

@@ -291,7 +291,7 @@ module.exports = function(app) {
               $state.go('user_dashboard');
 
             }
-            // });
+
           }
         });
 
