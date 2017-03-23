@@ -74,6 +74,9 @@ module.exports = function(app) {
 
 
     this.addServiceRequests = function() {
+
+      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+
       console.log('service requesting');
       this.previouslyEntered = localStorage.getItem('describeIssue');
       this.localStorageOil = localStorage.getItem('oilChosen');
@@ -96,6 +99,7 @@ module.exports = function(app) {
         } else this.requests.push(arrFilter[i]);
         console.log(arrFilter[i]);
       }
+      console.log(this.requests);
 
       this.serviceRequests.work_request = this.requests.toString();
       this.serviceRequests.user_id = localStorage.getItem('user_id');
@@ -107,6 +111,7 @@ module.exports = function(app) {
       $http.post(baseUrl + 'service_requests', this.serviceRequests)
       .then((res) => {
         console.log(res);
+        window.localStorage.service_requests = JSON.stringify(res.data.work_request);
         $state.go('user_dashboard');
       });
 
