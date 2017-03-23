@@ -271,40 +271,40 @@ module.exports = function(app) {
 
         $http.get(baseUrl + 'users/' + this.user_id )
         .then((res) => {
+          console.log(res);
           console.log('yes');
+          console.log(res.data.service_centers.length);
+          if (res.data.service_centers.length != 0) {
+            console.log('service center person');
+            $state.go('sc_portal_view');
+            console.log(this.signedInUser);
 
-          console.log(this.signedInUser);
-        //   if (res.data.service_requests.length !== 0 && res.data.autos.length !== 0) {
-        //     window.localStorage.service_requests = JSON.stringify(res.data.service_requests[0]);
-        //   } else {
-          //
-        //     console.log('no requests or saved cars');
-        //     this.message = "Are you sure you're not a mechanic?";
-        //   }
-        })
-      .then((res) => {
-        console.log(res);
-        if (localStorage.getItem('service_requests')) {
-          console.log('GOING TO THE DASHBOARD!');
-          $state.go('user_dashboard');
-        } else {
+          } else {
+            console.log(this.signedInUser);
+            // .then((res) => {
+            console.log(res);
+            if (localStorage.getItem('service_requests')) {
+              console.log('GOING TO THE DASHBOARD!');
+              $state.go('user_dashboard');
+            } else {
 
-          $state.go('user_dashboard');
-        //   console.log('Should go to mechanic');
-        }
-      });
+              $state.go('user_dashboard');
+
+            }
+            // });
+          }
+        });
+
+
       })
       .catch((res) => {
         this.message = 'Sorry, either your email or your password was wrong. Try again.';
       })
 
       .then(() => {
-
-
         if (this.message === 'Sorry, either your email or your password was wrong. Try again.') {
           console.log('sorry again');
         } else {
-
           console.log(modalService.thing);
           if (modalService.thing === 2) {
             that.closeModal();
@@ -316,6 +316,7 @@ module.exports = function(app) {
         }
 
       });
+      return;
 
     };
 
