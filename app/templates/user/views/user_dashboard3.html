@@ -35,7 +35,7 @@
 		</div>
 		<div class="col-md-3 col-sm-12" style="padding:0;">
 			<div class="apptHead">Your Vehicle</div>
-			<div style="display:inline;" class="apptText"><span  ng-if="UserDashCtrl.userObject.autos.length ==0"> No car entered, yet.<br><a style="color: red;"  ng-controller="vehicleModalController as $ctrl" ng-click ="$ctrl.open()">Add a vehicle</a></span>{{UserDashCtrl.userObject.autos[0].year}}<br>{{UserDashCtrl.userObject.autos[0].make}} {{UserDashCtrl.userObject.autos[0].model}}</div>
+			<div style="display:inline;" class="apptText"><span  ng-if="UserDashCtrl.userObject.autos.length ==0"> You haven't entered a car.<br><a style="color: white;"  ng-controller="vehicleModalController as $ctrl" ng-click ="$ctrl.open()">Add a vehicle</a></span>{{UserDashCtrl.userObject.autos[0].year}}<br>{{UserDashCtrl.userObject.autos[0].make}} {{UserDashCtrl.userObject.autos[0].model}}</div>
 		</div>
 		<div class="col-md-3 col-sm-12" style="padding:0;">
 			<div class="apptHead">Services</div>

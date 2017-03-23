@@ -262,7 +262,6 @@ module.exports = function(app) {
         window.localStorage.token = this.token;
         window.localStorage.user_id = res.data.user_id;
         this.signedInUser = resource.user_email;
-        // var x = data.user_id.toString();
         this.user_id = res.data.user_id;
 
         $http.get(baseUrl + 'users/' + this.user_id )
@@ -270,13 +269,13 @@ module.exports = function(app) {
           console.log('yes');
 
           console.log(this.signedInUser);
-          if (res.data.service_requests.length !== 0 && res.data.autos.length !== 0) {
-            window.localStorage.service_requests = JSON.stringify(res.data.service_requests[0]);
-          } else {
-
-            console.log('no requests or saved cars');
-            this.message = "Are you sure you're not a mechanic?";
-          }
+        //   if (res.data.service_requests.length !== 0 && res.data.autos.length !== 0) {
+        //     window.localStorage.service_requests = JSON.stringify(res.data.service_requests[0]);
+        //   } else {
+          //
+        //     console.log('no requests or saved cars');
+        //     this.message = "Are you sure you're not a mechanic?";
+        //   }
         })
       .then((res) => {
         console.log(res);
@@ -284,7 +283,9 @@ module.exports = function(app) {
           console.log('GOING TO THE DASHBOARD!');
           $state.go('user_dashboard');
         } else {
-          console.log('Should go to mechanic');
+
+          $state.go('user_dashboard');
+        //   console.log('Should go to mechanic');
         }
       });
       })
