@@ -2,7 +2,7 @@ module.exports = function(app) {
   app.factory('modalService', () => {
 
 
-    console.log('this instance');
+    console.log('modal service used');
 
     this.instance = 'instance';
     this.a = true;
@@ -28,7 +28,7 @@ module.exports = function(app) {
 
       pass: function(x) {
         this.instance = x;
-        console.log(x);
+        // console.log(x);
         return this.instance;
       },
 

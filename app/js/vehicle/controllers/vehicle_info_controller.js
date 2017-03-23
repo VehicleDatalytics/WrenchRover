@@ -1,8 +1,11 @@
 
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
-  app.controller('VehicleInfoController', ['edmundsVehicleListResource', 'vicClearSelections', '$state', '$http', function(Resource, ClearSelections, $state, $http) {
+  app.controller('VehicleInfoController', ['edmundsVehicleListResource', 'vicClearSelections', '$state', '$http', 'modalService', '$window', function(Resource, ClearSelections, $state, $http, modalService, $window) {
     this.cookies = navigator.cookieEnabled;
+    console.log('the thing is:');
+    console.log(modalService.thing);
+    var that = this;
 
     this.vehicleObject = {
       year: '',
@@ -24,6 +27,10 @@ module.exports = exports = function(app) {
       engineList: []
     };
     this.errors = [];
+    this.service = modalService;
+    this.closeModal = function() {
+      modalService.instance.close();
+    };
 
     var resource = new Resource(this.vehicleObject, this.vehicleListOptions, this.errors);
     var clearSelections = new ClearSelections(this.vehicleObject, this.vehicleListOptions, this.errors);
@@ -66,8 +73,26 @@ module.exports = exports = function(app) {
         $http.post(baseUrl + 'autos', this.auto)
         .then( (config) => {
           console.log(config);
+          if (modalService.thing == 2) {
+            $window.location.reload();
+          } else {
+            $state.go('user_dashboard');
+          }
+
+        })
+        .then(() => {
+          if (modalService.thing === 2) {
+            console.log('closing modal');
+            that.closeModal();
+
+          } else {
+            console.log('from the original flow');
+          }
         });
-        $state.go('user_dashboard');
+
+        // $state.go('user_dashboard');
+
+
       } else {
         console.log('there is not a token');
         $state.go('common_repairs_view.get_started');

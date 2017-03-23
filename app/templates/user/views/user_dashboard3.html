@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-md-6 col-sm-6 userText">
 			<div style="float:left;padding:9px 0px;margin-right:15px;"><i class="fa fa-car fa-3x"></i></div>
-			<div style="padding:12px 0px;"><b>{{UserDashCtrl.userObject.autos[0].year}} {{UserDashCtrl.userObject.autos[0].make}}</b><br> {{UserDashCtrl.userObject.autos[0].model}}</div>
+			<div style="padding:12px 0px;"> <span  ng-if="UserDashCtrl.userObject.autos.length ==0"> No car entered, yet.<br> <small><a style="color: red;"  ng-controller="vehicleModalController as $ctrl" ng-click ="$ctrl.open()">Add a vehicle</a></small></span><b>{{UserDashCtrl.userObject.autos[0].year}} {{UserDashCtrl.userObject.autos[0].make}}</b><br> {{UserDashCtrl.userObject.autos[0].model}}</div>
 		</div>
 	</div>
 <!--/////////////////// START WELCOME MESSAGE ROW /////////////////////-->
@@ -30,31 +30,27 @@
 			<h4>{{UserDashCtrl.message}}</h4>
 		</div>
 		<div class="col-md-4 col-sm-12" style="padding:0;"  >
-			<div class="apptHead">Where & When</div>
+			<div class="apptHead"><span>Where & When</span></div>
 			<div class="apptText">{{UserDashCtrl.appointment.service_center}}<br>{{UserDashCtrl.appointment.appointment_date_time}}</div>
 		</div>
 		<div class="col-md-3 col-sm-12" style="padding:0;">
 			<div class="apptHead">Your Vehicle</div>
-			<div class="apptText">{{UserDashCtrl.userObject.autos[0].year}}<br>{{UserDashCtrl.userObject.autos[0].make}} {{UserDashCtrl.userObject.autos[0].model}}</div>
+			<div style="display:inline;" class="apptText"><span  ng-if="UserDashCtrl.userObject.autos.length ==0"> No car entered, yet.<br><a style="color: red;"  ng-controller="vehicleModalController as $ctrl" ng-click ="$ctrl.open()">Add a vehicle</a></span>{{UserDashCtrl.userObject.autos[0].year}}<br>{{UserDashCtrl.userObject.autos[0].make}} {{UserDashCtrl.userObject.autos[0].model}}</div>
 		</div>
 		<div class="col-md-3 col-sm-12" style="padding:0;">
 			<div class="apptHead">Services</div>
-			<div class="apptText">            {{UserDashCtrl.userObject.pipedRequests}}
-
-
+			<div class="apptText">  <span  ng-if="UserDashCtrl.userObject.service_requests.length ==0">  <a style="color: white;" ng-click ="UserDashCtrl.addRequest()">Submit a request</a></span> {{UserDashCtrl.userObject.pipedRequests}}
 			</div>
 		</div>
 	</div>
 <!--/////////////////// START MAINTENANCE LISTINGS COLUMN /////////////////////-->
 	<div class="row">
 		<div class="col-md-8 col-sm-12">
-		<!-- <div> -->
 			<h3>Your Maintenance</h3>
 
 			<uib-tabset active="active">
 
 				<uib-tab index="0" heading="New({{UserDashCtrl.count}})">
-				<!-- <div class="row" ng-repeat="sample in UserDashCtrl.service_quotes_table"> -->
 					<div class="row" >
 				<div class="col-md-8 col-sm-8">
 				<div class="row" >
