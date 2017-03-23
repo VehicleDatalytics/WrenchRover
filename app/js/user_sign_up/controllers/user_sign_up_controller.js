@@ -1,4 +1,4 @@
-// userSignupcontroller storage while i experiment
+
 var baseUrl = require('../../config').baseUrl;
 
 var modalObj = require('../../modalObject').modalObj;
@@ -50,8 +50,8 @@ module.exports = function(app) {
         user_id: null,
         service_request_id: null
       };
-      console.log(this.storedVehicle);
-      console.log(this.auto);
+    //   console.log(this.storedVehicle);
+    //   console.log(this.auto);
 
 
     }
@@ -71,55 +71,6 @@ module.exports = function(app) {
       console.log('closing the drop down');
       modalService.closeDropDown();
     };
-
-//  user sign up from landing page
-    this.createUserAlt = function(resource) {
-      console.log(resource);
-      console.log('alternative');
-      this.x = {
-        user: resource
-      };
-      console.log(this.x);
-      $http.post(baseUrl + 'users', this.x)
-      .then((res) => {
-        window.localStorage.user_id = res.data.id;
-      })
-      .catch((res) => {
-        this.errorMsg = 'already taken';
-        console.log(res.data.user_email[0]);
-
-      })
-      .then(() => {
-        console.log(resource);
-        $http.post(baseUrl + 'authenticate', resource)
-
-      .then((res) => {
-        console.log(resource);
-        console.log(res);
-        res.config.headers.Authorization = res.data.auth_token;
-
-        that.token = res.data.auth_token;
-        window.localStorage.token = that.token;
-        $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-        console.log($http.defaults.headers.common.Authorization);
-      });
-      })
-      .then(() => {
-        console.log(that.token);
-        console.log(localStorage.getItem('token'));
-        $state.go('user_dashboard');
-      })
-      .then(() => {
-        console.log('closing');
-        console.log(modalService.thing);
-        if (modalService.thing === 2) {
-          that.closeModal();
-
-        } else {
-          that.closeDropDown();
-        }
-      });
-    }.bind(this);
 
 
     this.addServiceRequests = function() {
@@ -156,12 +107,15 @@ module.exports = function(app) {
       $http.post(baseUrl + 'service_requests', this.serviceRequests)
       .then((res) => {
         console.log(res);
+        $state.go('user_dashboard');
       });
+
     };
 
 
 // alt ends
 // alt2 begins
+
     this.createUser2 = function(resource) {
 
       this.x = {
@@ -169,55 +123,50 @@ module.exports = function(app) {
       };
       $http.post(baseUrl + 'users', this.x)
       .then((res) => {
+        console.log('1. create alt posting to users.');
         console.log(res);
-
         window.localStorage.user_id = res.data.id;
+
       })
-       .then(() => {
-         $http.post(baseUrl + 'authenticate', resource)
-        .then((res) => {
-          console.log(res);
-          res.config.headers.Authorization = res.data.auth_token;
-          this.token = res.data.auth_token;
-          window.localStorage.token = this.token;
-          $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-        })
-
-         .catch((error, status) => {
-           console.log('error');
-           console.log(error);
-           console.log(data);
-           this.data.error = { message: error, status: status };
-         })
-
-
       .then(() => {
-        console.log('alt2 signup ending, going to the user dashboard now');
-        $state.go('user_dashboard');
-      })
+        $http.post(baseUrl + 'authenticate', resource)
+          .then((res) => {
+            console.log('2. pushing to authenticate.');
+            console.log(res);
+            res.config.headers.Authorization = res.data.auth_token;
+            this.token = res.data.auth_token;
+            window.localStorage.token = this.token;
+            $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+          })
+          .catch((error) => {
+            console.log('there has been an error posting to users or auth');
+            console.log(error);
 
-      .then(() => {
-        console.log('closing');
-        console.log(modalService.thing);
-        if (modalService.thing === 2) {
-          that.closeModal();
+          })
+          .then(() => {
+            console.log('going to user dashboard');
+            console.log('token is: ');
+            console.log(localStorage.getItem('token'));
+            $state.go('user_dashboard');
+          })
+          .then(() => {
+            console.log('closing');
+            console.log(modalService.thing);
+            if (modalService.thing === 2) {
+              that.closeModal();
 
-        } else {
-          that.closeDropDown();
-        }
+            } else {
+              that.closeDropDown();
+            }
 
+          });
       });
 
-
-       });
-
-
     };
-    // .bind(this);
 // alt2 ends
 
     // user sign up via user flow
-// saint
+// original
     this.createUser = function(resource) {
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
@@ -232,13 +181,17 @@ module.exports = function(app) {
       };
       $http.post(baseUrl + 'users', this.x)
       .then((res) => {
+        console.log('1. posting to users');
+        console.log(this.x);
         this.auto.user_id = res.data.id;
         this.serviceRequests.user_id = res.data.id;
         window.localStorage.user_id = res.data.id;
       })
       .then(() => {
+        console.log(resource);
         $http.post(baseUrl + 'authenticate', resource)
         .then((res) => {
+          console.log('2. posting to authenticate');
           console.log(res);
           res.config.headers.Authorization = res.data.auth_token;
           this.token = res.data.auth_token;
@@ -246,11 +199,12 @@ module.exports = function(app) {
           $http.defaults.headers.common.Authorization = localStorage.getItem('token');
         })
 
-     .catch((error, status) => {
+     .catch((error) => {
        console.log('error');
        console.log(error);
-       console.log(data);
+    //    console.log(data);
        this.data.error = { message: error, status: status };
+       console.log(this.data.error);
      })
         .then(() => {
           $http.post(baseUrl + 'service_requests', this.serviceRequests)

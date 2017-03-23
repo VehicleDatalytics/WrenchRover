@@ -1,7 +1,7 @@
 /* eslint-disable prefer-arrow-callback */
 var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
-  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', '$window', function($http, NgMap, string, $state, $window) {
+  app.controller('UserDashboardController', ['$http', 'NgMap', 'string', '$state', '$window', 'modalService', function($http, NgMap, string, $state, $window, modalService) {
 
     this.key = string;
     var vm = this;
@@ -12,10 +12,23 @@ module.exports = exports = function(app) {
     this.count = 0;
     this.appointment = {};
     this.acceptedObject = {};
+    this.service_requests_count = 0;
+    this.modalService = 'modalService';
+
+    this.closeDropDown = function() {
+      console.log('closing the drop down');
+      modalService.closeDropDown();
+    };
+
+    this.goDash = function() {
+      console.log('going to dash');
+      $state.go('user_dashboard');
+      this.closeDropDown();
+    };
 
     this.getDash = function() {
       if (localStorage.getItem('user_id')) {
-        // $window.location.reload();
+        console.log('going to the dashboard');
         vm.getUserInfo();
       } else {
         console.log('please sign in');
@@ -41,10 +54,6 @@ module.exports = exports = function(app) {
 
       this.user_id = JSON.parse(localStorage.getItem('user_id'));
       this.user_id_mini = null;
-
-      console.log(this.user_id);
-
-
       $http.defaults.headers.common.Authorization = localStorage.getItem('token');
     }
 
@@ -104,22 +113,22 @@ module.exports = exports = function(app) {
        .then((res) => {
 
          console.log(res);
-
-         console.log(res.data.autos);
-         this.storedVehicle = {
-           make: { name: res.data.autos[0].make },
-           model: { name: res.data.autos[0].model },
-           trim: { name: res.data.autos[0].trim },
-           mileage: res.data.autos[0].mileage,
-           id: res.data.autos[0].id,
-           user_id: res.data.autos[0].user_id,
-           year: res.data.autos[0].year
-         };
-
-
-         window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
-
-         window.localStorage.auto_id = this.storedVehicle.id;
+         if (res.data.autos.length > 0) {
+           console.log(res.data.autos);
+           this.storedVehicle = {
+             make: { name: res.data.autos[0].make },
+             model: { name: res.data.autos[0].model },
+             trim: { name: res.data.autos[0].trim },
+             mileage: res.data.autos[0].mileage,
+             id: res.data.autos[0].id,
+             user_id: res.data.autos[0].user_id,
+             year: res.data.autos[0].year
+           };
+           window.localStorage.vehicle = JSON.stringify(this.storedVehicle);
+           window.localStorage.auto_id = this.storedVehicle.id;
+         } else {
+           console.log('No car entered.');
+         }
     //    console.log(localStorage.getItem('token'));
        //  get user's date of signup:
          var month = parseInt(res.data.created_at.slice(5, 7), 10);
@@ -132,21 +141,32 @@ module.exports = exports = function(app) {
          this.userObject = res.data;
          this.userObject.memberSince = memberDate;
          this.user_id_mini = this.userObject.user_name;
-    //    this.car_year = this.userObject.res.data;
 
          console.log(this.userObject);
+         if (res.data.service_requests.length > 0) {
+           var reqs = this.userObject.service_requests[0].work_request;
+           this.userObject.pipedRequests = reqs.replace(',', ' | ');
+           this.userObject.autos = res.data.autos;
+           this.service_requests_count = res.data.service_requests.length;
+           console.log(this.service_requests_count);
 
-         var reqs = this.userObject.service_requests[0].work_request;
-         this.userObject.pipedRequests = reqs.replace(',', ' | ');
-         this.userObject.autos = res.data.autos;
+         } else {
+
+           console.log('no service requests entered.');
+
+
+         }
+
        })
+
      .catch((res) => {
        console.log(res);
        console.log('error');
      })
      .then(() => {
+       if (this.service_requests_count > 0) {
 
-       $http.get(this.url + 'service_requests/' + this.service_request_id)
+         $http.get(this.url + 'service_requests/' + this.service_request_id)
         .then((res) => {
           console.log(res);
           console.log(res.data.service_quotes);
@@ -154,27 +174,17 @@ module.exports = exports = function(app) {
           if (res.data.service_quotes.length >= 1) {
             console.log(res.data.service_quotes[0].id);
             this.service_quotes = res.data.service_quotes;
-
             $http.get(this.url + 'service_quotes')
            .then((res) => {
-            //  console.log(res.data);
              this.service_quotes_table.splice(0);
              console.log(this.service_request_id);
-
-
              for (var i = 0; i < res.data.length; i++) {
-
-
                if (res.data[i].service_request_id == this.service_request_id) {
                  console.log(res.data[i].service_request_id);
                  console.log('THERE ARE BIDS');
-
                  vm.tab = 'New';
-
                  console.log(res.data[i]);
                  window.localStorage.appointment_service_center_name = res.data[i].service_center.service_name;
-
-
                  var loc_obj = {
                    id: res.data[i].service_center.service_name,
                    cost: res.data[i].quote_cost,
@@ -189,12 +199,8 @@ module.exports = exports = function(app) {
                    position: res.data[i].service_center.service_address + ', ' + res.data[i].service_center.service_city + ',' + res.data[i].service_center.service_state + ',' + res.data[i].service_center.service_zip,
                    dates: [ res.data[i].available_date_1, res.data[i].available_date_2, res.data[i].available_date_3]
                  };
-
-
                  vm.positions.push(loc_obj);
-
                  this.service_quotes_table.push(res.data[i]);
-
                }
              } // for loop ends
              console.log(loc_obj);
@@ -229,8 +235,12 @@ module.exports = exports = function(app) {
             console.log('nope');
           }
         });
-// maybe
-       // }
+
+
+       // if statement on service requets length ends
+       } else {
+         console.log('No service requests have been entered yet. part 2');
+       }
 
      });
     };
@@ -330,10 +340,27 @@ module.exports = exports = function(app) {
     };
 
 
-    this.addRequest = function(x) {
-      console.log(x);
+    this.addRequest = function() {
+    //   console.log();
       console.log('adding request');
+
+    //   if (localStorage.getItem('vehicle')) {
+    //     console.log(localStorage.getItem('vehicle'));
+    //     $state.go('common_repairs_view.get_started');
+    //   } else {
+    //     console.log(' no vehicle');
+    //     $state.go('vehicle_dropdown_selection');
+      //
+    //   }
+      console.log(localStorage.getItem('vehicle'));
       $state.go('common_repairs_view.get_started');
+    };
+
+
+    this.addVehicle = function(value) {
+      console.log('adding vehicle');
+      console.log(value);
+      $state.go('vehicle_dropdown_selection');
     };
 
 
