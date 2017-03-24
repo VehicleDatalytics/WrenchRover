@@ -12,8 +12,10 @@ module.exports = function(app) {
     console.log(this.token);
     if (!localStorage.getItem('token')) {
       this.heading = 'Sign in';
+      this.signedIn = false;
     } else {
       this.heading = 'Log Out';
+      this.signedIn = true;
     }
 
 
@@ -274,6 +276,7 @@ module.exports = function(app) {
       console.log('logging out');
       $http.defaults.headers.common.Authorization = '';
       localStorage.clear();
+      this.closeDropDown();
       $state.go('vehicle_dropdown_selection');
     };
 
