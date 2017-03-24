@@ -205,36 +205,6 @@ color: #fff;
 }
 
 
-
-.form-signin {
-  max-width: 330px;
-  /*max-with: 33%;*/
-
-  padding: 15px;
-  margin: 0 auto;
-
-  border: 2px solid orange;
-
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
 .formtop {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
@@ -330,32 +300,35 @@ ol { counter-reset: level1 }
 
 
 #menuTab .nav-tabs{
- border: 1px dotted black;
+
+
 }
 
 #menuTab .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
   border-width:0;
-  /*background: white;*/
 }
 
 #menuTab .nav-tabs > li > a {
-
   border: none;
-  color: #FF6600;
-   /*background: white;*/
   border-radius: 0;
+  color: #FF6600;
+
 }
 
 
 #menuTab .nav-tabs > li > a:hover {
-    border-radius: 0; color: white; background: rgba(255, 102, 0, .5);
+    /*border-radius: 0; color: white; background: rgba(255, 102, 0, .5);*/
+      border-radius: 0;
 }
 
 
     #menuTab .nav-tabs > li.active > a, .nav-tabs > li > a:hover {
 
-              border: none; color: white; background: #D95700;
+              /*border: none; color: white; background: #D95700;*/
+
     }
+
+
     #menuTab  .nav-tabs > li > a::after {
       content:""; background:#aaa; height:2px; position:absolute; width:100%; left:0px; transition:all 250ms ease 0s; transform:scale(0);
     }
@@ -365,11 +338,8 @@ ol { counter-reset: level1 }
 
  #menuTab .tab-nav > li > a::after {background:#000 none repeat scroll 0% 0%; color:purple;}
 
-
  #menuTab .tab-pane{
    position: relative;
-   border: 1px dotted white;
-   background: orange;
    width: 80%;
  }
 
@@ -382,11 +352,10 @@ ol { counter-reset: level1 }
 .iconpadLG {margin-right:10px;}
 
 .theDrop {
-/*width: 600px;*/
 width: 100vw;
-height: 350px;
-background: yellow;
-/*max-width: 80vw;*/
+/*height: 350px;*/
+height: 100vh;
+overflow-y: auto;
 
 }
 
@@ -400,31 +369,22 @@ background: yellow;
 @media (min-width: 769px){
 
   .theDrop {
-  /*width: 600px;*/
-  width: 50vw;
+  width: 600px;
   height: 350px;
-  background: white;
-  max-width: 80vw;
-
+  max-width: 70vw;
   }
 
   #menuTab .nav-tabs{
-   border: 1px dotted black;
-    float: right;
-    max-width: 20%;
-
+  float: right;
+  max-width: 20%;
+  /*background: yellow;*/
   }
 
-  .megaDirHolder{
-    background: black;
-
-  }
 
   .miniDir{
     max-width: 80%;
     margin-left: 0;
     background: red;
-
   }
 
   .form-signin{
