@@ -20,6 +20,10 @@ module.exports = function(app) {
     this.service_request_id = null;
 
 
+    this.welcome = localStorage.getItem('service_center_name');
+    console.log(this.welcome);
+    console.log('afef');
+
     this.getAll = () => {
 
 
