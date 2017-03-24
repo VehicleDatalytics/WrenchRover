@@ -2748,6 +2748,7 @@ fieldset[disabled] .checkbox label {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+
 }
 select.input-sm {
   height: 30px;
@@ -3672,7 +3673,7 @@ tbody.collapse.in {
   margin-bottom: 2px;
 }
 @media (min-width: 768px) {
- 
+
   .navbar-right .dropdown-menu {
     left: auto;
     right: 0;
