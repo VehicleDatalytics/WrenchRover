@@ -339,6 +339,7 @@ color:  #FF6600;
  #menuTab .tab-pane{
    position: relative;
    width: 80%;
+   margin: 0 auto;
  }
 
 .dropButton{
@@ -351,7 +352,7 @@ color:  #FF6600;
 
 .theDrop {
 /*display: inline;*/
-width: 100vw;
+width: 90vw;
 /*height: 350px;*/
 height: 100vh;
 overflow-y: auto;
@@ -364,7 +365,11 @@ overflow-y: auto;
 
 }
 
+.dropdown-menu{
+  /*background: yellow;*/
 
+
+}
 @media (min-width: 768px){
 
   .theDrop {
