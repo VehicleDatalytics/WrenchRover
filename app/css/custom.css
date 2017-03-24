@@ -292,6 +292,8 @@ ol { counter-reset: level1 }
 #menuTab .nav-tabs{
 /*display: inline;*/
 color:  #FF6600;
+/*border-bottom: 3px solid blue;*/
+border-bottom: none;
 }
 #menuTab .nav-tabs > li.active > a, .nav-tabs > li.active {
 
@@ -381,7 +383,7 @@ overflow-y: auto;
   #menuTab .nav-tabs{
   float: right;
   max-width: 20%;
-
+  /*border-bottom: 3px solid red;*/
   }
 
 
