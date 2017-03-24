@@ -74,8 +74,9 @@
 
       <uib-tab-heading>
 
-         <i class="fa fa-lock"> Log Out</i>
+         <a ng-controller="userSignUpController as $ctrl" ng-click="$ctrl.logout()"><i class="fa fa-lock"> Log Out</i></a>
       </uib-tab-heading>
+
     </uib-tab>
 
   </uib-tabset>

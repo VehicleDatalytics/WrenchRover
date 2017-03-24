@@ -152,25 +152,20 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controller: 'UserDashboardController',
   controllerAs: 'UserDashCtrl'
 })
+// .state('pending', {
+//   url: '/resetpassword:token',
+//   templateUrl: 'templates/user/views/pending.html',
+//   controller: 'UserDashboardController',
+//   controllerAs: 'UserDashboardController'
+// })
+
 .state('pending', {
-  url: '/resetpassword:token',
+  url: '/Password/reset?token=jnsbbwbwbrbbb12nn888b-9292',
   templateUrl: 'templates/user/views/pending.html',
   controller: 'UserDashboardController',
   controllerAs: 'UserDashboardController'
 })
-//
-// .state('user_dashboard.history', {
-//   url: '/history',
-//   templateUrl: 'templates/user/views/history.html',
-//   controller: 'UserDashboardController',
-//   controllerAs: 'UserDashboardController'
-// })
-// .state('user_dashboard.mybids', {
-//   url: '/mybids',
-//   templateUrl: 'templates/user/views/mybids.html',
-//   controller: 'UserDashboardController',
-//   controllerAs: 'UserDashboardController'
-// })
+
 ;
   $urlRouterProvider.otherwise('/');
 });

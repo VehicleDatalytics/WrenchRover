@@ -72,11 +72,8 @@ module.exports = function(app) {
       modalService.closeDropDown();
     };
 
-
     this.addServiceRequests = function() {
-
       $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-
       console.log('service requesting');
       this.previouslyEntered = localStorage.getItem('describeIssue');
       this.localStorageOil = localStorage.getItem('oilChosen');
@@ -117,61 +114,6 @@ module.exports = function(app) {
 
     };
 
-
-// alt ends
-// alt2 begins
-
-    this.createUser2 = function(resource) {
-
-      this.x = {
-        user: resource
-      };
-      $http.post(baseUrl + 'users', this.x)
-      .then((res) => {
-        console.log('1. create alt posting to users.');
-        console.log(res);
-        window.localStorage.user_id = res.data.id;
-
-      })
-      .then(() => {
-        $http.post(baseUrl + 'authenticate', resource)
-          .then((res) => {
-            console.log('2. pushing to authenticate.');
-            console.log(res);
-            res.config.headers.Authorization = res.data.auth_token;
-            this.token = res.data.auth_token;
-            window.localStorage.token = this.token;
-            $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-          })
-          .catch((error) => {
-            console.log('there has been an error posting to users or auth');
-            console.log(error);
-
-          })
-          .then(() => {
-            console.log('going to user dashboard');
-            console.log('token is: ');
-            console.log(localStorage.getItem('token'));
-            $state.go('user_dashboard');
-          })
-          .then(() => {
-            console.log('closing');
-            console.log(modalService.thing);
-            if (modalService.thing === 2) {
-              that.closeModal();
-
-            } else {
-              that.closeDropDown();
-            }
-
-          });
-      });
-
-    };
-// alt2 ends
-
-    // user sign up via user flow
-// original
     this.createUser = function(resource) {
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
