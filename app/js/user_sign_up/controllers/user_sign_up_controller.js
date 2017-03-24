@@ -229,6 +229,8 @@ module.exports = function(app) {
             console.log('service center person');
             $state.go('sc_portal_view');
             console.log(this.signedInUser);
+            console.log(res.data.service_centers[0].service_name);
+            window.localStorage.service_center_name = res.data.service_centers[0].service_name;
 
           } else {
             console.log(this.signedInUser);

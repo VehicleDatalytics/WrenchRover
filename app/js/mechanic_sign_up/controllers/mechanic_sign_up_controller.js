@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.controller('mechanicSignUpController', ['wrResource', '$http', '$state', 'modalService', function(Resource, $http, $state, modalService) {
 
     this.servicecenters = [];
-
+    this.service_center_name =
     this.errors = [];
     var remote = new Resource(this.servicecenters, this.errors, baseUrl + 'service_centers', { errMessages: { getAll: 'custome error message' } });
 
