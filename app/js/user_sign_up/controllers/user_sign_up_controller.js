@@ -8,6 +8,13 @@ module.exports = function(app) {
     var that = this;
     this.msg = 'Create New Account';
     this.errorMsg = null;
+    console.log('user sign up controller');
+    console.log(this.token);
+    if (!localStorage.getItem('token')) {
+      this.heading = 'Sign in';
+    } else {
+      this.heading = 'Log Out';
+    }
 
 
     this.service = modalService;

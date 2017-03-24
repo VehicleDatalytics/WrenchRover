@@ -5,11 +5,11 @@
    <!-- <uib-tabset id="menuTab" active="active" vertical="true" > -->
       <uib-tabset id="menuTab" active="active" >
      <uib-tab index="0" >
-          <uib-tab-heading>
-          <i class="fa fa-unlock-alt"> Sign In</i>
+          <uib-tab-heading ng-controller="userSignUpController as userctrl" >
+          <i class="fa fa-unlock-alt"> {{userctrl.heading}}</i>
           </uib-tab-heading>
 
-          <div  ng-controller="userSignUpController as userctrl">
+          <div  ng-controller="userSignUpController as userctrl" >
 
             <user-sign-in-form
             data-button-text="Log-In"
@@ -32,7 +32,7 @@
 
     <mini-dir></mini-dir>
     </uib-tab>
-    <uib-tab index="2"  >
+    <uib-tab index="2" >
 
       <uib-tab-heading>
 
@@ -71,15 +71,15 @@
             </div>
           </div>
     </uib-tab>
-    <uib-tab index="3">
+    <!-- <uib-tab index="3">
 
-      <uib-tab-heading>
+      <uib-tab-heading> -->
 
          <!-- <a ng-controller="userSignUpController as $ctrl" ng-click="$ctrl.logout()"><i class="fa fa-lock"> Log Out</i></a> -->
-         <i class="fa fa-lock">Log Out</i>
+         <!-- <i class="fa fa-lock">Log Out</i>
       </uib-tab-heading>
     <p style="margin: 0 auto;">Wanna log out?</p>
-    </uib-tab>
+    </uib-tab> -->
 
   </uib-tabset>
 
