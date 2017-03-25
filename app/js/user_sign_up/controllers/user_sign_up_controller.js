@@ -13,9 +13,11 @@ module.exports = function(app) {
     if (!localStorage.getItem('token')) {
       this.heading = 'Sign in';
       this.signedIn = false;
+      this.li = 'Sign in';
     } else {
       this.heading = 'Log Out';
       this.signedIn = true;
+      this.li = 'My Dash';
     }
 
 
