@@ -365,6 +365,7 @@ margin-top: -84.09px;
 
 box-shadow: none;
 border: 0px solid white;
+/*background: rgba(255, 255, 255, .50);*/
 
 }
 
@@ -438,6 +439,7 @@ color: #3acec2;
   margin-top: 0;
   margin-right: 0;
   box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background: white;
   /*border: 0px solid white;*/
 
   }
