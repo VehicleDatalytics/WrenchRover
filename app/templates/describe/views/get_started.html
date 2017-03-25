@@ -2,26 +2,38 @@
           <div class="probHeader">
 
             <h2 style="margin:0px">Lets get started!</h2>
-            <p>Choose a category to the left to choose your services.</p>
+            <p>Select a category to choose your services.</p>
           </div>
 
           <div>
+<!-- //// -->
+<a class="text-center tablink" ui-sref="common_repairs_view.{{description.label}}">
 
+<img src="../../../images/common_icons/{{description.label}}.png" alt=""
+class="propNavItem"><br>{{description.name}}
+</a>
+<!-- ////// -->
 
-            <div class="row getStarted"><br>
+            <div class="row getStarted" ><br>
 
                       <div class="col-md-4 col-sm-4 text-center">
+                        <a ui-sref="common_repairs_view.common_maintenance" style="color:black;">
                         <img src="../../images/common_icons/common_maintenance.png" alt = ""><br>
                         Choose from our extensive list of common vehicle service or maintenance.
+                      </a>
                       </div>
 
 
                       <div class="col-md-4 col-sm-4 text-center">
+                          <a ui-sref="common_repairs_view.dash_lights" style="color:black;">
                         <img src="../../images/common_icons/dash_lights.png"><br>
                         Just select the warning light that is displayed on your dashboard.
+                      </a>
                       </div>
                       <div class="col-md-4 col-sm-4 text-center">
+                          <a ui-sref="common_repairs_view.describe_issue" style="color:black;">
                         <img src="../../images/common_icons/describe_issue.png"><br>
                         Can't find what you need? Let us know what the problem is in your own words.
+                      </a>
                       </div>
                     </div>
