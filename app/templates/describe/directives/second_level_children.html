@@ -1,14 +1,19 @@
-<li data-ng-mouseover="count = 'x'"  data-ng-mouseleave = "count='x'" ng-init="count='x'" id="nails"  class="subcategory">
+<li data-ng-mouseover="count = 'x'"  data-ng-mouseleave = "count='x'" ng-init="count='x'" id="secLevChildren"  class="subcategory">
 
-{{secondchild.name}}
-<ol>
+<span class="md-col-9 sm-col-9 xs-col-12" >{{secondchild.name}}</span>
+<ul>
+  <img src="http://www.free-icons-download.net/images/car-oil-icon-7557.png" alt="oil" style="background:white;" class="visible-sm col-sm-2">
+
+
+
+
 
 <second-sibling data-secondsibling='secondsibling' ng-repeat="secondsibling in secondchild.children" >
 
 
 </second-sibling>
 
-</ol>
+</ul>
 
 
 

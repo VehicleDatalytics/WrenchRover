@@ -133,9 +133,6 @@ module.exports = function(app) {
 
     };
 
-    // this.nextPage = function() {
-    //   cmService.nextPage();
-    // };
 
     this.removeChosenService = function(z) {
       var x = z;
