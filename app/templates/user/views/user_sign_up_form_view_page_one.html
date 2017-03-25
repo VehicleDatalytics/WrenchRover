@@ -1,12 +1,21 @@
 
 
    <section data-ng-controller = "userSignUpController as userctrl">
-      <ul id="error">
+<!--
+     <nav class="navbar no-border navbar-default menu-lg navbar-fixed-top" role="navigation" style="height:100px; background:#fff;" >
+        <div class="container">
+        <div class="navbar-header">
+          <ul class="nav navbar-nav navbar-left">
+          <a class="navbar-brand navbar-left" href="#"><span class="reverse" ><img src="images/WrenchRover_Logo_Web.png" class="img-responsive brand"></span></a></ul>
+        </div>
+
+     </nav> -->
+      <!-- <ul id="error">
         <li data-ng-repeat="error in userctrl.errors">{{error.message}}<button class="btn btn-default" data-ng-click="userctrl.errors.splice(userctrl.errors.indexOf(error), 1)">Close This</button></li>
-      </ul>
+      </ul> -->
 
 
-      <user-sign-up-form-page-one
+      <!-- <user-sign-up-form-page-one
 
       ng-if = "!this.previouslyEntered || !this.localStorageOil !this.localStorageDash || !this.localStorageChosen || !this.storedVehicle"
         data-button-text="Sign up!"
@@ -14,9 +23,9 @@
 
             data-action="createAlt"
       >
-    </user-sign-up-form-page-one>
+    </user-sign-up-form-page-one> -->
 
-
+<!--
     <user-sign-up-form-page-one
 
     ng-if = "!this.previouslyEntered || !this.localStorageOil !this.localStorageDash || !this.localStorageChosen || !this.storedVehicle"
@@ -26,17 +35,26 @@
           data-action="createAlt"
     >
 
-  </user-sign-up-form-page-one>
-
-    <user-sign-in-form
+  </user-sign-up-form-page-one> -->
 
 
-        data-button-text="Sign up!"
+  <user-sign-in-form
+  data-button-text="Log-In"
+  data-login="login"
+  data-action = "create"
+  >
+  </user-sign-in-form>
+
+    <!-- <user-sign-in-form
+
+
+        data-button-text="Sign in"
         data-xuser="userctrl.newUser"
 
             data-action="create">
 
-    </user-sign-in-form>
+    </user-sign-in-form> -->
+
 
 
 
