@@ -1,9 +1,9 @@
 
-
-<li data-ng-mouseover="count = 'x'"  data-ng-mouseleave = "count='x'" ng-init="count='x'" id="secondSibling">
+<li class="col-sm-4 col-xs-4" data-ng-mouseover="count = 'x'"  data-ng-mouseleave = "count='x'" ng-init="count='x'" id="secondSibling" style="padding-left:0; margin-left:0px;">
 
   <input  type="checkbox"  id= "{{secondsibling.name}}"
   class="chk-hidden" name="describValue" data-ng-model="value" data-ng-true-value="'{{secondsibling.name}}'" data-ng-false-value=""   ng-change="checkedSelected(value, secondsibling.name)">
+
   <label for="{{secondsibling.name}}">   {{secondsibling.name}}</label>
 
 
