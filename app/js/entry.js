@@ -166,6 +166,13 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controllerAs: 'UserDashboardController'
 })
 
+.state('contact_us_view', {
+  url: '/contact',
+  templateUrl: 'templates/user/views/contact_us_view.html',
+  controller: 'userSignUpController',
+  controllerAs: 'userctrl'
+})
+
 ;
   $urlRouterProvider.otherwise('/');
 });
