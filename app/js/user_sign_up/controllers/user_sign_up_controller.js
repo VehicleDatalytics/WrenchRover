@@ -238,19 +238,23 @@ module.exports = function(app) {
             console.log(this.signedInUser);
             console.log(res.data.service_centers[0].service_name);
             window.localStorage.service_center_name = res.data.service_centers[0].service_name;
-
           } else {
             console.log(this.signedInUser);
-            // .then((res) => {
-            console.log(res);
-            if (localStorage.getItem('service_requests')) {
-              console.log('GOING TO THE DASHBOARD!');
-              $state.go('user_dashboard');
-            } else {
 
-              $state.go('user_dashboard');
+            console.log(res.data.service_requests[0].work_request);
 
-            }
+            window.localStorage.service_requests = JSON.stringify(res.data.service_requests[0].work_request);
+            $state.go('user_dashboard');
+
+            // console.log(res);
+            // if (localStorage.getItem('service_requests')) {
+            //   console.log('GOING TO THE DASHBOARD!');
+
+            // } else {
+            //
+            //   $state.go('user_dashboard');
+            //
+            // }
 
           }
         });
@@ -272,7 +276,6 @@ module.exports = function(app) {
           } else {
             that.closeDropDown();
           }
-
         }
 
       });
