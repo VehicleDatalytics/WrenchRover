@@ -76,7 +76,8 @@ module.exports = exports = function(app) {
           if (modalService.thing == 2) {
             $window.location.reload();
           } else {
-            $state.go('user_dashboard');
+            // $state.go('user_dashboard');
+            $state.go('common_repairs_view.get_started');
           }
 
         })

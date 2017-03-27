@@ -44,34 +44,33 @@
 
 				<uib-tab index="0" heading="New({{UserDashCtrl.count}})">
 					<div class="row" >
-			    	<div class="col-md-4 col-sm-12" style="border: 1px dotted red;">
-
-						<div  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
-						 		<ng-map  default-style="true" zoom="11" center="current-location">
-								<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
-								<marker id='{{p.id}}' position="{{p.pos}}"
-								 ng-repeat="p in UserDashCtrl.positions"
-								 on-click="UserDashCtrl.showDetail(p)"
-								 icon="{{p.map_icon_pics}}"
-								 title="pos: {{p.pos}}"
-								 on-mouseover="UserDashCtrl.showDetail(p);"
-								 on-mouseout="UserDashCtrl.hideDetail()">
-								</marker>
-								<info-window id="foo-iw">
-								 <div ng-non-bindable="">
-								 {{UserDashCtrl.shop.id}}<br/>
-								 {{UserDashCtrl.shop.pos}}<br/>
-								 <br/>
-								 </div>
-							 </info-window>
-						 </ng-map>
-				</div>
-
+			    	<div class="col-md-8 col-sm-8" style="border: 1px dotted red;">
+										<span  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
+										 		<ng-map  default-style="true" zoom="11" center="current-location">
+												<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
+												<marker id='{{p.id}}' position="{{p.pos}}"
+												 ng-repeat="p in UserDashCtrl.positions"
+												 on-click="UserDashCtrl.showDetail(p)"
+												 icon="{{p.map_icon_pics}}"
+												 title="pos: {{p.pos}}"
+												 on-mouseover="UserDashCtrl.showDetail(p);"
+												 on-mouseout="UserDashCtrl.hideDetail()">
+												</marker>
+												<info-window id="foo-iw">
+												 <div ng-non-bindable="">
+												 {{UserDashCtrl.shop.id}}<br/>
+												 {{UserDashCtrl.shop.pos}}<br/>
+												 <br/>
+												 </div>
+											 </info-window>
+										 </ng-map>
+									 </span>
 				</div>
 
 				<div class="col-md-4 col-sm-4" style="margin-top:15px;" >
 
-				<ol style="list-style-type:decimal;">
+				  <ol style="list-style-type:decimal;">
+
 					<li  class="mapListNumber" style="list-style-type:none;" ng-repeat="sample in UserDashCtrl.service_quotes_table">
 							<div class="row" style="margin:-27px 0 0 0;">
 								<div class="col-md-7 col-sm-7 inline mapListCompany">
@@ -139,6 +138,7 @@
 
 					</div>
 					</div>
+
 					<div class="col-md-4 col-sm-4" style="margin-top:15px;" >
 					<div class="row">
 						<div class="col-md-2 col-sm-2 inline">
