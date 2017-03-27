@@ -192,7 +192,7 @@ color: #fff;
 
 
 #ud_container{
-  border: 2px red solid;
+  /*border: 2px red solid;*/
 }
 
 #bid_container{
@@ -422,6 +422,19 @@ color: #3acec2;
 }
 
 
+
+/*user dash tabs*/
+
+#user_dash{
+
+}
+
+#user_dash .tab-pane{
+  /*font-style: italic;*/
+  border: 1px dotted black;
+  /*padding-left: 5%;
+  padding-right:5%;*/
+}
 
 
 @media (min-width: 768px){
