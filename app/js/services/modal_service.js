@@ -7,9 +7,12 @@ module.exports = function(app) {
     this.instance = 'instance';
     this.a = true;
 
+
     console.log(this.status);
     return {
       thing: 1,
+      dashTest: true,
+      heading: 'BATMAAAAAAN',
       apptArr: [],
       dateArr: [],
       timesArr: [],

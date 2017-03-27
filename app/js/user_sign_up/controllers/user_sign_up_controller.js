@@ -8,20 +8,25 @@ module.exports = function(app) {
     var that = this;
     this.msg = 'Create New Account';
     this.errorMsg = null;
+    this.service = modalService;
     console.log('user sign up controller');
     console.log(this.token);
+    console.log(modalService.heading);
     if (!localStorage.getItem('token')) {
       this.heading = 'Sign in';
+      modalService.heading = 'Sign in';
       this.signedIn = false;
       this.li = 'Sign in';
+      this.dashTest = 'xxx';
     } else {
       this.heading = 'Log Out';
+      modalService.heading = 'Log Out';
       this.signedIn = true;
       this.li = 'My Dash';
+      this.dashTest = 'yyy';
     }
+    console.log(modalService.heading);
 
-
-    this.service = modalService;
     this.users = [];
     this.errors = [];
     this.allProblems = null;

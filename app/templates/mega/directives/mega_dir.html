@@ -30,14 +30,31 @@
       </uib-tab>
 
     <uib-tab index="1">
-
       <uib-tab-heading>
-
-         <i class="fa fa-dashboard"> My Dash</i>
+       <i class="fa fa-dashboard"> My Dash</i>
       </uib-tab-heading>
 
-    <mini-dir></mini-dir>
+<div ng-controller="userSignUpController as userctrl">
 
+<span ng-hide="userctrl.signedIn == false">
+
+    <mini-dir></mini-dir>
+</span>
+
+
+    <div  ng-controller="userSignUpController as userctrl" >
+
+    <user-sign-in-form
+    ng-hide="userctrl.signedIn == true"
+    data-button-text="Log-In"
+    data-login="login"
+    data-action = "create"
+    >
+    </user-sign-in-form>
+
+</div>
+
+</div>
 
     </uib-tab>
     <uib-tab index="2" >
