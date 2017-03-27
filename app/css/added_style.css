@@ -32,19 +32,18 @@
 #secondSibling{
   display: block
   list-style: none;
-
-
 }
 
 #secondSibling label{
-
- /*height: auto;
- width:50px;*/
- /*background: white;*/
- border-radius: 4px;
- /*padding:px;*/
- margin: 0px;
+  padding: 50% 0;
+  vertical-align: top;
+  border-radius: 4px;
+  margin: 5% auto;
+  color: black;
 border: 1px solid white;
+/*max-height: 40px;*/
+font-size: .80em;
+
 }
 
 #secLevChildren{
@@ -65,10 +64,7 @@ border: 1px solid white;
 width: 100%;
 height: auto;
 text-align: center;
-/*background: white;*/
-/*color: #FF6600;*/
 min-width: 111px;
-/*max-width: 111px;*/
 }
 
 #secLevChildren label:hover{
@@ -78,56 +74,40 @@ min-width: 111px;
 
 
 
-
-
-
-
 @media (min-width: 768px){
   #secondSibling{
-    display: inline;
+    /*display: inline;*/
+    display: block;
     list-style: none;
-    border: 0;
-    margin-bottom: 0;
-    margin-top: 0;
-
-
-
+    /*border: 0;*/
   }
 
   #secondSibling label{
-   height: 20vh;
-   width:10vw;
 
-   padding-top: 5px;
-   padding-bottom: 5px;
+   padding: 50% 0;
+   margin: 5% auto;
    vertical-align: top;
+   background: #ddd;
+   border-radius:8px;
 
-     background: #ddd;
-     border-radius:8px;
   }
 
   #secLevChildren{
-    list-style: none;
-    /*overflow-x: */
+   list-style: none;
+    margin-left: 0;
+    padding-left: 0;
 
   }
 
   #secLevChildren span{
     background: #FF6600;
     color: white;
+    /*color:red;*/
     text-align: right;
     display: block;
    width: 100%;
    float:left;
   }
 
-
-
-
-label {
-
-min-width: 110.27px;
-
-}
 
 }
