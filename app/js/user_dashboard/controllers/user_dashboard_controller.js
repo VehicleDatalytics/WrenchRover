@@ -13,7 +13,24 @@ module.exports = exports = function(app) {
     this.appointment = {};
     this.acceptedObject = {};
     this.service_requests_count = 0;
-    this.modalService = 'modalService';
+    this.modalService = modalService;
+
+
+    if (!localStorage.getItem('token')) {
+      this.heading = 'Sign in';
+      modalService.heading = 'Sign in';
+      this.signedIn = false;
+      this.li = 'Sign in';
+    } else {
+      this.heading = 'Log Out';
+      modalService.heading = 'Log Out';
+      this.signedIn = true;
+      this.li = 'My Dash';
+    }
+
+    console.log(this.heading);
+    console.log(this.li);
+
 
     this.func = function() {
       console.log('capturing url');
