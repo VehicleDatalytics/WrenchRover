@@ -246,16 +246,6 @@ module.exports = function(app) {
             window.localStorage.service_requests = JSON.stringify(res.data.service_requests[0].work_request);
             $state.go('user_dashboard');
 
-            // console.log(res);
-            // if (localStorage.getItem('service_requests')) {
-            //   console.log('GOING TO THE DASHBOARD!');
-
-            // } else {
-            //
-            //   $state.go('user_dashboard');
-            //
-            // }
-
           }
         });
 
