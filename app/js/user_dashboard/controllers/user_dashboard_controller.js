@@ -139,7 +139,8 @@ module.exports = exports = function(app) {
 
          console.log(res);
          if (localStorage.getItem('service_requests')) {
-           this.service_request_id = res.data.service_requests[0].id;
+           vm.service_request_id = res.data.service_requests[0].id;
+           console.log(vm.service_request_id);
          }
 
 
@@ -181,10 +182,7 @@ module.exports = exports = function(app) {
            console.log(this.service_requests_count);
 
          } else {
-
            console.log('no service requests entered.');
-
-
          }
 
        })
