@@ -102,6 +102,7 @@ module.exports = exports = function(app) {
     this.confirm = function(value, time) {
       console.log(value);
       console.log(time);
+    //   console.log(time.length);
 
       window.localStorage.confirmedAppt = JSON.stringify(value);
       if (time == undefined) {
