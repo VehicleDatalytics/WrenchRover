@@ -6,11 +6,11 @@ module.exports = function(app) {
 
     this.service = modalService;
     this.open = function(parentSelector) {
-
       this.modalObj = {
         templateUrl: 'templates/modal/directives/modal_sign_in.html',
         controller: 'signInController',
         controllerAs: 'userctrl'
+        // size: 'sm'
       };
 
       var modalInstance = $uibModal.open(
@@ -18,6 +18,7 @@ module.exports = function(app) {
           templateUrl: 'templates/modal/directives/modal_sign_in.html',
           controller: 'signInController',
           controllerAs: 'userctrl'
+        //   size: 'sm'
         }
 
 

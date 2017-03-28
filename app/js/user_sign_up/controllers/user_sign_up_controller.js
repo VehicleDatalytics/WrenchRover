@@ -80,6 +80,7 @@ module.exports = function(app) {
 
 
     this.closeModal = function() {
+
       modalService.instance.close();
     };
 
