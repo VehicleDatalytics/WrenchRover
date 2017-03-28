@@ -2,14 +2,12 @@
 
 
 
-<main class="container" data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()" id="ud_container">
+<main class="container" data-ng-controller="UserDashboardController as UserDashCtrl" ng-init="UserDashCtrl.getUserInfo()" id="ud_container" style="font-family: Helvetica;">
 
 
 <!-- <div class="container" style="margin-top:115px;" > -->
 <div class="containter">
-<!--/////////////////// START USER  PROFILE ROW /////////////////////-->
 
-<!--/////////////////// START WELCOME MESSAGE ROW /////////////////////-->
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<h1>Welcome back, {{UserDashCtrl.userObject.user_name}}!</h1>
@@ -36,6 +34,8 @@
 		</div>
 	</div>
 <!--/////////////////// START MAINTENANCE LISTINGS COLUMN /////////////////////-->
+
+<!-- ==========NEW BIDS TAB ============ -->
 	<div class="row" id="user_dash">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<h3 >Your Maintenance</h3>
@@ -44,7 +44,9 @@
 
 				<uib-tab index="0" heading="New({{UserDashCtrl.count}})">
 					<div class="row" >
-			    	<div class="col-md-8 col-sm-8">
+			    	<!-- <div class="col-md-6 col-sm-6" id="mapDiv" style="border:1px solid green; padding-left: 5%; padding-right:5%;"> -->
+
+						  	<div class="col-md-6 col-sm-6" id="mapDiv">
 										<span  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
 										 		<ng-map  default-style="true" zoom="11" center="current-location">
 												<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
@@ -67,7 +69,7 @@
 									 </span>
 				</div>
 
-				<div class="col-md-4 col-sm-4" style="margin-top:15px;" >
+				<div class="col-md-4 col-sm-4" style="margin-top:15px; border: 1px dotted red;" >
 
 				  <ol style="list-style-type:decimal;">
 
@@ -75,40 +77,39 @@
 
 							<div class="row" style="margin:-27px 0 0 0;">
 
-								<!-- <div class="col-md-7 col-sm-7 inline mapListCompany" style="padding-left:12%;" > -->
-									<div class="col-md-7 col-sm-7 inline mapListCompany" style="padding-left:12%;" >
+									<div class="col-md-7 col-sm-7 col-xs-10 inline mapListCompany" style="padding-left:12%;" >
 										{{sample.service_center.service_name}}
 								</div>
-								<!-- <div class="col-md-3 col-sm-3 mapListBidPrice">
+
+								<div class="col-md-3 hidden-sm hidden-xs mapListBidPrice" style="color:blue;">
 									${{sample.quote_cost}}
-								</div> -->
-								<div class="col-md-3 col-sm-3 hidden-xs mapListBidPrice">
-									${{sample.quote_cost}}
+
 								</div>
 
 						</div>
-				<div class="row">
+				<div class="row" style="border: 1px solid black;">
 
-						<div class="col-md-6 col-xs-10 col-xs-offset-2 col-md-offset-2 form-group">
+						<div  class="col-md-6 col-sm-10 col-xs-6 col-xs-offset-2 col-md-offset-2 form-group">
 
-								 <select name="apptSelect" id="apptSelect" ng-model="UserDashCtrl.selectedTime" size="1" class="input-sm form-control">
+								 <select name="apptDate" id="apptSelect" ng-model="UserDashCtrl.selectedTime" size="1" class="input-sm form-control">
 									<option value="">Set Appointment</option>
-
 									<option value="{{sample.available_date_1}}">{{sample.available_date_1}}</option>
 									<option value="{{sample.available_date_2}}">{{sample.available_date_2}}</option>
 									<option value="{{sample.available_date_3}}">{{sample.available_date_3}}</option>
 								 </select>
 
 					</div>
-       <div class="row">
 
-							<div class="visible-xs col-xs-3 col-xs-offset-3 mapListBidPrice">
-								${{sample.quote_cost}}
-							</div>
-<!-- ng-disabled="UserDashCtrl.selectedTime " -->
-							<button class="btn btn-default col-xs-offset-2" id="accept"  ng-click="UserDashCtrl.confirm(sample, UserDashCtrl.selectedTime)"><i class="fa fa-check-circle"></i> ACCEPT</button>
+					<div class="visible-xs  visible-sm col-sm-3 col-xs-3 mapListBidPrice">
+						${{sample.quote_cost}}
+					</div>
+
+			 <div class="col-md-4 col-sm-4 col-xs-4">
+					<button class="btn btn-default pull-right" style="float:right"; id="accept"
+					ng-click="UserDashCtrl.confirm(sample, UserDashCtrl.selectedTime)"><i class="fa fa-check-circle"></i> ACCEPT</button>
 
 				</div>
+
 						<div class="row">
 									<div class="col-md-10 col-xs-10 col-xs-offset-2 col-md-offset-2 mapListAppt">
 										<b>Comments:</b> {{sample.quote_text}}
@@ -120,6 +121,9 @@
 				</div>
 
 				</uib-tab>
+
+
+				<!-- ==========NEW BIDS TAB ENDS============ -->
 
 		    <!-- <uib-tab index="1" heading="Pending" ng-init="UserDashCtrl.getAppointments()"> -->
 
@@ -208,6 +212,9 @@
 
 
 		  </uib-tabset>
+
+		</div>
+	</div>
     <ui-view></ui-view>
 </div>
 </main>
