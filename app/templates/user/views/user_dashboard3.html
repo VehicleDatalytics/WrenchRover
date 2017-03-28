@@ -44,7 +44,7 @@
 
 				<uib-tab index="0" heading="New({{UserDashCtrl.count}})">
 					<div class="row" >
-			    	<div class="col-md-8 col-sm-8" style="border: 1px dotted red;">
+			    	<div class="col-md-8 col-sm-8">
 										<span  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
 										 		<ng-map  default-style="true" zoom="11" center="current-location">
 												<marker position = "current-location" animation="Animation.BOUNCE"  centered="true"> </marker>
@@ -72,33 +72,48 @@
 				  <ol style="list-style-type:decimal;">
 
 					<li  class="mapListNumber" style="list-style-type:none;" ng-repeat="sample in UserDashCtrl.service_quotes_table">
+
 							<div class="row" style="margin:-27px 0 0 0;">
-								<div class="col-md-7 col-sm-7 inline mapListCompany">
+
+								<!-- <div class="col-md-7 col-sm-7 inline mapListCompany" style="padding-left:12%;" > -->
+									<div class="col-md-7 col-sm-7 inline mapListCompany" style="padding-left:12%;" >
 										{{sample.service_center.service_name}}
 								</div>
-								<div class="col-md-3 col-sm-3 mapListBidPrice">
+								<!-- <div class="col-md-3 col-sm-3 mapListBidPrice">
+									${{sample.quote_cost}}
+								</div> -->
+								<div class="col-md-3 col-sm-3 hidden-xs mapListBidPrice">
 									${{sample.quote_cost}}
 								</div>
 
 						</div>
 				<div class="row">
-					<div class="col-md-6 col-xs-6 col-xs-offset-2 col-md-offset-2 form-group">
-								 <select name="apptSelect" id="apptSelect" ng-model="UserDashCtrl.selectedTime" size="1" class="input-sm">
-									<option value="">Please select</option>
+
+						<div class="col-md-6 col-xs-10 col-xs-offset-2 col-md-offset-2 form-group">
+
+								 <select name="apptSelect" id="apptSelect" ng-model="UserDashCtrl.selectedTime" size="1" class="input-sm form-control">
+									<option value="">Set Appointment</option>
+
 									<option value="{{sample.available_date_1}}">{{sample.available_date_1}}</option>
 									<option value="{{sample.available_date_2}}">{{sample.available_date_2}}</option>
 									<option value="{{sample.available_date_3}}">{{sample.available_date_3}}</option>
 								 </select>
 
 					</div>
-						<div class="col-md-4 col-sm-4">
-							<button class="btn btn-default pull-right" style="float:right;" ng-click="UserDashCtrl.confirm(sample, UserDashCtrl.selectedTime)"><i class="fa fa-check-circle"></i> ACCEPT</button>
-						</div>
+       <div class="row">
+
+							<div class="visible-xs col-xs-3 col-xs-offset-3 mapListBidPrice">
+								${{sample.quote_cost}}
+							</div>
+<!-- ng-disabled="UserDashCtrl.selectedTime " -->
+							<button class="btn btn-default col-xs-offset-2" id="accept"  ng-click="UserDashCtrl.confirm(sample, UserDashCtrl.selectedTime)"><i class="fa fa-check-circle"></i> ACCEPT</button>
+
 				</div>
 						<div class="row">
-								<div class="col-md-10 col-xs-10 col-xs-offset-2 col-md-offset-2 mapListAppt">
+									<div class="col-md-10 col-xs-10 col-xs-offset-2 col-md-offset-2 mapListAppt">
 										<b>Comments:</b> {{sample.quote_text}}
 								</div>
+
 				     </div>
 		       </li></ol>
 				</div>
