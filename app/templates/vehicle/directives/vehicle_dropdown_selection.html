@@ -129,15 +129,22 @@
           <div class="col-md-12 col-sm-12">
             <button class="btn btn-primary"
 
-            ng-disabled="VehicleInfoController.vehicleObject.vin == '';" 
+            ng-disabled="VehicleInfoController.vehicleObject.vin == '';"
 
                     type="submit"
-                    ng-click="VehicleInfoController.disableMe('a');
-                              VehicleInfoController.getVin();">
+
+ ng-click= "VehicleInfoController.getVin(VehicleInfoController.vehicleObject.vin);"
+
+
+
+                              >
                     Lookup Vehicle
             </button>
           </div>
         </div>
+<!-- ng-click="VehicleInfoController.open()" -->
+
+        <!-- ng-click="VehicleInfoController.disableMe('a'); -->
 
 
       </form>

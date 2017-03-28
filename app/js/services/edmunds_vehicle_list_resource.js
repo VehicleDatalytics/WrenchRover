@@ -58,7 +58,7 @@ module.exports = exports = function(app) {
     };
 
     Resource.prototype.getVin = function() {
-    //   return;
+
 
       console.log(this.vehicle.vin);
 
@@ -82,6 +82,7 @@ module.exports = exports = function(app) {
         console.log('there has been errors');
       })
       .then(() => {
+
         window.localStorage.vehicle = JSON.stringify(this.vehicle);
         console.log(localStorage.getItem('vehicle'));
         if (localStorage.getItem('token')) {
