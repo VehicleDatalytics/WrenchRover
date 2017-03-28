@@ -104,8 +104,16 @@ module.exports = exports = function(app) {
       console.log(time);
 
       window.localStorage.confirmedAppt = JSON.stringify(value);
+      if (time == undefined) {
+        console.log('time undefined');
+        console.log(typeof time);
 
-      var timeString = time.toString();
+      } else {
+        console.log(typeof time);
+        // $window.location.reload();
+        var timeString = time.toString();
+      }
+
 
       this.acceptedObject.id = value.id;
       this.acceptedObject.accepted = timeString;
@@ -114,9 +122,9 @@ module.exports = exports = function(app) {
       console.log(resource);
 
       window.localStorage.appointment_service_center_name = value.service_center.service_name;
-   //   window.localStorage.appointment_date_time = JSON.stringify(time);
+
       window.localStorage.appointment_date_time = time;
-     //
+
       $http.put(baseUrl + 'service_quotes' + '/' + value.id, resource )
      .then((res) => {
        console.log(res);

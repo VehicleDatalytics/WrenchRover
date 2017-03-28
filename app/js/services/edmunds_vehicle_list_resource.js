@@ -58,7 +58,12 @@ module.exports = exports = function(app) {
     };
 
     Resource.prototype.getVin = function() {
-      return $http.get(this.url + 'vin/vin/vin/' + this.vehicle.vin)
+    //   return;
+
+      console.log(this.vehicle.vin);
+
+      if (this.vehicle.vin != '') {
+        $http.get(this.url + 'vin/vin/vin/' + this.vehicle.vin)
       .then( (res) => {
         console.log(res);
         this.vehicle.make = { name: '' };
@@ -74,13 +79,11 @@ module.exports = exports = function(app) {
       })
       .catch((error) => {
         console.log(error);
+        console.log('there has been errors');
       })
       .then(() => {
         window.localStorage.vehicle = JSON.stringify(this.vehicle);
         console.log(localStorage.getItem('vehicle'));
-          // ////
-
-
         if (localStorage.getItem('token')) {
           console.log('there is a token');
           this.auto = {
@@ -98,11 +101,16 @@ module.exports = exports = function(app) {
               console.log(config);
             });
           $state.go('user_dashboard');
+        //   (change this depending on what paul and dru decide for flow)
         } else {
+
           console.log('there is not a token');
           $state.go('common_repairs_view.get_started');
         }
       });
+      } else {
+        console.log('empty');
+      }
 
 
     };

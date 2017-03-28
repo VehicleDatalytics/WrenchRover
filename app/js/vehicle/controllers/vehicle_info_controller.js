@@ -3,7 +3,8 @@ var baseUrl = require('../../config').baseUrl;
 module.exports = exports = function(app) {
   app.controller('VehicleInfoController', ['edmundsVehicleListResource', 'vicClearSelections', '$state', '$http', 'modalService', '$window', function(Resource, ClearSelections, $state, $http, modalService, $window) {
     this.cookies = navigator.cookieEnabled;
-    console.log('the thing is:');
+    // console.log('the thing is:');
+
     console.log(modalService.thing);
     var that = this;
 
@@ -111,8 +112,14 @@ module.exports = exports = function(app) {
     };
 
     this.disableMe = function(id) {
+
+      console.log(this.vehicleObject.mileage);
+
       document.getElementById(id).disabled = true;
+
+      console.log(id);
     };
+
 
   }]);
 };

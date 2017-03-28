@@ -89,19 +89,35 @@ vehicleInfoRouter.trim.get('/vehicleInfo/:makeNiceName/:modelNiceName/:year', (r
 });
 
 vehicleInfoRouter.vin.get('/vehicleInfo/vin/vin/vin/:vin', (req, res) => {
+    // console.log(req, res);
 
+console.log(req.params);
   var vinTrigger = new EventEmitter();
+
+  console.log(req.params);
+
   request.get('https://api.edmunds.com/api/v1/vehicle/vin/' + req.params.vin +
               '/configuration?api_key=' + process.env.EDMUNDS_API)
+
+
   .end((err, data) => {
+
     if (err) {
-            res.status(404).send('Vin number not found.');
- console.log(err);
-    }// add error handler function
-    else {
+        res.status(404).send('VIN NUMBER WAS NOT FOUND.');
+        console.log(err);
+          vinTrigger.emit('error', data);
+
+    } else {
+
+
         vinTrigger.emit('finished', data);
-     }
-  });
+     }});
+
+     vinTrigger.on('error', () => {
+         console.log('There was a problem.');
+     });
+
+
   vinTrigger.on('finished', (data) => {
 
     var parsed = JSON.parse(data.text);

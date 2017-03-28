@@ -291,23 +291,32 @@ ol li.mapListNumber:before {background:#ff6600 ;font-size:16pt;border:solid 3px 
 ol { counter-reset: level1 }
 
 /*////*/
-/*
-div.inline {float:left;}
-.mapListNumber {background:#ff6600;font-size:16pt;border:solid 3px #ff6600;}
-.mapListBidPrice {color:#ff6600;font-size:16pt;float:right;}
+
+
+
+.inline{
+  float: left;
+}
+/*.mapListBidPrice {color:#ff6600;font-size:16pt;float:right;}*/
+
+.mapListBidPrice {color:#ff6600;font-size:16pt;}
 .mapListCompany {font-size:13pt;font-weight:bold;}
 .mapListAppt {font-size:9pt;}
-.supersmall {color:black;font-size:10pt;}
+/*.supersmall {color:black; background:red; font-size:10pt;}*/
+
+
+
+#accept{
+  color:black;
+  font-size: 10pt;
+  background: white;
+  /*float: right;*/
+}
+
+/*.supersmall {color:black;font-size:10pt;}*/
+
+.mapListAppt {font-size:9pt;}
 .boldHead div {font-weight:bold;}
-div .text-center {width:50px;}
-div .text-center button {width:45px;margin-bottom:5px;}
-.apptTime button {width:65px;margin-bottom:5px;margin-right:4px;float:left;}*/
-
-
-/*////// later/*/
-.mapListBidPrice {color:#ff6600;font-size:16pt;float:right;}
-.mapListCompany {font-size:13pt;font-weight:bold;}
-.mapListAppt {font-size:9pt;}
 
 
 /*///*/
@@ -450,7 +459,7 @@ color: #3acec2;
 
 #user_dash .tab-pane{
   /*font-style: italic;*/
-  border: 1px dotted black;
+  /*border: 1px dotted black;*/
   /*padding-left: 5%;
   padding-right:5%;*/
 }
@@ -503,5 +512,7 @@ color: #3acec2;
   .form-signin{
     max-width: 330px;
   }
+
+  .mapListBidPrice {color:#ff6600;font-size:16pt;float:right;}
 
 }
