@@ -291,6 +291,7 @@ module.exports = exports = function(app) {
 
 
     this.getAppointments = function() {
+      console.log('GETTING THE APPOINTMENTS!');
 
       $http.get(this.url + 'service_quotes')
       .then((res) => {
