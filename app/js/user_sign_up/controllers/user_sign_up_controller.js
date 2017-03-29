@@ -89,6 +89,13 @@ module.exports = function(app) {
       modalService.closeDropDown();
     };
 
+
+    this.goDash = function() {
+      console.log('going to dash');
+      $state.go('user_dashboard');
+      this.closeDropDown();
+    };
+
     this.addServiceRequests = function() {
       $http.defaults.headers.common.Authorization = localStorage.getItem('token');
       console.log('service requesting');
