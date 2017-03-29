@@ -7,9 +7,17 @@ module.exports = function(app) {
     this.instance = 'instance';
     this.a = true;
 
+    this.indexNumberA = 99;
+    this.indexNumberB = 999;
+
+    console.log(this.indexNumberA);
+    console.log(this.indexNumberB);
+
 
     console.log(this.status);
     return {
+    //   indexNumberA: 5,
+      indexNumberB: 7,
       thing: 1,
       dashTest: true,
       heading: 'BATMAAAAAAN',
