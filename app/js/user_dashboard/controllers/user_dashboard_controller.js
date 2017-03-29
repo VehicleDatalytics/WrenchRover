@@ -59,6 +59,10 @@ module.exports = exports = function(app) {
       }
     };
 
+    // this.goDash = function() {
+    //   console.log('going to the dash!!!!');
+    //   $state.go('user_dashboard');
+    // };
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
       '../../../images/map_icons/number_2.png',

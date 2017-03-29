@@ -1,7 +1,7 @@
 <div  data-ng-controller="UserDashboardController as UserDashCtrl"  ng-init="UserDashCtrl.getDash()" class= "miniDir">
 
 <!-- {{UserDashCtrl.mini_dash_message}} -->
-<a ng-click="UserDashCtrl.goDash();" style="color:white;">Go to Your Dashboard</a>
+<a ng-click="UserDashCtrl.goDash();" style="color:black;">Go to Your Dashboard</a>
         <h3 class="text-right"><i class="fa fa-home iconpadLG"></i>Welcome back!</h3>
         <div class="row">
           <div class="col-md-6 col-sm-12 userText">
@@ -12,7 +12,7 @@
             <div style="float:left;padding:0px 0px;margin-right:5px;width:52px;"><i class="fa fa-car fa-3x"></i></div>
             <div style="padding:0px 0px;"><b>{{UserDashCtrl.userObject.autos[0].year}}{{UserDashCtrl.userObject.autos[0].make}}  {{UserDashCtrl.userObject.autos[0].model}}</b><br> </div>
           </div>
-
+<!-- <a ui-sref="user_dashbooard">GO TO YOUR DASH</a> -->
             <div class="col-md-6 col-sm-6 hidden-xs">
 
                  <h4>Your Location</h4>
