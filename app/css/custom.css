@@ -89,16 +89,17 @@ span.dropt:hover span {margin: 20px 0 0 10px; left: 10px; background: #fff; z-in
 }
 
 #mapDiv{
-  border: 1px solid green;
-  padding-left: 0;
-  padding-right: 0;
+  /*border: 1px solid red;*/
+  padding-left: 5%;
+  padding-right: 5%;
 }
+
+
 
 @media only screen and (max-width: 768px) {
 
-
   #mapDiv{
-    border: 1px solid green;
+    /*border: 1px solid green;*/
     padding-left: 5%;
     padding-right: 5%;
   }
@@ -306,6 +307,8 @@ ol li.mapListNumber:before {background:#ff6600 ;font-size:16pt;border:solid 3px 
 
 ol { counter-reset: level1 }
 
+
+
 /*////*/
 
 
@@ -313,10 +316,10 @@ ol { counter-reset: level1 }
 .inline{
   float: left;
 }
-/*.mapListBidPrice {color:#ff6600;font-size:16pt;float:right;}*/
 
-.mapListBidPrice {color:#ff6600;font-size:16pt;}
-.mapListCompany {font-size:13pt;font-weight:bold;}
+
+
+.mapListCompany {font-size:13pt;font-weight:bold; padding-left: 5%;}
 .mapListAppt {font-size:9pt;}
 /*.supersmall {color:black; background:red; font-size:10pt;}*/
 
@@ -326,9 +329,13 @@ ol { counter-reset: level1 }
   color:black;
   font-size: 10pt;
   background: white;
-  /*float: right;*/
+  /*margin-right: -10px;*/
+  /*position: relative;*/
 }
 
+#acceptDiv{
+  float:right; padding-right:100px;
+}
 /*.supersmall {color:black;font-size:10pt;}*/
 
 .mapListAppt {font-size:9pt;}
@@ -421,14 +428,7 @@ border: 0px solid white;
 
 }
 
-/*.mobileDropDownContent{
-  margin: 0 auto;
 
-  color: blue;
-}*/
-.dropdown-menu{
-  /*background: yellow;*/
-}
 
 .moNav{
   display: inline;
@@ -437,7 +437,6 @@ border: 0px solid white;
 
 
 .signInForm{
-  /*color:red;*/
   width: 90vw;
   margin: 0 auto;
 }
@@ -468,21 +467,40 @@ color: #3acec2;
 
 /*user dash tabs*/
 
-#user_dash{
-
-}
-
 #user_dash .tab-pane{
-  /*font-style: italic;*/
-  /*border: 1px dotted black;*/
-  /*padding-left: 5%;
-  padding-right:5%;*/
+
+   border:solid 2px #ff6600
 }
 
 
-
+.mapListBidPrice {color:#ff6600;
+  font-size:16pt;
+  float:right;
+  /*margin-right: 0;*/
+  padding-right: 75px;
+  /*border: 1px solid red;*/
+}
 
 @media (min-width: 768px){
+
+  .mapListBidPrice {color:#ff6600;
+    font-size:16pt;
+    margin-right: 0;
+    float:right;
+    padding-right:0;
+  }
+  #acceptDiv{
+    float:right; padding-right: 0;
+  }
+
+  #accept{
+    color:black;
+    font-size: 10pt;
+    background: white;
+    margin-right: 0;
+  }
+
+  .mapListCompany {font-size:13pt;font-weight:bold; padding-left: 12%;}
 
   .signInForm{
     width: 40vw;
@@ -528,6 +546,6 @@ color: #3acec2;
     max-width: 330px;
   }
 
-  .mapListBidPrice {color:#ff6600;font-size:16pt;float:right;}
+
 
 }

@@ -44,8 +44,6 @@
 
 				<uib-tab index="0" heading="New({{UserDashCtrl.count}})">
 					<div class="row" >
-			    	<!-- <div class="col-md-6 col-sm-6" id="mapDiv" style="border:1px solid green; padding-left: 5%; padding-right:5%;"> -->
-
 						  	<div class="col-md-6 col-sm-6" id="mapDiv">
 										<span  map-lazy-load="https://maps.googleapis.com/maps/api/js?key={{UserDashCtrl.key}}" id = "map_canvas">
 										 		<ng-map  default-style="true" zoom="11" center="current-location">
@@ -69,7 +67,7 @@
 									 </span>
 				</div>
 
-				<div class="col-md-4 col-sm-4" style="margin-top:15px; border: 1px dotted red;" >
+				<div class="col-md-4 col-sm-4" style="margin-top:15px;" >
 
 				  <ol style="list-style-type:decimal;">
 
@@ -81,18 +79,19 @@
 										{{sample.service_center.service_name}}
 								</div>
 
-								<div class="col-md-3 hidden-sm hidden-xs mapListBidPrice" style="color:blue;">
+								<div class="col-md-3 col-sm-3 col-xs-3 mapListBidPrice">
 									${{sample.quote_cost}}
 
 								</div>
 
+
 						</div>
-				<div class="row" style="border: 1px solid black;">
+				<div class="row" >
 
-						<div  class="col-md-6 col-sm-10 col-xs-6 col-xs-offset-2 col-md-offset-2 form-group">
+						<div  class="col-md-7 col-sm-7 col-xs-7  col-xs-offset-0 col-md-offset-0 col-sm-offset-0 form-group">
 
-								 <select name="apptDate" id="apptSelect" ng-model="UserDashCtrl.selectedTime" size="1" class="input-sm form-control">
-									<option value="">Set Appointment</option>
+								 <select name="apptDate" id="apptSelect" ng-model="UserDashCtrl.selectedTime" size="1" class="input-sm form-control pull-left;" style="height:37px; width: auto; margin-left: -10px;">
+									<option value="">Pick Appointment</option>
 									<option value="{{sample.available_date_1}}">{{sample.available_date_1}}</option>
 									<option value="{{sample.available_date_2}}">{{sample.available_date_2}}</option>
 									<option value="{{sample.available_date_3}}">{{sample.available_date_3}}</option>
@@ -100,12 +99,10 @@
 
 					</div>
 
-					<div class="visible-xs  visible-sm col-sm-3 col-xs-3 mapListBidPrice">
-						${{sample.quote_cost}}
-					</div>
 
-			 <div class="col-md-4 col-sm-4 col-xs-4">
-					<button class="btn btn-default pull-right" style="float:right"; id="accept"
+			 <div class="col-md-4 col-sm-4 col-xs-4" id="acceptDiv" >
+
+					<button class="btn btn-default " style="padding-left: 5%;"; id="accept"
 					ng-click="UserDashCtrl.confirm(sample, UserDashCtrl.selectedTime)"><i class="fa fa-check-circle"></i> ACCEPT</button>
 
 				</div>
@@ -186,7 +183,7 @@
 
 </uib-tab>
 		     <uib-tab index="2" heading="Your History">
-					  		<div class="tab-content" style="border:solid 2px #ff6600;">
+					  		<div class="tab-content"  >
 				   				<div class="row">
 				   						<div class="col-md-12 col-sm-12">
 				   						<b>7/15/16 - Tire Rotation</b><br>
