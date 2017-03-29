@@ -14,15 +14,21 @@ module.exports = function(app) {
     console.log(modalService.heading);
     if (!localStorage.getItem('token')) {
       this.heading = 'Sign in';
-      modalService.heading = 'Sign in';
+    //   modalService.heading = 'Sign in';``
       this.signedIn = false;
       this.li = 'Sign in';
+      this.heading2 = 'Sign in';
       this.dashTest = 'xxx';
+      modalService.indexNumberA = 2;
+      modalService.indexNumberB = 3;
     } else {
+      modalService.indexNumberA = 3;
+      modalService.indexNumberB = 2;
       this.heading = 'Log Out';
       modalService.heading = 'Log Out';
       this.signedIn = true;
       this.li = 'My Dash';
+    //   this.heading2 = 'My Profile';
       this.dashTest = 'yyy';
     }
     console.log(modalService.heading);
