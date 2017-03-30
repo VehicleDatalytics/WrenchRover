@@ -1,164 +1,151 @@
 
 var baseUrl = require('../../config').baseUrl;
 module.exports = function(app) {
-  app.controller('scPortalController', ['$http', 'scCommService', function($http, scCommService) {
-    this.initfunction = function() {
-      console.log('iniTting the functions!!!!!');
-    };
-
-    var count = 0;
-    // this.captured_dates = [];
+  app.controller('scPortalController', ['$http', 'modalService', '$window', function($http, modalService, $window) {
 
 
-    // this.mytime = new Date().setHours(0);
-
-    this.ismeridian = true;
-
-    this.timeChange = function(value, value2, value3) {
-      console.log(value, value2, value3);
-      console.log(value.toLocaleTimeString());
-      console.log(value2.toLocaleTimeString());
-      console.log(value3.toLocaleTimeString());
-    };
-
-    this.service = scCommService;
+    var that = this;
+    this.modalService = modalService;
     this.servicerequests = [];
     this.workrequests = [];
     this.servicequotes = [];
     this.pastbids = [];
     this.acceptedbids = [];
+    this.service_request_id_arr = [];
+    this.incoming_sr_arr = [];
+    $http.defaults.headers.common.Authorization = localStorage.getItem('token');
+    this.service_center_id = localStorage.getItem('service_center_id');
+    console.log(this.service_center_id);
+    this.your_appointments = [];
+    this.service_request_id = null;
 
+
+    this.welcome = localStorage.getItem('service_center_name');
+    console.log(this.welcome);
+    console.log('afef');
 
     this.getAll = () => {
-      $http.get(baseUrl + '/service_requests')
-      .then((res) => {
-        this.servicerequests = res.data;
-        this.workrequests.splice(0);
-        for (var i = 0; i < res.data.length; i++) {
-          this.workrequests.push(res.data[i]);
-        }
-      });
+
+
+      if (localStorage.getItem('remainingRequests')) {
+        this.workrequests = JSON.parse(localStorage.getItem('remainingRequests'));
+        console.log('take care of the few that remain');
+        console.log(this.workrequests);
+
+      } else {
+
+        $http.get(baseUrl + '/service_requests')
+          .then((res) => {
+            console.log(res.data);
+            console.log(res.data[0].service_quotes);
+            for (var i = 0; i < res.data.length; i++) {
+              this.incoming_sr_arr.push(res.data[i].id);
+            }
+
+            function check(elem) {
+              return that.service_request_id_arr.indexOf(elem) === -1;
+            }
+
+
+            var filteredArr = this.incoming_sr_arr.filter(check);
+            console.log(filteredArr);
+            console.log(this.incoming_sr_arr);
+            console.log(this.service_request_id_arr);
+            this.workrequests.splice(0);
+            for (var i = 0; i < res.data.length; i++) {
+            //   console.log(res.data[i].id);
+              console.log(filteredArr.indexOf(res.data[i].id));
+              if (filteredArr.indexOf(res.data[i].id) > -1) {
+                this.workrequests.push(res.data[i]);
+              }
+
+            }
+
+
+            for (var i = 0; i < res.data.length; i++) {
+              res.data[i].converted = new Date(res.data[i].created_at);
+              res.data[i].convertedToString = res.data[i].converted.toString();
+            //   this.workrequests.push(res.data[i]);
+            }
+
+            console.log(this.workrequests);
+            console.log(this.servicequotes);
+            // console.log(this.incoming_sr_arr);
+          });
+      }
+
     };
 
+    // this.getQuotes();
     this.getQuotes = function() {
+      console.log('geting the quotesz');
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
         console.log(res.data);
-        this.servicerequests = res.data;
+        // this.servicerequests = res.data;
         this.servicequotes.splice(0);
-        for (var i = 0; i < res.data.length; i++) {
-          this.servicequotes.push(res.data[i]);
+
+        this.your_appointments.splice(0);
+
+
+        // res.data[i].converted = new Date(res.data[i].created_at);
+        // res.data[i].convertedToString = res.data[i].converted.toString();
+
+        for (var i = 0; i < res.data.length; i++ ) {
+          if (res.data[i].service_center_id == this.service_center_id && res.data[i].accepted != null) {
+            // res.data[i].converted = new Date(res.data[i].created_at);
+            // res.data[i].convertedToString = res.data[i].converted.toString();
+            this.your_appointments.push(res.data[i]);
+          }
         }
       });
+
+      console.log(this.your_appointments);
+
+    //   console.log( this.service_request_id_arr);
+    //   return this.servicequotes;
     };
 
+    this.getQuotes();
 
-    var _this = this;
-    this.activeDate = null;
+    this.createQuote = function(sc_user_id, scquote, sc_id, appt_array) {
+      console.log(sc_user_id, scquote, sc_id, appt_array);
+      this.quote_object = scquote;
+      this.quote_object.available_date_1 = appt_array[0];
+      this.quote_object.available_date_2 = appt_array[1];
+      this.quote_object.available_date_3 = appt_array[2];
+      this.quote_object.service_center_id = JSON.parse(localStorage.getItem('service_center_id'));
+      this.quote_object.service_request_id = sc_id;
+      console.log(this.quote_object);
 
-    this.selectedDates = [];
+      $http.post(baseUrl + 'service_quotes', this.quote_object)
+      .then((res) => {
+        console.log('QUOTING');
+        console.log(res);
+        this.modalService.appt_array = [];
 
-
-    if (this.activeDate = null) {
-      this.selectedDates.push(new Date().toLocaleDateString);
-      console.log(this.selectedDates);
-    }
-
-    this.type = 'individual';
-    this.options = {
-      customClass: function(data) {
-        if (_this.selectedDates.indexOf(data.date) > -1 && _this.selectedDates.length <= 3) {
-          return 'selected';
-        }
-        return '';
-      }
-    };
-
-
-    this.type = 'individual';
-
-    this.show2pickers = false;
-
-    this.removeFromSelected = function(dt) {
-      _this.selectedDates.splice(_this.selectedDates.indexOf(dt), 1);
-
-      _this.activeDate = dt;
-      console.log(this.selectedDates);
-      console.log(_this.selectedDates);
-      console.log(this.selectedDates.length);
+        // $window.location.reload();
+      });
 
     };
-    this.i = 0;
-
-    this.capture = function(value, index) {
-      console.log(value, index);
-
-      this.i++;
-      console.log(value);
-      this.x = [];
-      this.dateConverted = new Date(value);
-      this.captured_date = this.dateConverted.toDateString().slice(0, 10);
-      return this.captured_date;
-    };
-
-
-    this.addDates = function(value) {
-
-      console.log(value);
-      if (this.selectedDates.length < 3) {
-        this.message = 'Please, pick three dates';
-      } else {
-        scCommService.addDates(value);
-      }
-    };
-
-
-    this.createQuote = function(x, y, z, d, e, f) {
-        // x = user_id, y = scquote, z = sample.id, d/e/f = mytime(1-3)
-      console.log('creating the quote');
-      console.log(x, y, z, d, e, f);
-      this.times = [];
-
-      if (d != undefined && e != undefined && f != undefined) {
-        var h = d.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
-
-        var i = e.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
-        var j = f.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
-
-        this.times.push(h, i, j);
-        console.log(this.times);
-        console.log(d.toLocaleTimeString());
-        console.log(e.toLocaleTimeString());
-        console.log(f.toLocaleTimeString());
-        console.log(this.selectedDates);
-        console.log(this.quote_cost);
-
-    //   scCommService.createQuote(x, y, z, this.selectedDates, this.times);
-        this.message = 'Thank you';
-        scCommService.createQuote(x, y, z, this.selectedDates, this.times);
-      } else {
-        console.log('times are undefined');
-        this.message = 'Please, select three dates and times';
-      }
-    };
-
 
     this.getPastBids = function() {
-      this.service_center_id = localStorage.getItem('service_center_id');
-      console.log(this.token);
-      console.log(this.service_center_id);
-
       $http.get(baseUrl + '/service_quotes')
       .then((res) => {
+        console.log(res.data);
         this.pastbids.splice(0);
         this.acceptedbids.splice(0);
         for (var i = 0; i < res.data.length; i++) {
-          console.log('loop');
         //   console.log(res.data[i].service_center_id);
           if (res.data[i].service_center_id !== null && res.data[i].service_center_id == this.service_center_id) {
-            console.log('yes');
+            this.service_request_id_arr.push(res.data[i].service_request_id);
 
-            console.log(this.pastbids);
+            // //
+            res.data[i].converted = new Date(res.data[i].created_at);
+            res.data[i].convertedToString = res.data[i].converted.toString();
+            // /
+
+            // console.log(this.pastbids);
             console.log(res.data[i]);
             this.pastbids.push(res.data[i]);
             console.log(this.pastbids);
@@ -166,12 +153,25 @@ module.exports = function(app) {
               console.log('not null');
               this.acceptedbids.push(res.data[i]);
             }
-
           }
         }
+
+        console.log(this.service_request_id_arr);
       });
+    //   return this.pastbids;
+    };
 
 
+    this.removeDone = function(value) {
+      console.log('remove done');
+      console.log(value);
+      var item = this.workrequests.indexOf(value);
+        //   console.log(this.workrequests.indexOf(value));
+      this.workrequests.splice(item, 1);
+      console.log(this.workrequests);
+
+      window.localStorage.remainingRequests =
+      JSON.stringify(this.workrequests);
     };
   }
   ]

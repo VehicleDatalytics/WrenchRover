@@ -16,7 +16,8 @@ module.exports = function(app) {
       link: function(scope, element, attrs, controller) {
         var actions = {
           create: controller.createUser,
-          createAlt: controller.createUserAlt
+        //   createAlt: controller.createUserAlt
+          createAlt: controller.createUser2
 
 
         //   auto: controller.autoX
@@ -24,7 +25,7 @@ module.exports = function(app) {
         // scope.save = controller.createUser;
         // scope.auto = controller.autoX;
         scope.save = actions[scope.action];
-        console.log(scope.save);
+        // console.log(scope.save);
 
       }
     };

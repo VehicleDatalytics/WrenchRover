@@ -73,12 +73,18 @@ gulp.task('css:dev', () => {
   .pipe(gulp.dest('./build'));
 });
 
+gulp.task('font:dev', () => {
+  gulp.src('app/css/**/*')
+  .pipe(gulp.dest('./build/'));
+});
+
+
 gulp.task('images:dev', () => {
   return gulp.src('app/images/**/**')
   .pipe(gulp.dest('./build/images/'));
 });
 
-gulp.task('build', ['webpack:dev', 'static:dev', 'css:dev', 'images:dev']);
+gulp.task('build', ['webpack:dev', 'static:dev', 'font:dev', 'images:dev']);
 
 // build test task
 gulp.task('webpack:test', ['lint'], () => {

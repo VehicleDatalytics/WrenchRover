@@ -1,14 +1,24 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('mechanicSignUpController', ['wrResource', '$http', '$state', function(Resource, $http, $state) {
+  app.controller('mechanicSignUpController', ['wrResource', '$http', '$state', 'modalService', function(Resource, $http, $state, modalService) {
 
     this.servicecenters = [];
+    this.service_center_name =
     this.errors = [];
     var remote = new Resource(this.servicecenters, this.errors, baseUrl + 'service_centers', { errMessages: { getAll: 'custome error message' } });
 
     this.getAll = remote.getAll.bind(remote);
     this.signedInUser = null;
+    var that = this;
+
+    this.service = modalService;
+    // console.log(modalService.instance);
+
+    this.closeModal = function() {
+      console.log(modalService.instance);
+      modalService.instance.close();
+    };
 
     this.createServiceCenter = function(resource) {
 
@@ -23,7 +33,6 @@ module.exports = function(app) {
 
       $http.post(baseUrl + 'users', this.x)
     .then((res) => {
-      console.log(res);
       window.localStorage.user_id = res.data.id;
     })
     .then(() => {
@@ -45,7 +54,11 @@ module.exports = function(app) {
       })
       .then(() => {
         $state.go('sc_portal_view.pending_view');
+      })
+      .then(() => {
+        that.closeModal();
       });
+
 
     });
 
@@ -56,22 +69,16 @@ module.exports = function(app) {
       $http.post(baseUrl + 'authenticate', resource)
       .then((res) => {
         this.message = 'Welcome back! Taking you to your portal now!';
-        console.log(res);
-
         res.headers.Authorization = res.data.auth_token;
         this.token = res.data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
         window.localStorage.token = this.token;
-        console.log(resource);
-        console.log(resource.user_email);
-        console.log(this.mech.user_email);
         this.signedInUser = resource.user_email;
       })
     .then(() => {
       $http.get(baseUrl + 'service_centers').
       then((res) => {
-        console.log(this.signedInUser);
         for (var i = 0; i < res.data.length; i++) {
           if (res.data[i].service_email === this.signedInUser) {
             window.localStorage.user_id = res.data[i].id;
@@ -82,12 +89,17 @@ module.exports = function(app) {
         }
       })
       .then(() => {
-        $state.go('sc_portal_view.pending_view');
+        // $state.go('sc_portal_view.pending_view');
+        $state.go('sc_portal_view');
       });
     })
     .catch(() => {
       this.message = 'Sorry, either your email or your password was wrong. Try again.';
+    })
+    .then(() => {
+      that.closeModal();
     });
+
 
     };
   }]);

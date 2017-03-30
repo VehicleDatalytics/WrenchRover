@@ -1,30 +1,32 @@
 
 
-    <!-- Page Content -->
-    <div class="container">
 
-        <div class="row">
-        <!-- Signin content -->
-			<div class="col-md-12 col-sm-12">
-			  <form class="form-signin" name="signin" data-ng-submit = "save(login)">
-				<h2 class="form-signin-heading">Sign In</h2>
+<div class="item signInForm">
+	<h3 class="text-right"><i class="fa fa-lock iconpadLG"></i>Sign in</h3>
+	<form class="form-horizontal" role="form" name="signin" data-ng-submit = "save(login)">
+		<div class="form-group" style="height: 30px;">
+			<div class="col-lg-10 col-md-10 col-xl-10 col-sm-10 col-xs-12" style="float: right;">
+				<input class="input-sm form-control" name="email" id="inputEmail" placeholder="Email Address" data-ng-model="login.user_email"  required autofocus />
+			</div>
+		</div>
 
-				<label for="inputEmail" class="sr-only">Email Address</label>
-				<input type="email" id="inputEmail" class="form-control formtop" placeholder="Email address" data-ng-model="login.user_email" required autofocus>
+		<div class="form-group">
+			<div class=" col-lg-10 col-xl-10 col-md-10 col-sm-10 col-xs-12" style="height: 30px; float:right;">
 
-				<label for="inputPassword" class="sr-only">Password</label>
-				<input type="password" id="inputPassword" class="form-control formbot" placeholder="Password" data-ng-model="login.password" required>
+				<input class="input-sm form-control"   name="cpassword" type="password" id="inputPassword" placeholder="Password" data-ng-model="login.password"   autofocus required />
+						<p class="text-primary" style="cursor: pointer;"><small><a>Forgot your password?</a></small></p>
+			</div>
+	  </div>
+
+		<div class="form-group" style="height: 30px;">
+			<div class="col-sm-offset-3  col-sm-9">
 
 
-				<button id = "newUser" class="btn btn-lg btn-primary btn-block" type="submit">{{buttonText}}</button>
+				<button class="btn btn-default pull-right" type="submit" style="display:inline;"><i class="fa fa-unlock-alt"></i> {{buttonText}}</button>
 
-			  </form>
-        <!-- button from modal -->
-                <!-- <button ng-controller="signInController as $ctrl" class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Cancel</button> -->
-                <!-- button from modal ends -->
 
 
 			</div>
 		</div>
-
-    </div>
+	</form>
+</div>

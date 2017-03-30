@@ -1,0 +1,46 @@
+<div>
+
+Hi. Today's date is {{$ctrl._month + 1}}/{{$ctrl._date}}. Choose up to three appointment times.
+
+{{$ctrl.message}}
+<table  border="1" ng-hide="$ctrl.modalService.a">
+  <th ng-repeat="day in $ctrl.week">{{day}}</th>
+  <tr>
+    <!-- <button ng-click="a =!a">click here</button> -->
+    <td ng-repeat="date in $ctrl.fPart">
+
+
+    <button class="btn btn-primary"  ng-controller="dateOpenController as $ctrl" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.modalService.a = !$ctrl.modalService.a; $ctrl.pickDate(date); $ctrl.modalService.time = !$ctrl.modalService.time">{{date}}</button></td></tr>
+
+
+    <tr><td ng-repeat="date in $ctrl.nextWeek"><button class="btn btn-primary"  ng-controller="dateOpenController as $ctrl" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.pickDate(date); $ctrl.modalService.a = !$ctrl.modalService.a; $ctrl.modalService.time = !$ctrl.modalService.time">{{date}}</button></td></tr>
+
+
+
+<button ng-click="$ctrl.modalService.a = !$ctrl.modalService.a; $ctrl.modalService.time = !$ctrl.modalService.time">click me</button>
+</table>
+
+
+
+  <!-- <time-dir ng-hide="$ctrl.modalService.time"></time-dir> -->
+
+  <!-- ////// -->
+
+  <table border= "1" ng-hide="!$ctrl.modalService.time">
+
+    <tr ng-repeat="item in $ctrl.times">
+      <td> <button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.pickTimes(item.colA); $ctrl.modalService.a = !$ctrl.modalService.a; $ctrl.modalService.time = !$ctrl.modalService.time" > {{item.colA}}</button></td>
+
+      <td><button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click= "$ctrl.pickTimes(item.colB); $ctrl.modalService.a = !$ctrl.modalService.a; $ctrl.modalService.time = !$ctrl.modalService.time">{{item.colB}}</button></td>
+
+
+      <td><button class="btn btn-primary" ng-disabled="$ctrl.modalService.apptArr.length >= 3" ng-click="$ctrl.pickTimes(item.colC); $ctrl.modalService.a = !$ctrl.modalService.a; $ctrl.modalService.time = !$ctrl.modalService.time">{{item.colC}}</button></td>
+    </tr>
+  </table>
+  <!-- ///// -->
+
+
+<ul ng-repeat= "date in $ctrl.available_appts"><li>{{date}}<button ng-click="$ctrl.remove(date)">x</button></li></ul>
+
+
+</div>

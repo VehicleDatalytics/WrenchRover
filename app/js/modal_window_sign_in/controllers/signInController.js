@@ -1,13 +1,19 @@
 
 module.exports = function(app) {
-  app.controller('signInController', function($uibModalInstance) {
+  app.controller('signInController', ['modalService', '$uibModalInstance', function(modalService, $uibModalInstance ) {
     console.log('modal controller open');
-    console.log($uibModalInstance);
+    console.log('sign in controller');
+    // console.log($uibModalInstance);
     var $ctrl = this;
-    console.log($uibModalInstance);
 
-    $ctrl.ok = function() {
-      console.log('okay, then close');
+    this.service = modalService;
+    console.log(modalService.thing);
+    modalService.thing = 2;
+
+    console.log(modalService.thing);
+
+    $ctrl.close = function() {
+      console.log('okay, then closing');
       $uibModalInstance.close();
     };
 
@@ -16,7 +22,10 @@ module.exports = function(app) {
       $uibModalInstance.dismiss('cancel');
     };
 
-  });
+  }
+  ]
 
+);
+// ]
 
 };

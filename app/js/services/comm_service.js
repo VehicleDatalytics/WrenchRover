@@ -14,8 +14,6 @@ module.exports = function(app) {
     this.nextCount = 0;
     this.dashCount = 0;
     this.textInput = null;
-    this.thing = 'andrews';
-
 
     console.log(this.count);
 
@@ -27,8 +25,6 @@ module.exports = function(app) {
         if (value && that.count === 0) {
           that.count = 5;
           oilChosen.push(second);
-          console.log(that.count);
-
         } else {
           that.count = 0;
           var index = oilChosen.indexOf(second);
@@ -44,7 +40,6 @@ module.exports = function(app) {
       checkedSelected: function(value, second) {
         this.chosenService = second;
         if (value) {
-        //   that.value = false;
           that.nextCount = 7;
           chosen.push(second);
         } else {
@@ -53,13 +48,11 @@ module.exports = function(app) {
           if (chosen.length === 0) {
             that.nextCount = 0;
           }
-          console.log(that.nextCount);
         }
         this.chosen = that.chosen;
         console.log(that.nextCount);
         window.localStorage.chosen = this.chosen;
         this.nextCount = that.nextCount;
-        console.log(this.chosenService);
       },
 
       textAreaFunc: function(value) {
@@ -69,7 +62,6 @@ module.exports = function(app) {
 
         } else {
           window.localStorage.describeIssue = this.textInput;
-        //   window.localStorage.example = 'foo bar';
         }
       },
 
@@ -100,8 +92,6 @@ module.exports = function(app) {
       removeChosenService: function(x) {
         console.log(x);
         var index = chosen.indexOf(x);
-        console.log('removing');
-        console.log(index);
         chosen.splice(index, 1);
         console.log(chosen);
         if (chosen.length === 0) {
@@ -111,14 +101,11 @@ module.exports = function(app) {
         this.nextCount = that.nextCount;
         window.localStorage.chosen = this.chosen;
         this.nextCount = that.nextCount;
-        console.log( this.chosenService);
       },
 
       removeChosenDash: function(x) {
         console.log(x);
         var index = dashChosen.indexOf(x);
-        console.log('removing');
-        console.log(index);
         dashChosen.splice(index, 1);
         if (dashChosen.length === 0) {
           that.dashCount = 0;
@@ -131,10 +118,9 @@ module.exports = function(app) {
       },
 
       removeChosenOil: function(x) {
-        console.log(x);
+
         var index = oilChosen.indexOf(x);
-        console.log('removing');
-        console.log(index);
+
         oilChosen.splice(index, 1);
         if (oilChosen.length === 0) {
           that.count = 0;
@@ -149,10 +135,8 @@ module.exports = function(app) {
         console.log('next page');
       },
       autoX: function() {
-
-
         this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
-        console.log(this.storedVehicle);
+
         if (this.storedVehicle) {
           this.auto = {
             year: this.storedVehicle.year,
@@ -164,7 +148,7 @@ module.exports = function(app) {
           };
         }
 
-        console.log(this.auto);
+
         $http.post('https://wrenchroverapi.herokuapp.com/autos', this.auto)
         .then((res) => {
           console.log(res);

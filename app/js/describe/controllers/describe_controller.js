@@ -102,7 +102,7 @@ module.exports = function(app) {
     };
 
     this.checkedSelected = function(x, y) {
-      console.log('(else)parenthetical checkSelcted values: ' + x);
+    //   console.log('(else)parenthetical checkSelcted values: ' + x);
       var value = this.value;
       cmService.checkedSelected(value, y);
       console.log(cmService.chosen);
@@ -111,14 +111,12 @@ module.exports = function(app) {
 
 
     this.textAreaFunc = function(x) {
-      console.log(this.value);
       var value = this.value;
       this.value = 'Thank you';
       cmService.textAreaFunc(value);
     };
 
     this.editThis = function() {
-      console.log(this.placeholder);
       var value = '';
       this.placeholder = 'Update?';
       this.textAreaFunc();
@@ -135,9 +133,6 @@ module.exports = function(app) {
 
     };
 
-    // this.nextPage = function() {
-    //   cmService.nextPage();
-    // };
 
     this.removeChosenService = function(z) {
       var x = z;
@@ -145,7 +140,6 @@ module.exports = function(app) {
     };
 
     this.removeChosenDash = function(value) {
-      console.log(value);
       var x = value;
       cmService.removeChosenDash(x);
     };
@@ -157,7 +151,6 @@ module.exports = function(app) {
     };
 
     this.autoX = function() {
-      console.log('describe autox');
       cmService.autoX();
     };
 

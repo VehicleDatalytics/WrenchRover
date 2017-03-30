@@ -1,16 +1,16 @@
-<li data-ng-mouseover="count = 'x'"  data-ng-mouseleave = "count='x'" ng-init="count='x'" id="nails"  class="subcategory">
+<li class = "row" data-ng-mouseover="count = 'x'"  data-ng-mouseleave = "count='x'" ng-init="count='x'" id="secLevChildren"  class="subcategory">
 
-{{secondchild.name}}
-<ol>
+<!-- the category headings in the orange bars -->
+<span>{{secondchild.name}}</span>
+<ul>
+
+
 
 <second-sibling data-secondsibling='secondsibling' ng-repeat="secondsibling in secondchild.children" >
 
-
 </second-sibling>
 
-</ol>
-
-
+</ul>
 
 <ng-transclude></ng-transclude>
 </li>

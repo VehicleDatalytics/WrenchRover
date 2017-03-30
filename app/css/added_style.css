@@ -1,0 +1,113 @@
+/*new date well*/
+.date_holder{
+  border: 1px solid black;
+  background: yellow;
+  height: 200px;
+  width: 300px;
+}
+
+/*new times exp*/
+
+.timeHolder{
+  height: 100px;
+  width: auto;
+  overflow: auto;
+  border: 1px solid blue;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top:10px;
+}
+
+
+
+.userRow {background-color:#ddd; line-height:auto;}
+.userText {vertical-align:middle;}
+
+.apptRow {height:auto; background-color:#ff6600;}
+.apptHead {padding:2px 4px; background-color:#222; color:#fff;}
+.apptText {padding:2px 4px; color:#fff;}
+
+
+/*common maintenance list items*/
+#secondSibling{
+  display: block
+  list-style: none;
+}
+
+#secondSibling label{
+  padding: 50% 0;
+  vertical-align: top;
+  border-radius: 4px;
+  margin: 5% auto;
+  color: black;
+border: 1px solid white;
+/*max-height: 40px;*/
+font-size: .80em;
+
+}
+
+#secLevChildren{
+  list-style: none;
+}
+
+#secLevChildren span{
+  background: #FF6600;
+  color: white;
+  text-align: right;
+  display: block;
+}
+
+#secLevChildren ul{
+  list-style: none;
+}
+#secLevChildren label{
+width: 100%;
+height: auto;
+text-align: center;
+min-width: 111px;
+}
+
+#secLevChildren label:hover{
+  background-color: white;
+  color: #FF6600;
+}
+
+
+
+@media (min-width: 768px){
+  #secondSibling{
+    /*display: inline;*/
+    display: block;
+    list-style: none;
+    /*border: 0;*/
+  }
+
+  #secondSibling label{
+
+   padding: 50% 0;
+   margin: 5% auto;
+   vertical-align: top;
+   background: #ddd;
+   border-radius:8px;
+
+  }
+
+  #secLevChildren{
+   list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+
+  }
+
+  #secLevChildren span{
+    background: #FF6600;
+    color: white;
+    /*color:red;*/
+    text-align: right;
+    display: block;
+   width: 100%;
+   float:left;
+  }
+
+
+}

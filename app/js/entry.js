@@ -12,11 +12,9 @@ const wrApp = angular.module('wrApp', ['wrApp.config', require('angular-route'),
 
 require('./services')(wrApp);
 require('./maps')(wrApp);
-require('./searchBox')(wrApp);
 require('./service_centers')(wrApp);
 require('./mechanic_sign_up')(wrApp);
 require('./user_sign_up')(wrApp);
-require('./common_repairs')(wrApp);
 require('./vehicle')(wrApp);
 require('./describe')(wrApp);
 require('./user_dashboard')(wrApp);
@@ -26,6 +24,11 @@ require('./nav')(wrApp);
 require('./modal_button_sign_in')(wrApp);
 require('./modal_window_sign_in')(wrApp);
 require('./sc_portal')(wrApp);
+require('./time')(wrApp);
+require('./datemodal')(wrApp);
+require('./newcal')(wrApp);
+require('./componentCtrl')(wrApp);
+require('./mega')(wrApp);
 
 
 wrApp.config(($stateProvider, $urlRouterProvider) => {
@@ -93,9 +96,9 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
 
 .state('user_dashboard', {
   url: '/dashboard',
-  templateUrl: 'templates/user/views/user_dashboard.html',
+  templateUrl: 'templates/user/views/user_dashboard3.html',
   controller: 'UserDashboardController',
-  controllerAs: 'UserDashboardController'
+  controllerAs: 'UserDashCtrl'
 })
 .state('sc_portal_view', {
   url: '/scportal',
@@ -136,13 +139,39 @@ wrApp.config(($stateProvider, $urlRouterProvider) => {
   controller: 'mapController',
   controllerAs: 'vm'
 })
-// .state('user_dashboard.map_view', {
-//   url: '/getmap',
-//   templateUrl: 'templates/maps/views/map_view.html',
-//   controller: 'mapController',
-//   controllerAs: 'vm'
+
+.state('mega_view', {
+  url: '/mega',
+  templateUrl: 'templates/mega/views/mega_view.html',
+  controller: 'megaController',
+  controllerAs: '$ctrl'
+})
+.state('user_dashboard_mini', {
+  url: '/minidash',
+  templateUrl: 'templates/user/views/user_dashboard_mini.html',
+  controller: 'UserDashboardController',
+  controllerAs: 'UserDashCtrl'
+})
+// .state('pending', {
+//   url: '/resetpassword:token',
+//   templateUrl: 'templates/user/views/pending.html',
+//   controller: 'UserDashboardController',
+//   controllerAs: 'UserDashboardController'
 // })
 
+.state('pending', {
+  url: '/Password/reset?token=jnsbbwbwbrbbb12nn888b-9292',
+  templateUrl: 'templates/user/views/pending.html',
+  controller: 'UserDashboardController',
+  controllerAs: 'UserDashboardController'
+})
+
+.state('contact_us_view', {
+  url: '/contact',
+  templateUrl: 'templates/user/views/contact_us_view.html',
+  controller: 'userSignUpController',
+  controllerAs: 'userctrl'
+})
 
 ;
   $urlRouterProvider.otherwise('/');

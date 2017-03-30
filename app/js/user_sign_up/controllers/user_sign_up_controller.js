@@ -1,19 +1,45 @@
 
 var baseUrl = require('../../config').baseUrl;
 
+var modalObj = require('../../modalObject').modalObj;
+
 module.exports = function(app) {
-  app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', '$q', function(Resource, $http, $state, wrError, $q) {
-    console.log('user sign up controller open');
+  app.controller('userSignUpController', ['wrResource', '$http', '$state', 'wrHandleError', 'modalService', '$uibModal', '$window', function(Resource, $http, $state, wrError, modalService, $uibModal, $window) {
+    var that = this;
+    this.msg = 'Create New Account';
+    this.errorMsg = null;
+    this.service = modalService;
+    console.log('user sign up controller');
+    console.log(this.token);
+    console.log(modalService.heading);
+    if (!localStorage.getItem('token')) {
+      this.heading = 'Sign in';
+    //   modalService.heading = 'Sign in';``
+      this.signedIn = false;
+      this.li = 'Sign in';
+      this.heading2 = 'Sign in';
+      this.dashTest = 'xxx';
+      modalService.indexNumberA = 2;
+      modalService.indexNumberB = 3;
+    } else {
+      modalService.indexNumberA = 3;
+      modalService.indexNumberB = 2;
+      this.heading = 'Log Out';
+      modalService.heading = 'Log Out';
+      this.signedIn = true;
+      this.li = 'My Dash';
+    //   this.heading2 = 'My Profile';
+      this.dashTest = 'yyy';
+    }
+    console.log(modalService.heading);
 
     this.users = [];
     this.errors = [];
     this.allProblems = null;
-
     this.previousItem;
     this.localStorageOil;
     this.localStorageDash;
     this.localStorageChosen;
-
     this.message = null;
 
 
@@ -22,13 +48,13 @@ module.exports = function(app) {
     this.localStorageDash = localStorage.getItem('dashChosen');
     this.localStorageChosen = localStorage.getItem('chosen');
 
+
     var arr = [this.previouslyEntered, this.localStorageOil, this.localStorageChosen, this.localStorageDash];
 
     var arrFilter = arr.filter((z) => {
       return z != null;
     });
 
-    console.log(arrFilter);
 
     this.storedVehicle = JSON.parse(localStorage.getItem('vehicle'));
 
@@ -42,12 +68,12 @@ module.exports = function(app) {
         model: this.storedVehicle.model.name,
         trim: this.storedVehicle.trim.name,
         engine: this.storedVehicle.engine,
-        mileage: this.storedVehicle.mileage,
+        mileage: this.storedVehicle.miles,
         user_id: null,
         service_request_id: null
       };
-      console.log(this.storedVehicle);
-      console.log(this.auto);
+    //   console.log(this.storedVehicle);
+    //   console.log(this.auto);
 
 
     }
@@ -57,41 +83,27 @@ module.exports = function(app) {
       user_id: null,
       work_request: null
     };
-//  user sign up from landing page
-    this.createUserAlt = function(resource) {
-      console.log(resource);
-      console.log('alternative');
-      this.x = {
-        user: resource
-      };
-      $http.post(baseUrl + 'users', this.x)
-      .then((res) => {
 
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.id);
-        console.log(res.data.user_email);
-        // console.log(config);
-        // this.auto.user_id = res.data.id;
-        window.localStorage.user_id = res.data.id;
-      })
-      .then(() => {
-        console.log(resource);
-        $http.post(baseUrl + 'authenticate', resource)
-      .then((res) => {
 
-        console.log(res);
-        res.config.headers.Authorization = res.data.auth_token;
+    this.closeModal = function() {
 
-        this.token = res.data.auth_token;
-        $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-        window.localStorage.token = this.token;
-        console.log($http.defaults.headers.common.Authorization);
-      });
-      });
+      modalService.instance.close();
+    };
+
+    this.closeDropDown = function() {
+      console.log('closing the drop down');
+      modalService.closeDropDown();
+    };
+
+
+    this.goDash = function() {
+      console.log('going to dash');
+      $state.go('user_dashboard');
+      this.closeDropDown();
     };
 
     this.addServiceRequests = function() {
+      $http.defaults.headers.common.Authorization = localStorage.getItem('token');
       console.log('service requesting');
       this.previouslyEntered = localStorage.getItem('describeIssue');
       this.localStorageOil = localStorage.getItem('oilChosen');
@@ -101,6 +113,7 @@ module.exports = function(app) {
       var arr = [this.previouslyEntered, this.localStorageOil, this.localStorageChosen, this.localStorageDash];
 
       var arrFilter = arr.filter((z) => {
+        console.log(z);
         return z != null;
       });
       console.log(arr);
@@ -113,6 +126,7 @@ module.exports = function(app) {
         } else this.requests.push(arrFilter[i]);
         console.log(arrFilter[i]);
       }
+      console.log(this.requests);
 
       this.serviceRequests.work_request = this.requests.toString();
       this.serviceRequests.user_id = localStorage.getItem('user_id');
@@ -124,18 +138,13 @@ module.exports = function(app) {
       $http.post(baseUrl + 'service_requests', this.serviceRequests)
       .then((res) => {
         console.log(res);
+        window.localStorage.service_requests = JSON.stringify(res.data.work_request);
+        $state.go('user_dashboard');
       });
+
     };
 
-
-// alt ends
-
-
-    // user sign up via user flow
-
     this.createUser = function(resource) {
-      console.log('original');
-      console.log(resource);
       this.requests = [];
       for (var i = 0; i < arrFilter.length; i++) {
         if (Array.isArray(arrFilter[i])) {
@@ -143,76 +152,49 @@ module.exports = function(app) {
         } else this.requests.push(arrFilter[i]);
       }
       this.serviceRequests.work_request = this.requests.toString();
-      console.log(this.serviceRequests);
 
       this.x = {
         user: resource
       };
-
-      console.log(this.x);
       $http.post(baseUrl + 'users', this.x)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.id);
-        console.log(res.data.user_email);
-          // console.log(config);
+        console.log('1. posting to users');
+        console.log(this.x);
         this.auto.user_id = res.data.id;
         this.serviceRequests.user_id = res.data.id;
-        console.log(res.data.id);
-        console.log(this.serviceRequests);
-
         window.localStorage.user_id = res.data.id;
       })
       .then(() => {
+        console.log(resource);
         $http.post(baseUrl + 'authenticate', resource)
         .then((res) => {
-
+          console.log('2. posting to authenticate');
           console.log(res);
-          console.log(res.data.auth_token);
-
           res.config.headers.Authorization = res.data.auth_token;
           this.token = res.data.auth_token;
-
-
-          console.log(this.token);
           window.localStorage.token = this.token;
           $http.defaults.headers.common.Authorization = localStorage.getItem('token');
-
-
-          console.log($http.defaults.headers.common.Authorization);
         })
 
-     .catch((error, status) => {
+     .catch((error) => {
        console.log('error');
+       console.log(error);
+    //    console.log(data);
        this.data.error = { message: error, status: status };
-       console.log(this.data.error.status);
+       console.log(this.data.error);
      })
         .then(() => {
-          console.log(this.serviceRequests);
           $http.post(baseUrl + 'service_requests', this.serviceRequests)
           .then((res) => {
-            console.log(res);
             window.localStorage.service_requests = JSON.stringify(res.data.work_request);
             this.auto.service_request_id = res.data.id;
             window.localStorage.service_request_id = res.data.id;
-            console.log(localStorage.getItem('service_requests'));
-            console.log(this.auto.service_request_id);
-            console.log(res.data.id);
           })
 
           .then(() => {
-            console.log('auto ing');
-            console.log(this.auto);
             $http.post(baseUrl + 'autos', this.auto)
             .then((res) => {
-              console.log(res);
-              console.log(this.auto);
-
-              console.log(window.localStorage.service_requests);
-
               this.srthing = JSON.parse(localStorage.getItem('service_requests'));
-              console.log(this.srthing);
 
             });
           })
@@ -221,7 +203,21 @@ module.exports = function(app) {
             this.message = 'Thank you for signing up!';
             console.log(JSON.parse(localStorage.getItem('service_requests')));
             $state.go('user_dashboard');
+          })
+
+          .then(() => {
+            console.log('closing');
+            console.log(modalService.thing);
+            if (modalService.thing === 2) {
+              that.closeModal();
+
+            } else {
+              that.closeDropDown();
+            }
+
           });
+
+
         });
 
       });
@@ -230,61 +226,99 @@ module.exports = function(app) {
     }.bind(this);
 
     this.logIn = function(resource) {
+      console.log('logging in');
       console.log(this.login.user_email);
 
       $http.post(baseUrl + 'authenticate', resource)
       .then((res) => {
         console.log(res);
-        // console.log(config);
-        // console.log(headers);
-        // this.message = 'Welcome back! Taking you to your dashboard now!';
         res.headers.Authorization = res.data.auth_token;
         this.token = res.data.auth_token;
         $http.defaults.headers.common.Authorization = this.token.toString();
         console.log($http.defaults.headers.common.Authorization);
-        //
         window.localStorage.token = this.token;
-        //
         window.localStorage.user_id = res.data.user_id;
-
-        // console.log(resource);
-        // console.log(resource.user_email);
-        // console.log(this.login.user_email);
         this.signedInUser = resource.user_email;
-        // var x = data.user_id.toString();
         this.user_id = res.data.user_id;
 
         $http.get(baseUrl + 'users/' + this.user_id )
         .then((res) => {
+          console.log(res);
+          console.log(res.data.service_centers.length);
+          if (res.data.service_centers.length != 0) {
+            console.log('service center person');
 
-          console.log(this.signedInUser);
-          if (res.data.service_requests.length !== 0 && res.data.autos.length !== 0) {
-            window.localStorage.service_requests = JSON.stringify(res.data.service_requests[0]);
+            console.log(this.signedInUser);
+            console.log(res.data.service_centers[0].service_name);
+            window.localStorage.service_center_name = res.data.service_centers[0].service_name;
+
+
+// ////////
+            $http.get(baseUrl + 'service_centers').
+then((res) => {
+  console.log(res);
+  for (var i = 0; i < res.data.length; i++) {
+    if (res.data[i].service_email === this.signedInUser) {
+      console.log(res.data[i].service_email);
+      console.log(this.signedInUser);
+      window.localStorage.user_id = res.data[i].id;
+      window.localStorage.service_center_id = res.data[i].id;
+    } else {
+      console.log('no');
+    }
+  }
+})
+.then(() => {
+  // $state.go('sc_portal_view.pending_view');
+  $state.go('sc_portal_view');
+});
+
+
+// /////
+
+
           } else {
+            console.log(this.signedInUser);
 
-            console.log('no requests or saved cars');
-            this.message = "Are you sure you're not a mechanic?";
+            console.log(res.data.service_requests[0].work_request);
+
+            window.localStorage.service_requests = JSON.stringify(res.data.service_requests[0].work_request);
+            $state.go('user_dashboard');
+
           }
-        })
-      .then((res) => {
-        console.log(res);
-        if (localStorage.getItem('service_requests')) {
-          $state.go('user_dashboard');
-        } else {
-          console.log('Should go to mechanic');
-        }
-      });
+        });
+
+
       })
       .catch((res) => {
         this.message = 'Sorry, either your email or your password was wrong. Try again.';
-      });
+      })
 
+      .then(() => {
+        if (this.message === 'Sorry, either your email or your password was wrong. Try again.') {
+          console.log('sorry again');
+        } else {
+          console.log(modalService.thing);
+          if (modalService.thing === 2) {
+            that.closeModal();
+
+          } else {
+            that.closeDropDown();
+          }
+        }
+
+      });
+      return;
 
     };
+
 
     this.logout = function() {
       console.log('logging out');
       $http.defaults.headers.common.Authorization = '';
+      localStorage.clear();
+      this.closeDropDown();
+      $state.go('vehicle_dropdown_selection');
     };
 
   }]);

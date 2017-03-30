@@ -1,0 +1,152 @@
+
+ <div class="row">
+  <div>
+
+   <!-- <uib-tabset id="menuTab" active="active" vertical="true" > -->
+    <uib-tabset id="menuTab" active="active" >
+
+      <uib-tab index="1">
+        <uib-tab-heading><i class="fa fa-user">My Profile</i></uib-tab-heading>
+        <div ng-controller="userSignUpController as userctrl">
+              <span ng-hide="userctrl.signedIn == false">
+                <mini-dir></mini-dir>
+              </span>
+
+            <div ng-controller="userSignUpController as userctrl" >
+              <user-sign-in-form
+              ng-hide="userctrl.signedIn == true"
+              data-button-text="Log-In"
+              data-login="login"
+              data-action = "create">
+              </user-sign-in-form>
+            </div>
+        </div>
+      </uib-tab>
+
+
+                <uib-tab index="3">
+
+                  <uib-tab-heading ng-controller="userSignUpController as userctrl">
+
+                       <a  ng-show="userctrl.signedIn == true" ng-click="userctrl.goDash()" style="color: #ff6600;"><i class="fa fa-dashboard"> My Dash</i></a>
+
+                 <i class="fa fa-dashboard" ng-show="userctrl.signedIn == false"> My Dash</i>
+
+                  </uib-tab-heading>
+
+                  <div ng-controller="userSignUpController as userctrl">
+                        <span ng-hide="userctrl.signedIn == false">
+                          <mini-dir></mini-dir>
+                        </span>
+
+                      <div ng-controller="userSignUpController as userctrl" >
+                        <user-sign-in-form
+                        ng-hide="userctrl.signedIn == true"
+                        data-button-text="Log-In"
+                        data-login="login"
+                        data-action = "create">
+                        </user-sign-in-form>
+                      </div>
+                  </div>
+                </uib-tab>
+
+
+
+
+
+     <uib-tab index="5" ng-if="$ctrl.service.indexNumberA == 2">
+            <uib-tab-heading ng-controller="userSignUpController as userctrl"  >
+                <!-- <i  ng-if="userctrl.heading != 'Sign in'" class="fa fa-lock"> {{userctrl.heading}}</i> -->
+
+                          <i  ng-if="userctrl.heading != 'Sign in'" class="fa fa-lock"> {{userctrl.heading}}</i>
+
+                <i ng-if = "userctrl.heading == 'Sign in'" class="fa fa-unlock-alt" >{{userctrl.heading}} </i>
+
+
+            </uib-tab-heading>
+
+            <div  ng-controller="userSignUpController as userctrl" >
+                 <h3 ng-if="userctrl.heading != 'Sign in'" >Thank you for your business. <a ng-click="userctrl.logout()" style="color:blue;">Log out?</a></h3>
+                 <!-- {{userctrl.heading}} -->
+                <user-sign-in-form
+                data-button-text="Log-In"
+                data-login="login"
+                data-action = "create"
+                ng-if = "userctrl.heading == 'Sign in'">
+                </user-sign-in-form>
+              </div>
+
+      </uib-tab>
+
+
+
+
+
+    <uib-tab index="2" >
+
+      <uib-tab-heading>
+
+         <i class="fa fa-phone"> Contact Us</i>
+      </uib-tab-heading>
+      <div style="width: 80%;">
+          <h3 class="text-right"><i class="fa fa-envelope iconpadLG"></i>Contact us</h3>
+            <div class="row">
+              <form role="form">
+                <div class="col-xs-6 col-md-6 ">
+                  <div class="form-group">
+                    <input class="input-sm form-control" id="inputName" name="inputName" placeholder="Your Name" />
+                  </div>
+                </div>
+                <div class="col-xs-6 col-md-6 ">
+                  <div class="form-group">
+                    <input type="email" class="input-sm form-control" id="inputEmail" name="inputEmail" placeholder="Your Email" />
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-12 ">
+                  <div class="form-group">
+                    <input type="text" class="input-sm form-control" id="inputSubject" name="inputSubject" placeholder="Subject" />
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-12 ">
+                  <div class="form-group">
+                    <textarea class="form-control" id="inputMessage" name="inputMessage" rows="3">Description</textarea>
+                  </div>
+                </div>
+                <div class="form-group col-sm-offset-3 col-sm-9">
+                  <button class="btn btn-default pull-right" type="submit">
+                  <i class="fa fa-chevron-circle-right"></i> Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </uib-tab>
+
+
+
+
+     <uib-tab index="7" ng-if = "$ctrl.service.indexNumberA != 2">
+            <uib-tab-heading ng-controller="userSignUpController as userctrl" >
+                <i  ng-if="userctrl.heading != 'Sign in'" class="fa fa-lock"> {{userctrl.heading}}</i>
+                <i ng-if = "userctrl.heading == 'Sign in'" class="fa fa-unlock-alt"> {{userctrl.heading}}</i>
+            </uib-tab-heading>
+
+            <div  ng-controller="userSignUpController as userctrl" >
+                 <h3 ng-if="userctrl.heading != 'Sign in'" >Thank you for your business. <a ng-click="userctrl.logout()" style="color:blue;">Log out?</a></h3>
+                 <!-- {{userctrl.heading}} -->
+                <user-sign-in-form
+                data-button-text="Log-In"
+                data-login="login"
+                data-action = "create"
+                ng-if = "userctrl.heading == 'Sign in'">
+                </user-sign-in-form>
+              </div>
+
+      </uib-tab>
+
+
+
+  </uib-tabset>
+
+ </div>
+ </div>

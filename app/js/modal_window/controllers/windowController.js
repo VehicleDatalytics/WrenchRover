@@ -1,7 +1,7 @@
 
 module.exports = function(app) {
   app.controller('windowController', function($uibModalInstance) {
-    console.log('modal controller open');
+    console.log('modal window/ window controller open');
     console.log($uibModalInstance);
     var $ctrl = this;
     console.log($uibModalInstance);
