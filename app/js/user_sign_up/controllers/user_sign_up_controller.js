@@ -244,14 +244,39 @@ module.exports = function(app) {
         $http.get(baseUrl + 'users/' + this.user_id )
         .then((res) => {
           console.log(res);
-          console.log('yes');
           console.log(res.data.service_centers.length);
           if (res.data.service_centers.length != 0) {
             console.log('service center person');
-            $state.go('sc_portal_view');
+
             console.log(this.signedInUser);
             console.log(res.data.service_centers[0].service_name);
             window.localStorage.service_center_name = res.data.service_centers[0].service_name;
+
+
+// ////////
+            $http.get(baseUrl + 'service_centers').
+then((res) => {
+  console.log(res);
+  for (var i = 0; i < res.data.length; i++) {
+    if (res.data[i].service_email === this.signedInUser) {
+      console.log(res.data[i].service_email);
+      console.log(this.signedInUser);
+      window.localStorage.user_id = res.data[i].id;
+      window.localStorage.service_center_id = res.data[i].id;
+    } else {
+      console.log('no');
+    }
+  }
+})
+.then(() => {
+  // $state.go('sc_portal_view.pending_view');
+  $state.go('sc_portal_view');
+});
+
+
+// /////
+
+
           } else {
             console.log(this.signedInUser);
 

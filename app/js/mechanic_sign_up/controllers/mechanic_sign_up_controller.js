@@ -79,8 +79,6 @@ module.exports = function(app) {
     .then(() => {
       $http.get(baseUrl + 'service_centers').
       then((res) => {
-        //   paxton
-        // console.log(res);
         for (var i = 0; i < res.data.length; i++) {
           if (res.data[i].service_email === this.signedInUser) {
             window.localStorage.user_id = res.data[i].id;

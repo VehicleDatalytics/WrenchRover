@@ -14,6 +14,7 @@ module.exports = exports = function(app) {
     this.acceptedObject = {};
     this.service_requests_count = 0;
     this.modalService = modalService;
+    this.message = 'temp';
 
 
     if (!localStorage.getItem('token')) {
@@ -34,7 +35,6 @@ module.exports = exports = function(app) {
 
     this.func = function() {
       console.log('capturing url');
-    //   $location.absUrl();
       console.log($location.absUrl());
     };
 
@@ -59,10 +59,12 @@ module.exports = exports = function(app) {
       }
     };
 
-    // this.goDash = function() {
-    //   console.log('going to the dash!!!!');
-    //   $state.go('user_dashboard');
-    // };
+    this.getAll = function() {
+
+      console.log('x');
+
+    };
+
 
     var map_icons = [ '../../../images/map_icons/number_1.png',
       '../../../images/map_icons/number_2.png',
@@ -88,7 +90,7 @@ module.exports = exports = function(app) {
 
       this.service_requests = JSON.parse(localStorage.getItem('service_requests'));
       this.service_request_id = this.service_requests.id;
-      console.log(this.service_request_id);
+    //   console.log(this.service_request_id);
       console.log(this.service_requests.id);
 
     }
@@ -205,7 +207,11 @@ module.exports = exports = function(app) {
        console.log('error');
      })
      .then(() => {
-       if (this.service_requests_count > 0) {
+       if (this.service_requests_count > 0 ) {
+         console.log(vm.message);
+         console.log(this.message);
+         console.log(vm.pending_message);
+         console.log(this.pending_message);
 
          console.log(this.service_request_id);
 
@@ -220,15 +226,19 @@ module.exports = exports = function(app) {
             this.service_quotes = res.data.service_quotes;
             $http.get(this.url + 'service_quotes')
            .then((res) => {
+
+
              this.service_quotes_table.splice(0);
              console.log(this.service_request_id);
              for (var i = 0; i < res.data.length; i++) {
-               if (res.data[i].service_request_id == this.service_request_id) {
+               if (res.data[i].service_request_id == this.service_request_id && res.data[i].accepted == null) {
                  console.log(res.data[i].service_request_id);
                  console.log('THERE ARE BIDS');
                  vm.tab = 'New';
                  console.log(res.data[i]);
                  window.localStorage.appointment_service_center_name = res.data[i].service_center.service_name;
+
+
                  var loc_obj = {
                    id: res.data[i].service_center.service_name,
                    cost: res.data[i].quote_cost,
@@ -245,6 +255,12 @@ module.exports = exports = function(app) {
                  };
                  vm.positions.push(loc_obj);
                  this.service_quotes_table.push(res.data[i]);
+               }
+
+
+               if (res.data[i].accepted != null) {
+                 console.log('YOU HAVE ACCEPTED BIDS ');
+
                }
              } // for loop ends
              console.log(loc_obj);
@@ -283,6 +299,7 @@ module.exports = exports = function(app) {
 
        // if statement on service requets length ends
        } else {
+         console.log('he met a girl out there with a tattoo, too');
          console.log('No service requests have been entered yet. part 2');
        }
 
@@ -377,6 +394,7 @@ module.exports = exports = function(app) {
             vm.appointment.service_center = 'Coming soon...';
             vm.pending_message = 'Coming soon...';
             vm.message = 'You have received bids';
+
           }
         } // for loop ends
 
