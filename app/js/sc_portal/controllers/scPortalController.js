@@ -120,10 +120,11 @@ module.exports = function(app) {
 
       $http.post(baseUrl + 'service_quotes', this.quote_object)
       .then((res) => {
+        console.log('QUOTING');
         console.log(res);
         this.modalService.appt_array = [];
 
-        $window.location.reload();
+        // $window.location.reload();
       });
 
     };
